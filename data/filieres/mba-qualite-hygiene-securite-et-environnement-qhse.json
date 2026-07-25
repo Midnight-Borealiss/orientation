@@ -1,0 +1,100 @@
+{
+  "id": "mba-qualite-hygiene-securite-et-environnement-qhse",
+  "nom": "MBA Qualité, Hygiène, Sécurité et Environnement (QHSE)",
+  "ecole": "ism-management",
+  "niveau": "mba",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel",
+    "cours-du-soir"
+  ],
+  "axes": {
+    "quantitatif": 1,
+    "technique": 2,
+    "relationnel": 4,
+    "creatif": 1,
+    "cadre": 5
+  },
+  "domaines": [
+    "qualite",
+    "comptabilite",
+    "ingenierie"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Animateur QHSE",
+      "Directeur QHSE",
+      "Chef de projets",
+      "Auditeur QHSE",
+      "Ingénieur QHSE (processus, produits, Services, Conseil..)",
+      "Chargéde mission QHSE"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Introduction à la normalisation",
+        "Infrastructures qualité",
+        "Fondamentaux SMQ, SMSST, SMSDA, SMI",
+        "Management des processus",
+        "Accréditation/reconnaissance",
+        "Management des risques",
+        "Référentiel ISO: 9001 VS 2015",
+        "Coûts d’obtention de la qualité",
+        "Méthodes et outils de résolution de problèmes",
+        "ISO 45001 VS 2018",
+        "SMSDA: ISO 22000",
+        "Management des Risques industriels",
+        "SME: Étude du référentiel 14001",
+        "Etudes des impacts environnementaux",
+        "Audit des systèmes de Management de la Qualité",
+        "Système de Management intégré"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "La spécialisation QHSE, forte de son label d’Excellence de l’UEMOA, a pour principal objectif de former des cadres de haut niveau capables d’assurer et de maîtriser la qualité sur l’ensemble des processus et des systèmes de management. De plus, ce programme est également disponible en cours du soir pour une flexibilité accrue. Elle favorise l’acquisition et le développement de compétences dans les domaines de l’ingénierie et du pilotage des systèmes qualité. Elle forme des spécialistes capables de mettre en place des systèmes intégrés."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference",
+      "partenariats": "brochure"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  },
+  "parcours": "Parcours Responsabilité, Organisation et Management",
+  "partenariats": {
+    "double_diplome": null,
+    "diplome_delocalise": null,
+    "accreditations": [
+      "Label UEMOA"
+    ]
+  }
+}

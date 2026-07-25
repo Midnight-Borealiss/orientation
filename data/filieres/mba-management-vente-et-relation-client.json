@@ -1,0 +1,92 @@
+{
+  "id": "mba-management-vente-et-relation-client",
+  "nom": "MBA Management, Vente et Relation Client",
+  "ecole": "ism-management",
+  "niveau": "mba",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel",
+    "cours-du-soir"
+  ],
+  "axes": {
+    "quantitatif": 2,
+    "technique": 2,
+    "relationnel": 5,
+    "creatif": 2,
+    "cadre": 1
+  },
+  "domaines": [
+    "marketing",
+    "gestion",
+    "data"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "et de la relation client, et au management commercial. Directeur ou responsable marketing",
+      "Ingénieur commercial",
+      "Responsable de la communication événementielle",
+      "Responsable des ventes"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Psychosociologie du consommateur",
+        "Techniques de prospection commerciale",
+        "Études de marché",
+        "Politiques de produit et de prix",
+        "Techniques de négociation commerciale",
+        "Politique de distribution",
+        "Optimisation et gestion des tournées de livraison",
+        "Social selling",
+        "Gestion des réclamations et de la satisfaction client",
+        "Marketing relationnel - Gestion Relation Client",
+        "Outils, Méthodes et Techniques de Fidélisation",
+        "Business intelligence et Big Data",
+        "Techniques de data mining appliquées",
+        "Audit commercial & Plan d’Action Commerciale",
+        "Budget commercial & des ventes",
+        "Plan Marketing",
+        "Management commercial",
+        "Progiciels de Gestion : SAARI - gestion commerciale"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Ce MBA, également disponible en cours du soir, permet aux étudiants d’acquérir une double compétence, en les formant à l’expertise des situations de la relation client et l’art de la négociation, mais également à devenir un manager performant, capable de développer l’activité commerciale d’une marque, entreprise ou organisation. Le programme a été conçu pour doter les étudiants des connaissances fondamentales et des outils professionnels adaptés aux nouveaux"
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  },
+  "parcours": "Parcours Communication, Créativité et Marketing"
+}

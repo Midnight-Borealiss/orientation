@@ -1,0 +1,87 @@
+{
+  "id": "master-en-droit-notarial-et-gestion-du-patrimoine",
+  "nom": "Master en Droit Notarial et Gestion du Patrimoine",
+  "ecole": "ism-droit",
+  "niveau": "master",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 3,
+    "technique": 1,
+    "relationnel": 5,
+    "creatif": 1,
+    "cadre": 3
+  },
+  "domaines": [
+    "gestion",
+    "droit",
+    "culture-evenementiel"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Conseiller en gestion de patrimoine",
+      "Clerc de notaire",
+      "Juriste spécialisé en gestion du patrimoine",
+      "Consultant"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Ingénierie Juridique des Affaires",
+        "Initiation au Management public",
+        "Techniques quantitatives de Gestion",
+        "Management",
+        "Management opérationnel",
+        "Instruments de paiement et de Garantie",
+        "Fiscalité",
+        "Comportement professionnel et renforcement de Capacité",
+        "Pratique du Droit des Affaires",
+        "Techniques quantitatives de Gestion en Management",
+        "Théories et pratiques Notariales",
+        "Recherche"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 2,
+    "modules_exemples": [
+      "Techniques quantitatives de Gestion",
+      "Techniques quantitatives de Gestion en Management"
+    ],
+    "niveau": "modere"
+  },
+  "vitrine": {
+    "description": "Le MBA Droit notarial et Gestion du patrimoine a pour ambition de former des auditeurs désireux de devenir notaires, clercs de notaires ou conseillers en gestion du patrimoine. La formation associe aux matières du droit notarial classique des enseignements en gestion et en droit international appliquéau notariat. Les objectifs de la formation sont lamaitrise des techniques rédactionnelles des actes notariés, l’acquisition de la rigueur, de la synthèse et de la méthodologie nécessaires au notaire, les connaissances des grands principes du droit international privé appliqué au notariat, la réact"
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  }
+}

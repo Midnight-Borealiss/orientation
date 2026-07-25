@@ -1,0 +1,84 @@
+{
+  "id": "mba-management-et-securite-des-systemes-d-information",
+  "nom": "MBA Management et Sécurité des Systèmes d’Information",
+  "ecole": "ism-ingenieurs",
+  "niveau": "mba",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 1,
+    "technique": 5,
+    "relationnel": 4,
+    "creatif": 1,
+    "cadre": 2
+  },
+  "domaines": [
+    "cybersecurite",
+    "gestion",
+    "ingenierie"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Ingénieur intégration / Architecte système",
+      "Responsable sécurité système",
+      "Chef de projet IT - Consultant en organisation",
+      "Consultant/Responsable business intelligence",
+      "Responsable veille Stratégique et Technologique",
+      "Directeur des systèmes d’information",
+      "Responsable service informatique École de d’Ingénieurs p.49"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Management stratégique et opérationnel",
+        "Bases de données et systèmes d’information",
+        "Architecture et technologies du web",
+        "Réseaux et systèmes informatiques",
+        "Gestion des données et informatique décisionnelle",
+        "Management des systèmes d’information",
+        "Management de la sécurité des systèmes d’information",
+        "Outils d’efficacité professionnelle - Méthodologie et thèse professionnelle"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "L’objectif de ce programme est de former des experts dotés d’une double compétence en ingénierie du management et de la sécurité des systèmes d’information. Il s’agit pour les étudiants d’acquérir les aptitudes nécessaires pour concevoir, réaliser et faire évoluer l’ingénierie de la conception, du pilotage et de la sécurité des systèmes d’information"
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  },
+  "parcours": "Parcours innovation entreprenariat et technologies"
+}

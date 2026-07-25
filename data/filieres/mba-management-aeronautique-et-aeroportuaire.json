@@ -1,0 +1,89 @@
+{
+  "id": "mba-management-aeronautique-et-aeroportuaire",
+  "nom": "MBA Management Aéronautique et Aéroportuaire",
+  "ecole": "ism-management",
+  "niveau": "mba",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 1,
+    "technique": 3,
+    "relationnel": 2,
+    "creatif": 1,
+    "cadre": 2
+  },
+  "domaines": [
+    "logistique",
+    "gestion"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Responsable de l’exploitation aéroportuaire",
+      "Directeur exploitation aéroportuaire",
+      "Responsable exploitation sûreté opérationnelle",
+      "Agent d’escale commerciale",
+      "Agent d’opération École de Management"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Aéronef et systèmes du transport aérien",
+        "Ground handling",
+        "Organisation et fonctionnement des aéroports",
+        "Droit international de l’aviation civile",
+        "Gestion des opérations",
+        "Sécurité aérienne du transport de marchandises dangereuses",
+        "Optimisation des recettes (revenue management)",
+        "Compagnies aériennes et industries du transport aérien",
+        "Stratégies des aéroports",
+        "Stratégies des compagnies aériennes",
+        "Télécommunications : systèmes et techniques",
+        "Maintenance & Navigabilité",
+        "Sûreté et Sécurité dans l’assistance",
+        "Principes généraux / AHM",
+        "Assurance aéroportuaire et gestion des réclamations",
+        "Progiciels de gestion intégrés (ERP)"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Le rôle particulièrement important joué par les aéroports dans le cadre de la libéralisation du transport aérien, l’ouverture de l’assistance aéroportuaire, la diversité des métiers de l’exploitation, la sûreté des plates-formes aéroportuaires, ou encore les problèmes économiques généraux, nécessitent des responsables particulièrement compétents pour conduire et développer chaque aéroport. Le MBA Management aéroportuaire et aéronautique s’adresse aux étudiants passionnés par le secteur et aux salariés, professionnels évoluant dans ledit secteur. Il vise à leur donner les compétences en gestion"
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  },
+  "parcours": "Parcours Responsabilité, Organisation et Management"
+}

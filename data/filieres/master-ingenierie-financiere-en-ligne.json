@@ -1,0 +1,102 @@
+{
+  "id": "master-ingenierie-financiere-en-ligne",
+  "nom": "Master Ingénierie Financière",
+  "ecole": "ism-online",
+  "niveau": "master",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "en-ligne"
+  ],
+  "axes": {
+    "quantitatif": 5,
+    "technique": 1,
+    "relationnel": 2,
+    "creatif": 1,
+    "cadre": 3
+  },
+  "domaines": [
+    "finance",
+    "comptabilite",
+    "marches-financiers"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "nancier",
+      "Gestionnaire d’actifs Opérateur de marché"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Enseignements M1",
+      "modules": [
+        "Management Stratégique et RSE",
+        "Techniques comptables approfondies",
+        "Diagnostic Financier - Etats financiers",
+        "Investissement et financement",
+        "Marchés des capitaux et Économie financière",
+        "Normes internationales IFRS",
+        "Comptabilité des groupes",
+        "Valeur, risque et finance",
+        "Marches financiers et Produits dérivés",
+        "Fiscalité des entreprises",
+        "Droit Spécial des Sociétés",
+        "Outils de communication Enseignements M2",
+        "Management Stratégique et Éthique dans les affaires",
+        "Normes internationales IFRS",
+        "Évaluation fi l’entreprise",
+        "Business Plan, Mont opérations à effet levier",
+        "Gestion de Portefeuille",
+        "Modélisation et Économétr",
+        "Management des r",
+        "Finance Décentralisée : Micr",
+        "Finance Islamique",
+        "Applications fi",
+        "Stratégie Boursière",
+        "Méthodologies et Techniques de Recherche et Thèse professionnelle",
+        "Directeur fi",
+        "(asset manager) ; Analyste de risque crédit ; nancière de la valeur de ages fi",
+        "isques fi",
+        "nancière sur EXCEL nanciers et",
+        "ie financière",
+        "nanciers",
+        "ofinance"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 1,
+    "modules_exemples": [
+      "Modélisation et Économétr"
+    ],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Cette formation s’active à former des spécialistes de l’ingénierie techniques financières modernes. Elle prépare essentiellement à l’intégration de la dimension globale des problèmes financiers à traiter, et notamment leurs enjeux stratégiques dans le fonctionnement organisationnel. Enfin, ce parcours favorise l’accès à certains métiers d’expertise et, à terme, à des postes de Direction financière ou de Management organisationnel. financière maîtrisant les outils et les"
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "brochure",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_ONLINE_ISF_BROCHURE.pdf"
+  }
+}

@@ -1,0 +1,96 @@
+{
+  "id": "master-gouvernance-et-management-public",
+  "nom": "Master Gouvernance et Management Public",
+  "ecole": "madiba",
+  "niveau": "master",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 2,
+    "technique": 1,
+    "relationnel": 3,
+    "creatif": 3,
+    "cadre": 4
+  },
+  "domaines": [
+    "gestion",
+    "administration-publique",
+    "marketing"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Cadre, chef de service, chef de division d’un établissement public",
+      "Chef de service ou de département d’un établissement public",
+      "Chargé de mission",
+      "Attaché territorial"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Accompagnement pour la Dynamisation de Carrière",
+        "Outils de conception et de gestion de projet (focus sur la GAR)",
+        "Projet de créativité «libère ta créativité et rêve ton Afrique de demain»",
+        "Droit de l’administration publique",
+        "Management stratégique des organisations publiques",
+        "Décentralisation et marketing territorial",
+        "Pratiques de gouvernance et de management public",
+        "Conception et pilotage de politiques publiques",
+        "Évaluation de politiques publiques",
+        "Gestion des ressources humaines dans le secteur public",
+        "Compétences du XXIème siècle",
+        "Fiscalité et finances publiques",
+        "Partenariat public-privé",
+        "E-gouvernance et modernisation des administrations publiques africaines",
+        "Gouvernance et passation des marchés publics",
+        "Marketing social et communication institutionnelle Audit et contrôle administratif",
+        "Veille informationnelle, Méthodologie de rédaction d’un mémoire, Projet de spécialité",
+        "Mémoire, Séminaire de suivi, Soutenance"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Ce programme a vocation à renforcer les capacités managériales au service d’une bonne gouvernance en tablant sur les meilleures pratiques en matière de gestion et sur les techniques de pointe. Mise en œuvre à Dakar, elle est contextualisée pour s’inscrire dans la réalité de l’environnement sénégalais tout en apportant unedimension internationale, propre à l’Université Senghor comme au Groupe ISM."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference",
+      "partenariats": "brochure"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  },
+  "partenariats": {
+    "double_diplome": "double diplôme mentionné",
+    "diplome_delocalise": null,
+    "accreditations": []
+  }
+}

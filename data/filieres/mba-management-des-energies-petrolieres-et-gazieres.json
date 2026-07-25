@@ -1,0 +1,104 @@
+{
+  "id": "mba-management-des-energies-petrolieres-et-gazieres",
+  "nom": "MBA Management des Énergies Pétrolières et Gazières",
+  "ecole": "ism-management",
+  "niveau": "mba",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 3,
+    "technique": 2,
+    "relationnel": 3,
+    "creatif": 1,
+    "cadre": 3
+  },
+  "domaines": [
+    "gestion",
+    "logistique",
+    "qualite"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Chef de Projet dans l’industrie pétrolière et/ou gazière",
+      "Manager Chargé d’exploitation",
+      "Manager QHSE - Risk Manager",
+      "Manager spécialisé dans les processus, produits et services pétroliers et gaziers",
+      "Chargé de mission",
+      "Chargé d’approvisionnement",
+      "Analyste des Risques Politiques et Environnementaux",
+      "Opérateur de Trading",
+      "Logisticien des hydrocarbures : pétrole et gaz"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Management des organisations énergétiques",
+        "Énergies - RSE et développement durable",
+        "Économie du pétrole, du gaz et de l’énergie",
+        "Gestion de projets énergétiques",
+        "Passation des marchés et partenariat public privé énergie",
+        "Gestion de la chaîne logistique",
+        "Technique de négociation commerciale",
+        "Comptabilité et finance internationale",
+        "ERP : Logiciel de gestion appliquée",
+        "Leadership et management des équipes",
+        "Management stratégique",
+        "Énergie et éthique des affaires",
+        "Politique énergétique et gestion de l’environnement",
+        "Droit des contrats dans le secteur énergétique",
+        "Technique de recueil et analyse de données",
+        "Logistique des hydrocarbures",
+        "Gestion financière approfondie",
+        "Contrôle de gestion approfondie",
+        "QSHE : pétrole et gaz",
+        "Management du risque"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "L’objectif de ce programme est de former des cadres de haut niveau capables d’assurer et de maîtriser la qualité sur l’ensemble des processus et systèmes de management des ressources pétrolières et gazières. Ce programme favorise l’acquisition et le développement de compétences dans les domaines du management, du pilotage des systèmes d’exploitation : distribution, logistique, commercialisation, de ces dites ressources."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference",
+      "partenariats": "brochure"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  },
+  "parcours": "Parcours Responsabilité, Organisation et Management",
+  "partenariats": {
+    "double_diplome": null,
+    "diplome_delocalise": "l'univeriste senghor-egypte l'objectif de ce programme est de former d",
+    "accreditations": []
+  }
+}

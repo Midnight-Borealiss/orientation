@@ -1,0 +1,104 @@
+{
+  "id": "master-in-business-administration",
+  "nom": "Master in Business Administration",
+  "ecole": "ism-management",
+  "niveau": "master",
+  "langue": "bilingue",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 3,
+    "technique": 2,
+    "relationnel": 3,
+    "creatif": 1,
+    "cadre": 3
+  },
+  "domaines": [
+    "comptabilite",
+    "gestion",
+    "droit"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Gestionnaires",
+      "Directeur / cadre supérieur de PME et de cabinets d’études et de conseil",
+      "Consultant free-lance",
+      "Business coordinateur",
+      "Directeur d’agence",
+      "Directeur des opérations",
+      "Gérant d’entreprise"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Leadership & Management",
+        "RSE & Développement durable",
+        "Stratégie d’entreprise",
+        "Ethique des affaires",
+        "Supply Chain Management",
+        "Management des Ressources Humaines",
+        "Marketing stratégique et opérationnel",
+        "Innovation & transformation digitale",
+        "Management des projets",
+        "Prise de décision",
+        "Comptabilité pour managers",
+        "Gestion de la performance",
+        "Marchés financiers.",
+        "Droit des affaires",
+        "Droit du travail",
+        "Environnement économique et international de l’entreprise",
+        "Fiscalité",
+        "Management interculturel",
+        "Comptabilité analytique",
+        "Finance d’entreprise",
+        "Contrôle interne",
+        "Contrôle de gestion",
+        "Communication d’entreprise",
+        "Système d’information de gestion",
+        "Power BI",
+        "Veille concurrentielle et prospective",
+        "Tableau de bord et outils de suivi"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "LeMaster of Business Administration(MBA) est une formation de pointe qui offre aux étudiants une expertise approfondie en gestion et en leadership. En suivant ce programme MBA, les participants acquièrent de solides compétences stratégiques, essentielles pour exceller dans le monde du management. Le M.B.A. développe des compétences de management avancées et permet aux étudiants d’acquérir des savoirs pratiques leur permettant d’assumer des postes à haute responsabilité dans le monde de l’entreprise. Le programme leur permet d’élargir leurs horizons professionnels et de maximiser leur potentiel"
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "langue": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  },
+  "parcours": "Parcours responsabilité, organisation et management"
+}

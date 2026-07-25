@@ -1,0 +1,82 @@
+{
+  "id": "executive-mba-pour-cadres-dirigeants",
+  "nom": "EXECUTIVE MBA POUR CADRES DIRIGEANTS",
+  "ecole": "ism-executive",
+  "niveau": "mba",
+  "langue": "bilingue",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel",
+    "en-ligne"
+  ],
+  "axes": {
+    "quantitatif": 1,
+    "technique": 1,
+    "relationnel": 5,
+    "creatif": 2,
+    "cadre": 1
+  },
+  "domaines": [
+    "design-web"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "PEOPLE, MANAGEMENT & POLICY",
+        "Leadership and effective teams",
+        "Human Resources Strategy",
+        "Business Negotiation Techniques",
+        "Organization Change & Behavior",
+        "INNOVATION & SYSTEMS",
+        "Management of Innovation",
+        "Business Model Design",
+        "Corporate Social Responsibility",
+        "Ethics & Corporate Governance",
+        "BUSINESS & PROCESS",
+        "Intelligence",
+        "Management of Information System",
+        "Project Management",
+        "Business Process Management (BPM) Pour en savoir plus sur l’ISM Executive Education : Téléphone :+221 78 458 18 58",
+        "Programme Executive Education"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Cette formation d’une année est organisée et professeurs nationaux et internationaux. Il s’agit d’identifier les problématiques auxquelles sont confrontés les managers et de développer les aptitudes et comportements adaptés pour y répondre, un programme axé sur l’acquisition de compétentes techniques (hard skills) et compétences personnelles (soft skills). En plus de cela, les études de cas et mises en situation sont un des éléments clés du programme, autour de l’analyse financière, la formulation et la gestion de la stratégie, l’analyse des fonctions de l’entreprise et le processus de prise d"
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "langue": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  }
+}

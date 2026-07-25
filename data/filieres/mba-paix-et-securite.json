@@ -1,0 +1,100 @@
+{
+  "id": "mba-paix-et-securite",
+  "nom": "MBA Paix et Sécurité",
+  "ecole": "madiba",
+  "niveau": "mba",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 1,
+    "technique": 1,
+    "relationnel": 3,
+    "creatif": 1,
+    "cadre": 4
+  },
+  "domaines": [
+    "communication",
+    "droit",
+    "gestion"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Chargé de projets et programmes paix et sécurité",
+      "Coordonnateur ou chef de projets",
+      "Médiateur et négociateur",
+      "Consultant en prévention de conflits dans les ONG ou Organisation internationales",
+      "Analyste veille sécuritaire",
+      "Analyste dans les cabinets de conseil en stratégie, sécurité"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Théories de la paix et de la sécurité",
+        "Introduction à la géostratégie",
+        "Histoire de la guerre et la paix",
+        "Sociologie des conflits",
+        "Négociations et conflits politiques",
+        "Développement personnel",
+        "Anglais des Relations internationales",
+        "Analyse des conflits armés africains",
+        "Stratégies militaires contemporaines",
+        "Droit International humanitaire",
+        "Droit pénal international",
+        "Cybercriminalité et cybersécurité",
+        "Éthique des organisations",
+        "Communication de crise",
+        "Médiation dans les conflits armés",
+        "Gestion de crise",
+        "Politiques de sécurité",
+        "Analyse, décision et planification stratégiques",
+        "Paix et sécurité internationales",
+        "Techniques de rédaction administrative",
+        "Méthodologie de rédaction de Mémoire",
+        "Prévention des conflits",
+        "Child and women protection",
+        "Droit du maintien de la paix",
+        "Justice transitionnelle",
+        "Anglais des Relations internationales"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Cette formation vise à doter les cadres d’expertise en gestion des conflits et sécurité contemporaine, combinant théorie et pratique. Les apprenants seront initiés à l’élaboration de politiques sécuritaires, à la gestion de crises, et seront aptes à proposer des analyses et stratégies pour des États ou organisations internationales. Grâce à cette formation, ils pourront intégrer diverses structures, de la gouvernance sécuritaire aux organisations internationales."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "id": "mba-en-decentralisation-et-gouvernance-territoriale",
+  "nom": "MBA en Décentralisation et Gouvernance Territoriale",
+  "ecole": "madiba",
+  "niveau": "mba",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 3,
+    "technique": 1,
+    "relationnel": 2,
+    "creatif": 1,
+    "cadre": 1
+  },
+  "domaines": [
+    "gestion",
+    "informatique",
+    "management-projet"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Cadre supérieur dans l’administration territoriale",
+      "Chef de projet d’une ONG",
+      "Assistant parlementaire",
+      "Conseiller territorial",
+      "Responsable de projets de développement territorial des organismes internationaux",
+      "Responsable en planifcation et de développement local"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Déconcentration / Décentralisation",
+        "Planification locale et développement Durable",
+        "Management des organisations",
+        "Leadership",
+        "Économie",
+        "Statistiques",
+        "Logiciels (Excel avancé, base de données et SIG)",
+        "Anglais",
+        "Management stratégique",
+        "Management des ressources humaines",
+        "Budget et Fiscalité locale",
+        "Passation des marchés et GAR",
+        "Aménagement du territoire et gestion foncière",
+        "Économie des déchets",
+        "Élaboration et gestion de projets",
+        "Suivi, évaluation et capitalisation des projets",
+        "Statistiques approfondies",
+        "Méthodologie de rédaction de mémoire",
+        "Analyse et évaluation des politiques publiques",
+        "Intelligence économique",
+        "Communication institutionnelle",
+        "Gestion de l’état civil",
+        "Coopération décentralisée",
+        "Intercommunalité",
+        "Éthique et Gouvernance des organisations",
+        "Marchés financiers mondiaux",
+        "Partenariat Public-Privé",
+        "Stratégie d’aménagement du Territoire",
+        "Intelligence territoriale",
+        "Marketing des territoires",
+        "Droit de l’environnement",
+        "Méthode active de recherche participative"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 2,
+    "modules_exemples": [
+      "Statistiques",
+      "Statistiques approfondies"
+    ],
+    "niveau": "modere"
+  },
+  "vitrine": {
+    "description": "Ce parcours a pour objectif de former des ingénieurs de l’action territoriale pour accompagner la mise en place et le déploiement des politiques sur le territoire. Il s’agit d’acquérir les connaissances et le savoir-faire nécessaires pour appuyer l’État et les collectivités territoriales dans le développement territorial. Les diplômés maîtriseront les enjeux de la décentralisation, sauront manager l’économie locale et tout en assurant un pilotage efficace des administrations des collectivités territoriales."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  }
+}

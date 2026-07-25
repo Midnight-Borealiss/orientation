@@ -1,0 +1,160 @@
+{
+  "id": "licence-de-gestion-option-comptabilite-finance",
+  "nom": "Licence de gestion option Comptabilité - Finance",
+  "ecole": "ism-management",
+  "niveau": "licence",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 3,
+    "technique": 1,
+    "relationnel": 3,
+    "creatif": 1,
+    "cadre": 2
+  },
+  "domaines": [
+    "comptabilite",
+    "gestion",
+    "finance"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Comptable",
+      "Financier",
+      "Trésorier",
+      "Auditeur interne",
+      "Chargé du service administratif et financier",
+      "Gestionnaire des investissements",
+      "Gestionnaire portefeuille"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "UE Concepts et Techniques de Gestion",
+      "modules": [
+        "Management",
+        "Marketing : Comportement du Consommateur",
+        "Comptabilité Générale",
+        "Analyse Financière",
+        "Comptabilité Analytique",
+        "Comptabilité des Sociétés",
+        "Macroéconomie",
+        "Typologies et Culture Organisationnelle",
+        "Marketing : Etude de Marché",
+        "Management Multiculturel",
+        "Marketing Mix : Produit - Prix – Distribution",
+        "Marketing Opérationnel : Publicité",
+        "Force de Vente",
+        "Techniques de Vente",
+        "Économie Monétaire",
+        "Management de la Qualité",
+        "Management des Ressources Humaines"
+      ]
+    },
+    {
+      "intitule": "UE Comportement professionnel - Culture juridique et politique",
+      "modules": [
+        "Géopolitique",
+        "Droit",
+        "Droit des Obligations",
+        "Leadership",
+        "Droit Commercial et des Sociétés",
+        "Développement personnel"
+      ]
+    },
+    {
+      "intitule": "UE Initiation à la Recherche",
+      "modules": [
+        "Actions de recherche encadrées UE. Langues – Civilisations",
+        "Business English",
+        "Business Communication"
+      ]
+    },
+    {
+      "intitule": "UE Initiation à la Recherche",
+      "modules": [
+        "Actions de terrain encadrées",
+        "Techniques d’Expression et de Communication en Français"
+      ]
+    },
+    {
+      "intitule": "UE Entrepreneuriat – Communication et Service à la Communauté",
+      "modules": [
+        "Entrepreneuriat",
+        "Techniques de recherche d’emploi",
+        "Service à la Communauté"
+      ]
+    },
+    {
+      "intitule": "UE Outils et Techniques de gestion approfondies",
+      "modules": [
+        "Comptabilité de Gestion",
+        "Gestion Budgétaire",
+        "Fiscalité des entreprises",
+        "Techniques et Pratiques bancaires",
+        "Gestion de Trésorerie",
+        "Gestion de la Production/Application sur MS Project"
+      ]
+    },
+    {
+      "intitule": "UE Management et Responsabilité Sociale d’Entreprise",
+      "modules": [
+        "Stratégie d’entreprise",
+        "RSE et Développement Durable"
+      ]
+    },
+    {
+      "intitule": "UE Ateliers d’approfondissement et Finance appliquée",
+      "modules": [
+        "Appui et Financement des PME",
+        "Introduction à l’Audit et au Contrôle interne",
+        "Finance de Marché"
+      ]
+    },
+    {
+      "intitule": "UE Projet d’entreprise",
+      "modules": [
+        "Création d’entreprise",
+        "Soutenance du Business Plan"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Ce parcours vise à doter les étudiants des compétences clés dans ces domaines pour une insertion réussie en entreprise. Il propose aussi de développer des aptitudes en marketing et management pour leur assurer une bonne maîtrise de l’environnement professionnel. À l’issue de leur formation, les diplômés pourront choisir de s’insérer directement dans le marché du travail ou de poursuivre leur cursus en master."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_bachelor_brochure.pdf"
+  },
+  "option": "Comptabilité - Finance",
+  "programme_parent": "licence-en-gestion"
+}

@@ -1,0 +1,90 @@
+{
+  "id": "master-marketing-communication-vente-relation-client-en-ligne",
+  "nom": "Master Marketing – Communication (Vente – Relation Client)",
+  "ecole": "ism-online",
+  "niveau": "master",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "en-ligne"
+  ],
+  "axes": {
+    "quantitatif": 2,
+    "technique": 2,
+    "relationnel": 5,
+    "creatif": 3,
+    "cadre": 2
+  },
+  "domaines": [
+    "marketing",
+    "communication",
+    "gestion"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Directeur commercial",
+      "Directeur/responsable Analyste marketing",
+      "Responsable des ventes"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Enseignements M1",
+      "modules": [
+        "Management stratégique et RSE",
+        "Psychosociologie du consommateur",
+        "Techniques de prospection commerciale",
+        "Marketing Relationnel",
+        "Marketing Stratégique",
+        "Techniques de négociation commerciale",
+        "Webmarketing & Community Management",
+        "Gestion de l’offre et Politique de distribution",
+        "Création publicitaire et médias planning",
+        "Événementiel",
+        "Outils de communication et technologies de l’information marketing ; Ingénieur commercial ; Chef de produit Enseignements M2",
+        "Stratégie et Éthique des affaires",
+        "Analyse prédictive du comportement des clients",
+        "Gestion de la satisfaction client",
+        "Outils, Méthodes et Techniques de Fidélisation",
+        "Management Commercial",
+        "Audit commercial & Plan d’Action Commerciale",
+        "Category management & Merchandising",
+        "Gestion budgétaire",
+        "Méthodologie - Techniques de recueil de données et thèse professionnelle"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Ce Master permet aux étudiants d’acquérir une double compétence, en les formant à l’expertise des situations de la relation client et l’art de la négociation, mais également à devenir un manager performant, capable de développer l’activité commerciale d’une marque, entreprise ou organisation. Le programme a été conçu pour doter les étudiants des connaissances fondamentales et des outils professionnels adaptés aux nouveaux métiers du marketing, du e-marketing et de la relation client, et au management commercial."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "brochure",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_ONLINE_ISF_BROCHURE.pdf"
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "id": "licence-en-science-politique-et-relations-internationales",
+  "nom": "Licence en Science politique et Relations internationales",
+  "ecole": "madiba",
+  "niveau": "licence",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 2,
+    "technique": 1,
+    "relationnel": 3,
+    "creatif": 1,
+    "cadre": 2
+  },
+  "domaines": [
+    "science-politique",
+    "droit",
+    "gestion"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Administration publique et territoriale",
+      "Organisations internationales",
+      "Entreprises privées",
+      "Cabinets de conseil",
+      "Associations et autres structures humanitaires"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "UE Science politique et relations internationales",
+      "modules": [
+        "Introduction à la Science politique",
+        "Introduction aux relations internationales",
+        "Histoire des idées politiques",
+        "Etudes des systèmes politiques",
+        "Institutions internationales",
+        "Géopolitique",
+        "Enjeux et pratiques des relations internationales",
+        "Analyse et évaluation des politiques publiques",
+        "Politiques contemporaines"
+      ]
+    },
+    {
+      "intitule": "UE Droit privé et Droit public",
+      "modules": [
+        "Droit constitutionnel",
+        "Introduction au droit",
+        "Droit international public",
+        "Droit administratif",
+        "Finances publiques",
+        "Droit de l’intégration",
+        "Droit des organisations internationales UE. Économie, Gestion, outils de base",
+        "Introduction à l’économie",
+        "Comptabilité générale",
+        "Introduction au management",
+        "Management des organisations,",
+        "Actions de recherche encadrées",
+        "Marketing",
+        "Entrepreneuriat",
+        "Gestion des RH",
+        "Management de projet",
+        "Enjeux du développement durable"
+      ]
+    },
+    {
+      "intitule": "UE Comportements professionnels, Communication, Leadership",
+      "modules": [
+        "Anglais,",
+        "Informatique",
+        "Agora",
+        "Leadership",
+        "Introduction à la communication",
+        "Communication politique et institutionnelle",
+        "Recherche",
+        "Langues"
+      ]
+    },
+    {
+      "intitule": "UE Sciences humaines et sociales",
+      "modules": [
+        "Sociologie",
+        "philosophie",
+        "anthropologie"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "La licence en science politique et relations internationales offre aux futurs professionnels des compétences élargies, qui leur permettent de se mouvoir à la fois dans l’administration publique, dans les organisations internationales et les entreprises privées. Science politique, sciences humaines, droit, économie et management : la pluridisciplinarité des enseignements permet aux apprenants de se constituer une solide culture générale et en cela devenir de précieux collaborateurs."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_bachelor_brochure.pdf"
+  }
+}

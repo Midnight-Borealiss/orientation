@@ -1,0 +1,88 @@
+{
+  "id": "master-in-international-management",
+  "nom": "Master in International Management",
+  "ecole": "ism-management",
+  "niveau": "master",
+  "langue": "anglais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 3,
+    "technique": 1,
+    "relationnel": 5,
+    "creatif": 1,
+    "cadre": 1
+  },
+  "domaines": [
+    "commerce-international"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Business Analyst",
+      "Export Zone Manager",
+      "Overseas Subsidiary Manager",
+      "Business Developer",
+      "Consultant in relocation",
+      "International purchaser"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Fundamentals of International HR Management",
+        "Accounting Management",
+        "International Economics and Policy",
+        "Emerging Economies & Market",
+        "Total Quality Management",
+        "Geopolitics in Business",
+        "International Negotiations",
+        "International Management of Information System",
+        "International Finance",
+        "International Investment",
+        "Diversity Management",
+        "Corporate Strategy",
+        "International Operations Management",
+        "International Marketing Strategies"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Enhance and apply your knowledge regarding major issues of globalization, and be ready to address them responsibly while taking into account their complexity, stakeholders’ demands as well as geopolitical and geostrategic realities. This training is geared by an alternation of courses and work experience and overseas trips, in view of greater open- mindedness. Therefore, you are sure to gain the most up-to-date strategies in business and management. A study trip is required for this program. In joining the MIM, you do more than attending a course in ISM, you become an ISM (Internationally Shap"
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "langue": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  },
+  "parcours": "Parcours responsabilité, organisation et management"
+}

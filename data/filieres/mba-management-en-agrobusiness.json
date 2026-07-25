@@ -1,0 +1,92 @@
+{
+  "id": "mba-management-en-agrobusiness",
+  "nom": "MBA Management en Agrobusiness",
+  "ecole": "ism-management",
+  "niveau": "mba",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 1,
+    "technique": 1,
+    "relationnel": 4,
+    "creatif": 2,
+    "cadre": 2
+  },
+  "domaines": [
+    "agrobusiness",
+    "marketing",
+    "qualite"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Chef de projet en logistique et approvisionnement",
+      "Responsable d’affaires agroalimentaires",
+      "Responsable de commercialisation des produits agricoles",
+      "Responsable Qualité, Hygiène, Sécurité, Environnement",
+      "Gestionnaire du processus de production agricole",
+      "Technicien supérieur de recherche agricole",
+      "Responsable d’usine",
+      "Responsable Supply Chain",
+      "Responsable Marketing",
+      "Négociateur"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Management Organisationnel",
+        "Environnement Agro Business",
+        "Marketing & Innovation",
+        "Commercialisation & Chaîne logistique",
+        "Gestion financière",
+        "Management & Communication",
+        "Qualité totale",
+        "Environnement des organisations",
+        "Marketing & Qualité",
+        "Approvisionnement & Distribution",
+        "Entreprenariat",
+        "Management des projets",
+        "Mémoire de Recherche"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Cette spécialisation prépare les étudiants aux métiers du commerce dans l’agroalimentaire, le milieu agricole, la production ou encore l’innovation. Ils seront alors aptes à travailler sur les marchés internationaux afin de mieux comprendre les marchés agroalimentaires, appréhender la mondialisation agricole : ses enjeux, ses conséquences et perspectives, mais aussi de donner une connaissance théorique et pratique managériale à des auditeurs ayant déjà une formation technique et une expérience liées à l’agriculture et au secteur agroalimentaire et désireux d’accéder à des emplois à responsabil"
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  },
+  "parcours": "Parcours responsabilité, organisation et management"
+}

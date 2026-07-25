@@ -1,0 +1,128 @@
+{
+  "id": "licence-en-electronique-telecommunications-et-systemes-embar",
+  "nom": "Licence en Électronique, Télécommunications et Systèmes embarqués",
+  "ecole": "ism-ingenieurs",
+  "niveau": "licence",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 1,
+    "technique": 5,
+    "relationnel": 2,
+    "creatif": 1,
+    "cadre": 1
+  },
+  "domaines": [
+    "reseaux",
+    "electronique",
+    "communication"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Concepteur de systèmes automatisés industriels en réseaux",
+      "Concepteur de systèmes embarqués",
+      "Informaticien industriel",
+      "Administrateur de réseau",
+      "Architecte de systèmes de communication et d’information",
+      "Responsable maintenance logiciel et matériel pour les réseaux et les installations de télécommunications",
+      "Technico-commercial"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "UE Maitrise des Comportements Professionnels",
+      "modules": [
+        "Communication Professionnelle",
+        "Leadership - Team Bulding & Soft Skills",
+        "Business English & Com",
+        "English For IT",
+        "Creativity & Social Involvement"
+      ]
+    },
+    {
+      "intitule": "UE Outils Mathématiques, Réseaux et Systèmes Informatiques",
+      "modules": [
+        "Mathématiques Appliquées - Lois de Probabilité",
+        "Recherche Opérationnelle",
+        "Système Linux",
+        "Architectures et réseaux informatiques",
+        "Administration et interconnexion de Réseaux informatiques",
+        "Sécurité informatique"
+      ]
+    },
+    {
+      "intitule": "UE Electronique et Systèmes Embarqués",
+      "modules": [
+        "Electronique Digital - Analogique - Programmable",
+        "Electronique pour les Systèmes Embarqué et les Télécoms",
+        "Systèmes Embarqués - IOT - Intelligence Artificielle"
+      ]
+    },
+    {
+      "intitule": "Certification CISCO Gratuite et intégrée dans le curiculum de formation (IT Essentials - IOT - CCNA - Linux) UE. Télécommunications",
+      "modules": [
+        "Communication Numérique - Théorie et Traitement du Signal",
+        "Commutation - Supports et Systèmes de Transmission",
+        "Trafic et Qualité de Service",
+        "Téléphonie Analogique - Faisceaux Herztiens et VSAT",
+        "Réseaux Sans Fils - Mobiles - Géolocalisation - ToIP et VoIP"
+      ]
+    },
+    {
+      "intitule": "UE Programmation – Développement web et d’applications",
+      "modules": [
+        "Algorithmique et Structures de Données",
+        "Systèmes d’Information - Bases de Données",
+        "Technologies Web",
+        "Programmation Python",
+        "Programmation C"
+      ]
+    },
+    {
+      "intitule": "UE Méthodologie & Entrepreneurship",
+      "modules": [
+        "Méthodologie entrepreneuriat",
+        "Projet d’entre"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 1,
+    "modules_exemples": [
+      "Mathématiques Appliquées - Lois de Probabilité"
+    ],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Centrée sur la convergence de l’électronique, des télécommunications et des systèmes embarqués, cette licence forme des collaborateurs de plus en plus recherchés par les entreprises. Ce parcours propose aux étudiants d’apprendre les fondamentaux de l’électronique analogique et numérique, de connaître les bases du fonctionnement des microprocesseurs et des systèmes informatiques. À l’issue de sa formation, l’étudiant saura proposer et concevoir l’architecture d’un réseau unifié intégrant la téléphonique, la vidéo et l’informatique. Il participera au sein d’une équipe à la conception de systèmes"
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_bachelor_brochure.pdf"
+  },
+  "departement": "Sciences et Technologies appliquées"
+}

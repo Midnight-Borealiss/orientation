@@ -1,0 +1,87 @@
+{
+  "id": "master-en-passation-des-marches-et-droit-notarial",
+  "nom": "Master en Passation des Marchés et Droit Notarial",
+  "ecole": "ism-droit",
+  "niveau": "master",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 2,
+    "technique": 1,
+    "relationnel": 5,
+    "creatif": 1,
+    "cadre": 4
+  },
+  "domaines": [
+    "administration-publique",
+    "droit"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Spécialiste en management des marchés publics",
+      "Spécialiste en régulation des marchés publics",
+      "Direction ou animation de cellule de passation des marchés publics",
+      "Juriste",
+      "Analyste ou chargé d’études au sein des structures publiques (état, collectivités locales…) ou privées",
+      "Consultant auprès des structures spécialisées dans les marchés publics…"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Ingénierie Juridique des Affaires",
+        "Initiation au Management public",
+        "Techniques quantitatives de Gestion",
+        "Management",
+        "Management opérationnel",
+        "Instruments de paiement et de Garantie",
+        "Fiscalité",
+        "Comportement professionnel et renforcement de Capacité",
+        "Management public",
+        "Réglementation de Marchés publics en procédures de passation",
+        "Procédures de passation",
+        "Recherche"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 1,
+    "modules_exemples": [
+      "Techniques quantitatives de Gestion"
+    ],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Dans un souci de répondre aux enjeux posés par la commande publique, le MBA passation des Marchés permet de connaitre et de s’approprier les bases légales, les fondements économiques mais aussi les aspects managériaux des marchés publics. A cet effet, la formation est axée sur les connaissances des procédures de passation des marchés publics, le management et régulation des marchés publics, les connaissances des finances publiques et des principaux contrats administratifs."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  }
+}

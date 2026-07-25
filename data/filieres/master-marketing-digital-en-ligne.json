@@ -1,0 +1,82 @@
+{
+  "id": "master-marketing-digital-en-ligne",
+  "nom": "Master Marketing Digital",
+  "ecole": "ism-online",
+  "niveau": "master",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "en-ligne"
+  ],
+  "axes": {
+    "quantitatif": 1,
+    "technique": 5,
+    "relationnel": 1,
+    "creatif": 3,
+    "cadre": 1
+  },
+  "domaines": [
+    "marketing",
+    "informatique"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Brand Content Manager Traffic Manager Social Media Manager Chargé(e) de communication web"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Enseignements M1",
+      "modules": [
+        "Culture Digitale - Transformation Digitale",
+        "Réaliser Comprendre les principes et les enjeux d’une démarche de veille",
+        "Construire un système performant de veille",
+        "Analyser les informations et les valoriser",
+        "Identifier, comprendre et exploiter les nouvelles tendances digitales",
+        "Mesurer l’impact de la présence sur internet",
+        "Marketing Stratégique & Marketing Digital : Concevoir une stratégie globale de",
+        "digitalisation Enseignements M2",
+        "Comprendre le e-commerce",
+        "Planning Stratégique et Plateforme de marque",
+        "Définir une stratégie d’emailing et concevoir une campagne",
+        "Piloter ses campagnes d’e-mailing avec MailChimp",
+        "Conduite du changement & Management de l’innovation",
+        "Outils Graphique & Web 2 : Illustrator",
+        "CMS Wordpress & WooCommerce : Créer un site web avec Wordpress"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Cette formation permet aux étudiants de maîtriser communication d’un projet digital. Il s’agit pour eux d’acquérir à la fois des compétences en management dans le cadre d’un projet digital et aussi de maîtriser les techniques et outils opérationnels de la communication et du marketing digital. tous les aspects stratégiques, marketing et"
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "brochure",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_ONLINE_ISF_BROCHURE.pdf"
+  }
+}

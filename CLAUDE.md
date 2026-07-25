@@ -18,11 +18,10 @@ jamais `src/engine/`.
 |---|---|
 | Schéma de données | fait |
 | Taxonomie ISM réelle | fait |
-| Extraction PDF | à réviser — voir « Parsing » ci-dessous |
 | Rapport des manques | fait |
 | Validation CI | fait |
 | Logique de fonctionnement | **validée** — voir ci-dessous |
-| Extraction révisée (3 profils) | **à faire — chemin critique** |
+| Extraction révisée (3 profils) | **faite** — 84 fiches, `npm test` vert |
 | Calcul de distinctivité | **à faire — point de contrôle** |
 | Moteur de scoring | à faire, après le point de contrôle |
 | Interface quiz | à faire |
@@ -33,16 +32,25 @@ jamais `src/engine/`.
 
 Trois **catalogues** ISM, pas des brochures par filière :
 
-| Fichier | Pages | Contenu | Mise en page |
-|---|---|---|---|
-| `Brochure_Master__MAJ2_2024__Groupe_ISM.pdf` | 76 | ~43 programmes Master/MBA/DBA | **2 colonnes**, 2 programmes par page |
-| `ISM_bachelor_brochure.pdf` | 48 | **26 licences/bachelors** (sommaire explicite p.13) | 1 colonne |
-| `ISM_ONLINE_ISF_BROCHURE.pdf` | 43 | Programmes ISM Online et ISF | 1 colonne |
+| Fichier | Format | Contenu | Mise en page | Fiches produites |
+|---|---|---|---|---|
+| `Brochure Master - MAJ2 2024 - Groupe ISM.pdf` | 76 p. portrait 595×842 | Master/MBA/DBA | **2 colonnes**, 2 programmes par page, gouttière à x≈300 | **44** |
+| `ISM_bachelor_brochure.pdf` | 48 p. **paysage 842×595** | licences/bachelors (sommaire p.13) | 3 zones : prose à gauche, **2 colonnes d'UE** à droite | **26** |
+| `ISM_ONLINE_ISF_BROCHURE.pdf` | 43 p. portrait 595×842 | ISM Online (p.8-21) puis ISF (p.24-28) | 2 colonnes : prose à gauche, contenu à droite | **14** |
 
 Les trois sont des PDF texte (InDesign / Illustrator), pas des scans. Extraction fiable.
 
-Volume total attendu : **75 à 80 programmes**. C'est ce qui impose l'architecture en
-entonnoir : un scoring à plat sur 80 filières ne discrimine rien.
+Volume réel : **84 fiches**. C'est ce qui impose l'architecture en entonnoir :
+un scoring à plat sur 84 filières ne discrimine rien.
+
+**Aucun catalogue n'est sur une seule colonne.** La brochure Bachelor est en
+paysage et ses pages programme portent trois zones distinctes. Un regroupement
+par Y seul recolle les colonnes et verse la moitié des modules dans les métiers.
+
+**L'ISF n'est pas extrait.** Les pages 24 à 28 du catalogue Online sont un
+*tableau* (« Filières | Certificat de compétences | Contenus de la formation »)
+de certificats courts de 1 à 3 mois, sans bloc `Objectif` : ils ne relèvent
+d'aucun des trois profils. À trancher : ces certificats entrent-ils dans le quiz ?
 
 ### Conséquence n°1 — découper, pas mapper
 
@@ -55,31 +63,60 @@ de repère de fin.
 
 ### Conséquence n°2 — trois profils de parsing
 
-Les trois catalogues utilisent des en-têtes différents. Prévoir des profils nommés,
-sélectionnés par fichier, pas une liste unique de motifs.
+Les trois catalogues utilisent des en-têtes différents : des profils nommés,
+sélectionnés par nom de fichier, jamais une liste unique de motifs. Ils vivent
+dans `scripts/lib/profils.mjs`.
 
-| Profil | Objectif | Débouchés | Contenu | Colonnes |
+| Profil | Objectif | Débouchés | Contenu | Segmentation |
 |---|---|---|---|---|
-| `master-2024` | `OBJECTIF DE LA FORMATION` | `FUTURS MÉTIERS`, sép. ` \| ` | `CONTENUS PÉDAGOGIQUES`, puces `•` | **2** |
-| `bachelor-2024` | `OBJECTIFS :` | `DéBOUCHéS :`, sép. retour ligne | `CONTENU DE LA FORMATION (3 ANS)`, blocs `UE.` | 1 |
-| `online-2425` | `Objectif` | `Métiers et débouchés`, sép. ` ; ` | `Contenu de la formation`, sous-colonnes M1/M2 | 1 |
+| `master-2024` | `OBJECTIF DE LA FORMATION` | `FUTURS MÉTIERS`, sép. ` \| ` | `CONTENUS PÉDAGOGIQUES` **ou** `CONTENUS DES ENSEIGNEMENTS`, puces `•` | 1 programme **par colonne** |
+| `bachelor-2024` | `OBJECTIFS :` | `DéBOUCHéS :`, sép. retour ligne | `CONTENU DE LA FORMATION (3 ANS)`, blocs `UE.` | 1 programme **par page** |
+| `online-2425` | `Objectif` | `Métiers et débouchés`, sép. ` ; ` ou puces | `Contenu de la formation`, sous-colonnes M1/M2 | 1 programme **par page** |
+
+Les en-têtes ne suffisent pas à isoler un programme : les pages d'accroche du
+Bachelor (« 3 ANS pour révéler son talent ») portent aussi un `OBJECTIFS :`.
+Les profils « par page » exigent donc **objectif ET contenu** — pas de liste noire
+de pages, qui se périmerait à la prochaine édition.
+
+Deux programmes du catalogue Master s'étalent sur deux pages (Executive MBA p.66-67,
+DBA p.68-69) : titre seul sur la page paire, blocs sur l'impaire. Le segmenteur
+garde un « titre en attente » pour ce cas.
 
 **Piège d'encodage.** La brochure Bachelor écrit `DéBOUCHéS` — des `é` minuscules
 accentués au milieu d'un mot en capitales, artefact InDesign. Un motif `/DÉBOUCHÉS/`
 échoue. Toujours comparer en insensible à la casse, et normaliser (`NFD`) avant test.
 
 **Validation de la segmentation.** La brochure Bachelor contient page 13 un sommaire
-listant ses 26 programmes (« 4 écoles, 26 possibilités »). L'utiliser comme référence :
-si le script en extrait 24 ou 28, la segmentation est fausse. Écrire un test là-dessus.
+listant ses 26 programmes (« 4 écoles, 26 possibilités »). C'est la référence, et
+`scripts/test-extract.mjs` (`npm test`) la vérifie : 24 ou 28 signifie que la
+segmentation est fausse.
+
+Détail vérifié, à ne pas « corriger » par erreur : les 26 = 21 intitulés + les
+5 options de la Licence en Gestion, et **seulement 24 ont une page dédiée**.
+Deux entrées du sommaire n'existent nulle part ailleurs dans la brochure —
+`Licence en Gestion` (le parent des 5 options) et `Bachelor en Gestion full time`.
+Elles produisent des fiches squelettes : nom, école, niveau et modalité lus au
+sommaire, le reste vide et signalé par `report.mjs`. Le compte de 26 est donc
+`24 pages + 2 entrées de sommaire`, jamais 24.
+
+Le sommaire est aussi la **meilleure source d'école** de ce catalogue : il donne
+l'école ET le département de chaque programme, là où les pages de séparation
+mélangent « École d'ingénieurs & ISM Digital Campus ». L'appariement page↔sommaire
+se fait sur le titre normalisé (égalité, puis inclusion, puis recouvrement lexical) ;
+un programme de page qui n'apparaît pas au sommaire déclenche une `ALERTE` et fait
+échouer le test — jamais un silence.
 
 ### Conséquence n°2 bis — l'école se lit dans le PDF, pas dans le dossier
 
-Chaque catalogue couvre plusieurs écoles. Le catalogue Master contient Management,
-Droit, Ingénieurs et Madiba ; le Bachelor en contient cinq. L'école doit donc être
-déduite des **titres de section** rencontrés dans le flux de texte
-(`ÉCOLE DE MANAGEMENT`, `MADIBA LEADERSHIP INSTITUTE`, `ISM DIGITAL CAMPUS`...) :
-le parser tient l'école courante et l'attribue aux programmes qui suivent, jusqu'au
-titre de section suivant.
+Chaque catalogue couvre plusieurs écoles. Le catalogue Master en contient six, le
+Bachelor cinq. Trois sources, par ordre de fiabilité décroissante :
+
+1. **le sommaire** (Bachelor) — donne école + département par programme ;
+2. **le pied de page des pages impaires** (Master) — `École de Management p.25`,
+   `Madiba Leadearship Institute p.59` (coquille de la brochure, conservée dans le
+   motif). Les pages paires portent un pied générique : l'école se lit sur la page
+   suivante, d'où une recherche avant puis arrière ;
+3. **les titres de section** (`REJOIGNEZ L'ÉCOLE DE MANAGEMENT`, `Decouvrez ISM Online`).
 
 Ne pas se fier au nom du dossier — cette convention ne vaut que pour une brochure
 mono-école. Les catalogues se déposent à plat dans `data/brochures/`.
@@ -93,10 +130,31 @@ Master en Marché              MBA en Banque
 Financier & Trading           Assurance
 ```
 
-`scripts/extract.mjs` groupe déjà les items par coordonnée Y. Il faut ajouter une
-séparation par X : détecter le creux central (page A4 = 595 pts, césure vers x≈300),
-constituer deux flux de texte, les traiter séparément. Ne pas se fier à
-`pdftotext -layout`, qui fusionne les colonnes.
+`scripts/lib/pdf-layout.mjs` découpe donc par X **avant** de grouper par Y, en deux
+passages. Ne pas se fier à `pdftotext -layout`, qui fusionne les colonnes.
+
+1. **Projection sur l'axe X.** Seuls les items étroits comptent : un paragraphe
+   pleine largeur enjambe les colonnes et bouche la gouttière. Le ratio de largeur
+   est essayé de 0.4 à 0.25, les passes de repli exigeant un creux plus large.
+2. **Modes d'abscisse de début.** Certaines listes de modules sur deux colonnes
+   *se touchent* — aucun blanc vertical à trouver (Bachelor p.29, 35, 40 ;
+   Master p.67, 69). Les abscisses de début, elles, forment deux modes nets à plus
+   de 40 pts d'écart. Sans ce second passage, un module sort en
+   « Théorie de l'information et de la communication Introduction à l'économie ».
+
+Deux conséquences du même ordre :
+
+- **L'espace ne s'insère pas entre deux items voisins**, il se déduit de l'écart
+  horizontal. Ces PDF livrent chaque lettre accentuée comme un item distinct :
+  joindre par `" "` rend « sp é cialistes », « cer tifi cation ».
+- **Numéros de page et pieds de page se filtrent** avant tout rattachement, sinon
+  une UE s'intitule « 19 UE. Langues – Civilisations ».
+
+**Rattachement à une section.** L'en-tête le plus proche au-dessus **dans la même
+colonne** ; si la colonne n'en a aucun (3e colonne d'UE du Bachelor), on emprunte
+celui de la colonne la plus proche qui en a un. Une recherche « au-dessus, toutes
+colonnes confondues » y verrait le `DéBOUCHéS` de la première colonne et verserait
+la moitié des modules dans les métiers.
 
 ### Conséquence n°4 — aucune condition d'admission dans les brochures
 
@@ -109,6 +167,14 @@ signaler comme manquants pour 100 % des fiches — c'est attendu, pas un bug.
 
 C'est le point bloquant du projet : sans ces filtres, le quiz peut recommander une
 filière inaccessible. À obtenir tôt.
+
+`niveau_acces`, en revanche, est renseigné pour les 84 fiches, avec sa source :
+
+- `brochure` quand la voie d'accès est écrite (« accessible après un bac+2 »,
+  « justifiant d'un niveau (Bac +2) », et les règles d'admission énoncées p.6-7
+  du catalogue Online : L3 par un bac+2, M1 par un bac+3) — 16 fiches ;
+- `inference` sinon, déduit du niveau délivré (master/MBA → bac+3, licence → bac).
+  `report.mjs` les traite comme à confirmer.
 
 ---
 
@@ -393,6 +459,8 @@ Cycle : `meta.statut` = `brouillon` → `a_valider` → `valide`.
 - Afficher un score en pourcentage. Trois niveaux, jamais un chiffre.
 - Dupliquer une question de départage dans les fiches. Elle vit dans `config/departages.json`.
 - Inférer les axes depuis la prose marketing. Toujours depuis les UE.
+- Regrouper les items d'une page par Y seul. Les colonnes d'abord, toujours.
+- Supposer qu'un catalogue est mono-colonne parce qu'une page l'est.
 - Noter un axe de contenu à la main. Ils se comptent depuis les modules.
 - Poser une question déclarative (« es-tu rigoureux ? »). Toujours situationnelle.
 - Lancer les entretiens avant que la distinctivité ait tourné.
@@ -402,10 +470,25 @@ Cycle : `meta.statut` = `brouillon` → `a_valider` → `valide`.
 ## Commandes
 
 ```bash
-npm run extract -- --dump   # PDF → fiches + texte brut dans data/_raw/
+npm run extract -- --dump   # catalogues → fiches + texte segmenté dans data/_raw/
+npm test                    # 26 fiches Bachelor + conformité des 84 (tourne en CI)
 npm run report -- --csv     # manques par filière → data/_manques.csv
 npm run validate            # schéma + taxonomie (tourne aussi en CI)
 ```
 
-`--dump` puis lecture de `data/_raw/*.txt` est la façon la plus rapide de diagnostiquer
-un parsing qui dérape.
+`--dump` écrit, par catalogue : les lignes reconstruites **avec leur colonne, leur
+abscisse et leur taille de police**, puis la liste des programmes segmentés, puis le
+journal (appariements au sommaire, blocs rattachés, alertes). C'est la façon la plus
+rapide de diagnostiquer un parsing qui dérape — lire `data/_raw/*.txt` avant de
+toucher un motif.
+
+`npm test` ne touche pas `data/filieres/` : l'extraction y tourne en mémoire.
+
+Découpage du code d'extraction :
+
+| Fichier | Responsabilité |
+|---|---|
+| `scripts/lib/pdf-layout.mjs` | géométrie seule : items → colonnes → lignes. Aucune connaissance d'ISM. |
+| `scripts/lib/profils.mjs` | les trois profils : en-têtes, sommaire, écoles, segmentation. |
+| `scripts/lib/fiche.mjs` | UE, métiers, niveaux, modalités, comptage des axes et du quantitatif. |
+| `scripts/extract.mjs` | orchestration, appariement au sommaire, écriture, CLI. |

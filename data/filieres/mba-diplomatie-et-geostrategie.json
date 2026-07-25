@@ -1,0 +1,100 @@
+{
+  "id": "mba-diplomatie-et-geostrategie",
+  "nom": "MBA Diplomatie et Géostratégie",
+  "ecole": "madiba",
+  "niveau": "mba",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 1,
+    "technique": 2,
+    "relationnel": 3,
+    "creatif": 1,
+    "cadre": 3
+  },
+  "domaines": [
+    "science-politique",
+    "droit"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Fonctionnaire international",
+      "Diplomate",
+      "Consultant international",
+      "Chef de projet international",
+      "Lobbyiste",
+      "Responsable de mobilité internationale",
+      "Analyste de sources ouvertes",
+      "Chargé(e) des relations internationales ou publiques"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Introduction à la diplomatie",
+        "Introduction aux relations internationales",
+        "Droit des organisations internationales",
+        "Système des Nations Unies",
+        "Analyse de la politique étrangère",
+        "Négociations internationales",
+        "Développement personnel",
+        "Introduction au droit diplomatique",
+        "Domaines et pratiques de la nouvelle diplomatie",
+        "Systèmes de l’Union Africaine et des communautés régionales",
+        "Diplomatie des grandes multinationales en Afrique",
+        "Sécurité et Etat en Afrique",
+        "Langage et rédaction diplomatiques",
+        "Anglais des relations internationale",
+        "Analyse, décision et planification stratégiques",
+        "Communication et information stratégiques",
+        "Doctrines et écoles stratégiques",
+        "Alliances et coalitions de défense et de sécurité",
+        "Géopolitique et politique internationale",
+        "Paix et sécurité internationales",
+        "Diplomatie d’entreprise et stratégie d’influence",
+        "Intelligence économique et intelligence stratégique",
+        "Doctrines et politiques stratégiques",
+        "Cyberespace et secteur de la sécurité",
+        "Méthodologie de rédaction de mémoire"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Cette spécialisation forme des professionnels compétents et opérationnels en leur offrant les outils juridiques et économiques nécessaires à la bonne compréhension du jeu diplomatique. Les compétences techniques acquises permettent au diplômé d’intégrer les cabinets ministériels, les organismes publics ou privés, les ONG, ou encore les institutions non gouvernementales ou autres organisations internationales."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  }
+}

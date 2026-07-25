@@ -1,0 +1,184 @@
+{
+  "id": "licence-en-contentieux-et-recouvrement",
+  "nom": "Licence en Contentieux et Recouvrement",
+  "ecole": "ism-droit",
+  "niveau": "licence",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 2,
+    "technique": 1,
+    "relationnel": 2,
+    "creatif": 1,
+    "cadre": 5
+  },
+  "domaines": [
+    "droit",
+    "gestion",
+    "fiscalite"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Collaborateurs des études d’Huissier de justice et de tous services contentieux",
+      "Assistants service contentieux",
+      "Collaborateurs de cabinet de recouvrement",
+      "Gestionnaires de recouvrement"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "UE initiation au droit privé",
+      "modules": [
+        "Introduction au droit",
+        "Organisation judiciaire",
+        "Histoire du Droit des obligations",
+        "Droit des personnes et de la famille",
+        "Droit des obligations",
+        "Droit des biens"
+      ]
+    },
+    {
+      "intitule": "UE initiation au droit public",
+      "modules": [
+        "Droit constitutionnel,",
+        "Initiation au droit communautaire OHADA",
+        "Droit des organisations internationales"
+      ]
+    },
+    {
+      "intitule": "UE Économie – Gestion - Outils de base",
+      "modules": [
+        "Introduction au management",
+        "Développement personnel",
+        "Initiation aux techniques quantitatives de gestion",
+        "Anglais",
+        "Economie politique",
+        "Informatique",
+        "Management de la qualité",
+        "Initiation à l’entreprenariat",
+        "Psychosociologie des organisations",
+        "Fiscalité de l’entreprise",
+        "Management des ressources humaines"
+      ]
+    },
+    {
+      "intitule": "UE Culture générale et initiation à la recherche",
+      "modules": [
+        "Géopolitique",
+        "Actions de recherche encadrées"
+      ]
+    },
+    {
+      "intitule": "UE Service à la communauté",
+      "modules": [
+        "Humanitaire",
+        "Environnement"
+      ]
+    },
+    {
+      "intitule": "UE Droit privé",
+      "modules": [
+        "Droit commercial général",
+        "Droit pénal général",
+        "Droit de la responsabilité",
+        "Droit commun des sociétés commerciales",
+        "Droit du travail",
+        "Procédure pénale",
+        "Droit des suretés UE. Droit public",
+        "Droit administratif",
+        "Droit budgétaire",
+        "Droit des collectivités locales"
+      ]
+    },
+    {
+      "intitule": "UE Outils juridiques fondamentaux",
+      "modules": [
+        "Droit des sûretés 2",
+        "Droit des entreprises en difficulté",
+        "Introduction à la fiscalité"
+      ]
+    },
+    {
+      "intitule": "UE Procédure civile et rédaction d’actes",
+      "modules": [
+        "Procédure civile",
+        "Pratique des actes de procédure"
+      ]
+    },
+    {
+      "intitule": "UE Voies d’exécution",
+      "modules": [
+        "Recouvrement extrajudiciaire des créances",
+        "Mesures conservatoires et voies d’exécution forcée"
+      ]
+    },
+    {
+      "intitule": "UE Outils fonctionnels des métiers du contentieux",
+      "modules": [
+        "Anglais",
+        "Techniques et psychologie de la négociation",
+        "Informatique : initiation au logiciel « legal suite »"
+      ]
+    },
+    {
+      "intitule": "UE Management du contentieux",
+      "modules": [
+        "Contentieux de l’impayé : prévention et recouvrement",
+        "Crédit management : gestion du risque client"
+      ]
+    },
+    {
+      "intitule": "UE Contentieux fiscal et des établissements financiers",
+      "modules": [
+        "Droit et contentieux des assurances",
+        "Droit et contentieux bancaires",
+        "Contentieux fiscal"
+      ]
+    },
+    {
+      "intitule": "UE Mise en situation professionnelle, Stage, Mémoire",
+      "modules": [
+        "Recherche, Rédaction et Soutenance Mémoire",
+        "Stage (6 semaines minimum) et Soutenance du rapport de stage"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 1,
+    "modules_exemples": [
+      "Initiation aux techniques quantitatives de gestion"
+    ],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "L’objectif de ce parcours de licence est de former des diplômés capables de : Maîtriser les techniques de la négociation amiable et les fondamentaux du recouvrement forcé des créances civiles ou commerciales ; Monter et traiter des dossiers complexes ou litigieux."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_bachelor_brochure.pdf"
+  }
+}

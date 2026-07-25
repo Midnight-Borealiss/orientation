@@ -1,0 +1,91 @@
+{
+  "id": "mba-en-droit-maritime-et-activites-portuaires",
+  "nom": "MBA en Droit Maritime et Activités Portuaires",
+  "ecole": "ism-droit",
+  "niveau": "mba",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 2,
+    "technique": 1,
+    "relationnel": 4,
+    "creatif": 1,
+    "cadre": 5
+  },
+  "domaines": [
+    "droit",
+    "assurance",
+    "gestion"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Direction juridique des entreprises du secteur maritime",
+      "Juriste des compagnies d’assurance maritime",
+      "Expert maritime/transport",
+      "Organisations internationales spécialisées",
+      "Cabinets d’avocats",
+      "Collectivités locales",
+      "Douane",
+      "Aministrations… École de Droit"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Ingénierie juridique des Affaires",
+        "Initiation au management public",
+        "Techniques quantitatives de gestion",
+        "Management",
+        "Management opérationnel",
+        "Instruments de paiement et de garantie",
+        "Fiscalité",
+        "Comportement professionnel et renforcement de capacité",
+        "Droit de la mer",
+        "Droit des transports maritimes",
+        "Droit portuaire/protection de l’environnement",
+        "Assurance maritime",
+        "Droit du travail maritime/Sûretés"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 1,
+    "modules_exemples": [
+      "Techniques quantitatives de gestion"
+    ],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Dans un contexte de mondialisation et de globalisation des échanges, le développementéconomique s’accompagne d’une multiplication du trafic maritime et portuaire. Conscient de la nécessité de disposer de compétences spécialisées dans ce domaine, l’Ecole de droit de l’ISM vous offre avec ce MBA l’opportunité de bénéficier d’une formation efficiente en droit maritime et des activités portuaires. L’objectif de cette filière est donc de former des spécialistes immédiatement opérationnels, pour répondre aux besoins juridiques mais aussi de gestion des entreprises et administrations du secteur marit"
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  }
+}

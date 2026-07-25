@@ -1,0 +1,132 @@
+{
+  "id": "bachelor-concepteur-et-developpeur-de-solutions-digitales",
+  "nom": "Bachelor Concepteur et Développeur de Solutions digitales",
+  "ecole": "ism-digital-campus",
+  "niveau": "bachelor",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+2",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 1,
+    "technique": 5,
+    "relationnel": 1,
+    "creatif": 3,
+    "cadre": 1
+  },
+  "domaines": [
+    "informatique",
+    "design-web",
+    "communication"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Développeur(euse) front end ou back end",
+      "Développeur(euse) fullstack",
+      "Développeur(euse) web",
+      "Développeur(euse) application mobile",
+      "Intégrateur(trice) web",
+      "Lead développeur(euse)",
+      "Chef(fe) de projet",
+      "Ingénieur(e) développement ou R&D plateforme",
+      "Créative développeur(euse)",
+      "Web designer/UI/UX designer",
+      "Design ou Product Manager"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "UE Culture",
+      "modules": [
+        "Culture de l’image",
+        "Technique de créativité",
+        "Digital humanities"
+      ]
+    },
+    {
+      "intitule": "UE Design",
+      "modules": [
+        "Design web UX / UI",
+        "Prototypage",
+        "Data visualisation",
+        "Motion design"
+      ]
+    },
+    {
+      "intitule": "UE Développement",
+      "modules": [
+        "Integration Web – CMS",
+        "HTML /CSS - Projet Portfolio – Intégration - BootStrap / Sass /",
+        "Less - Javascript / jQuery - CMS Wordpress / CMS Prestashop /",
+        "WooCommerce - CMS Drupal – etc…",
+        "Application web et mobile",
+        "PHP orienté objet (POO) / Mysql - Projet Portfolio – Administration",
+        "Android – Java - Framework Symfony - TypeScript / React.js - iOs",
+        "– Swift - Framework Laravel – TypeScript - node.js / express.js - vue.",
+        "js / angular.js - React.js",
+        "Application informatique",
+        "Langage C++ avec visual C++ - Langage Python",
+        "Ingénierie technique",
+        "Algorithmie & Architecture de données - UML, Design pattern - Approches Agile - Sécurisation - Partage - Administration système",
+        "Machine Learning - Approches Solid - Certification Opquast - Normes et protocoles) UE. Marketing",
+        "Marketing digital"
+      ]
+    },
+    {
+      "intitule": "UE Communication",
+      "modules": [
+        "Communication",
+        "Social media"
+      ]
+    },
+    {
+      "intitule": "UE Gestion de Projet",
+      "modules": [
+        "Gestion de projet informatique"
+      ]
+    },
+    {
+      "intitule": "UE Professionnalisation",
+      "modules": [
+        "Projet professionnel",
+        "Langue vivante étrangère",
+        "Droit",
+        "Prise de parole"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Le/la concepteur (trice) développeur(euse) de solutions digitales identifie et conçoit les solutions digitales permettant de développer ou valoriser l’activité d’une organisation : entreprise, association ou administration. Il/elle maîtrise les langages informatiques permettant la structuration de bases de données, la conception et le développement d’une interface web ou mobile et l’optimisation de l’interaction entre l’interface et une ou plusieurs bases de données, voir avec d’autres applications. C’est un professionnel de la gestion de projet digital. À ce titre, il/elle est à la fois capab"
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_bachelor_brochure.pdf"
+  }
+}

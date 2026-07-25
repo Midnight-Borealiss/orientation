@@ -1,0 +1,413 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/OWNER/orientation-engine/schema/filiere.schema.json",
+  "title": "Filière",
+  "description": "Fiche canonique d'une filière. Toute donnée du moteur d'orientation passe par ce schéma.",
+  "type": "object",
+  "required": [
+    "id",
+    "nom",
+    "ecole",
+    "niveau",
+    "axes",
+    "domaines",
+    "meta"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+      "description": "Identifiant stable en kebab-case. Ne jamais le changer une fois publié."
+    },
+    "nom": {
+      "type": "string",
+      "minLength": 3
+    },
+    "ecole": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Doit exister dans config/taxonomy.json > ecoles. null tant que la fiche est en brouillon."
+    },
+    "niveau": {
+      "type": "string",
+      "enum": [
+        "bts",
+        "licence",
+        "bachelor",
+        "licence-pro",
+        "master",
+        "mba",
+        "dba",
+        "certificat"
+      ],
+      "description": "Ce que le programme DELIVRE."
+    },
+    "duree_annees": {
+      "type": "number",
+      "minimum": 0.5,
+      "maximum": 6
+    },
+    "langue": {
+      "type": "string",
+      "enum": [
+        "francais",
+        "anglais",
+        "bilingue"
+      ],
+      "default": "francais"
+    },
+    "eligibilite": {
+      "type": "object",
+      "description": "FILTRES DURS. Exclut des filières, ne les note jamais.",
+      "additionalProperties": false,
+      "properties": {
+        "series_bac": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Vide = toutes séries acceptées. Sinon, liste issue de taxonomy > series_bac."
+        },
+        "niveau_maths": {
+          "type": "string",
+          "enum": [
+            "aucun",
+            "faible",
+            "moyen",
+            "eleve"
+          ],
+          "description": "Niveau de maths réellement exigé pour réussir, pas celui affiché."
+        },
+        "prerequis_autres": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "axes": {
+      "type": "object",
+      "description": "Les 5 axes de contenu sont COMPTES depuis unites_enseignement, pas notes a la main. Les 2 axes de disposition (ancrage, abstraction) ne vivent PAS ici : ils sont au niveau du domaine, dans config/domaines_axes.json.",
+      "required": [
+        "quantitatif",
+        "technique",
+        "relationnel",
+        "creatif",
+        "cadre"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "quantitatif": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "technique": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "relationnel": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "creatif": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        },
+        "cadre": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 5
+        }
+      }
+    },
+    "domaines": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      },
+      "description": "Liste FERMÉE, voir config/taxonomy.json > domaines. Sert à l'aiguillage."
+    },
+    "profil_ideal": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 4,
+      "description": "3 traits maximum. Pas de paragraphe."
+    },
+    "deconseille_si": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Signaux d'alerte. Génèrent les poids négatifs. Jamais présent dans une brochure."
+    },
+    "voisines": {
+      "type": "array",
+      "description": "ids des filieres confondues avec celle-ci. La question de departage vit dans config/departages.json, indexee par paire.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "debouches": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "metiers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "secteurs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "poursuite_etudes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "vitrine": {
+      "type": "object",
+      "description": "Ce qui s'affiche sur l'écran de résultat.",
+      "additionalProperties": false,
+      "properties": {
+        "accroche": {
+          "type": "string",
+          "maxLength": 120
+        },
+        "description": {
+          "type": "string"
+        },
+        "fait_marquant": {
+          "type": "string"
+        },
+        "couleur": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        }
+      }
+    },
+    "meta": {
+      "type": "object",
+      "description": "Traçabilité. Indique quels champs sont fiables et lesquels attendent validation.",
+      "required": [
+        "sources",
+        "statut"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "sources": {
+          "type": "object",
+          "description": "Pour chaque champ renseigné : d'où vient la donnée.",
+          "additionalProperties": {
+            "type": "string",
+            "enum": [
+              "brochure",
+              "inference",
+              "responsable",
+              "admissions",
+              "manuel"
+            ]
+          }
+        },
+        "statut": {
+          "type": "string",
+          "enum": [
+            "brouillon",
+            "a_valider",
+            "valide"
+          ],
+          "description": "brouillon = extrait automatiquement. valide = confirmé par le responsable."
+        },
+        "brochure_fichier": {
+          "type": "string"
+        },
+        "annee_source": {
+          "type": "integer"
+        },
+        "valide_par": {
+          "type": "string"
+        },
+        "valide_le": {
+          "type": "string",
+          "format": "date"
+        }
+      }
+    },
+    "modalites": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "presentiel",
+          "en-ligne",
+          "cours-du-soir",
+          "week-end",
+          "full-time"
+        ]
+      },
+      "description": "FILTRE. Present dans les brochures."
+    },
+    "parcours": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Regroupement thematique affiche en bandeau dans le catalogue."
+    },
+    "departement": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Sous-ensemble d'une ecole (ex. Sciences et Technologies appliquees)."
+    },
+    "option": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Option d'un programme parent (ex. Licence en Gestion option Agrobusiness)."
+    },
+    "programme_parent": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "id de la fiche parente si cette fiche est une option."
+    },
+    "partenariats": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "double_diplome": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "diplome_delocalise": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "accreditations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "exigence_quantitative": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "AVERTISSEMENT informatif, derive du comptage des modules dans les UE. N'exclut jamais, ne score jamais.",
+      "properties": {
+        "modules_comptes": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "modules_exemples": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 5
+        },
+        "niveau": {
+          "type": "string",
+          "enum": [
+            "faible",
+            "modere",
+            "eleve"
+          ]
+        }
+      }
+    },
+    "unites_enseignement": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "intitule"
+        ],
+        "properties": {
+          "intitule": {
+            "type": "string"
+          },
+          "modules": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "description": "Listes d'UE extraites de la brochure. Base de l'inference des axes et du comptage quantitatif."
+    },
+    "niveau_acces": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "bac",
+        "bac+2",
+        "bac+3",
+        "bac+4",
+        "bac+5",
+        null
+      ],
+      "description": "Diplome EXIGE a l'entree. Distinct de niveau. Present dans les brochures (« accessible apres un bac+2 », « BAC+3 »). FILTRE dur."
+    },
+    "distinctivite": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "CALCULE par scripts/distinctivite.mjs. Ce qui distingue ce programme des autres de son domaine. Alimente les questions de fin de parcours et la justification du resultat.",
+      "properties": {
+        "modules_exclusifs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "metiers_exclusifs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "recouvrement_max": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "plus_proche": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    }
+  }
+}

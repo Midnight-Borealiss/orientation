@@ -1,0 +1,84 @@
+{
+  "id": "mastere-big-data-data-strategie",
+  "nom": "Mastère Big Data & Data Stratégie",
+  "ecole": "ism-digital-campus",
+  "niveau": "master",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 1,
+    "technique": 5,
+    "relationnel": 2,
+    "creatif": 2,
+    "cadre": 1
+  },
+  "domaines": [
+    "data",
+    "management-projet",
+    "informatique"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Data scientist",
+      "Chief Data officer",
+      "Analyste data",
+      "Chef de projet data",
+      "Chef de projet web"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Datascience / Techniques De Traitement De Données Massives",
+        "Design / Techniques De Conception Et De Design De La Donnée",
+        "Développement / Langages De Développement Spécifiques Aux Dataviz Interactives",
+        "Gestion de Projet Agile",
+        "Business Data",
+        "Culture & Environnement Digital",
+        "Environnement International",
+        "Communication globale et digitale",
+        "Gestion de projets & Management",
+        "Outils & Langages web",
+        "DC START"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Les objectifs de ce mastère proposé par ISM Digital Campus est de former des spécialistes en data, maîtrisant tous les aspects d’analyse et de traitement de la donnée au service de la stratégie d’une entreprise. Il s’agit aussi pour les apprenants de savoir gérer des outils techniques, d’acquérir une bonne compréhension des projets et d’analyser les stratégies de communication associées."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  }
+}

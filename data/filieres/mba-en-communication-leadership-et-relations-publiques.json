@@ -1,0 +1,105 @@
+{
+  "id": "mba-en-communication-leadership-et-relations-publiques",
+  "nom": "MBA en Communication, Leadership et Relations Publiques",
+  "ecole": "madiba",
+  "niveau": "mba",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 1,
+    "technique": 1,
+    "relationnel": 5,
+    "creatif": 2,
+    "cadre": 2
+  },
+  "domaines": [
+    "communication",
+    "gestion",
+    "culture-evenementiel"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Responsable des relations publiques",
+      "Chargé de communication",
+      "Attaché de presse",
+      "Agent d’affaires publiques",
+      "Lobbyiste",
+      "Chef d’agence de communication",
+      "Conseiller en image",
+      "Coach en média training",
+      "Chargé de projetévénementiel Madiba Leadearship Institute p.61"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Management des organisations",
+        "Audit et diagnostic organisationnel",
+        "Fondamentaux de la communication",
+        "Communication d’entreprise",
+        "Fondamentaux des relations publiques",
+        "Communication d’influence et Lobbying",
+        "Leadership",
+        "Droit des médias",
+        "Economie des médias",
+        "Marketing",
+        "Management opérationnel",
+        "Management des ressources humaines",
+        "Relations publiques et innovation",
+        "Ecriture médiatique",
+        "Management de projet",
+        "Management Interculturel",
+        "Pratiques des relations publiques",
+        "Communication politique",
+        "Communication institutionnelle",
+        "Gestion des relations interpersonnelles",
+        "Méthodes et outils de coaching efficace",
+        "Management stratégique",
+        "Ethique et gouvernance des organisations",
+        "Stratégies de communication",
+        "Outils de communication digitale",
+        "Plan de communication",
+        "Business English",
+        "Méthodologie de rédaction du mémoire"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Ce parcours offre une expertise en communication d’entreprise, couvrant l’image de marque, les relations publiques, et la gestion de la réputation. Il met l’accent sur le développement personnel et le leadership, enrichi par des ateliers et des Masterclass avec des coachs renommés, afin de renforcer les compétences en prise de parole, networking et direction."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  }
+}

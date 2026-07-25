@@ -1,0 +1,112 @@
+{
+  "id": "mba-big-data-et-intelligence-artificielle",
+  "nom": "MBA Big Data et Intelligence Artificielle",
+  "ecole": "ism-ingenieurs",
+  "niveau": "mba",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 2,
+    "technique": 3,
+    "relationnel": 3,
+    "creatif": 2,
+    "cadre": 2
+  },
+  "domaines": [
+    "data",
+    "finance",
+    "management-projet"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Project Management Officer (PMO)",
+      "Chef de projet digital ou IT - PMO",
+      "PMO support",
+      "PMO conformité",
+      "Gestionnaire de projets et programmes",
+      "Coordinateur de développement de projets",
+      "Product owner",
+      "PMO Junior",
+      "Consultant junior PMO",
+      "Consultant senior PMO",
+      "Ingénieur projet PMO",
+      "Coordinateur ou analyst du PMO",
+      "PMO directif",
+      "Responsable de département",
+      "Directeur de département",
+      "Chef de projet",
+      "Directeur de service"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Stratégie d’entreprises de la Tech",
+        "Finance d’entreprise",
+        "Tech Marketing",
+        "Management de projet Tech",
+        "Start up & financement",
+        "Éthique & régulation dans la Tech",
+        "Data management",
+        "Management des systèmes d’information",
+        "E-commerce & stratégies numériques",
+        "Blockchain & Cryptomonnaies",
+        "Intelligence Artificielle en affaires",
+        "Cybersécurité pour managers",
+        "Leadership dans la Tech",
+        "Innovation & Design Thinking",
+        "Learning Expedition Internationale",
+        "Management de changement technologique",
+        "Technologie : prospectives & incidences",
+        "Atelier Cours Florent",
+        "Coaching individuel",
+        "Professional Captsone"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Ce MBA explore les techniques avancées d’IA, en mettant l’accent sur l’analyse des données. Les apprenants acquièrent une compréhension approfondie des algorithmes d’IA, ainsi que des compétences pratiques pour concevoir, développer et déployer des solutions d’IA dans divers domaines, tels que la santé, les finances, l’automatisation industrielle et bien d’autres encore. Ce cursus prépare les étudiants à relever les défis complexes de l’ère de l’IA et à contribuer de manière significative à l’avancement de cette technologie révolutionnaire."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference",
+      "partenariats": "brochure"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  },
+  "parcours": "Parcours innovation entreprenariat et technologies",
+  "partenariats": {
+    "double_diplome": null,
+    "diplome_delocalise": "deesg paris ce mba explore les techniques avancees d'ia, en mettant l'",
+    "accreditations": []
+  }
+}

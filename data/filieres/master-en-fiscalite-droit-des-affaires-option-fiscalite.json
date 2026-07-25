@@ -1,0 +1,91 @@
+{
+  "id": "master-en-fiscalite-droit-des-affaires-option-fiscalite",
+  "nom": "Master en Fiscalité-Droit des Affaires, Option Fiscalité",
+  "ecole": "ism-droit",
+  "niveau": "master",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 3,
+    "technique": 1,
+    "relationnel": 4,
+    "creatif": 1,
+    "cadre": 4
+  },
+  "domaines": [
+    "droit",
+    "fiscalite",
+    "gestion"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Conseiller en gestion de patrimoine",
+      "Juriste d’entreprise publique ou privée (secteurs du commerce, de l’assurance, de l’immobilier, de l’industrie…)",
+      "Juriste de banque",
+      "Juriste en cabinet d’avocats",
+      "Préparation au concours du barreau et à la magistrature",
+      "Fiscaliste École de Droit"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Ingénierie juridique des affaires",
+        "Initiation au management public",
+        "Techniques quantitatives de gestion",
+        "Management opérationnel",
+        "Instruments de paiement et de Garantie",
+        "Fiscalité",
+        "Comportement professionnel et renforcement de capacité",
+        "Pratique du droit des affaires",
+        "Techniques quantitatives de gestion",
+        "Management",
+        "Ingénierie juridique des affaires",
+        "Droit de la propriété",
+        "Recherche"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 2,
+    "modules_exemples": [
+      "Techniques quantitatives de gestion",
+      "Techniques quantitatives de gestion"
+    ],
+    "niveau": "modere"
+  },
+  "vitrine": {
+    "description": "Cette spécialisation a pour objectif de garantir aux auditeurs, une parfaite maîtrise d’un socle de connaissances pointues sur les méthodes et pratiques du droit et de la fiscalité appliquées aux différents acteurs de la vie des affaires. En effet, en plus de prôner le sens de l’éthique dans les affaires chez nos auditeurs, la professionnalisation est un point focal de la formation grâce à des enseignements pratiques axés sur la maîtrise du raisonnement juridique ainsi que sur la capacité d’analyse, de rigueur et de synthèse. C’est dans cette optique, que tous les enseignements sont confiés à "
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  },
+  "option": "Fiscalité"
+}

@@ -1,0 +1,81 @@
+{
+  "id": "mba-ingenierie-reseaux-et-systemes-decisionnels",
+  "nom": "MBA Ingénierie Réseaux et Systèmes Décisionnels",
+  "ecole": "ism-ingenieurs",
+  "niveau": "mba",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 1,
+    "technique": 5,
+    "relationnel": 3,
+    "creatif": 1,
+    "cadre": 2
+  },
+  "domaines": [
+    "reseaux",
+    "ingenierie"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Directeur des ou Consultant réseaux",
+      "Administrateur de réseaux informatiques",
+      "Responsable sécurité réseaux et système",
+      "Ingénieur en business Intégrateur d’exploitation",
+      "Spécialiste en technologies des entrepôts de données, Data mining et systèmes décisionnels École de d’Ingénieurs"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Management stratégique",
+        "Base de données et systèmes d’information",
+        "Architectures et technologies du web",
+        "Réseaux et systèmes informatiques",
+        "Gestion de données et informatique décisionnelle",
+        "Ingénierie des réseaux informatiques",
+        "Management de la Sécurité des Systèmes d’Information",
+        "Méthodologie de recherche et thèse professionnelle"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "L’objectif de ce programme est de des professionnels compétence Il s’agit d’une qui auront de modéliser, connaissance de l’analyse des besoins et des marchés dans le domaine des réseaux, les architectures mettre en place dans les organisations d’autre part, de leur permettre d’ une bonne connaissance des systèmes décisionnels"
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  },
+  "parcours": "Parcours innovation entreprenariat et technologies"
+}

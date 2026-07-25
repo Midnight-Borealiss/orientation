@@ -1,0 +1,94 @@
+{
+  "id": "master-management-de-projet-en-ligne",
+  "nom": "Master Management de Projet",
+  "ecole": "ism-online",
+  "niveau": "master",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "en-ligne"
+  ],
+  "axes": {
+    "quantitatif": 3,
+    "technique": 1,
+    "relationnel": 5,
+    "creatif": 1,
+    "cadre": 2
+  },
+  "domaines": [
+    "management-projet",
+    "gestion",
+    "finance"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Chef de projets (tous secteurs, notamment services, ONG…)",
+      "Chef de programme ou de portefeuille",
+      "Consultant en gestion et montage de projet, de programme ou de portefeuille",
+      "Ingénieur planning",
+      "Contrôleur / Suivi-évaluateur de projet",
+      "Responsable qualité projet"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Enseignements M1",
+      "modules": [
+        "Management stratégique et opérationnel",
+        "Droit du travail et relations individuelles",
+        "Finance publique",
+        "Management du changement",
+        "Technique de montage projet",
+        "Analyse économique et financière de projet",
+        "Management des risques de projet",
+        "Management de la qualité de projet",
+        "Management de la communication d’un projet",
+        "Gestion budgétaire et tableaux de bord",
+        "Outils de Communication et d’efficacité professionnelle Enseignements M2",
+        "Management stratégique et opérationnel",
+        "Planification stratégique et Cadre logique de projet",
+        "Planification opérationnelle de projet",
+        "Analyse économique et financière de projet",
+        "Techniques et méthodes informatiques et de gestion appliquée aux projet",
+        "Analyse de données",
+        "Appel d’offres et passation de marche en projet",
+        "Suivi - Évaluation",
+        "Marketing appliquée et gestion des RH en projet",
+        "Outils d’efficacité professionnelle – Méthodologie et thèse professionnelle"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Cette spécialisation répond à des besoins grandissants dans le domaine de la formation de managers aptes à planifier et à piloter des projets industriels, de services ou encore culturels ou sociaux. Ce programme vise ainsi à former des cadres maîtrisant tout le processus du management de projet en leur apportant les concepts et outils nécessaires à la conception et à la mise en œuvre d’un projet sous ses différents aspects."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "brochure",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_ONLINE_ISF_BROCHURE.pdf"
+  }
+}

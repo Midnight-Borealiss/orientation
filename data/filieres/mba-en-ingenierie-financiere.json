@@ -1,0 +1,96 @@
+{
+  "id": "mba-en-ingenierie-financiere",
+  "nom": "MBA en Ingénierie Financière",
+  "ecole": "ism-management",
+  "niveau": "mba",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel",
+    "cours-du-soir"
+  ],
+  "axes": {
+    "quantitatif": 5,
+    "technique": 2,
+    "relationnel": 1,
+    "creatif": 1,
+    "cadre": 3
+  },
+  "domaines": [
+    "finance",
+    "marches-financiers",
+    "gestion"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Directeur financier",
+      "Gestionnaire d’actifs (asset manager)",
+      "Analyste de risque crédit",
+      "Opérateur de marché École de Management"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Introduction aux marchés des capitaux",
+        "Elaboration, lecture et diagnostic des états financiers",
+        "Initiation au Trading",
+        "Investissement et financement",
+        "Valeur, risque, finance",
+        "Normes internationales IFRS",
+        "Gestion des dispositifs prudentiels en zone UEMOA",
+        "Gestion de portefeuille",
+        "Stratégie boursière",
+        "Modélisation et économétrie financière",
+        "Évaluation financière des entreprises",
+        "Stratégie boursière",
+        "Application financière sur Excel - VBA",
+        "Stratégie de Trading"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 1,
+    "modules_exemples": [
+      "Modélisation et économétrie financière"
+    ],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Cette formation, également disponible en cours du soir, s’active à former des spécialistes de l’ingénierie financière maîtrisant les outils et les techniques financières modernes. Elle prépare essentiellement à l’intégration de la dimension globale des problèmes financiers à traiter, et notamment leurs enjeux stratégiques dans le fonctionnement organisationnel. Enfin, ce parcours favorise l’accès à certains métiers d’expertise et, à terme, à des postes de Direction financière ou de Management organisationnel."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference",
+      "partenariats": "brochure"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  },
+  "parcours": "Parcours investissement et gouvernance d’entreprise",
+  "partenariats": {
+    "double_diplome": "double diplôme mentionné",
+    "diplome_delocalise": null,
+    "accreditations": []
+  }
+}

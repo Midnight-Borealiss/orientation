@@ -1,0 +1,154 @@
+{
+  "id": "licence-en-informatique",
+  "nom": "Licence en Informatique",
+  "ecole": "ism-ingenieurs",
+  "niveau": "licence",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 2,
+    "technique": 4,
+    "relationnel": 2,
+    "creatif": 1,
+    "cadre": 1
+  },
+  "domaines": [
+    "informatique",
+    "reseaux",
+    "droit"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Assistant Chef de projet / Technico-commercial",
+      "Analyste d’étude / Développeur d’application",
+      "Chargé de Recherche et Développement",
+      "Technicien réseaux / d’exploitation /",
+      "Administrateur de systèmes"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "UE Maîtrise des comportements professionnels",
+      "modules": [
+        "Communication professionnelle",
+        "Leadership - Team Bulding & Soft Skills",
+        "Techniques de recherche d’emploi",
+        "Business English & Com",
+        "English For IT",
+        "Creativity & Social Involvement"
+      ]
+    },
+    {
+      "intitule": "UE Mathématiques et techniques quantitatives de gestion",
+      "modules": [
+        "Mathématiques appliquées",
+        "Recherche opérationnelle",
+        "Comptabilité",
+        "Mathématiques et décisions financières",
+        "Gestion budgétaire",
+        "Management de projet"
+      ]
+    },
+    {
+      "intitule": "UE Management & Organisations",
+      "modules": [
+        "Mathématiques et décisions financières",
+        "Management de projet",
+        "Management des Processus",
+        "Droit du Numérique",
+        "Obligations Juridiques et Fiscales des Entreprises",
+        "Droit du Travail"
+      ]
+    },
+    {
+      "intitule": "UE Réseaux et Systèmes informatiques",
+      "modules": [
+        "Électronique",
+        "Système Linux",
+        "Architectures et réseaux informatiques",
+        "Administration et interconnexion de Réseaux informatiques",
+        "Sécurité informatique",
+        "Réseaux mobiles et télécoms"
+      ]
+    },
+    {
+      "intitule": "UE Programmation – Développement web et d’applications",
+      "modules": [
+        "Génie Logiciel",
+        "Systèmes d’Information",
+        "Bases de Données",
+        "Algorithmes et Structures de Données",
+        "Technologies Web",
+        "Oracle Server",
+        "SQL Server",
+        "Technologies Mobiles",
+        "Technologies JAVA - .NET & Python"
+      ]
+    },
+    {
+      "intitule": "UE Méthodologie & Entrepreneurship",
+      "modules": [
+        "Méthodologie entrepreneuriat",
+        "Projet d’entreprise"
+      ]
+    },
+    {
+      "intitule": "UE Algorithmiques et Programmation",
+      "modules": [
+        "Complexité",
+        "Algo et Structures de Données Avancées",
+        "Programmation Python",
+        "Théories et Algorithmes des Graphes",
+        "Théories des Langages",
+        "Projet Python"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 3,
+    "modules_exemples": [
+      "Mathématiques appliquées",
+      "Mathématiques et décisions financières",
+      "Mathématiques et décisions financières"
+    ],
+    "niveau": "modere"
+  },
+  "vitrine": {
+    "description": "Le diplôme de la Licence en Informatique de l’Institut National Universitaire Champollion d’Albi (Toulouse) permet de prétendre à des emplois diversifiés dans lesquels seront mises en œuvre les activités suivantes : Transmission du savoir, diffusion des connaissances, communication et animation scientifique, enseignement; Recherche fondamentale ou appliquée, expérimentation en laboratoire ou sur le terrain; Gestion et résolution de problèmes dans les différents domaines de l’informatique."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference",
+      "partenariats": "brochure"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_bachelor_brochure.pdf"
+  },
+  "departement": "Sciences et Technologies appliquées",
+  "partenariats": {
+    "double_diplome": null,
+    "diplome_delocalise": "l'inu champollion d'albi/toulouse",
+    "accreditations": []
+  }
+}

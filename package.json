@@ -1,0 +1,19 @@
+{
+  "name": "orientation-engine",
+  "version": "0.1.0",
+  "description": "Moteur d'orientation reutilisable : quiz guide pilote par les donnees",
+  "type": "module",
+  "license": "MIT",
+  "engines": { "node": ">=18" },
+  "scripts": {
+    "extract": "node scripts/extract.mjs",
+    "test": "node scripts/test-extract.mjs",
+    "report": "node scripts/report.mjs",
+    "validate": "node scripts/validate.mjs"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "pdfjs-dist": "^5.4.149"
+  }
+}

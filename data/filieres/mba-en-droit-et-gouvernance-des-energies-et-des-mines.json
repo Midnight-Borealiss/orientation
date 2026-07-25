@@ -1,0 +1,87 @@
+{
+  "id": "mba-en-droit-et-gouvernance-des-energies-et-des-mines",
+  "nom": "MBA en Droit et Gouvernance des Énergies et des Mines",
+  "ecole": "ism-droit",
+  "niveau": "mba",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 2,
+    "technique": 1,
+    "relationnel": 4,
+    "creatif": 1,
+    "cadre": 4
+  },
+  "domaines": [
+    "droit"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Cette formation permet de rejoindre des structures telles que les :",
+      "Grandes compagnies pétrolières",
+      "Collectivités territoriales",
+      "Cabinets d’avocats ou de conseil",
+      "Sociétés d’État",
+      "Organismes Internationaux…",
+      "École de Droit"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Ingénierie juridique des Affaires",
+        "Initiation au management public",
+        "Techniques quantitatives de gestion",
+        "Management",
+        "Management opérationnel",
+        "Instruments de paiement et de garantie",
+        "Fiscalité",
+        "Comportement professionnel et renforcement de capacité",
+        "Analyse de différentes sources d’énergie et de leur régime juridique",
+        "Énergie et protection de l’environnement",
+        "Droit de la maîtrise de l’énergie",
+        "Energie et responsabilité"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 1,
+    "modules_exemples": [
+      "Techniques quantitatives de gestion"
+    ],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Les défis énergétiques actuels nécessitent des compétences nouvelles, pour cela, la spécialisation en Droit et Gouvernance des Énergies et Mines propose à ses auditeurs d’acquérir les connaissances nécessaires pour maîtriser les enjeux de ces secteurs et appréhender les régimes juridiques spécifiques (régulation, responsabilité, cadre juridique, environnement, développement durable du secteur de l’énergie) et rédiger les grands contrats énergétiques. Conscient de la nécessité de placer la RSE au cœur des enseignements, un des axes centraux de la formation est dedévelopper le sens de l’éthique "
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  }
+}

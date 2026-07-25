@@ -1,0 +1,90 @@
+{
+  "id": "mba-gestion-de-la-chaine-logistique",
+  "nom": "MBA Gestion de la Chaîne Logistique",
+  "ecole": "ism-management",
+  "niveau": "mba",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel",
+    "cours-du-soir"
+  ],
+  "axes": {
+    "quantitatif": 1,
+    "technique": 2,
+    "relationnel": 1,
+    "creatif": 1,
+    "cadre": 2
+  },
+  "domaines": [
+    "logistique",
+    "gestion",
+    "qualite"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Chef de service logistique",
+      "Responsable de la sûreté opérationnelle",
+      "Responsable des relations territoriales",
+      "Coordonnateur de projet",
+      "Ingénieur chargé d’affaires",
+      "Contrôleur des travaux",
+      "Agent d’escale commercial",
+      "Agent import-export École de Management"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Fondement de la logistique et de la Supply Chain",
+        "Achats approvisionnement et gestion des stocks",
+        "Théorie des jeux et gestion de la chaîne d’approvisionnement",
+        "Gestion des systèmes d’entreposage",
+        "Logistique humanitaire",
+        "Audit et diagnostic logistique",
+        "Fondements de l’optimisation des algorithmes",
+        "Gestion des opérations logistiques",
+        "Stratégie logistique et e-business",
+        "WMS : Optimisation et gestion des entrepôts",
+        "TMS : Optimisation et gestion des tournées de livraison",
+        "Management de la sûreté de la chaîne d’approvisionnement : ISO 28000"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Ce MBA permet aux étudiants de développer une vision globale du processus logistique, d’acquérir les savoirs et pratiques nécessaires au management d’une équipe logistique, de maîtriser les concepts techniques de la planification d’une chaîne d’approvisionnement. Ils sont également formés aux outils de mesure de la performance des processus logistiques, dans un contexte mondialisé. De surcroît, ce MBA est également disponible en cours du soir, s’adaptant aux besoins des apprenants."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  },
+  "parcours": "Parcours responsabilité, organisation et management"
+}

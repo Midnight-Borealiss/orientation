@@ -1,0 +1,95 @@
+{
+  "id": "master-en-fiscalite-droit-des-affaires-option-affaires-inter",
+  "nom": "Master en Fiscalité-Droit des Affaires, Option Affaires Internationales",
+  "ecole": "ism-droit",
+  "niveau": "master",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 3,
+    "technique": 1,
+    "relationnel": 3,
+    "creatif": 1,
+    "cadre": 5
+  },
+  "domaines": [
+    "droit",
+    "fiscalite",
+    "finance"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Juriste d’entreprises multinationales",
+      "Cabinet d’avocats à envergure internationale (cabinets de lawyers)",
+      "Préparation au concours du barreau et à la magistrature"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Ingénierie juridique des affaires",
+        "Environnement juridique international et communautaire",
+        "Initiation au management public",
+        "Techniques quantitatives de gestion",
+        "Management opérationnel",
+        "Initiation à la fiscalité",
+        "Droit bancaire et des marchés financiers",
+        "Droit social",
+        "Anglais et système juridique de common law",
+        "Comportement professionnel et renforcement de capacité",
+        "Pratique du droit des affaires internationales",
+        "Droit et pratique des contrats et des investissements internationaux",
+        "Droit et TIC",
+        "Droit de la propriété intellectuelle",
+        "Droit bancaire, financier et monétaire international",
+        "Fiscalité internationale",
+        "Modes alternatifs de règlement des litiges et contentieux international",
+        "Management",
+        "Techniques quantitatives de gestion",
+        "Recherche"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 2,
+    "modules_exemples": [
+      "Techniques quantitatives de gestion",
+      "Techniques quantitatives de gestion"
+    ],
+    "niveau": "modere"
+  },
+  "vitrine": {
+    "description": "Ce parcours a pour ambition de former des juristes ayant une profonde connaissance de la pratique des affaires internationales et de l’ingénierie juridique dans leurs différentes composantes. En plus de prôner le sens de l’éthique dans les affaires internationales chez nos auditeurs, la professionnalisation est un point focal de la formation dispensée grâce à des enseignements axés sur la maitrise du raisonnement juridique incluant une bonne capacité d’analyse, de rigueur et de synthèse. L’accent est mis sur les matières essentielles du droit des affaires axé sur les opérations internationales"
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  },
+  "option": "Affaires Internationales"
+}

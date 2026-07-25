@@ -1,0 +1,86 @@
+{
+  "id": "master-droit-des-affaires-en-ligne",
+  "nom": "Master Droit des Affaires",
+  "ecole": "ism-online",
+  "niveau": "master",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "en-ligne"
+  ],
+  "axes": {
+    "quantitatif": 1,
+    "technique": 2,
+    "relationnel": 3,
+    "creatif": 1,
+    "cadre": 5
+  },
+  "domaines": [
+    "droit",
+    "assurance"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Juristes d’entreprises publiques ou privées (secteurs du commerce, de l’assurance, de l’immobilier, de l’industrie…)",
+      "Juristes de banque",
+      "Juristes en cabinets d’avocats"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Enseignements M1",
+      "modules": [
+        "Contrats spéciaux",
+        "Pratiques sociétaires",
+        "Régime général des obligations",
+        "Droit des assurances",
+        "Droit bancaire",
+        "Droit pénal des affaires Enseignements M2",
+        "Techniques contractuelles",
+        "Rédaction d’actes",
+        "Droit du numérique : Outils de protection des données à caractère personnel",
+        "Contrats informatiques et électroniques",
+        "Management par la Qualité Totale (TQM)",
+        "Management stratégique",
+        "Responsabilité sociale des entreprises",
+        "Contentieux des affaires",
+        "Droit de l’arbitrage",
+        "Droit de la propriété industrielle",
+        "Droit de la propriété artistique et littéraire"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Le MBA Droit des Affaires a pour ambition de former des juristes ayant une profonde connaissance de la pratique des affaires et de l’ingénierie juridique dans leurs différentes composantes. En plus de prôner le sens de l’éthique dans les affaires chez nos auditeurs, leur professionnalisation est un point focal de la formation dispensée grâce à des enseignements axés sur la maîtrise du raisonnement juridique, la capacité d’analyse, de rigueur et de synthèse en vue de susciter en eux plus de réactivité et de créativité en entreprise ou en cabinet."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "brochure",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_ONLINE_ISF_BROCHURE.pdf"
+  }
+}

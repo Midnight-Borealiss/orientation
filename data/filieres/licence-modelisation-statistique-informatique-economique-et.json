@@ -1,0 +1,153 @@
+{
+  "id": "licence-modelisation-statistique-informatique-economique-et",
+  "nom": "Licence modélisation statistique - informatique -économique et financière",
+  "ecole": "ism-ingenieurs",
+  "niveau": "licence",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac",
+  "modalites": [
+    "presentiel",
+    "en-ligne"
+  ],
+  "axes": {
+    "quantitatif": 5,
+    "technique": 2,
+    "relationnel": 1,
+    "creatif": 1,
+    "cadre": 2
+  },
+  "domaines": [
+    "mathematiques",
+    "finance",
+    "informatique"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Analyste et extracteurs de bases de données",
+      "Data Analyste",
+      "Programmeur d’application en informatique décisionnelle",
+      "Analyste de risques",
+      "Assistant chargé d’études statistiques, économiques…",
+      "Technicien dans les différents domaines de la gestion (marketing, Gestionnaire ou technicien d’enquêtes)",
+      "Le programme est développé et mis en œuvre en partenariat avec le cabinet",
+      "Governance Economic Modeling Design and Policy (GEMDP)"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "UE Outils Scientifiques",
+      "modules": [
+        "Statistique descriptive",
+        "Séries Temporelles et Simulations",
+        "Statistique inférentielle et sondages",
+        "Probabilités",
+        "Mathématiques",
+        "Analyse des données",
+        "Econométrie",
+        "Méthode Scoring"
+      ]
+    },
+    {
+      "intitule": "UE Economie et Gestion",
+      "modules": [
+        "Microéconomie",
+        "Macroéconomie",
+        "Economie d’Entreprise",
+        "Comptabilité Générale et Analytique",
+        "Economie publique",
+        "Commerce International et Finances d’entreprise",
+        "Economie Monétaire Internationale",
+        "Théorie de la croissance",
+        "Droit"
+      ]
+    },
+    {
+      "intitule": "UE Informatiques Décisionnelles et Communications",
+      "modules": [
+        "Modélisation – Algorithmique et Programmation Informatique",
+        "Big Data et Data mining",
+        "Anglais",
+        "Technique de Communication UE. Logiciel économétrique",
+        "Logiciel R, STATA, GREL"
+      ]
+    },
+    {
+      "intitule": "UE Finances – Actuariat",
+      "modules": [
+        "Règlement et Assurance",
+        "Gestion portefeuille",
+        "Assurance vie et Dommage"
+      ]
+    },
+    {
+      "intitule": "UE Gestion de Risque",
+      "modules": [
+        "Gestion du risque",
+        "Risque Crédit",
+        "Mesure du Risque"
+      ]
+    },
+    {
+      "intitule": "UE Méthodes quantitatives et sciences sociales",
+      "modules": [
+        "Marketing",
+        "Sondage et Pratiques des Enquêtes",
+        "Boostrap et ré échantillonnage"
+      ]
+    },
+    {
+      "intitule": "UE Prévision et Politiques Economiques",
+      "modules": [
+        "Modélisation Macroéconomique",
+        "Analyse Conjoncturelle",
+        "Economie du Développement"
+      ]
+    },
+    {
+      "intitule": "UE Stage",
+      "modules": [
+        "Méthodologie de Recherche – Rapport de Stage"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 8,
+    "modules_exemples": [
+      "Statistique descriptive",
+      "Statistique inférentielle et sondages",
+      "Probabilités",
+      "Mathématiques",
+      "Econométrie"
+    ],
+    "niveau": "eleve"
+  },
+  "vitrine": {
+    "description": "Le volume et la variété des informations collectées et mises à la disposition des décideurs, qu’ils soient publics ou privés (entreprises, administrations, organismes publics et parapublics, nationaux ou internationaux) sont en croissance quasi-exponentielle : fournisseurs de données (Datastream, Standard & Poor’s, etc.), bases de données « clients » des entreprises, des banques ou des assurances, des fichiers liés à l’activité des administrations et des organismes publics et parapublics, ou encore des informations collectées sur la « toile » par les entreprises impliquées dans la vente en lig"
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_bachelor_brochure.pdf"
+  },
+  "departement": "Sciences et Technologies appliquées"
+}

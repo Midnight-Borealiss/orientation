@@ -1,0 +1,140 @@
+{
+  "id": "licence-en-mathematiques-appliquees-informatique-et-economet",
+  "nom": "Licence en Mathématiques appliquées – Informatique et Économétrie",
+  "ecole": "ism-ingenieurs",
+  "niveau": "licence",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 5,
+    "technique": 2,
+    "relationnel": 2,
+    "creatif": 1,
+    "cadre": 2
+  },
+  "domaines": [
+    "mathematiques",
+    "droit",
+    "finance"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Actuaire",
+      "Cryptologue",
+      "Statisticien",
+      "Certification CISCO Gratuite et intégrée dans le curiculum de formation (IT Essentials - CCNA - Python)"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "UE Maitrise des Comportements Professionnels",
+      "modules": [
+        "Communication Professionnelle",
+        "Leadership - Team Bulding & Soft Skills",
+        "Techniques de Recherche d’Emploi",
+        "Business English & Com",
+        "English For IT",
+        "Creativity & Social Involvement"
+      ]
+    },
+    {
+      "intitule": "UE Management & Organisations",
+      "modules": [
+        "Management des Processus",
+        "Management de projet",
+        "Droit du Numérique",
+        "Obligations Juridiques et Fiscales des Entreprises",
+        "Droit du Travail"
+      ]
+    },
+    {
+      "intitule": "UE Mathématiques et techniques quantitatives de gestion",
+      "modules": [
+        "Mathématiques Appliquées",
+        "Statistiques et lois de probabilité",
+        "Recherche opérationnelle",
+        "Comptabilité",
+        "Mathématiques et décisions financières",
+        "Gestion budgétaire et tableau de bord",
+        "Management de projet",
+        "Actuariat et Marché Financier",
+        "Analyse de Données",
+        "Big Data & Data Science",
+        "Machine Learning"
+      ]
+    },
+    {
+      "intitule": "UE Techniques et méthodes économiques",
+      "modules": [
+        "Analyse économique",
+        "Macroéconomie",
+        "Microéconomie",
+        "Economie bancaire et de la Monnaie",
+        "Économétrie",
+        "Économie Industrielle",
+        "Économie du Risque et de l’Incertain",
+        "Optimisation et modélisation économique"
+      ]
+    },
+    {
+      "intitule": "UE Conception & Développement",
+      "modules": [
+        "Systèmes d’Information",
+        "Bases de données",
+        "Algorithmes et structures de données",
+        "Technologies web",
+        "Technologies JAVA - .NET & Python"
+      ]
+    },
+    {
+      "intitule": "UE Méthodologie & Entrepreneurship",
+      "modules": [
+        "Méthodologie Entrepreneuriat",
+        "Projet d’Entreprise"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 6,
+    "modules_exemples": [
+      "Mathématiques Appliquées",
+      "Statistiques et lois de probabilité",
+      "Mathématiques et décisions financières",
+      "Actuariat et Marché Financier",
+      "Économétrie"
+    ],
+    "niveau": "eleve"
+  },
+  "vitrine": {
+    "description": "La Licence en Mathématiques appliquées et Économétrie permet aux étudiants d’acquérir de solides connaissances leur permettant d’analyser les situations économiques en s’appuyant sur des outils mathématiques. Il s’agit de former les apprenants aux outils permettant de contribuer à la prise de décision, à la préconisation de solutions et d’axes d’amélioration et à la prévision dans l’organisation. Cela par la maîtrise de la gestion des données, de la démarche mathématique et statistique, et des outils de l’analyse économique. Cette formation les dotera également des compétences scientifiques en"
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_bachelor_brochure.pdf"
+  },
+  "departement": "Sciences et Technologies appliquées"
+}

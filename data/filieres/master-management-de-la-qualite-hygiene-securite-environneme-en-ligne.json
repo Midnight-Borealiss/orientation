@@ -1,0 +1,100 @@
+{
+  "id": "master-management-de-la-qualite-hygiene-securite-environneme-en-ligne",
+  "nom": "Master Management de la Qualité, Hygiène, Sécurité, Environnement",
+  "ecole": "ism-online",
+  "niveau": "master",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "en-ligne"
+  ],
+  "axes": {
+    "quantitatif": 1,
+    "technique": 4,
+    "relationnel": 5,
+    "creatif": 1,
+    "cadre": 5
+  },
+  "domaines": [
+    "qualite",
+    "comptabilite",
+    "ingenierie"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Animateur QHSE",
+      "Directeur/Responsable QHSE (client, produits et services…)",
+      "Chef de projets",
+      "Auditeur QHSE Ingénieur QHSE (processus, produits, services, conseil…)",
+      "Chargé de mission QHSE"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Enseignements M1",
+      "modules": [
+        "Management Stratégique et RSE",
+        "Normalisation / Infrastructures Qualité",
+        "SMQ : Système de Management de la Qualité",
+        "SMSST : Système de Management de la Sante et de la Sécurité au Travail",
+        "SMSDA : Système de Management et de la Sécurité des Denrées Alimentaires",
+        "SMI : Système de Management intégré",
+        "Management des processus",
+        "Accréditation/reconnaissance",
+        "Management des risques Enseignements M2",
+        "Coûts d’obtention de la qualité",
+        "Méthodes et outils de résolution de problèmes",
+        "Management des risques industriels",
+        "Études des impacts environnementaux",
+        "Audit des systèmes de Management de la Qualité",
+        "Système de Management intégré",
+        "Études des référentiels :",
+        "ISO : 9001",
+        "ISO 45 001",
+        "ISO 22 000",
+        "ISO 14 001"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Forte de son label d’Excellence de l’UEMOA, cette spécialisation a pour principal objectif de former des cadres de haut niveau capables d’assurer et de maîtriser la qualité sur l’ensemble des processus et des systèmes de management. Elle favorise l’acquisition et le développement de compétences dans les domaines de l’ingénierie et du pilotage des systèmes qualité, pour former des spécialistes capables de mettre en place des systèmes intégrés."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "brochure",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference",
+      "partenariats": "brochure"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_ONLINE_ISF_BROCHURE.pdf"
+  },
+  "partenariats": {
+    "double_diplome": null,
+    "diplome_delocalise": null,
+    "accreditations": [
+      "Label UEMOA"
+    ]
+  }
+}

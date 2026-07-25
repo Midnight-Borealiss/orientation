@@ -1,0 +1,93 @@
+{
+  "id": "mba-management-des-ressources-humaines",
+  "nom": "MBA Management des Ressources Humaines",
+  "ecole": "ism-management",
+  "niveau": "mba",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel",
+    "cours-du-soir"
+  ],
+  "axes": {
+    "quantitatif": 1,
+    "technique": 1,
+    "relationnel": 5,
+    "creatif": 1,
+    "cadre": 3
+  },
+  "domaines": [
+    "rh",
+    "gestion"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Directeur des Ressources Humaines",
+      "Responsable de la formation",
+      "Responsable rémunération",
+      "Responsable paie",
+      "Responsable des carrières et du développement"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Management des équipes",
+        "Gestion opérationnelle des RH",
+        "Psychosociologie des organisations",
+        "Droit du Travail",
+        "Communication 2.0",
+        "Ingénierie de la formation",
+        "Gestion des compétences",
+        "Politique d’emploi et stratégie d’acquisition",
+        "Paie et Politique de Rémunération",
+        "Hygiène, sécurité et santé au travail",
+        "Marketing RH",
+        "Audit social - Bilan social et tableau de bord",
+        "Négociation collective et gestion des conflits"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "La création de valeur repose sur une bonne maîtrise de la gestion des Hommes, des équipes et des relations sociales. La contribution des managers et des spécialistes de la fonction RH est, à cet égard, essentielle et leurs missions passionnantes : gérer les défis de l’attraction, du développement, de la mobilisation (les ADM) et de la fidélisation des compétences requises en tenant compte des différentes parties prenantes de l’organisation est plus que primordiale dans les organisations d’aujourd’hui et de demain. Le MBA en Management des Ressources Humaines vient en réponse à ces problématiqu"
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference",
+      "partenariats": "brochure"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  },
+  "parcours": "Parcours Responsabilité, Organisation et Management",
+  "partenariats": {
+    "double_diplome": "double diplôme mentionné",
+    "diplome_delocalise": null,
+    "accreditations": []
+  }
+}

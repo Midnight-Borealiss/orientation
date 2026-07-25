@@ -1,0 +1,112 @@
+{
+  "id": "licence-en-droit-prive-fondamental",
+  "nom": "Licence en Droit privé fondamental",
+  "ecole": "ism-droit",
+  "niveau": "licence",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac",
+  "modalites": [
+    "presentiel",
+    "en-ligne"
+  ],
+  "axes": {
+    "quantitatif": 1,
+    "technique": 1,
+    "relationnel": 1,
+    "creatif": 1,
+    "cadre": 5
+  },
+  "domaines": [
+    "droit",
+    "finance",
+    "marketing"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Assistant dans un cabinet d’avocat, d’huissier de justice ou de notaire",
+      "Assistant dans un cabinet de conseils juridiques et fiscaux",
+      "Assistant DRH",
+      "Employé de (banques /assurances, etc.)"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Semestre 3",
+      "modules": [
+        "Droit constitutionnel de la Ve République",
+        "Droit privé 1 : Droit de la famille et des personnes",
+        "Droit pénal général",
+        "Finances publiques de l’État",
+        "Droit général de l’Union Européenne 1"
+      ]
+    },
+    {
+      "intitule": "Semestre 4",
+      "modules": [
+        "Droit privé 2 : Droit des biens",
+        "Droit administratif",
+        "Droit commercial",
+        "Droit général de l’Union Européenne 2",
+        "Anglais Semestre 5",
+        "Droit commercial Général ;",
+        "Droit des Sociétés ;",
+        "Droit du Travail 1 ;",
+        "Droit des personnes ;",
+        "Droit de la Famille/Droit Pénal général ;",
+        "Droit du Commerce International ;",
+        "Anglais."
+      ]
+    },
+    {
+      "intitule": "Semestre 6",
+      "modules": [
+        "Droit des Obligations et Droit de la Concurrence ;",
+        "Droit spécial des sociétés ;",
+        "Droit du travail 2 ;",
+        "Droit notarial ;",
+        "Droit des biens ;",
+        "Droit de la propriété industrielle/Droit pénal spécial ;",
+        "Anglais."
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Fondée sur un partenariat entre l’École de Droit du Groupe ISM et l’Institut National Universitaire (INU) Jean François Champollion d’Albi (France), la licence en Droit privé offre l’opportunité aux étudiants justifiant d’un niveau (Bac +1) ou (Bac +2) en droit, d’obtenir un diplôme universitaire français depuis Dakar. Les enseignements sont dispensés en partie en FOAD (Formation Ouverte à Distance) via les plateformes de l’INU JF Champollion, et en partie en présentiel par les enseignants de l’ISM (Travaux dirigés et cours de langue)."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference",
+      "partenariats": "brochure"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_bachelor_brochure.pdf"
+  },
+  "partenariats": {
+    "double_diplome": null,
+    "diplome_delocalise": "l'inu champollion d'albi/toulouse",
+    "accreditations": []
+  }
+}

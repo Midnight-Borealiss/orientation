@@ -1,0 +1,88 @@
+{
+  "id": "mastere-marketing-digital-brand-content",
+  "nom": "Mastère Marketing Digital & Brand Content",
+  "ecole": "ism-digital-campus",
+  "niveau": "master",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 1,
+    "technique": 5,
+    "relationnel": 4,
+    "creatif": 3,
+    "cadre": 1
+  },
+  "domaines": [
+    "marketing",
+    "communication",
+    "informatique"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Brand Content Manager",
+      "Traffic Manager",
+      "Social Media Manager",
+      "Chargé(e) de communication web",
+      "Chef(fe) de projet marketing digital",
+      "Manager de projet SEM/SMO",
+      "Consultant(e) en communication digitale, en social média et en e-marketing",
+      "Directeur(trice) de la communication",
+      "Webmarketer",
+      "Community Manager",
+      "Ce programme témoigne du titre RNCP de niveau 7 (bac+5), numéro"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Brand Content",
+        "Marketing digital et e-commerce",
+        "Social média",
+        "Culture et environnement digital",
+        "Environnement international",
+        "Communication globale et digitale",
+        "Gestion de projets et management",
+        "Outils et langages web",
+        "Dc Start"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Cette formation permet aux étudiants de maîtriser tous les aspects stratégiques, marketing et communication d’un projet digital. Il s’agit pour eux d’acquérir à la fois des compétences en management dans le cadre d’un projet digital et aussi de maîtriser les techniques et outils opérationnels de la communication et du marketing digital."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  }
+}

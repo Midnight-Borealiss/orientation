@@ -1,0 +1,183 @@
+{
+  "id": "licence-en-administration-publique",
+  "nom": "Licence en Administration Publique",
+  "ecole": "ism-droit",
+  "niveau": "licence",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 2,
+    "technique": 1,
+    "relationnel": 2,
+    "creatif": 1,
+    "cadre": 5
+  },
+  "domaines": [
+    "droit",
+    "administration-publique",
+    "gestion"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Techniciens supérieurs ou cadres moyens",
+      "Secteurs :",
+      "Fonction publique d’État",
+      "Fonction publique territoriale",
+      "Fonction publique hospitalière",
+      "Types de structures :",
+      "Collectivités territoriales",
+      "Trésor Public",
+      "Douanes",
+      "Administration pénitentiaire",
+      "Établissement hospitalier",
+      "Justice, Police, Défense, Armées",
+      "Entreprises de dimension nationale et/ou internationale",
+      "Rencontre entre M. Pierre Moscovici, ancien ministre de l’économie et des finances en France - Actuel",
+      "Premier président de la Cour des comptes de France, et les étudiants"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "UE Initiation au droit privé",
+      "modules": [
+        "Introduction au Droit,",
+        "Organisation judiciaire",
+        "Histoire du Droit des Obligations",
+        "Droit des personnes et de la famille,",
+        "Droit des obligations,",
+        "Droit des Biens"
+      ]
+    },
+    {
+      "intitule": "UE Initiation au Droit public",
+      "modules": [
+        "Droit constitutionnel,",
+        "Initiation au Droit communautaire OHADA",
+        "Droit des organisations internationales"
+      ]
+    },
+    {
+      "intitule": "UE Économie - Gestion - Outils de base",
+      "modules": [
+        "Introduction au management,",
+        "Développement personnel",
+        "Initiation aux techniques quantitatives de gestion",
+        "Anglais",
+        "Economie politique",
+        "Informatique",
+        "Management de la qualité,",
+        "Initiation à l’entreprenariat",
+        "Psychosociologie des organisations",
+        "Fiscalité de l’entreprise",
+        "Management des ressources humaines"
+      ]
+    },
+    {
+      "intitule": "UE Culture générale et initiation à la recherche",
+      "modules": [
+        "Géopolitique",
+        "Actions de recherche encadrées"
+      ]
+    },
+    {
+      "intitule": "UE Service à la Communauté",
+      "modules": [
+        "Humanitaire",
+        "Environnement"
+      ]
+    },
+    {
+      "intitule": "UE Droit privé",
+      "modules": [
+        "Droit commercial général",
+        "Droit pénal général",
+        "Droit de la responsabilité",
+        "Droit commun des sociétés commerciales",
+        "Droit du travail",
+        "Procédure pénale",
+        "Droit des suretés UE. Droit public",
+        "Droit administratif",
+        "Droit budgétaire",
+        "Droit des collectivités locales",
+        "Droit constitutionnel approfondie : contentieux constitutionnel",
+        "Action et contrôle de l’action administrative",
+        "Droit administratif des biens",
+        "Contentieux administratifs",
+        "Droit foncier",
+        "Droit international public"
+      ]
+    },
+    {
+      "intitule": "UE Connaissance de l’administration et Contrats Publics",
+      "modules": [
+        "Institutions politiques et administratives",
+        "Droit de la Fonction publique",
+        "Partenariat Public-Privé"
+      ]
+    },
+    {
+      "intitule": "UE Économie et Finances locales",
+      "modules": [
+        "Économie générale",
+        "Introduction à la Fiscalité",
+        "Finances Locales"
+      ]
+    },
+    {
+      "intitule": "UE Langue, Méthodologie et Préparation aux Concours",
+      "modules": [
+        "Anglais",
+        "Méthodologie de la dissertation",
+        "Entraînements aux épreuves écrites",
+        "Méthodologie de la note de synthèse",
+        "Entraînements aux épreuves orales"
+      ]
+    },
+    {
+      "intitule": "UE Mise en situation professionnelle, Stage, Mémoire",
+      "modules": [
+        "Recherche, Rédaction et Soutenance Mémoire",
+        "Stage découverte de l’administration (8 semaines minimum)",
+        "Soutenance du rapport de stage"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 1,
+    "modules_exemples": [
+      "Initiation aux techniques quantitatives de gestion"
+    ],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "L’objectif principal de la licence en Administration publique est de donner aux étudiants une formation pluridisciplinaire centrée sur le droit, la culture générale, l’économie et les finances, leur permettant ainsi de préparer et de réussir les concours d’accès aux administrations publiques de leur choix. Elle prépare aussi à la poursuite d’études vers des masters à finalité professionnelle dans des domaines d’activité en relation avec le management des administrations publiques."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_bachelor_brochure.pdf"
+  }
+}

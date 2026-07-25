@@ -1,0 +1,133 @@
+{
+  "id": "licence-en-communication-et-medias",
+  "nom": "Licence en Communication et MÉdias",
+  "ecole": "madiba",
+  "niveau": "licence",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 2,
+    "technique": 1,
+    "relationnel": 4,
+    "creatif": 2,
+    "cadre": 1
+  },
+  "domaines": [
+    "communication",
+    "gestion",
+    "journalisme"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Chef de publicité",
+      "Chargé de la communication et des relations extérieures",
+      "Consultant en communication",
+      "Média planner",
+      "Attaché de presse",
+      "Chargé des relations publiques",
+      "Dirigeant d’une entreprise de communication ou de médias"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "UE Communication et information",
+      "modules": [
+        "Théorie de l’information et de la communication",
+        "Introduction à la communication",
+        "Médias et société",
+        "Communication et image : marques et organisation",
+        "Communication politique et institutionnelle",
+        "Sociologie de la communication",
+        "Ecriture médiatique",
+        "Stratégies et plan de communication",
+        "Culture et audiovisuel : source et langage cinématographique",
+        "Journalisme et médias d’information : radio, télévision, presse",
+        "écrite",
+        "Relations presse et média training",
+        "Méthode d’enquête en science de l’information et de la",
+        "communication",
+        "Veille médiatique et communicationnelle"
+      ]
+    },
+    {
+      "intitule": "UE Médias et Journalisme",
+      "modules": [
+        "Presse et journalisme",
+        "Techniques de base rédactionnelles",
+        "Journalisme numérique",
+        "Perfectionnement rédactionnel",
+        "Introduction à la diffusion numérique de l’information",
+        "Économie du journalisme",
+        "Production éditoriale UE. Économie, Gestion, Outils de base",
+        "Introduction à l’économie",
+        "Comptabilité générale",
+        "Introduction au management",
+        "Management des organisations",
+        "Actions de recherche encadrées",
+        "Lecture et analyse des états financiers",
+        "Marketing",
+        "Gestion des RH",
+        "entrepreneuriat",
+        "économie internationale",
+        "management de projet"
+      ]
+    },
+    {
+      "intitule": "UE Comportements professionnels , Leadership, Langues",
+      "modules": [
+        "Anglais",
+        "informatique",
+        "Agora,",
+        "Leadership",
+        "Recherche",
+        "Langues"
+      ]
+    },
+    {
+      "intitule": "UE Sciences humaines et sociales",
+      "modules": [
+        "Sociologie",
+        "philosophie",
+        "anthropologie",
+        "science politique",
+        "relations internationales"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Cette licence propose aux apprenants de devenir professionnel de la communication et des médias, d’acquérir des compétences pointues et une créativité nécessaire à l’exercice des métiers du secteur. Les enseignements transversaux confèrent aux étudiants une maîtrise des outils de la communication et du fonctionnement des médias, enrichie par des modules de gestion, management et leadership pour les préparer à devenir des jeunes managers/cadres au profil complet, maîtrisant les codes de la société hyper-médiatique."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_bachelor_brochure.pdf"
+  }
+}

@@ -1,0 +1,95 @@
+{
+  "id": "mba-communication-creativite-et-evenementiel",
+  "nom": "MBA Communication, Créativité et Evènementiel",
+  "ecole": "ism-management",
+  "niveau": "mba",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 1,
+    "technique": 4,
+    "relationnel": 4,
+    "creatif": 5,
+    "cadre": 1
+  },
+  "domaines": [
+    "communication",
+    "culture-evenementiel",
+    "marketing"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Directeur ou responsable marketing",
+      "Responsable de la communication événementielle",
+      "Ingénieur commercial",
+      "Responsable des ventes École de Management"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Études de marché",
+        "Techniques de négociation commerciale",
+        "Webmarketing",
+        "Politique de communication",
+        "Relations publiques - Relations presse",
+        "Design thinking",
+        "Informatique appliquée au Marketing",
+        "Infographie et création publicitaire",
+        "Ateliers de création de site Web et de blog",
+        "Stratégie Événementielle et Scénographie",
+        "Lancement d’une Campagne Marketing digitale",
+        "Social Media Marketing - Community management",
+        "Analyse d’audience Web & traffic management",
+        "Projet Événementiel",
+        "Gestion Financière des Événements",
+        "Organisation d’un événement"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Cette formation opérationnelle au marketing, à la communication et à l’événement vise à diffuser la culture marketing. Elle vous permet de bâtir un plan marketing opérationnel multi-canal de A à Z, de construire des arguments clients et des messages clés, demettre en perspective chaque outil dans une logique de création de valeur pour le client et pour l’entreprise. Elle apporte les clés pour réaliser des campagnes multi supports et en évaluer les résultats. Elle vous permet d’acquérir une méthodologie et des outils pour réussir manifestations etévènements."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference",
+      "partenariats": "brochure"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  },
+  "parcours": "Parcours créativité, communication et marketing",
+  "partenariats": {
+    "double_diplome": "double diplôme mentionné",
+    "diplome_delocalise": null,
+    "accreditations": []
+  }
+}

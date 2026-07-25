@@ -1,0 +1,110 @@
+{
+  "id": "bachelor-en-gestion-option-organisation-rh-en-ligne",
+  "nom": "Bachelor en Gestion Option Organisation -RH",
+  "ecole": "ism-online",
+  "niveau": "bachelor",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+2",
+  "modalites": [
+    "en-ligne"
+  ],
+  "axes": {
+    "quantitatif": 3,
+    "technique": 2,
+    "relationnel": 5,
+    "creatif": 1,
+    "cadre": 3
+  },
+  "domaines": [
+    "gestion",
+    "rh",
+    "comptabilite"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Assistant en gestion des entreprises",
+      "Assistant gestion administrative",
+      "Assistant Gestion des Ressources Humaines",
+      "Assistant management de la qualité",
+      "Chargé de formation"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "UE Outils et techniques de gestion approfondie",
+      "modules": [
+        "Comptabilité de Gestion",
+        "Gestion Budgétaire",
+        "Fiscalité d’entreprise",
+        "Gestion de la production"
+      ]
+    },
+    {
+      "intitule": "UE Management et Responsabilité sociale d’entreprise",
+      "modules": [
+        "Stratégie d’entreprise",
+        "RSE et développement durable",
+        "MRH : Acquisition des RH",
+        "MRH : Administration des RH",
+        "TQM : Coûts de la Non Qualité",
+        "TQM : Management des Processus",
+        "Introduction à la communication d’entreprise",
+        "Marketing des Services"
+      ]
+    },
+    {
+      "intitule": "UE Fondamentaux de l’audit et de la finance de marché",
+      "modules": [
+        "Introduction à l’audit et au contrôle interne",
+        "Introduction à l’audit social"
+      ]
+    },
+    {
+      "intitule": "UE Langue et Civilisation",
+      "modules": [
+        "Business English",
+        "Business Communication"
+      ]
+    },
+    {
+      "intitule": "UE Recherche / Projet d’entreprise",
+      "modules": [
+        "Projet d’entreprise"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Le Diplôme Supérieur de Gestion (DSG –Bac+3) option Organisation et Gestion des Ressources Humaines prépare les étudiants à intégrer les service de gestion et RH en entreprise. Ils seront également formés au management et à lafinance, pour acquérir une bonne maîtrise des affaires et de la gestion d’entreprise. Dotés de ces compétences clés, les diplômés pourront s’insérer rapidement dans le marché du travail ou choisir de poursuivre en master."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "brochure",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_ONLINE_ISF_BROCHURE.pdf"
+  },
+  "option": "Organisation -RH (BAC+3)"
+}

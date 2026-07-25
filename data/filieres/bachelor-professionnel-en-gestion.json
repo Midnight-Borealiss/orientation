@@ -1,0 +1,86 @@
+{
+  "id": "bachelor-professionnel-en-gestion",
+  "nom": "BACHELOR PROFESSIONNEL EN GESTION",
+  "ecole": "ism-management",
+  "niveau": "bachelor",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+2",
+  "modalites": [
+    "presentiel",
+    "week-end"
+  ],
+  "axes": {
+    "quantitatif": 3,
+    "technique": 1,
+    "relationnel": 5,
+    "creatif": 1,
+    "cadre": 3
+  },
+  "domaines": [
+    "gestion",
+    "comptabilite"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Gestionnaire des entreprises / administrative",
+      "Marketeur",
+      "Comptable",
+      "Manageur de la qualité",
+      "Chargé des relations externes",
+      "Responsable des achats et approvisionnement",
+      "Entrepreneur"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "UE semestre 1",
+      "modules": [
+        "Outils du management des organisations",
+        "management juridique et outils de gouvernance",
+        "Gestion comptable financière de l’entreprise",
+        "Leadership et Soft skills"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Ce programme de Bachelor proposé par le Groupe ISM s’adresse aux professionnels ou étudiants qui souhaitent obtenir un diplôme supérieur de Gestion (bac+3). Accessible après un bac+2, il offre aux apprenants les compétences nécessaires à une bonne insertion dans l’entreprise et/ou permet d’envisager une évolution dans sa carrière. Les enseignements pluridisciplinaires confèrent une maîtrise de l’ensemble des outils de gestion et de management indispensable en entreprise. Cette formation transversale et variée prépare les jeunes professionnels à de futures fonctions de responsabilité. Le Bachel"
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "brochure",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference",
+      "partenariats": "brochure"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_bachelor_brochure.pdf"
+  },
+  "partenariats": {
+    "double_diplome": null,
+    "diplome_delocalise": null,
+    "accreditations": [
+      "Cames"
+    ]
+  }
+}

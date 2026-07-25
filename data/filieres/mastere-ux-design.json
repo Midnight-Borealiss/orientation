@@ -1,0 +1,93 @@
+{
+  "id": "mastere-ux-design",
+  "nom": "Mastère UX Design",
+  "ecole": "ism-digital-campus",
+  "niveau": "master",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 1,
+    "technique": 4,
+    "relationnel": 2,
+    "creatif": 1,
+    "cadre": 1
+  },
+  "domaines": [
+    "design-web",
+    "qualite"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "UX strategist",
+      "UX researcher",
+      "UX analyst",
+      "Architecte de l’information",
+      "Interaction designer",
+      "Wireframer",
+      "UX designer",
+      "Visual designer",
+      "UI designer",
+      "Motion designer",
+      "Digital art director",
+      "Head of UC",
+      "Design director",
+      "Ce programme témoigne du titre RNCP de niveau 7 (bac+5), numéro",
+      "Digital Campus"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Connaissance de l’utilisateur et Conception orientée",
+        "Sciences de l’information",
+        "Maîtrise de l’interface",
+        "Objectifs de marque",
+        "Technologies UX",
+        "Culture et environnement digital",
+        "Environnement international",
+        "Communication globale et digitale",
+        "Gestion de projet et Management",
+        "Outils et langages du web",
+        "Dc Start"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Ce mastère propose aux apprenants d’acquérir les compétences nécessaires et opérationnelles pour devenir expert dans la stratégie de l’expérience utilisateur dans la conception de systèmes de navigation. Il s’agit de maîtriser la prise en main d’un site, son accessibilité, et générer de la confiance auprès des utilisateurs."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "_comment": "Les 2 axes de DISPOSITION, au niveau du domaine et non de la filiere. Seule donnee que le catalogue ne contient pas : elle vient du tri de portraits fait par les 5 responsables d'ecole. Echelle 1-5.",
+
+  "_axes": {
+    "ancrage": "1 = bureau, ecran, dossiers  |  5 = terrain, deplacement, contact direct",
+    "abstraction": "1 = concret, resultat visible vite  |  5 = abstrait, conceptuel, plusieurs reponses defendables"
+  },
+
+  "_statut": "a_collecter",
+
+  "domaines": {
+    "finance": { "ancrage": null, "abstraction": null },
+    "comptabilite": { "ancrage": null, "abstraction": null },
+    "marketing": { "ancrage": null, "abstraction": null },
+    "rh": { "ancrage": null, "abstraction": null },
+    "droit": { "ancrage": null, "abstraction": null },
+    "informatique": { "ancrage": null, "abstraction": null },
+    "logistique": { "ancrage": null, "abstraction": null },
+    "communication": { "ancrage": null, "abstraction": null }
+  }
+}

@@ -1,0 +1,93 @@
+{
+  "id": "executive-mba-parcours-full-english-en-ligne",
+  "nom": "Executive MBA -parcours Full english",
+  "ecole": "ism-online",
+  "niveau": "mba",
+  "langue": "anglais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "en-ligne"
+  ],
+  "axes": {
+    "quantitatif": 3,
+    "technique": 1,
+    "relationnel": 3,
+    "creatif": 3,
+    "cadre": 1
+  },
+  "domaines": [
+    "finance",
+    "marketing"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Chief Executive Officer Company Director Senior Executive Functional Director Senior Consultant"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Enseignements M2",
+      "modules": [
+        "HR POLICY / MANAGEMENT MODULE",
+        "Leadership and team management",
+        "Human resource strategy",
+        "Decision-making and negotiation",
+        "Change management",
+        "MARKET STRATEGY MODULE",
+        "Business strategy",
+        "Value-based marketing",
+        "Competitive analysis and strategies",
+        "International marketing",
+        "FINANCE & ACCOUNTING MODULE",
+        "Accounting for finance",
+        "Corporate finance",
+        "International finance",
+        "International taxation",
+        "BUSINESS PROCESSES MODULE",
+        "Economic intelligence",
+        "Information system management",
+        "Business process management",
+        "International trade law",
+        "INNOVATION & SYSTEMS MODULE",
+        "Innovation management",
+        "Business model design",
+        "Corporate social responsibility",
+        "Business ethics and governance"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "The Executive MBA aims to develop in participants responsibilities in management professions: • Analytical abilities and business management • Strategy and decision-making • Leadership, mastery of a multicultural professional environment • Responsible management and a sense of ethics the necessary skills to assume significant"
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "langue": "brochure",
+      "niveau_acces": "brochure",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_ONLINE_ISF_BROCHURE.pdf"
+  }
+}

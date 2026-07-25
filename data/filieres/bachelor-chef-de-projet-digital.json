@@ -1,0 +1,135 @@
+{
+  "id": "bachelor-chef-de-projet-digital",
+  "nom": "Bachelor Chef de Projet Digital",
+  "ecole": "ism-digital-campus",
+  "niveau": "bachelor",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+2",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 1,
+    "technique": 4,
+    "relationnel": 2,
+    "creatif": 5,
+    "cadre": 1
+  },
+  "domaines": [
+    "informatique",
+    "design-web",
+    "communication"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Chef de projet multimédia (Internet, Web, mobile)",
+      "Concepteur-réalisateur multimédia",
+      "UX designer",
+      "Motion designer",
+      "Webdesigner",
+      "Directeur artistique",
+      "Graphiste / Creative technologist",
+      "Développeur Web",
+      "Intégrateur web / mobile",
+      "Webmaster"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "UE Culture",
+      "modules": [
+        "Culture de l’image",
+        "Technique de créativite",
+        "Digital humanities"
+      ]
+    },
+    {
+      "intitule": "UE Design",
+      "modules": [
+        "Outils Graphiques et Web (Infographie – Webdesign)",
+        "UX Design (Ergonomie – Prototypage)",
+        "UI Design (Méthodologie UI – Design d’interface)",
+        "Motion design (Première Pro – After Effect - Design Sonore)"
+      ]
+    },
+    {
+      "intitule": "UE Développement",
+      "modules": [
+        "Développement Front End et Intégration (HTML-CSS – Javascript – Jquerry – Mobile)",
+        "Développement Back End (PhP – MySQL)",
+        "CMS (Wordpress – Prestatshop – Woocommerce)",
+        "Ingenierie technique (Algo et architecture de données)"
+      ]
+    },
+    {
+      "intitule": "UE Marketing",
+      "modules": [
+        "Marketing (Marketing Opérationnel et stratégique – Etude de",
+        "Marché – Stratégie Marketing)",
+        "Web Marketing (Visibilité et Référencement – Digital Marketing - Inbound marketing) UE. Communication",
+        "Communication",
+        "Technologies de la communication",
+        "(Théorie et scénario - Manipulation Caméra – Podcast)",
+        "Social media (Rédaction pour le web – E-Reputation)"
+      ]
+    },
+    {
+      "intitule": "UE Gestion de Projet",
+      "modules": [
+        "Méthodologie (Vie d’un projet – Cahier des charges – Test et recetages – Méthodes Agiles)",
+        "Management d’équipe / Client / Gestion de crise",
+        "Economie et Gestion (Facturation et Devis - Gestion",
+        "Comptable - Business Model – Business Plan – Business Game)"
+      ]
+    },
+    {
+      "intitule": "UE Professionnalisation",
+      "modules": [
+        "Projet professionnel",
+        "Langue vivante",
+        "Book de Compétence",
+        "Droits du numérique et propriété intellectuelle",
+        "Prise de parole"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Digital native, vous voulez participer, penser et fabriquer l’innovation numérique ? Ce Bachelor s’adresse aux étudiants créatifs, ingénieux, toujours au courant des dernières tendances du web. Ils y apprendront à valoriser leurs projets et à développer des savoir-faire pointus dans le numérique. Ils sauront maîtriser les 3 grands domaines du web (webdesign, webmarketing, développement web) et travailleront, en équipe, à la conception, la gestion et la réalisation de projets réels. Cette immersion permettra aux apprenants de se professionnaliser rapidement pour être opérationnels dès l’obtenti"
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference",
+      "partenariats": "brochure"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_bachelor_brochure.pdf"
+  },
+  "partenariats": {
+    "double_diplome": "la licence en informatique appliquee a la gestion des entreprises de l",
+    "diplome_delocalise": null,
+    "accreditations": []
+  }
+}

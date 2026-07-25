@@ -1,0 +1,115 @@
+{
+  "id": "licence-en-informatique-appliquee-a-la-gestion-des-entrepris",
+  "nom": "Licence en Informatique appliquée à la Gestion des entreprises",
+  "ecole": "ism-ingenieurs",
+  "niveau": "licence",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac",
+  "modalites": [
+    "presentiel",
+    "en-ligne"
+  ],
+  "axes": {
+    "quantitatif": 3,
+    "technique": 5,
+    "relationnel": 2,
+    "creatif": 1,
+    "cadre": 2
+  },
+  "domaines": [
+    "informatique",
+    "gestion",
+    "reseaux"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Assistant Chef de projet / Technico-commercial",
+      "Analyste d’étude / Développeur d’application",
+      "Chargé de Recherche et Développement",
+      "Technicien réseaux / d’exploitation /",
+      "Administrateur de systèmes",
+      "Certification CISCO Gratuite et intégrée dans le curiculum de formation ( IT Essentials - CCNA)"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "UE Mathématiques et techniques quantitatives de gestion",
+      "modules": [
+        "Mathématiques appliquées",
+        "Recherche opérationnelle",
+        "Comptabilité",
+        "Mathématiques et décisions financières",
+        "Gestion budgétaire",
+        "Management de projet"
+      ]
+    },
+    {
+      "intitule": "UE Management & Organisations",
+      "modules": [
+        "Droit du Numérique",
+        "Obligations Juridiques et Fiscales des Entreprises",
+        "Web marketing",
+        "Droit du Travail",
+        "Marketing Média et plan de communication",
+        "Management des Processus UE. Réseaux et Systèmes informatiques",
+        "Architectures systèmes et réseaux informatiques",
+        "Sécurité informatique",
+        "Réseaux mobiles et télécoms"
+      ]
+    },
+    {
+      "intitule": "UE Programmation - Développement Web et d’applications",
+      "modules": [
+        "Systèmes d’information",
+        "Systèmes de gestion de bases de données",
+        "Algorithmes et structures de données",
+        "Webmastering",
+        "Technologies JAVA & .NET"
+      ]
+    },
+    {
+      "intitule": "UE Méthodologie & Entrepreneurship",
+      "modules": [
+        "Méthodologie entrepreneuriat",
+        "Projet d’entreprise"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 2,
+    "modules_exemples": [
+      "Mathématiques appliquées",
+      "Mathématiques et décisions financières"
+    ],
+    "niveau": "modere"
+  },
+  "vitrine": {
+    "description": "Cette licence permet de former des techniciens supérieurs à la fois au management et à l’utilisation des technologies afin de : les rendre aptes à l’analyse, à la conception et au pilotage de systèmes d’information et de communication leur donner les moyens de mettre en place des outils technologiques (réseaux d’entreprises, développement d’applications de gestion etc.). Il s’agit pour les étudiants d’acquérir des compétences transverses, notamment en management et gestion de projets, d’apprécier l’état actuel du monde des réseaux et du développement de logiciels, de maîtriser les spécificités"
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_bachelor_brochure.pdf"
+  },
+  "departement": "Management et Technologies"
+}

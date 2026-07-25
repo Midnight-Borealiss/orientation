@@ -1,0 +1,85 @@
+{
+  "id": "mba-management-de-projets",
+  "nom": "MBA Management de Projets",
+  "ecole": "ism-ingenieurs",
+  "niveau": "mba",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 3,
+    "technique": 2,
+    "relationnel": 5,
+    "creatif": 1,
+    "cadre": 2
+  },
+  "domaines": [
+    "management-projet",
+    "gestion",
+    "marches-financiers"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Chef de projets (tous secteurs, notamment services, ONG…)",
+      "Chef de programme ou de portefeuille",
+      "Consultant en gestion et montage de projet, de programme ou de portefeuille Ingénieur planning",
+      "Contrôleur de projet",
+      "Responsable qualité projet"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Management stratégique et opérationnel",
+        "Outils de gestion et de management",
+        "Fondements du management des projets et des risques",
+        "Techniques quantitatives et gestion de l’information",
+        "Outils de Communication et d’efficacité professionnelle",
+        "Planification et montage de projets",
+        "Techniques et méthodes informatiques et de gestion appliquée aux projets",
+        "Passation de marchés et suivi-évaluation dans les projets",
+        "Outils d’efficacité professionnelle – Méthodologie et thèse professionnelle"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 1,
+    "modules_exemples": [
+      "Techniques quantitatives et gestion de l’information"
+    ],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Cette spécialisation répond à des besoins grandissants dans le domaine de la formation de managers aptes à planifier et à piloter des projets industriels, de services ou encore culturels ou sociaux. Ce programme vise ainsi à former des cadres maîtrisant tout le processus du management de projet en leur apportant les concepts et outils nécessaires à la conception et à la mise en œuvre d’un projetsous ses différents aspects."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  },
+  "parcours": "Parcours innovation entreprenariat et technologies"
+}

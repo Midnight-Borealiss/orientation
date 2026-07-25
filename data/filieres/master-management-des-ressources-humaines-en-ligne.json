@@ -1,0 +1,89 @@
+{
+  "id": "master-management-des-ressources-humaines-en-ligne",
+  "nom": "Master Management des Ressources Humaines",
+  "ecole": "ism-online",
+  "niveau": "master",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "en-ligne"
+  ],
+  "axes": {
+    "quantitatif": 1,
+    "technique": 1,
+    "relationnel": 5,
+    "creatif": 1,
+    "cadre": 3
+  },
+  "domaines": [
+    "rh",
+    "gestion",
+    "rse"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Directeur des RH",
+      "Responsable de la formation Responsable rémunération",
+      "Responsable paie",
+      "Responsable des carrières et du développement"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Enseignements M1",
+      "modules": [
+        "Management stratégique et RSE",
+        "Psychosociologie des Organisations, Gestion du stress et risques psychosociaux",
+        "Gestion de la diversité, de la cohésion et des Crises",
+        "Management des Equipes, des compétences, de la performance et du changement",
+        "Droit des relations individuelles et collectives du travail",
+        "Planification opérationnelle des RH Enseignements M2",
+        "Management stratégique et Éthique dans les affaires",
+        "Hygiène, sécurité, et sante du Travail",
+        "Système d’information RH",
+        "Gestion des connaissances",
+        "Politique d’emploi et stratégie d’acquisition",
+        "Ingénierie de la formation",
+        "Négociation collective et gestion des conflits",
+        "Paie et politique de renumérotation",
+        "Diagnostic et Évaluation des RH",
+        "GPEC",
+        "Bilan Social",
+        "Méthodologie - Technique de recueil de donnes et thèse professionnelle"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Cette spécialisation englobe l’ensemble des disciplines techniques des RH, du management mais également du développement des compétences. Il s’agit pour les apprenants d’acquérir une bonne maîtrise de la gestion des Hommes, des équipes et des relations sociales, d’être capable d’élaborer et d’adapter les outils d’analyse, les indicateurs et procédures en lien avec les enjeux stratégiques de la fonction RH."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "brochure",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_ONLINE_ISF_BROCHURE.pdf"
+  }
+}

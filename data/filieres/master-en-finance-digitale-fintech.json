@@ -1,0 +1,95 @@
+{
+  "id": "master-en-finance-digitale-fintech",
+  "nom": "Master en Finance Digitale (Fintech)",
+  "ecole": "ism-management",
+  "niveau": "master",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 4,
+    "technique": 5,
+    "relationnel": 4,
+    "creatif": 3,
+    "cadre": 2
+  },
+  "domaines": [
+    "finance",
+    "data",
+    "management-projet"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Analyste Financier",
+      "Chef de Projet FinTech",
+      "Conseiller Financier",
+      "Consultant en Innovation Financière",
+      "Digital Market Manager",
+      "Responsable monétique",
+      "Fraud Manager",
+      "Manager des projets d’innovation",
+      "Digital entrepreneur"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Finance de marché",
+        "Marketing des Services Financiers Numériques",
+        "Techniques Comptables Approfondies",
+        "Econométrie appliquée à la finance",
+        "Risk management et Cartographie des risques",
+        "Design Thinking",
+        "Management de l’innovation & de la transformation numérique",
+        "Big Data",
+        "Machine learning",
+        "Cybersécurité",
+        "Monétique générale: Systèmes et moyens de paiement digitaux",
+        "Technologies BlockChain & Crypto-monnaies",
+        "Management de projet informatique",
+        "Développement web et bases de données",
+        "Systèmes d’information informatique"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 1,
+    "modules_exemples": [
+      "Econométrie appliquée à la finance"
+    ],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Le Master en Finance Digitale de l’ISM forme des professionnels capables de comprendre les innovations digitales dans les services financiers, d’identifier les opportunités et menaces pour les institutions financières, et de devenir des acteurs de la transformation digitale. Les étudiants acquerront des compétences en comptabilité, services financiers, gestion, fintech et inclusion financière, et apprendront à élaborer et mettre en œuvre des stratégies de digitalisation. Les candidats doivent posséder des compétences solides en comptabilité financière et fiscalité classiques. Ils devront appré"
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  },
+  "parcours": "Parcours investissement et gouvernance d’entreprise"
+}

@@ -1,0 +1,106 @@
+{
+  "id": "bachelor-chef-de-projet-digital-en-ligne",
+  "nom": "Bachelor Chef de Projet Digital",
+  "ecole": "ism-online",
+  "niveau": "bachelor",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+2",
+  "modalites": [
+    "en-ligne"
+  ],
+  "axes": {
+    "quantitatif": 1,
+    "technique": 5,
+    "relationnel": 1,
+    "creatif": 4,
+    "cadre": 1
+  },
+  "domaines": [
+    "design-web",
+    "informatique",
+    "management-projet"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Chef de projet multimédia (Internet, Web, mobile)",
+      "Concepteur réalisateur multimédia",
+      "UX designer",
+      "Motion designer",
+      "Webdesigner",
+      "Directeur artistique",
+      "Graphiste"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "UE Culture",
+      "modules": [
+        "Découvrir l’univers du digital"
+      ]
+    },
+    {
+      "intitule": "UE Développement & Intégration",
+      "modules": [
+        "Javascript / Jquerry",
+        "S’initier à la programmation avec Javascript",
+        "Dynamiser vos sites web avec Javascript"
+      ]
+    },
+    {
+      "intitule": "UE Marketing - Communication : L’élaboration d’une stratégie web• marketing Stratégie Marketing",
+      "modules": [
+        "Comprendre la stratégie d’entreprise",
+        "Définir ses Buyer Personas",
+        "Définir une stratégie d’acquisition, de conversion et",
+        "de fidélisation",
+        "Le SEO au service de sa stratégie webmarketing"
+      ]
+    },
+    {
+      "intitule": "UE Création de contenus digitaux",
+      "modules": [
+        "Typographie",
+        "Créer des visuels avec Photoshop",
+        "Identité visuelle",
+        "Créer des logos et des illustrations avec Illustrator",
+        "Digital Content",
+        "Piloter la production de contenus digitaux",
+        "représentation graphique des",
+        "données"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Ce Bachelor s’adresse aux étudiants créatifs, ingénieux, toujours au courant des dernières tendances du web. Ils y apprendront à : - Valoriser leurs projets et à développer des savoir-faire pointus dans le numérique. - Maîtriser les 3 grands domaines du web (webdesign, webmarketing, web development). Ils travailleront, en équipe, à la conception, la gestion et la réalisation de projets réels. Cette immersion permettra aux apprenants de se professionnaliser rapidement pour être opérationnels dès l’obtention de leur diplôme."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "brochure",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_ONLINE_ISF_BROCHURE.pdf"
+  }
+}

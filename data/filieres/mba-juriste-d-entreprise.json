@@ -1,0 +1,97 @@
+{
+  "id": "mba-juriste-d-entreprise",
+  "nom": "MBA Juriste d’Entreprise",
+  "ecole": "ism-droit",
+  "niveau": "mba",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 1,
+    "technique": 1,
+    "relationnel": 3,
+    "creatif": 1,
+    "cadre": 5
+  },
+  "domaines": [
+    "droit",
+    "gestion"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Fonctionnels : Juriste",
+      "Juriste groupe",
+      "Juriste corporate",
+      "Juriste d’affaires",
+      "Juriste international",
+      "Juriste négociateur",
+      "Sectoriels : Juriste en immobilier",
+      "Juriste en droit commercial",
+      "Juriste en droit bancaire - financier",
+      "Juriste en droit de la construction / urbanisme",
+      "Juriste en droit des NTIC",
+      "Juriste en droit de la santé",
+      "Juriste en droit des télécommunications",
+      "Domaines d’activités : Juriste en droit des sociétés",
+      "Juriste en droit des contrats",
+      "Juriste en précontentieux et contentieux",
+      "Juriste en compliance et conformité"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Gestion des chantiers et de la vie juridique de l’organisation",
+        "Analyse et gestion des risques juridiques",
+        "Pilotage de la veille juridique",
+        "Conseil juridique et opérationnel aux collaborateurs et à la direction",
+        "Sensibilisation et formation des collaborateurs sur les enjeux juridiques clés",
+        "Mise en place et déploiement d’outils de suivi des documents juridiques et de la bonne exécution des contrats pour les acteurs internes.",
+        "Définition de la stratégie et des procédures judiciaires à engager en coordination avec les conseils externes."
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Spécialiste du droit, la mission du juriste en entreprise est de défendre les intérêts de son employeur, de prévenir les risques judiciaires et de veiller à l’application des lois et règlementations dans l’entreprise. Le cadre juridique ainsi que les structures des entreprises et des groupes évoluent en permanence, avec une complexification du rôle des départements juridiques au sein des entreprises, notamment due à l’internationalisation des entreprises, l’arrivée de nouvelles réglementations en matière de RGPD, ou encore l’arrivée de solutions technologiques modernes. Donc l’élargissement du"
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference",
+      "partenariats": "brochure"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  },
+  "partenariats": {
+    "double_diplome": null,
+    "diplome_delocalise": "deelije du groupe esg paris specialiste du droit, la mission du jurist",
+    "accreditations": []
+  }
+}

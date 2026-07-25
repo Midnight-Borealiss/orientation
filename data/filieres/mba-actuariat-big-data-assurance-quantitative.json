@@ -1,0 +1,100 @@
+{
+  "id": "mba-actuariat-big-data-assurance-quantitative",
+  "nom": "MBA Actuariat, Big Data, Assurance quantitative",
+  "ecole": "ism-ingenieurs",
+  "niveau": "mba",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 4,
+    "technique": 2,
+    "relationnel": 1,
+    "creatif": 1,
+    "cadre": 2
+  },
+  "domaines": [
+    "assurance",
+    "data",
+    "finance"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Actuaire",
+      "Data Scientist expert l’assurance",
+      "Opérateur de marché (trading) - Risk- Manager",
+      "Gérants d’actifs (sté de gestion – assurance)",
+      "Consultants / Chef de Projet Big Data et Assurance",
+      "Contrôleur & Analyste des risques (crédit, marché, opérationnel)"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Modèles de durée",
+        "Mathématiques stochastiques",
+        "Copule de dépendance stochastique",
+        "Théorie des valeurs extrêmes",
+        "Théorie de la crédibilité",
+        "Générateur de scénarios économiques",
+        "Excel et VBA",
+        "Modélisation",
+        "Risque Crédit",
+        "Mesure du Risque",
+        "Big Data et Data mining",
+        "NoSQL et Python pour Big Data",
+        "Technique de Communication",
+        "Simulation aléatoire sous R",
+        "Actuariat de l’assurance dommage",
+        "Actuariat de la retraite",
+        "Actuariat de l’assurance vie",
+        "L’actuariat prévoyance et santé",
+        "Valorisation et gestion du risque sur les marchés de l’énergie"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 7,
+    "modules_exemples": [
+      "Mathématiques stochastiques",
+      "Copule de dépendance stochastique",
+      "Modélisation",
+      "Actuariat de l’assurance dommage",
+      "Actuariat de la retraite"
+    ],
+    "niveau": "eleve"
+  },
+  "vitrine": {
+    "description": "Ce programme propose de haut niveau en appliquées au calcul techniques développées outils modernes d’analyse stochastique et ceux du traitement numérique des données s’appuient fortement sur la programmation informatique utilisée de manière intense en entreprise. La formation offre également, au-delà de l’actuariat, une solide formation en data science."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  },
+  "parcours": "Parcours innovation entreprenariat et technologies"
+}

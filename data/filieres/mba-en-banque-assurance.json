@@ -1,0 +1,90 @@
+{
+  "id": "mba-en-banque-assurance",
+  "nom": "MBA en Banque Assurance",
+  "ecole": "ism-management",
+  "niveau": "mba",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel",
+    "cours-du-soir"
+  ],
+  "axes": {
+    "quantitatif": 4,
+    "technique": 1,
+    "relationnel": 1,
+    "creatif": 1,
+    "cadre": 3
+  },
+  "domaines": [
+    "finance",
+    "assurance",
+    "gestion"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Analyste de risque crédit",
+      "Souscripteur en assurances de biens et responsabilités",
+      "Banquier- conseil",
+      "Chef de projet en organisation bancaire",
+      "Comptable bancaire",
+      "Responsable du back office banque"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Techniques bancaires",
+        "Techniques d’assurance",
+        "Management des risques en entreprises",
+        "Banque",
+        "Assurance",
+        "Compatibilité des compagnies d’assurances",
+        "Introduction au marché des capitaux",
+        "Droit bancaire et des assurances",
+        "Monnaie et financement de l’économie",
+        "Finance décentralisée : Microfinance",
+        "Assurances risques de l’entreprise",
+        "Pilotage et contrôle de gestion de l’activité bancaire",
+        "Gestion technique et financière d’une institution d’assurance",
+        "Business Plan, montages financiers et opérations à effet de levier"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Ce programme, également disponible en cours du soir, vise à former des cadres de haut niveau dans les métiers de la banque et de l’assurance. Les diplômés de ce MBA seront dotés de solides connaissances en technique bancaire, d’assurance et de finance, et d’une bonne maîtrise des outils analytiques et juridiques requis pour exercer dans ces secteurs."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  },
+  "parcours": "Parcours investissement et gouvernance d’entreprise"
+}

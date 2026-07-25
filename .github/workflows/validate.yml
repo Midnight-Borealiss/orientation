@@ -1,0 +1,22 @@
+name: Validation des fiches
+
+on:
+  push:
+    paths: ["data/filieres/**", "schema/**", "config/**", "scripts/**"]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm run validate
+      # Test de segmentation : la brochure Bachelor doit produire 26 fiches.
+      # Ignoré si les catalogues PDF ne sont pas dans le dépôt.
+      - run: npm test
+        if: hashFiles('data/brochures/*.pdf') != ''

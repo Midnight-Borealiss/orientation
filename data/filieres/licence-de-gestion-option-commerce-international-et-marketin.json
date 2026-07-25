@@ -1,0 +1,182 @@
+{
+  "id": "licence-de-gestion-option-commerce-international-et-marketin",
+  "nom": "Licence de Gestion option Commerce international et Marketing",
+  "ecole": "ism-management",
+  "niveau": "licence",
+  "langue": "bilingue",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 4,
+    "technique": 1,
+    "relationnel": 3,
+    "creatif": 1,
+    "cadre": 1
+  },
+  "domaines": [
+    "marketing",
+    "gestion",
+    "finance"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Chargé de clientèle",
+      "Attaché commercial / Chef de produit",
+      "Chargé du développement",
+      "Chargé d’études marketing",
+      "Responsable des ventes",
+      "Chargé logistique / achats / approvisionnements",
+      "Entrepreneur"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "UE Concepts et Techniques de Gestion",
+      "modules": [
+        "Management",
+        "Typologies and Organizational Culture",
+        "Corporate Culture and Cross Cultural Management",
+        "Marketing : Consumer’s behavior",
+        "Market Research- Product - Price – Place",
+        "Promotion – Sales Technics- Sales Force",
+        "International Trade Technics",
+        "International Marketing",
+        "Gestion Budgétaire",
+        "Marketing and Research Development",
+        "Comptabilité Générale",
+        "Comptabilité Analytique",
+        "Comptabilité des Sociétés",
+        "Macroeconomics",
+        "Monetary Economics",
+        "Analyse Financière",
+        "Gestion de Trésorerie",
+        "Total Quality Management",
+        "Human Ressources Management",
+        "Operations Management",
+        "Supply Chain Management",
+        "International Marketing",
+        "Typologies and Organizational Culture"
+      ]
+    },
+    {
+      "intitule": "UE Comportement professionnel - Culture juridique et politique",
+      "modules": [
+        "Geopolitics",
+        "Droit- Droit des Obligations",
+        "Legal Aspects of International Trade",
+        "International Trade Theories",
+        "Contracting in International Trade",
+        "International Tax System",
+        "Academic Writing Skills",
+        "Droit commercial et des sociétés"
+      ]
+    },
+    {
+      "intitule": "UE Maîtrise des Techniques - Traitement de données",
+      "modules": [
+        "Mathématiques : Statistiques Descriptives",
+        "Calculs Matriciels & Fonctions à plusieurs variables",
+        "Informatique Appliquée",
+        "Management des Systèmes d’Information (MSI)",
+        "Mathématiques Financières",
+        "Décisions Financières UE. Initiation à la Recherche - Environnement socioéconomique",
+        "Actions de recherche encadrées",
+        "Macroeconomics",
+        "Service à la Communauté",
+        "Techniques bancaires",
+        "Project Management"
+      ]
+    },
+    {
+      "intitule": "UE Langues – Civilisations",
+      "modules": [
+        "Busines English",
+        "Techniques d’Expression et de Communication en Français",
+        "Développement Personnel",
+        "LV2 (Coréen - Japonais - Chinois)"
+      ]
+    },
+    {
+      "intitule": "UE Immersion en entreprise",
+      "modules": [
+        "Rapport d’études en alternance : école/entreprise"
+      ]
+    },
+    {
+      "intitule": "UE Création et Gestion d’entreprise",
+      "modules": [
+        "Entrepreneuriat Social",
+        "Monetary Economics",
+        "Comptabilité des Sociétés",
+        "Analyse Financière",
+        "Comptabilité Analytique",
+        "Business Management and Trade Strategy",
+        "Corporate Strategy",
+        "International Economy",
+        "Logistics",
+        "Supply chain and costums Compliance",
+        "Financing International Trade",
+        "Entrepreneurship (Business Plan)"
+      ]
+    },
+    {
+      "intitule": "UE Environnement financier de l’entreprise",
+      "modules": [
+        "Operation and Service Management",
+        "Finance de Marché",
+        "BRVM",
+        "International Business Environment"
+      ]
+    },
+    {
+      "intitule": "UE Management opérationnel",
+      "modules": [
+        "Gestion de la Production",
+        "MS Project 2010",
+        "Introduction to Project Management"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 3,
+    "modules_exemples": [
+      "Mathématiques : Statistiques Descriptives",
+      "Calculs Matriciels & Fonctions à plusieurs variables",
+      "Mathématiques Financières"
+    ],
+    "niveau": "modere"
+  },
+  "vitrine": {
+    "description": "Cette formation prépare les étudiants aux métiers des affaires internationales et leur donne toutes les bases nécessaires à l’exercice d’une fonction marketing dans un environnement international. Les diplômés seront formés au management et à la finance internationale, afin d’être rapidement opérationnels en entreprise ou de poursuivre leur cursus en master."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "langue": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_bachelor_brochure.pdf"
+  },
+  "option": "Commerce international et Marketing",
+  "programme_parent": "licence-en-gestion"
+}

@@ -1,0 +1,87 @@
+{
+  "id": "master-droit-de-l-entreprise",
+  "nom": "Master Droit de l’Entreprise",
+  "ecole": "ism-droit",
+  "niveau": "master",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel",
+    "en-ligne"
+  ],
+  "axes": {
+    "quantitatif": 2,
+    "technique": 1,
+    "relationnel": 2,
+    "creatif": 1,
+    "cadre": 5
+  },
+  "domaines": [
+    "droit",
+    "finance"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Juriste d’entreprise",
+      "Juriste d’affaires",
+      "Conseiller juridique",
+      "Collaborateur en cabinet d’avocat spécialisé"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Droit des affaires approfondi (entreprises en difficulté, Instruments et paiement de crédits)",
+        "Contrats spéciaux",
+        "Droit des assurances et de la banque",
+        "Droit international des affaires",
+        "Droit du travail approfondi",
+        "Droit des restructurations des entreprises",
+        "Fiscalité des entreprises",
+        "Contentieux du travail",
+        "Droit pénal des affaires"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Fondé sur un partenariat entre l’Ecole de Droit du Groupe ISM et l’université publique Jean François Champollion de Toulouse/ Albi, le Master en droit de l’entreprise offre l’opportunité à tout étudiant justifiant d’une licence en Droit, d’obtenir un master en droit de l’entreprise d’une université française depuis Dakar. Les enseignements sont dispensés en FOAD (formation ouverte à distance) via la plateforme de l’université numérique juridique francophone (UNJF), et en présentiel, en partie par les enseignants de l’ISM (Travaux dirigés et cours de langue)."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference",
+      "partenariats": "brochure"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  },
+  "partenariats": {
+    "double_diplome": null,
+    "diplome_delocalise": "l'universite publique jean francois champollion de toulouse /albi fond",
+    "accreditations": []
+  }
+}

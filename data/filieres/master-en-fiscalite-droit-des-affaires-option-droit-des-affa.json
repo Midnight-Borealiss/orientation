@@ -1,0 +1,89 @@
+{
+  "id": "master-en-fiscalite-droit-des-affaires-option-droit-des-affa",
+  "nom": "Master en Fiscalité-Droit des Affaires, Option Droit des Affaires",
+  "ecole": "ism-droit",
+  "niveau": "master",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 3,
+    "technique": 1,
+    "relationnel": 4,
+    "creatif": 1,
+    "cadre": 4
+  },
+  "domaines": [
+    "droit",
+    "fiscalite",
+    "gestion"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Juristes d’entreprises publiques ou privées (secteurs du commerce, de l’assurance, de l’immobilier, de l’industrie…)",
+      "Juristes de banque",
+      "Juristes en cabinets d’avocats",
+      "Préparation au concours du barreau et à la magistrature…"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Ingénierie Juridique des Affaires",
+        "Initiation au Management public",
+        "Techniques quantitatives de Gestion",
+        "Management opérationnel",
+        "Instruments de paiement et de Garantie",
+        "Fiscalité",
+        "Comportement professionnel et renforcement de Capacité",
+        "Pratique du Droit des Affaires",
+        "Techniques quantitatives de Gestion en Management",
+        "Ingénierie Juridique des Affaires",
+        "Droit de la propriété",
+        "Management",
+        "Recherche"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 2,
+    "modules_exemples": [
+      "Techniques quantitatives de Gestion",
+      "Techniques quantitatives de Gestion en Management"
+    ],
+    "niveau": "modere"
+  },
+  "vitrine": {
+    "description": "Le MBA Droit des Affaires a pour ambition de former des juristes ayant une profonde connaissance de la pratique des affaires et de l’ingénierie juridique dans leurs différentes composantes. En plus de prôner le sens de l’éthique dans les affaires chez nos auditeurs, leur professionnalisation est un point focal de la formation dispensée grâce à des enseignements axés sur la maîtrise du raisonnement juridique, la capacité d’analyse, de rigueur et de synthèse en vue de susciter en eux plus de réactivité et de créativitéen entreprise ou en cabinet."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  },
+  "option": "Droit des Affaires"
+}

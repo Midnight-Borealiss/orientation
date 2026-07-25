@@ -1,0 +1,165 @@
+{
+  "id": "licence-de-gestion-option-management-international",
+  "nom": "Licence de gestion option Management international",
+  "ecole": "ism-management",
+  "niveau": "licence",
+  "langue": "bilingue",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 4,
+    "technique": 2,
+    "relationnel": 3,
+    "creatif": 1,
+    "cadre": 1
+  },
+  "domaines": [
+    "gestion",
+    "finance",
+    "marketing"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Chargé de marché à l’international",
+      "Commercial / Chargé export",
+      "Chargé marketing de filiales étrangères",
+      "Trésorier international",
+      "Chargé des achats et approvisionnements",
+      "Entrepreneur"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "UE Concepts et Techniques de gestion",
+      "modules": [
+        "Management",
+        "Typologies and Organizational Culture",
+        "Corporate Culture and Cross Cultural Management",
+        "Marketing : Consumer’s behavior",
+        "Market Research- Product - Price – Place",
+        "Promotion – Sales Technics- Sales Force- Marketing des services- International Marketing",
+        "Comptabilité générale",
+        "Comptabilité analytique",
+        "Comptabilité des Sociétés",
+        "Macroeconomics",
+        "Monetary Economics",
+        "Analyse Financière",
+        "Total Quality Management",
+        "Human Ressources Management"
+      ]
+    },
+    {
+      "intitule": "UE Comportement Professionnel - Culture juridique et politique",
+      "modules": [
+        "Geopolitics",
+        "Droit",
+        "Droit des Obligations",
+        "Droit Commercial et des Sociétés",
+        "Développement Personnel",
+        "Leadership"
+      ]
+    },
+    {
+      "intitule": "UE Maîtrise des Techniques - Traitement de données",
+      "modules": [
+        "Mathématiques : Statistiques Descriptives",
+        "Informatique Appliquée",
+        "Suites Numériques & Systèmes d’Equation",
+        "Calculs Matriciels & Fonctions à plusieurs variables",
+        "Analyses Combinatoires et Calculs des Probabilités",
+        "Mathématiques Financières",
+        "Décisions Financières UE. Initiation à la Recherche",
+        "Actions de recherche encadrées",
+        "Actions de terrain encadrées",
+        "Techniques d’Expression et de Communication en Français",
+        "Service à la Communauté"
+      ]
+    },
+    {
+      "intitule": "UE Langues – Civilisations",
+      "modules": [
+        "Business English",
+        "Business Communication",
+        "LV2 (Coréen - Japonais - Chinois)"
+      ]
+    },
+    {
+      "intitule": "UE Entrepreneuriat – Communication",
+      "modules": [
+        "Entrepreneurship (Business Plan)",
+        "Techniques de recherche d’emploi"
+      ]
+    },
+    {
+      "intitule": "UE Outils et Techniques de gestion approfondies",
+      "modules": [
+        "Comptabilité de Gestion",
+        "Gestion Budgétaire",
+        "Gestion de Trésorerie",
+        "Fiscalité des Entreprise",
+        "Gestion de la Production / Application sur MS Project",
+        "Techniques et Pratiques Bancaires"
+      ]
+    },
+    {
+      "intitule": "UE Management et Responsabilité Sociale d’Entreprise",
+      "modules": [
+        "Corporate Strategy",
+        "RSE et Développement Durable",
+        "Appui et Financement des PME"
+      ]
+    },
+    {
+      "intitule": "UE Fondamentaux de la Finance",
+      "modules": [
+        "Corporate Finance",
+        "La Finance de Marché",
+        "Business Accounting"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 5,
+    "modules_exemples": [
+      "Mathématiques : Statistiques Descriptives",
+      "Suites Numériques & Systèmes d’Equation",
+      "Calculs Matriciels & Fonctions à plusieurs variables",
+      "Analyses Combinatoires et Calculs des Probabilités",
+      "Mathématiques Financières"
+    ],
+    "niveau": "eleve"
+  },
+  "vitrine": {
+    "description": "Préparer les étudiants aux métiers des affaires internationales est l’objectif de ce programme de niveau bac+3. Au-delà de l’enseignement des fondamentaux du management, le programme vise aussi à développer chez les étudiants et compétences en marketing, management, gestion des Ressources Humaines et finance internationale pour favoriser une bonne maîtrise de l’environnement international des affaires et des entreprises."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "langue": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_bachelor_brochure.pdf"
+  },
+  "option": "Management international",
+  "programme_parent": "licence-en-gestion"
+}

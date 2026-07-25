@@ -1,0 +1,214 @@
+{
+  "id": "licence-de-gestion-option-agrobusiness",
+  "nom": "Licence de gestion option Agrobusiness",
+  "ecole": "ism-management",
+  "niveau": "licence",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 3,
+    "technique": 2,
+    "relationnel": 3,
+    "creatif": 1,
+    "cadre": 2
+  },
+  "domaines": [
+    "agrobusiness",
+    "gestion",
+    "marketing"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Commercial des entreprises para-agricoles",
+      "Responsable de magasin ou de rayon",
+      "Assistant financier et marketing",
+      "Assistant en gestion administrative",
+      "Assistant responsable achat-approvisionnement",
+      "Entrepreneur"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "UE Concepts et Techniques de Gestion",
+      "modules": [
+        "Management",
+        "Marketing : Comportement du Consommateur",
+        "Comptabilité Générale",
+        "Analyse Financière",
+        "Comptabilité Analytique",
+        "Comptabilité des Sociétés",
+        "Macroéconomie",
+        "Typologies et Culture Organisationnelle",
+        "Marketing : Etude de Marché",
+        "Management Multiculturel",
+        "Marketing Mix : Produit - Prix – Distribution",
+        "Marketing Opérationnel : Publicité",
+        "Force de Vente",
+        "Marketing des produits agricoles",
+        "Techniques de Vente",
+        "Économie Monétaire",
+        "Management de la Qualité",
+        "Management des Ressources Humaines"
+      ]
+    },
+    {
+      "intitule": "UE Comportement Professionnel - Culture juridique et politique",
+      "modules": [
+        "Géopolitique",
+        "Droit",
+        "Droit des Obligations",
+        "Leadership",
+        "Droit Commercial et des Sociétés",
+        "Droit de l’environnement",
+        "Droit des sociétés et des groupements",
+        "OMC : La loi du marché",
+        "Entreprises agricoles en difficulté",
+        "Développement Personnel"
+      ]
+    },
+    {
+      "intitule": "UE Maîtrise des Techniques - Traitement de données",
+      "modules": [
+        "Mathématiques : Statistiques Descriptives",
+        "Informatique",
+        "Suites Numériques & Systèmes d’Equation",
+        "Calculs Matriciels & Fonctions à plusieurs variables",
+        "Analyses Combinatoires et Calculs des Probabilités",
+        "Mathématiques Financières",
+        "Décisions Financières",
+        "Informatique appliquée"
+      ]
+    },
+    {
+      "intitule": "UE Initiation à la Recherche",
+      "modules": [
+        "Actions de recherche encadrées (domaine agricole ou agroalimentaire)",
+        "Techniques d’Expression et de Communication en Français"
+      ]
+    },
+    {
+      "intitule": "UE Langues – Civilisations",
+      "modules": [
+        "Business English",
+        "Business Communication UE. Initiation à la Recherche et Service à la"
+      ]
+    },
+    {
+      "intitule": "Communauté",
+      "modules": [
+        "Actions de terrain encadrées (domaine agricole ou agroalimentaire)",
+        "Service à la Communauté",
+        "Techniques d’Expression et de Communication en Français"
+      ]
+    },
+    {
+      "intitule": "UE Entrepreneuriat – Communication",
+      "modules": [
+        "Entrepreneuriat (Ddomaine agricole ou agroalimentaire)",
+        "Techniques de recherche d’emploi"
+      ]
+    },
+    {
+      "intitule": "UE Outils et Techniques de gestion approfondies",
+      "modules": [
+        "Comptabilité de Gestion",
+        "Gestion Budgétaire",
+        "Fiscalité des Entreprise",
+        "Techniques et Pratiques bancaires",
+        "Gestion de Trésorerie",
+        "Gestion de la Production/Application sur MS Project"
+      ]
+    },
+    {
+      "intitule": "UE Management et Responsabilité Sociale d’Entreprise",
+      "modules": [
+        "Stratégie d’entreprise",
+        "RSE et Développement Durable"
+      ]
+    },
+    {
+      "intitule": "UE Ateliers d’Approfondissement et Finance appliquée",
+      "modules": [
+        "Appui et Financement des PME",
+        "Introduction à l’Audit et au Contrôle Interne",
+        "Finance de Marché"
+      ]
+    },
+    {
+      "intitule": "UE Projet d’entreprise",
+      "modules": [
+        "Création d’entreprise (domaine agricole ou agroalimentaire)",
+        "Soutenance Business Plan"
+      ]
+    },
+    {
+      "intitule": "UE Enseignements managériaux appliqués",
+      "modules": [
+        "Présentation des secteurs primaire-secondaire et tertiaire",
+        "Management des structures agricoles et agroalimentaires",
+        "Sociologie rurale",
+        "Management des risques"
+      ]
+    },
+    {
+      "intitule": "UE Outils et Techniques de gestion des entreprises agricoles et agroalimentaires",
+      "modules": [
+        "Tableau de bord",
+        "Gestion de la production/Application MS Project"
+      ]
+    },
+    {
+      "intitule": "UE Enseignements environnementaux",
+      "modules": [
+        "L’environnement tropical",
+        "Évolution des entreprises agricoles/horticoles",
+        "Les menaces climatiques et environnementales des activités agricoles",
+        "tropicales"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 5,
+    "modules_exemples": [
+      "Mathématiques : Statistiques Descriptives",
+      "Suites Numériques & Systèmes d’Equation",
+      "Calculs Matriciels & Fonctions à plusieurs variables",
+      "Analyses Combinatoires et Calculs des Probabilités",
+      "Mathématiques Financières"
+    ],
+    "niveau": "eleve"
+  },
+  "vitrine": {
+    "description": "La licence en Management des Organisations agricoles et agroalimentaires a pour objectif de former des agents d’encadrement outillés pour une insertion professionnelle réussie dans les secteurs primaire, secondaire et tertiaire. La formation leur permettra d’acquérir des méthodes et aptitudes techniques en science de gestion. Ils seront également formés en management, en marketing et en finance pour pouvoir participer à la gestion des entreprises et structures agricoles ou agroalimentaires."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_bachelor_brochure.pdf"
+  },
+  "option": "Agrobusiness",
+  "programme_parent": "licence-en-gestion"
+}

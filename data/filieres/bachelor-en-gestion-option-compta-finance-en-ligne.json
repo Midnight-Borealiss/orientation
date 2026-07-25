@@ -1,0 +1,113 @@
+{
+  "id": "bachelor-en-gestion-option-compta-finance-en-ligne",
+  "nom": "Bachelor en Gestion Option Compta-Finance",
+  "ecole": "ism-online",
+  "niveau": "bachelor",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+2",
+  "modalites": [
+    "en-ligne"
+  ],
+  "axes": {
+    "quantitatif": 4,
+    "technique": 2,
+    "relationnel": 3,
+    "creatif": 1,
+    "cadre": 2
+  },
+  "domaines": [
+    "gestion",
+    "finance",
+    "comptabilite"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Comptable",
+      "Financier",
+      "Trésorier",
+      "Auditeur interne",
+      "Chargé du service administr",
+      "Gestionnaire des investissements",
+      "Gestionnaire portefeuille atif et financier"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "UE Outils et techniques de gestion approfondie",
+      "modules": [
+        "Comptabilité de Gestion",
+        "Gestion Budgétaire",
+        "Fiscalité d’entreprise",
+        "Gestion de trésorerie",
+        "Gestion de la production",
+        "Techniques et pratiques bancaires"
+      ]
+    },
+    {
+      "intitule": "UE Management et Responsabilité sociale d’entreprise",
+      "modules": [
+        "Stratégie d’entreprise",
+        "RSE et développement durable",
+        "MRH : Acquisition des RH",
+        "MRH : Administration des RH",
+        "TQM : Couts de la Non Qualité",
+        "TQM : Management des Processus",
+        "Marketing des Services"
+      ]
+    },
+    {
+      "intitule": "UE Fondamentaux de l’audit et de la finance de marché",
+      "modules": [
+        "Introduction à l’audit et au contrôle interne",
+        "Finance de marché"
+      ]
+    },
+    {
+      "intitule": "UE Langue et Civilisation",
+      "modules": [
+        "Business English",
+        "Business Communication"
+      ]
+    },
+    {
+      "intitule": "UE Recherche / Projet d’entreprise",
+      "modules": [
+        "Projet d’entreprise"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Ce Diplôme Supérieur de Gestion (DSG – bac+3) option Comptabilité - Finance vise à des compétences clés dans ces domaines pour une insertion réussie en entreprise. Le programme propose aussi aptitudes en marketing et management pour leur assurer une bonne maîtrise professionnel. À l’issue de leur formation, les diplômés pourront choisir de s’insérer marché du travail ou de poursuivre leur cursus en master. doter les étudiants de développer des de l’environnement directement dans le"
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "brochure",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_ONLINE_ISF_BROCHURE.pdf"
+  },
+  "option": "Compta-Finance (BAC+3)"
+}

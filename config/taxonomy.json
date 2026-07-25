@@ -1,0 +1,228 @@
+{
+  "_comment": "Vocabulaire commun. Ecoles issues du sommaire du catalogue Master 2024. Toute valeur utilisee dans data/filieres/ doit exister ici.",
+  "ecoles": [
+    {
+      "id": "ism-management",
+      "nom": "École de Management"
+    },
+    {
+      "id": "ism-droit",
+      "nom": "École de Droit"
+    },
+    {
+      "id": "ism-ingenieurs",
+      "nom": "École d'Ingénieurs",
+      "departements": [
+        "Management et Technologies",
+        "Sciences et Technologies appliquées"
+      ]
+    },
+    {
+      "id": "ism-digital-campus",
+      "nom": "ISM Digital Campus"
+    },
+    {
+      "id": "madiba",
+      "nom": "Madiba Leadership Institute"
+    },
+    {
+      "id": "ism-executive",
+      "nom": "Programmes Executive"
+    },
+    {
+      "id": "ism-online",
+      "nom": "ISM Online"
+    },
+    {
+      "id": "isf",
+      "nom": "ISF"
+    }
+  ],
+  "modalites": [
+    "presentiel",
+    "en-ligne",
+    "cours-du-soir",
+    "week-end",
+    "full-time"
+  ],
+  "domaines": [
+    {
+      "id": "finance",
+      "label": "Finance et banque"
+    },
+    {
+      "id": "marches-financiers",
+      "label": "Marchés financiers et trading"
+    },
+    {
+      "id": "comptabilite",
+      "label": "Comptabilité, audit et contrôle"
+    },
+    {
+      "id": "fiscalite",
+      "label": "Fiscalité"
+    },
+    {
+      "id": "gestion",
+      "label": "Gestion et administration"
+    },
+    {
+      "id": "management-projet",
+      "label": "Management de projet"
+    },
+    {
+      "id": "entrepreneuriat",
+      "label": "Entrepreneuriat"
+    },
+    {
+      "id": "marketing",
+      "label": "Marketing et vente"
+    },
+    {
+      "id": "communication",
+      "label": "Communication et médias"
+    },
+    {
+      "id": "informatique",
+      "label": "Développement et logiciel"
+    },
+    {
+      "id": "reseaux",
+      "label": "Réseaux et télécoms"
+    },
+    {
+      "id": "cybersecurite",
+      "label": "Cybersécurité"
+    },
+    {
+      "id": "data",
+      "label": "Données, big data et IA"
+    },
+    {
+      "id": "ingenierie",
+      "label": "Ingénierie et industrie"
+    },
+    {
+      "id": "qualite",
+      "label": "Qualité, hygiène et sécurité"
+    },
+    {
+      "id": "logistique",
+      "label": "Transport et logistique"
+    },
+    {
+      "id": "rh",
+      "label": "Ressources humaines"
+    },
+    {
+      "id": "droit",
+      "label": "Droit et juridique"
+    },
+    {
+      "id": "science-politique",
+      "label": "Science politique et relations internationales"
+    },
+    {
+      "id": "rse",
+      "label": "RSE et développement durable"
+    },
+    {
+      "id": "assurance",
+      "label": "Assurance et actuariat"
+    },
+    {
+      "id": "agrobusiness",
+      "label": "Agrobusiness et agroalimentaire"
+    },
+    {
+      "id": "commerce-international",
+      "label": "Commerce international"
+    },
+    {
+      "id": "journalisme",
+      "label": "Journalisme et information"
+    },
+    {
+      "id": "culture-evenementiel",
+      "label": "Culture et événementiel"
+    },
+    {
+      "id": "administration-publique",
+      "label": "Administration publique"
+    },
+    {
+      "id": "design-web",
+      "label": "Design et création numérique"
+    },
+    {
+      "id": "electronique",
+      "label": "Électronique et systèmes embarqués"
+    },
+    {
+      "id": "mathematiques",
+      "label": "Mathématiques appliquées et économétrie"
+    }
+  ],
+  "axes": [
+    {
+      "id": "quantitatif",
+      "label": "Chiffres et analyse"
+    },
+    {
+      "id": "technique",
+      "label": "Technique et outils"
+    },
+    {
+      "id": "relationnel",
+      "label": "Contact humain"
+    },
+    {
+      "id": "creatif",
+      "label": "Création et expression"
+    },
+    {
+      "id": "cadre",
+      "label": "Cadre et procédures"
+    },
+    {
+      "id": "ancrage",
+      "label": "Bureau ou terrain",
+      "_niveau": "domaine"
+    },
+    {
+      "id": "abstraction",
+      "label": "Concret ou abstrait",
+      "_niveau": "domaine"
+    }
+  ],
+  "series_bac": [
+    "S1",
+    "S2",
+    "S3",
+    "L1",
+    "L2",
+    "L1a",
+    "G",
+    "STMG",
+    "T1",
+    "T2",
+    "F6",
+    "autre"
+  ],
+  "niveaux": [
+    "bts",
+    "licence",
+    "bachelor",
+    "licence-pro",
+    "master",
+    "mba",
+    "dba",
+    "certificat"
+  ],
+  "niveaux_maths": [
+    "aucun",
+    "faible",
+    "moyen",
+    "eleve"
+  ]
+}

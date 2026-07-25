@@ -1,0 +1,139 @@
+{
+  "id": "licence-en-genie-logiciel-reseaux-et-systemes",
+  "nom": "Licence en Génie logiciel - Réseaux et Systèmes",
+  "ecole": "ism-ingenieurs",
+  "niveau": "licence",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 2,
+    "technique": 4,
+    "relationnel": 2,
+    "creatif": 1,
+    "cadre": 2
+  },
+  "domaines": [
+    "reseaux",
+    "informatique",
+    "droit"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Assistant ingénieurs dans les domaines suivants :",
+      "Développement – Administration et gestion des systèmes logiciels",
+      "Analyste programmeur",
+      "Concepteur et développeur d’application",
+      "Administrateur de réseaux et systèmes",
+      "Architecte réseau / Responsable d’exploitation",
+      "Technico-commercial"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "UE Maîtrise des comportements professionnels",
+      "modules": [
+        "Communication professionnelle",
+        "Leadership - Team Bulding & Soft Skills",
+        "Techniques de recherche d’emploi",
+        "Business English & Com",
+        "English For IT",
+        "Creativity & Social Involvement"
+      ]
+    },
+    {
+      "intitule": "UE Mathématiques et techniques quantitatives de gestion",
+      "modules": [
+        "Mathématiques appliquées",
+        "Recherche opérationnelle",
+        "Comptabilité",
+        "Mathématiques et décisions financières",
+        "Gestion budgétaire",
+        "Management de projet"
+      ]
+    },
+    {
+      "intitule": "UE Management & Organisations",
+      "modules": [
+        "Mathématiques et décisions financières",
+        "Management de projet",
+        "Management des Processus",
+        "Droit du Numérique",
+        "Obligations Juridiques et Fiscales des Entreprises",
+        "Droit du Travail"
+      ]
+    },
+    {
+      "intitule": "Certification CISCO Gratuite et intégrée dans le curiculum de formation (IT Essentials - IOT - CCNA - SECURITY - Linux - Python) UE. Réseaux et Systèmes informatiques",
+      "modules": [
+        "Électronique",
+        "Système Linux",
+        "Architectures et réseaux informatiques",
+        "Administration et interconnexion de Réseaux informatiques",
+        "Sécurité informatique",
+        "Réseaux mobiles et télécoms"
+      ]
+    },
+    {
+      "intitule": "UE Programmation – Développement web et d’applications",
+      "modules": [
+        "Génie Logiciel",
+        "Systèmes d’Information",
+        "Bases de Données",
+        "Algorithmes et Structures de Données",
+        "Technologies Web",
+        "Oracle Server",
+        "SQL Server",
+        "Technologies Mobiles",
+        "Technologies JAVA - .NET & Python"
+      ]
+    },
+    {
+      "intitule": "UE Méthodologie & Entrepreneurship",
+      "modules": [
+        "Méthodologie entrepreneuriat",
+        "Projet d’entreprise"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 3,
+    "modules_exemples": [
+      "Mathématiques appliquées",
+      "Mathématiques et décisions financières",
+      "Mathématiques et décisions financières"
+    ],
+    "niveau": "modere"
+  },
+  "vitrine": {
+    "description": "Les objectifs principaux de cette formation sont de savoir maîtriser les techniques et méthodes liées à la conception des systèmes logiciels, le déploiement et l’administration de réseaux et systèmes au sein des organisations ; de savoir développer des applications dans un contexte de ressources organisées en réseau ; et d’acquérir les connaissances théoriques et pratiques nécessaires à la compréhension et à la mise en place des réseaux et systèmes."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_bachelor_brochure.pdf"
+  },
+  "departement": "Sciences et Technologies appliquées"
+}

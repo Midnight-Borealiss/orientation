@@ -1,0 +1,88 @@
+{
+  "id": "master-rse-developpement-durable",
+  "nom": "Master RSE & Développement Durable",
+  "ecole": "ism-management",
+  "niveau": "master",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 1,
+    "technique": 5,
+    "relationnel": 4,
+    "creatif": 1,
+    "cadre": 1
+  },
+  "domaines": [
+    "rse",
+    "informatique",
+    "qualite"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Spécialiste de la RSE",
+      "Spécialiste de l’économie verte",
+      "Responsable des démarches en DD",
+      "Responsable RSE",
+      "Agent de veille sur la santé au travail",
+      "Gestionnaire des risques sociaux et environnementaux",
+      "Conseiller santé, sécurité, environnement École de Management"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Identifier les enjeux stratégiques de la Responsabilité Sociétale des Entreprises (RSE) et du Développement Durable pour les entreprises, organisations, collectivités.",
+        "Élargir ses compétences et la maîtrise d’outils dédiés à l’environnement et à la RSE pour accompagner les entreprises et les organisations dans l’accélération de leur transition.",
+        "Raisonner dans une logique de performance globale d’entreprise basée sur le management des risques et l’amélioration continue.",
+        "Accompagner les évolutions managériales et culturelles indispensables pour répondre aux nouveaux enjeux RSE.",
+        "Partager les bonnes pratiques des entreprises performantes.",
+        "Maîtriser des outils et méthodes permettant la mise en œuvre de la RSE.",
+        "Réaliser le diagnostic RSE / Développement Durable.",
+        "Définir la politique et la démarche stratégique RSE / Développement Durable.",
+        "Proposer des approches d’analyse via des problèmes complexes, multi-échelles, multi-acteurs.",
+        "Mettre en œuvre la démarche RSE / Développement Durable avec les parties prenantes.",
+        "Élaborer et mettre en œuvre des stratégies de communication et de sensibilisation des managers et des populations sur les enjeux du développement durable.",
+        "Participer à l’élaboration de projets dans une perspective de développement durable."
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Le Master RSE & Développement Durable du Groupe ISM de réfléchir, d’analyser, de décider et d’agir dans le domaine de la RSE-RSO fondé sur des connaissances solides et des compétences transversales, prépare les étudiants à devenir des managers spécialisés en guidant les entreprises et organisations vers des pratiques durables et socialement responsables, tout en respectant les exigences éthiques et réglementaires. Les cours sont abordés du point de vue Front, Middle et Back Office, et le programme inclut des conférences sur les marchés financiers de trading ainsi que des partages d’expérience "
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  },
+  "parcours": "Parcours responsabilité, organisation et management"
+}

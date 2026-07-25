@@ -1,0 +1,102 @@
+{
+  "id": "master-en-fiscalite-droit-des-affaires-option-juriste-de-ban",
+  "nom": "Master en Fiscalité-Droit des Affaires, Option Juriste de Banque et Compliance",
+  "ecole": "ism-droit",
+  "niveau": "master",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 4,
+    "technique": 2,
+    "relationnel": 3,
+    "creatif": 1,
+    "cadre": 5
+  },
+  "domaines": [
+    "droit",
+    "finance",
+    "fiscalite"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Juriste de banque",
+      "Cabinet d’avocats",
+      "Responsable de conformité",
+      "Directeur juridique",
+      "Avocat",
+      "Auditeur",
+      "Préparation au concours du barreau et à la magistrature"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Ingénierie juridique des affaires",
+        "Organisation et base technique de l’activité bancaire",
+        "Initiation au management public",
+        "Techniques quantitatives de gestion",
+        "Management opérationnel",
+        "Initiation à la fiscalité",
+        "Droit bancaire et des marchés financiers",
+        "Droit de la régulation",
+        "Droit social",
+        "Comportement professionnel et renforcement de capacité",
+        "Éthique des affaires",
+        "Audit et gestion des risques juridiques",
+        "Gestion des risques de non-conformité et des comportements non-éthiques",
+        "Fraude et Risk Management",
+        "Commissariat aux comptes",
+        "Les risques du métier de banquier et le ratio de Bâle",
+        "Environnement juridique de la Finance islamique et des Systèmes Financiers Décentralisés",
+        "Management des systèmes d’information",
+        "Cybercriminalité",
+        "Blanchiment d’argent et financement du terrorisme",
+        "Droit et TIC",
+        "Techniques quantitatives de gestion",
+        "Recherche"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 2,
+    "modules_exemples": [
+      "Techniques quantitatives de gestion",
+      "Techniques quantitatives de gestion"
+    ],
+    "niveau": "modere"
+  },
+  "vitrine": {
+    "description": "Ce parcours a pour ambition deformer des professionnels dans les métiers de banque et conformité en leurpermettant d’acquérir les compétences juridiques, techniques et managérialespour : • Gérer le risque de non-conformité et de comportements non-éthiques. • Comprendre les dispositifs légaux et réglementaires, • Maitriser les outils de Lutte contre la corruption et le blanchiment d’argent En plus de prôner le sens de l’éthique chez nos auditeurs, la professionnalisation est un point focal de la formation dispensée grâce à des enseignements axés sur la maitrise du raisonnement juridique incluan"
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  },
+  "option": "Juriste de Banque et Compliance"
+}

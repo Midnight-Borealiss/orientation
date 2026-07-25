@@ -1,0 +1,96 @@
+{
+  "id": "master-audit-controle-de-gestion-et-aide-a-la-decision-en-ligne",
+  "nom": "Master Audit Contrôle de Gestion et aide à la Décision",
+  "ecole": "ism-online",
+  "niveau": "master",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "en-ligne"
+  ],
+  "axes": {
+    "quantitatif": 5,
+    "technique": 2,
+    "relationnel": 3,
+    "creatif": 1,
+    "cadre": 5
+  },
+  "domaines": [
+    "comptabilite",
+    "gestion",
+    "finance"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Auditeur Interne",
+      "Contrôleur de gestion Trésorier",
+      "Contrôleur budgétaire Risk manager",
+      "Consultant",
+      "Auditeur financier"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Enseignements M1",
+      "modules": [
+        "Management Stratégique et RSE",
+        "Comptabilité de Gestion",
+        "Techniques comptables approfondies",
+        "Diagnostic Financier - Etats financiers",
+        "Investissement et financement",
+        "Normes internationales IFRS",
+        "Planification et gestion budgétaire",
+        "Comptabilité des groupes",
+        "Audit - Contrôle Interne - Contrôle de Gestion",
+        "Fiscalité des entreprises",
+        "Droit Spécial des Sociétés",
+        "Outils de communication et technologies de l’information Enseignements M2",
+        "Management Stratégique et Éthique dans les affaires",
+        "Normes internationales IFRS",
+        "Contrôle de gestion stratégique et pilotage de la performance",
+        "Audit comptable et Financier",
+        "Audit Fiscal et Social",
+        "Audit des Approvisionnements et de la trésorerie",
+        "Audit Bancaire et des assurances",
+        "Audit de projets et programmes",
+        "Contrôle Interne et management des risques",
+        "Tableau de bord et Reporting sur Excel",
+        "Contrôle de gestion sociale",
+        "Méthodologie et Techniques de Recherche et Thèse professionnelle"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Acquérir une formation pour répondre aux attentes des entreprises en matière d’audit, de contrôle de gestion et d’aide à la décision est l’objectif principal de ce Master. Il s’agit de doter les étudiants d’un niveau d’expertise et de capacités analytiques leur permettant d’évaluer une organisation, ses procédures et opérations administrativ es et financières."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "brochure",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_ONLINE_ISF_BROCHURE.pdf"
+  }
+}

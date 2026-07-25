@@ -1,0 +1,94 @@
+{
+  "id": "mastere-concepteur-et-developpeur-de-solutions-digitales",
+  "nom": "Mastère Concepteur et Développeur de Solutions Digitales",
+  "ecole": "ism-digital-campus",
+  "niveau": "master",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 1,
+    "technique": 5,
+    "relationnel": 1,
+    "creatif": 3,
+    "cadre": 3
+  },
+  "domaines": [
+    "informatique",
+    "design-web",
+    "cybersecurite"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Lead Developer (Front-end, Back-end, Mobile)",
+      "DevOps",
+      "Architecte (Logiciel, Base de Données, Solutions",
+      "Cloud)",
+      "Responsable qualité et performances",
+      "Créative développeur(euse)",
+      "Web designer/UI/UX designer",
+      "Design ou Product Manager"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Culture de l’image",
+        "Technique de créativité",
+        "Digital humanities",
+        "Design web UX / UI",
+        "Data visualisation",
+        "PHP orienté objet (POO)",
+        "Administration système",
+        "Sécurisation et partage",
+        "Framework Symfony -Laravel",
+        "Algorithmie",
+        "UML, Design pattern",
+        "Normes et protocoles",
+        "Cyber sécurité",
+        "Machine Learning",
+        "Implémentation d’API",
+        "Administration et conception d’une base de données",
+        "Normes et protocoles",
+        "Cyber sécurité"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "L’objectif de ce programme est de former l’apprenant à devenir un expert en développement d’une entreprise. Il sera à la croisée des chemins entre l’encadrement et l’animation des équipes de développement, la définition des architectures, l’interaction avec la direction des technologies et celle avec les décideurs non techniques de l’entreprise avec lesquels il doit pouvoir interagir."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  }
+}

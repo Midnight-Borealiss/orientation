@@ -1,0 +1,84 @@
+{
+  "id": "doctorate-in-business-administration-dba",
+  "nom": "DOCTORATE IN BUSINESS ADMINISTRATION (DBA)",
+  "ecole": "ism-executive",
+  "niveau": "dba",
+  "langue": "bilingue",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+5",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 1,
+    "technique": 3,
+    "relationnel": 1,
+    "creatif": 1,
+    "cadre": 1
+  },
+  "domaines": [
+    "reseaux"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Première année : Fondations et Méthodologie de Recherche Quatre séminaires fondamentaux sont inclus :",
+      "modules": [
+        "Séminaire n°1:",
+        "Séminaire n°2:",
+        "Séminaire n°3:",
+        "Séminaire n°4: Deuxième année : Expérience Terrain, Réseautage et Élaboration de la Recherche Les ateliers incluent :",
+        "Atelier n°1 :",
+        "Atelier n°2 :",
+        "Atelier n°3 :",
+        "Atelier n°4 : Troisième année : La Thèse Doctorate in Business Administration La thèse est un élément central du programme DBA. Elle doit:",
+        "Mobiliser une littérature scientifique et utiliser une méthodologie rigoureuse",
+        "Inclure des investigations empiriques",
+        "Avoir une orientation appliquée, avec la production de connaissances actionnables et des retombées managériales",
+        "Valoriser l’expérience pratique attendue du manager de très haut niveau",
+        "La soutenance de la thèse aura lieu à ESG Paris ou à l’ISM-Dakar."
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "PROGRAMME EXECUTIVE EDUCATION DOCTORATE IN BUSINESS ADMINISTRATION (DBA) Délocalisé deESG PARIS Le DBA de l’ESG Paris et du Groupe ISM vise à offrir aux cadres de haut niveau une formation avancée en administration des affaires, leur permettant de conceptualiser leurs expériences professionnelles dans un environnement de recherche. Les doctorants acquerront des connaissances solides en méthodologie de recherche, développeront une perspective critique sur leur pratique professionnelle, et amélioreront leurs perspectives de carrière. Le DBA est un programme bilingue (français/anglais) de trois a"
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "langue": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference",
+      "partenariats": "brochure"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  },
+  "partenariats": {
+    "double_diplome": null,
+    "diplome_delocalise": "deesg paris le dba de l'esg paris et du groupe ism vise a offrir aux c",
+    "accreditations": []
+  }
+}

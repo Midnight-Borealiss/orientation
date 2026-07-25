@@ -1,0 +1,107 @@
+{
+  "id": "executive-mba-parcours-en-francais-en-ligne",
+  "nom": "Executive MBA -parcours en Français",
+  "ecole": "ism-online",
+  "niveau": "mba",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "en-ligne"
+  ],
+  "axes": {
+    "quantitatif": 3,
+    "technique": 1,
+    "relationnel": 3,
+    "creatif": 2,
+    "cadre": 2
+  },
+  "domaines": [
+    "finance",
+    "gestion",
+    "marketing"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Président Directeur Général Directeur d’entreprise Cadre supérieur Directeur Fonctionnel Consultant Sénior"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "UE POLITIQUE RH / MANAGEMENT",
+      "modules": [
+        "Leadership et gestion d’équipe",
+        "Stratégie des ressources humaines",
+        "Prise de décision et négociation Conduite du changement"
+      ]
+    },
+    {
+      "intitule": "UE STRATÉGIE DE MARCHÉ",
+      "modules": [
+        "Stratégie d’entreprise",
+        "Le marketing basé sur la valeur",
+        "Analyse et stratégies concurrentielles",
+        "Marketing international"
+      ]
+    },
+    {
+      "intitule": "UE FINANCE & COMPTABILITÉ",
+      "modules": [
+        "comptabilité pour la finance",
+        "Finance d’entreprise",
+        "Finance internationale",
+        "Fiscalité internationale"
+      ]
+    },
+    {
+      "intitule": "UE PROCESSUS MÉTIERS",
+      "modules": [
+        "Intelligence économique",
+        "Gestion du système d’information",
+        "Gestion des processus métiers",
+        "Droit du commerce international"
+      ]
+    },
+    {
+      "intitule": "UE INNOVATION & SYSTÈMES",
+      "modules": [
+        "Management de l’innovation",
+        "Conception de Business model",
+        "Responsabilité sociale des entreprises",
+        "Éthique et gouvernance d’entreprise"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "L’Executive MBA vise à développer chez les participants les aptitudes nécessaires pour assumer des responsabilités importantes dans les professions du Management: • Capacités d’analyse et conduite d’entreprise • Stratégie et prise de décisions Leadership • Maîtrise d’un environnement professionnel multiculturel • Management responsable et sens de l’éthique"
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "brochure",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_ONLINE_ISF_BROCHURE.pdf"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "_comment": "Questions de departage entre filieres proches. Une entree par PAIRE, jamais dupliquee dans les fiches. Renseigne par le service des admissions a partir des confusions reellement observees.",
+
+  "_seuils": {
+    "ecart_declenchant_departage": 5,
+    "correspondance_forte": 85,
+    "correspondance_bonne": 70
+  },
+
+  "paires": [
+    {
+      "entre": ["licence-droit-des-affaires", "licence-administration-publique"],
+      "difference": "Exercice en entreprise privee ou cabinet, contre preparation aux concours de la fonction publique.",
+      "question": "Te vois-tu plutot en entreprise ou dans l'administration publique ?",
+      "reponses": [
+        { "label": "En entreprise ou en cabinet", "vers": "licence-droit-des-affaires" },
+        { "label": "Dans l'administration publique", "vers": "licence-administration-publique" }
+      ],
+      "source": "exemple"
+    }
+  ]
+}

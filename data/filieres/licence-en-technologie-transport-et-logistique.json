@@ -1,0 +1,134 @@
+{
+  "id": "licence-en-technologie-transport-et-logistique",
+  "nom": "Licence en Technologie, Transport et Logistique",
+  "ecole": "ism-ingenieurs",
+  "niveau": "licence",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 2,
+    "technique": 3,
+    "relationnel": 3,
+    "creatif": 1,
+    "cadre": 1
+  },
+  "domaines": [
+    "logistique",
+    "gestion",
+    "commerce-international"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Assistant gestionnaire des opérations logistiques",
+      "Assistant gestionnaire de plate-forme ou d’unité logistique (portuaires, aéroportuaires, ferroviaires et des entrepôts)",
+      "Logisticien dans toutes les formes d’organisation (humanitaire, etc…)",
+      "Agent de transit – déclarant de douane",
+      "Responsable achats"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "UE Maîtrise des comportements professionnels",
+      "modules": [
+        "Communication professionnelle",
+        "Leadership - Team Bulding & Soft Skills",
+        "Techniques de recherche d’emploi",
+        "Business English & Com",
+        "English For IT",
+        "Creativity & Social Involvement"
+      ]
+    },
+    {
+      "intitule": "UE Techniques quantitatives de gestion",
+      "modules": [
+        "Recherche opérationnelle",
+        "Mathématiques et décisions financières",
+        "Comptabilité"
+      ]
+    },
+    {
+      "intitule": "UE Management & Organisations",
+      "modules": [
+        "Management",
+        "Marketing",
+        "Droit du Numérique",
+        "Obligations Juridiques et Fiscales des Entreprises",
+        "Droit du Travail",
+        "Management de projet",
+        "Management des Processus UE. Management des activités logistiques",
+        "Management de la Chaine Logistique",
+        "Logistique de Production",
+        "Organisation et Gestion d’Entrepôt",
+        "Négociation Commerciale et Achat",
+        "Gestion des stocks - Achats et approvisionnements",
+        "Informatique Appliquée à la logistique",
+        "Gestion des Services Après-Vente"
+      ]
+    },
+    {
+      "intitule": "UE Technologies Web & E-Business",
+      "modules": [
+        "Systèmes d’Information",
+        "Bases de données",
+        "Intégration web et CMS",
+        "Entreprise numérique",
+        "Technologies web"
+      ]
+    },
+    {
+      "intitule": "UE Organisation et Gestion des transports",
+      "modules": [
+        "Économie des transports",
+        "Transports terrestres, maritimes et aériens",
+        "Douanes, transit et assurances",
+        "Techniques du Commerce International"
+      ]
+    },
+    {
+      "intitule": "UE Méthodologie & Entrepreneurship",
+      "modules": [
+        "Méthodologie entrepreneuriat",
+        "Projet d’entreprise"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 1,
+    "modules_exemples": [
+      "Mathématiques et décisions financières"
+    ],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Cette licence permet de développer chez l’étudiant les compétences de base liées au pilotage des opérations de toute la chaîne logistique dans un contexte national et international (approvisionnements, production, gestion d’entrepôt et de stockage, transport et distribution jusqu’à la livraison chez le client). L’apprenant saura mettre en œuvre des techniques et méthodes permettant de piloter et d’orienter les flux en se basant sur un système logistique et des réseaux d’information efficaces et performants. Enfin, il acquerra des connaissances en gestion tournées vers l’analyse et le contrôle "
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_bachelor_brochure.pdf"
+  },
+  "departement": "Management et Technologies"
+}

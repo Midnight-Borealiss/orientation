@@ -1,0 +1,97 @@
+{
+  "id": "mba-en-science-politique-et-relations-internationales",
+  "nom": "MBA en Science Politique et Relations Internationales",
+  "ecole": "madiba",
+  "niveau": "mba",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 1,
+    "technique": 1,
+    "relationnel": 3,
+    "creatif": 1,
+    "cadre": 2
+  },
+  "domaines": [
+    "science-politique",
+    "droit"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Cadre supérieur dans l’administration publique",
+      "Chef de projet ONG ou responsable humanitaire",
+      "Fonctionnaire internationale",
+      "Assistant parlementaire ou diplomatique",
+      "Consultant sur les questions sécuritaires, les droits de l’homme, le développement"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Analyse des politiques publiques",
+        "Suivi et évaluation des politiques publiques",
+        "Négociations internationales",
+        "Diplomatie",
+        "Analyse de la politique étrangère",
+        "Géopolitique",
+        "Philosophie politique",
+        "Régimes politiques occidentaux",
+        "Management des organisations publiques",
+        "Règlement des conflits politiques",
+        "Droit international humanitaire",
+        "Politique africaine",
+        "Anthropologie sociale et culturelle",
+        "Sociologie politique approfondie",
+        "Théorie politique",
+        "Théories générales des relations internationales",
+        "L’Afrique dans le monde",
+        "Etudes de sécurité",
+        "Sociologie politique approfondie",
+        "Etat de droit et démocratie",
+        "Economie internationale",
+        "Méthodologie de rédaction de mémoire",
+        "Anglais des Relations internationales",
+        "Sociologie historique de l’Etat en Afrique",
+        "Gender studies"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Ce parcours a pour objectif de former des cadres dotés de connaissances approfondies et des outils nécessaires pour comprendre et analyser les grands enjeux qui sous-tendent l’actualité internationale. Les enseignements transversaux proposés permettent aux étudiants de développer leur regard informé et critique sur l’évolution des configurations internationales."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  }
+}

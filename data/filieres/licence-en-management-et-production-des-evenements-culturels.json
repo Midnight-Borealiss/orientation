@@ -1,0 +1,154 @@
+{
+  "id": "licence-en-management-et-production-des-evenements-culturels",
+  "nom": "Licence en Management et Production des ÉvÉnements culturels",
+  "ecole": "madiba",
+  "niveau": "licence",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 2,
+    "technique": 2,
+    "relationnel": 4,
+    "creatif": 2,
+    "cadre": 1
+  },
+  "domaines": [
+    "culture-evenementiel",
+    "communication",
+    "gestion"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Chargé de diffusion/distribution",
+      "Chargé/responsable de production",
+      "Gestionnaire répartition des droits",
+      "Responsable de produits de tourisme culturel",
+      "Manager /assistant de Galerie",
+      "Chargée des relations exposants d’une foire",
+      "Chargé de développement des publics",
+      "Chargée de communication",
+      "Médiateur culturel/socio culturel",
+      "Guide conférencier/accompagnateur"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "UE Art et culture",
+      "modules": [
+        "Histoire de l’art et de l’artisanat en Afrique",
+        "Histoire du spectacle-vivant en Afrique",
+        "Médiation culturelle",
+        "Les métiers du secteur artistique et touristique",
+        "Histoire de l’art et de l’architecture en Afrique",
+        "Histoire des arts européens",
+        "Production d’exposition et de spectacles",
+        "Droit du patrimoine et de la propriété littéraire et artistique",
+        "Les contrats de production et de diffusion",
+        "Conservation préventive des œuvres et des objets",
+        "Production d’actions et d’outils de médiation,",
+        "Financement d’un projet culturel",
+        "Conservation et diffusion du patrimoine immatériel,",
+        "Diffuser une exposition ou un spectacle",
+        "Economies et politiques culturelles et touristiques"
+      ]
+    },
+    {
+      "intitule": "UE Communication et médias",
+      "modules": [
+        "Théorie de l’information et de la communication,",
+        "Introduction à la communication",
+        "Médias et société,",
+        "Communication et image : marques et organisation,",
+        "Histoire et économie des médias,",
+        "Communication politique et institutionnelle,",
+        "Sociologie de la communication",
+        "Plan de communication et démarche qualité",
+        "Stratégies de communication évènementielle",
+        "Culture et audiovisuel : source et langage cinématographique",
+        "Théorie et pratique de la médiation culturelle",
+        "Analyse de discours et communication l’IEIA arts&culture est un établissement d’enseignement supérieur privé français, reconnu par",
+        "le ministère de la Culture et de la Communication, formant aux métiers de la production, de",
+        "la communication, de la médiation et de la commercialisation dans les secteurs de l’art et",
+        "de la culture. Grâce à son centre de recherche appliquée en cultures contemporaines, l’IESA",
+        "arts&culture développe et soutient des formations et des projets culturels internationaux,",
+        "notamment avec l’Afrique, l’Amérique latine, l’Asie et l’Europe. Un incubateur spécialisé dans",
+        "l’entrepreneuriat culturel innovant, IESA Incub’, ouvrira à Dakar en janvier 2019. UE. Économie, Gestion, Outils de base",
+        "Introduction à l’économie",
+        "Comptabilité générale",
+        "Introduction au management",
+        "Management des organisations",
+        "Actions de recherche encadrées",
+        "Lecture et analyse des états financiers",
+        "Marketing",
+        "Psychologie des organisations",
+        "RSE",
+        "Entrepreneuriat",
+        "Gestion des RH",
+        "Economie internationale",
+        "Management de projet"
+      ]
+    },
+    {
+      "intitule": "UE Comportements professionnels, Leadership, Langues",
+      "modules": [
+        "Anglais",
+        "Informatique",
+        "Agora",
+        "Leadership",
+        "Recherche",
+        "Langues"
+      ]
+    },
+    {
+      "intitule": "UE Sciences humaines et sociales",
+      "modules": [
+        "Sociologie",
+        "philosophie",
+        "science politique",
+        "relations internationales"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Cette formation ouverte en double diplôme avec l’IESA arts&culture (Paris) permet aux apprenants de concevoir et piloter des projets artistiques et culturels en valorisant le patrimoine et la création africaine, dans ses différents champs : exposition, spectacle-vivant (musique, théâtre, conte, danse, arts de la rue et festivals), patrimoine, cinéma et audiovisuel. Elle permet d’acquérir les compétences nécessaires à la production et au management d’un événement culturel. Cette licence dispense une solide connaissance de l’histoire des arts, africains et internationaux, et des créations contem"
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference",
+      "partenariats": "brochure"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_bachelor_brochure.pdf"
+  },
+  "partenariats": {
+    "double_diplome": "l'iesa arts&culture (paris",
+    "diplome_delocalise": null,
+    "accreditations": []
+  }
+}

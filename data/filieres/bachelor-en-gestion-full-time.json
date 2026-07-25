@@ -1,0 +1,55 @@
+{
+  "id": "bachelor-en-gestion-full-time",
+  "nom": "Bachelor en Gestion full time",
+  "ecole": "ism-management",
+  "niveau": "bachelor",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+2",
+  "modalites": [
+    "presentiel",
+    "full-time"
+  ],
+  "axes": {
+    "quantitatif": 3,
+    "technique": 3,
+    "relationnel": 3,
+    "creatif": 3,
+    "cadre": 3
+  },
+  "domaines": [
+    "gestion"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {},
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "brochure",
+      "modalites": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_bachelor_brochure.pdf"
+  }
+}

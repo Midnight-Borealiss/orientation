@@ -1,0 +1,96 @@
+{
+  "id": "mba-management-de-projets-internationaux",
+  "nom": "MBA Management de Projets Internationaux",
+  "ecole": "ism-ingenieurs",
+  "niveau": "mba",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 3,
+    "technique": 1,
+    "relationnel": 3,
+    "creatif": 2,
+    "cadre": 3
+  },
+  "domaines": [
+    "management-projet",
+    "gestion",
+    "finance"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Au sein des Organisations Non Gouvernementales dans des projets de développement ou humanitaire",
+      "Au sein des Organisations de Solidarité Internationale quelle que soit leur nationalité"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Accompagnement pour la Dynamisation de Carrière",
+        "Financement du développement",
+        "Projet de créativité « libère ta créativité et rêve ton Afrique de demain »",
+        "Conception de projets internationaux",
+        "Gestion de projet internationaux axée sur les résultats",
+        "Planification opérationnelle de projet (dont MS Project)",
+        "Management interculturel",
+        "Financement de projets internationaux (inclut modalités de financement)",
+        "Analyse économique et financière de projets internationaux (inclut rentabilité des projets)",
+        "Appel d’offre - Passation de marché et procédure des bailleurs dans les projets",
+        "Compétences du XXIème siècle",
+        "Partenariats public privé",
+        "Méthodes de suivi et d’évaluation de projets - Etudes d’impact d’un projet",
+        "Analyse et traitement de données d’enquête",
+        "Management des équipes de projets",
+        "Management de la qualité",
+        "Gestion des risques sociaux et environnementaux des projets",
+        "Veille informationnelle, Méthodologie de rédaction d’un mémoire, Projet de spécialité",
+        "Mémoire (rédaction, séminaire de suivi, soutenance); stage* (Le stage ne concerne que les auditeurs sans activité professionnelle)"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Répondant aux enjeux majeurs du développement de l’Afrique, le master 2 executive en Management de projets internationaux est un projet commun à l’Université internationale Senghor à Alexandrie (Egypte) et au Groupe ISM à travers son École d’Ingénieurs, à Dakar (Sénégal). L’objectif de ce programme est deformer des cadres compétents pour favoriser la gestion de projets à niveau hautement qualifié tant dans le secteur public que l’entreprise privée, les ONG, les organisations de la société civile et, plus globalement, mettre à disposition des États africains, au premier rang desquels le Sénégal"
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference",
+      "partenariats": "brochure"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  },
+  "parcours": "Parcours innovation entreprenariat et technologies",
+  "partenariats": {
+    "double_diplome": "double diplôme mentionné",
+    "diplome_delocalise": "l'universite senghor- egypte(double diplome enmanagement de projets de",
+    "accreditations": []
+  }
+}

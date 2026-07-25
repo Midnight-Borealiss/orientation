@@ -1,0 +1,177 @@
+{
+  "id": "licence-en-droit-des-affaires",
+  "nom": "Licence en Droit des Affaires",
+  "ecole": "ism-droit",
+  "niveau": "licence",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 1,
+    "technique": 1,
+    "relationnel": 2,
+    "creatif": 1,
+    "cadre": 5
+  },
+  "domaines": [
+    "droit",
+    "gestion",
+    "assurance"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Le titulaire de la Licence en Droit des Affaires peut, en début de carrière, occuper les fonctions suivantes :",
+      "Assistant dans un cabinet d’avocat, d’huissier de justice ou de notaire",
+      "Assistant dans un cabinet de conseil juridique et fiscal",
+      "Assistant DRH",
+      "Employé de (banques /assurances etc.)"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "UE Initiation au Droit privé",
+      "modules": [
+        "Introduction au Droit",
+        "Organisation judiciaire",
+        "Histoire du Droit des obligations",
+        "Droit des obligations",
+        "Droit des personnes et de la famille",
+        "Droit des biens"
+      ]
+    },
+    {
+      "intitule": "UE Initiation au Droit public",
+      "modules": [
+        "Droit constitutionnel,",
+        "Initiation au Droit communautaire OHADA",
+        "Droit des organisations internationales"
+      ]
+    },
+    {
+      "intitule": "UE Économie – Gestion - Outils de base",
+      "modules": [
+        "Introduction au Management",
+        "Développement personnel",
+        "Initiation aux techniques quantitatives de gestion",
+        "Anglais",
+        "Economie politique",
+        "Informatique",
+        "Management de la qualité",
+        "Initiation à l’entreprenariat",
+        "Psychosociologie des organisations",
+        "Fiscalité de l’entreprise",
+        "Management des ressources humaines"
+      ]
+    },
+    {
+      "intitule": "UE Culture générale et initiation à la recherche",
+      "modules": [
+        "Géopolitique",
+        "Actions de recherche encadrées"
+      ]
+    },
+    {
+      "intitule": "UE Service à la Communauté",
+      "modules": [
+        "Humanitaire",
+        "Environnement"
+      ]
+    },
+    {
+      "intitule": "UE Droit privé",
+      "modules": [
+        "Droit commercial général",
+        "Droit pénal général",
+        "Droit de la responsabilité",
+        "Droit commun des sociétés commerciales",
+        "Droit du travail",
+        "Procédure pénale",
+        "Droit des suretés UE droit public",
+        "Droit Administratif",
+        "Droit budgétaire",
+        "Droit des collectivités locales"
+      ]
+    },
+    {
+      "intitule": "UE Pratique du Droit des Affaires",
+      "modules": [
+        "Droit et Pratiques bancaires,",
+        "Droit et Pratiques des assurances,",
+        "Pratiques sociétaires",
+        "Pratiques du commerce international"
+      ]
+    },
+    {
+      "intitule": "UE Contentieux des Affaires",
+      "modules": [
+        "procédure civile,",
+        "Droit des entreprises en difficultés,",
+        "Droit Pénal des affaires"
+      ]
+    },
+    {
+      "intitule": "UE Environnement des Affaires",
+      "modules": [
+        "Droit de la concurrence,",
+        "Responsabilité Sociale des Entreprises (RSE)"
+      ]
+    },
+    {
+      "intitule": "UE Pratiques Contractuelles",
+      "modules": [
+        "Contrats spéciaux,",
+        "Partenariats Public-Privé",
+        "Rédaction d’actes"
+      ]
+    },
+    {
+      "intitule": "UE Pratiques Professionnelles",
+      "modules": [
+        "Techniques de recherche d’emploi et écrits professionnels"
+      ]
+    },
+    {
+      "intitule": "UE Recherche, Rédaction et Soutenance de Mémoire",
+      "modules": [
+        "Rédaction et Soutenance de Mémoire"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 1,
+    "modules_exemples": [
+      "Initiation aux techniques quantitatives de gestion"
+    ],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Le programme de licence en Droit des Affaires permet aux apprenants de se former au droit privé (droit des sociétés, droit commercial, droit du travail…) et au droit public pour être apte, une fois diplômés de choisir d’exercer en entreprise ou cabinet, ou de poursuivre leur cursus en master. Au-delà de l’enseignement des fondamentaux du Droit, le programme vise aussi à développer des aptitudes en gestion et culture générale, pour favoriser une bonne maîtrise de l’environnement des entreprises."
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_bachelor_brochure.pdf"
+  }
+}

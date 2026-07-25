@@ -1,0 +1,109 @@
+{
+  "id": "bachelor-en-informatique-appliquee-a-la-gestion-des-entrepri-en-ligne",
+  "nom": "Bachelor en Informatique Appliquée à la Gestion des Entreprises",
+  "ecole": "ism-online",
+  "niveau": "bachelor",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+2",
+  "modalites": [
+    "en-ligne"
+  ],
+  "axes": {
+    "quantitatif": 2,
+    "technique": 5,
+    "relationnel": 2,
+    "creatif": 1,
+    "cadre": 2
+  },
+  "domaines": [
+    "informatique",
+    "gestion",
+    "reseaux"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Assistant Chef de projet / Technico- commercial",
+      "Analyste d’étude / Développeur d’application",
+      "Chargé de Recherche et Développement",
+      "Technicien réseaux / d’exploitation /",
+      "Administrateur de systèmes"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "UE Maitrise des Comportements Professionnels",
+      "modules": [
+        "English For IT",
+        "Leadership – Développement personnel – Techniques de",
+        "recherche d’emploi"
+      ]
+    },
+    {
+      "intitule": "UE Techniques Quantitatives de Gestion",
+      "modules": [
+        "Comptabilité de Gestion",
+        "Gestion Budgétaire",
+        "Informatique Appliquée à la Comptabilité : SAARI",
+        "Tableaux de bord Excel"
+      ]
+    },
+    {
+      "intitule": "UE Mathématiques et Réseaux",
+      "modules": [
+        "Interconnexion de réseaux et système",
+        "Administration de réseaux sous Linux server",
+        "Administration de réseaux sous Windows server",
+        "Fondamentaux de la sécurité informatique"
+      ]
+    },
+    {
+      "intitule": "UE Programmation et Développement Web",
+      "modules": [
+        "Développement d’application",
+        "Administration de bases de données",
+        "Programmation"
+      ]
+    },
+    {
+      "intitule": "UE Management",
+      "modules": [
+        "Acquisition et Administration des RH",
+        "Droit du travail",
+        "Gestion de Projet informatique"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Ce Bachelor permet de former des techniciens supérieurs à la fois au management et à l’utilisation des technologies afin de : • les rendre aptes à l’analyse, à la conception et au pilotage de systèmes d’information et de communication • leur donner les moyens de mettre en place des outils technologiques (réseaux d’entreprises, développement d’applications de gestion etc.). Il s’agit pour les étudiants d’acquérir des compétences transverses, notamment en management et gestion de projets, d’apprécier l’état actuel du monde des réseaux et du développement de logiciels, de maîtriser les spécificit"
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "brochure",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "ISM_ONLINE_ISF_BROCHURE.pdf"
+  }
+}

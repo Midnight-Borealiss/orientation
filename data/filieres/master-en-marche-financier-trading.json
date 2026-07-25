@@ -1,0 +1,96 @@
+{
+  "id": "master-en-marche-financier-trading",
+  "nom": "Master en Marché Financier & Trading",
+  "ecole": "ism-management",
+  "niveau": "master",
+  "langue": "francais",
+  "eligibilite": {
+    "series_bac": [],
+    "prerequis_autres": []
+  },
+  "niveau_acces": "bac+3",
+  "modalites": [
+    "presentiel"
+  ],
+  "axes": {
+    "quantitatif": 4,
+    "technique": 1,
+    "relationnel": 1,
+    "creatif": 1,
+    "cadre": 2
+  },
+  "domaines": [
+    "marches-financiers",
+    "finance",
+    "gestion"
+  ],
+  "profil_ideal": [],
+  "deconseille_si": [],
+  "voisines": [],
+  "debouches": {
+    "metiers": [
+      "Trader",
+      "Analyste financier",
+      "Ingénieur financier de marché",
+      "Sales",
+      "Opérateur de marchés",
+      "Analyst risques financiers",
+      "Gérant de portefeuille",
+      "Consultant financier / consultante financière",
+      "Gestionnaire des opérations",
+      "Risk Manager",
+      "Broker",
+      "Consultant financier sénior",
+      "Chef de salle de marché",
+      "Listing sales manager",
+      "Responsable gestion d’actifs"
+    ],
+    "secteurs": [],
+    "poursuite_etudes": []
+  },
+  "unites_enseignement": [
+    {
+      "intitule": "Contenus pédagogiques",
+      "modules": [
+        "Marchés des capitaux",
+        "Marchés financiers",
+        "Gestion des Dispositifs Prudentiels en Zone UEMOA",
+        "Marchés monétaires, marchés des changes et leurs dérivés",
+        "Produits structurés, actions dérivées",
+        "Stratégie boursière",
+        "Stratégie de trading",
+        "Gestion de positions de taux, swaps et obligations",
+        "Analyse Fondamentale BRVM et FOREX",
+        "Comptabilité des OPCVM en zone UEMOA",
+        "Blockchain et Produits Dérivés",
+        "Fusions et acquisitions et Private equity"
+      ]
+    }
+  ],
+  "exigence_quantitative": {
+    "modules_comptes": 0,
+    "modules_exemples": [],
+    "niveau": "faible"
+  },
+  "vitrine": {
+    "description": "Le Master en Marché Financier & Trading de l’ISM offre une formation pratique pour maîtriser le trading, la gestion des risques, et le suivi des opérations de marché. Il vise à doter les étudiants de compétences en techniques boursières et financières internationales, avec un accès à une salle des marchés équipée. Ce programme permet de travailler sur tous types de supports et marchés, et est reconnu par les professionnels (traders, commerciaux, courtiers) et les entreprises du secteur. Les étudiants bénéficient des meilleurs intervenants et d’outils professionnels tels que des terminaux de ré"
+  },
+  "meta": {
+    "sources": {
+      "nom": "brochure",
+      "ecole": "brochure",
+      "niveau": "brochure",
+      "niveau_acces": "inference",
+      "modalites": "brochure",
+      "debouches.metiers": "brochure",
+      "unites_enseignement": "brochure",
+      "axes": "inference",
+      "domaines": "inference",
+      "exigence_quantitative": "inference"
+    },
+    "statut": "brouillon",
+    "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
+    "annee_source": 2024
+  },
+  "parcours": "Parcours investissement et gouvernance d’entreprise"
+}
