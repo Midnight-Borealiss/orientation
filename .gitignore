@@ -3,3 +3,5 @@ data/_raw/
 data/_manques.csv
 .DS_Store
 *.log
+
+*.zip
