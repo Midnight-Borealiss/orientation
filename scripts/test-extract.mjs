@@ -112,6 +112,79 @@ verifier(
 const orphelins = rBachelor.journal.filter((l) => l.startsWith("ALERTE"));
 verifier("aucun programme de page absent du sommaire", !orphelins.length, orphelins.join("\n      "));
 
+/* ── 1 bis. Le sommaire annonce aussi la modalité et le niveau d'accès ──
+ * Format régulier : `Bachelor en Gestion (accessible après bac+2) full time`. Ces deux
+ * informations étaient jusqu'ici captées PAR ACCIDENT — le titre brut de l'entrée était
+ * concaténé dans le texte servi aux détecteurs. Une édition qui poserait la mention sur une
+ * ligne séparée aurait fait disparaître la modalité sans aucune alerte.
+ * ─────────────────────────────────────────────────────────── */
+{
+  const annotees = rBachelor.sommaire.filter((e) => e.niveauAcces || e.modalites?.length);
+  verifier(
+    "le sommaire livre niveau d'accès et modalité en champs, pas dans le titre",
+    annotees.length >= 2,
+    `${annotees.length} entrée(s) annotée(s)`
+  );
+  verifier(
+    "le titre nu est conservé à part, sans la mention",
+    annotees.every((e) => e.titreNu && !/accessible|full ?time|week-?end/i.test(e.titreNu)),
+    annotees.map((e) => e.titreNu).join(" · ")
+  );
+
+  const parId = new Map(rBachelor.fiches.map((f) => [f.id, f]));
+
+  // « Accessible après un bac+2, en semaine ou en WEEK-END » veut dire LES DEUX. Un choix
+  // exclusif retirerait un programme réel du parcours d'un candidat qui travaille.
+  const soir = parId.get("bachelor-professionnel-en-gestion");
+  verifier(
+    "« en semaine ou en week-end » produit les deux modalités, pas l'une ou l'autre",
+    soir?.modalites.includes("presentiel") && soir?.modalites.includes("week-end"),
+    JSON.stringify(soir?.modalites)
+  );
+  verifier(
+    "et son niveau d'accès vient de la brochure, pas d'une inférence",
+    soir?.niveau_acces === "bac+2" && soir?.meta.sources.niveau_acces === "brochure",
+    `${soir?.niveau_acces} (${soir?.meta.sources.niveau_acces})`
+  );
+
+  // Annoncé `full time` au sommaire, et SANS page dédiée : c'est le cas où seul le sommaire
+  // porte l'information. Une fiche squelette doit tout de même sortir avec sa modalité.
+  const ft = parId.get("bachelor-en-gestion-full-time");
+  verifier(
+    "une entrée annoncée au sommaire sans page dédiée porte quand même sa modalité",
+    ft?.modalites.includes("full-time"),
+    JSON.stringify(ft?.modalites)
+  );
+  verifier(
+    "et son niveau d'accès aussi",
+    ft?.niveau_acces === "bac+2" && ft?.meta.sources.niveau_acces === "brochure",
+    `${ft?.niveau_acces} (${ft?.meta.sources.niveau_acces})`
+  );
+}
+
+/* ── 1 ter. Toute modalité de la taxonomie est portée ──────────────
+ * Le contrôle qui aurait attrapé seul un défaut d'extraction sur les modalités. Une modalité à
+ * zéro fiche est soit une extraction manquée, soit une entrée de taxonomie à retirer — le
+ * filtre du quiz, lui, se contente de ne rien trouver, sans rien dire.
+ * ─────────────────────────────────────────────────────────── */
+{
+  const compte = new Map((taxo.modalites || []).map((m) => [m, 0]));
+  const intrus = new Set();
+  for (const f of toutesFiches) {
+    for (const m of f.modalites || []) {
+      if (compte.has(m)) compte.set(m, compte.get(m) + 1);
+      else intrus.add(m);
+    }
+  }
+  const vides = [...compte.entries()].filter(([, n]) => !n).map(([m]) => m);
+  verifier(
+    "chaque modalité de la taxonomie est portée par au moins une fiche",
+    !vides.length,
+    vides.length ? `à zéro : ${vides.join(", ")}` : [...compte.entries()].map(([m, n]) => `${m} ${n}`).join(" · ")
+  );
+  verifier("aucune fiche ne porte de modalité hors taxonomie", !intrus.size, [...intrus].join(", "));
+}
+
 verifier(
   "24 programmes ont une page dédiée, 2 ne sont annoncés qu'au sommaire",
   rBachelor.programmes.length === 24 && rBachelor.fiches.filter((f) => f._sansPage).length === 2,

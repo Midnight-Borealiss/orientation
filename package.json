@@ -20,7 +20,8 @@
     "validate": "node scripts/validate.mjs",
     "test:interface": "node scripts/test-interface.mjs",
     "contexte:web": "node scripts/contexte-web.mjs",
-    "web": "node scripts/servir.mjs"
+    "web": "node scripts/servir.mjs",
+    "impasses": "node scripts/impasses.mjs"
   },
   "dependencies": {
     "ajv": "^8.17.1",

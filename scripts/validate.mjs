@@ -189,5 +189,42 @@ for (const nom of fichiers) {
   }
 }
 
+/* ── Toute modalité de la taxonomie est portée par au moins une fiche ──
+ * C'est le contrôle qui aurait attrapé seul un défaut d'extraction sur les modalités : une
+ * modalité à zéro fiche est soit une extraction manquée — la brochure la déclare et personne
+ * ne la lit —, soit une entrée de taxonomie à supprimer. Dans les deux cas c'est une
+ * incohérence entre le vocabulaire et les données, et rien d'autre ne la signale : le filtre,
+ * lui, se contente de ne rien trouver.
+ *
+ * Il est complémentaire du contrôle sur les questions plus haut, qui vérifie qu'une modalité
+ * est ATTEIGNABLE par une option. Les deux sont nécessaires : une modalité peut être
+ * atteignable et ne désigner aucun programme, ou être portée par des fiches qu'aucune réponse
+ * ne permet d'atteindre.
+ * ─────────────────────────────────────────────────────────── */
+{
+  const compte = new Map((taxo.modalites || []).map((m) => [m, 0]));
+  const horsTaxonomie = new Set();
+  for (const nom of fichiers) {
+    const f = JSON.parse(fs.readFileSync(path.join(DIR, nom), "utf8"));
+    for (const m of f.modalites || []) {
+      if (compte.has(m)) compte.set(m, compte.get(m) + 1);
+      else horsTaxonomie.add(m);
+    }
+  }
+
+  const vides = [...compte.entries()].filter(([, n]) => !n).map(([m]) => m);
+  if (vides.length || horsTaxonomie.size) {
+    console.log(`\n  ✗ modalités`);
+    for (const m of vides) {
+      console.log(`      « ${m} » n'est portée par aucune fiche — extraction manquée, ou entrée à retirer de la taxonomie`);
+    }
+    for (const m of horsTaxonomie) console.log(`      « ${m} » portée par une fiche mais absente de la taxonomie`);
+    console.log("");
+    process.exit(1);
+  }
+  const detail = [...compte.entries()].map(([m, n]) => `${m} ${n}`).join(" · ");
+  console.log(`\n  ✓ modalités : chacune est portée par au moins une fiche — ${detail}`);
+}
+
 console.log(erreurs ? `\n  ${erreurs} fiche(s) en erreur\n` : `\n  Tout est conforme.\n`);
 process.exit(erreurs ? 1 : 0);

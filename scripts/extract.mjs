@@ -198,8 +198,51 @@ const cleTitre = (s) =>
     .trim();
 
 /**
+ * Ce que l'entrée du sommaire annonce, en plus du titre.
+ *
+ * Le sommaire du catalogue Bachelor est régulier : `Bachelor en Gestion (accessible après
+ * bac+2) full time`. Niveau d'accès entre parenthèses, modalité en suffixe.
+ *
+ * POURQUOI L'EXTRAIRE EXPLICITEMENT, alors que ça « marchait déjà ». Ça marchait par accident :
+ * le titre brut de l'entrée était concaténé dans le texte servi aux détecteurs, qui y
+ * retrouvaient « bac+2 » et « full time » par expression régulière. Deux conséquences que
+ * personne n'aurait vues venir :
+ *
+ *   - une édition qui pose la mention sur une ligne séparée du titre, ou qui l'écrit
+ *     autrement, ferait disparaître la modalité SANS ALERTE — la fiche sortirait simplement
+ *     en `presentiel` ;
+ *   - on ne peut rien CROISER avec la page du programme si la donnée n'existe pas comme champ.
+ *     Or c'est le croisement qui dit si les deux sources se contredisent.
+ *
+ * Le titre nu est conservé à part. On ne s'en sert PAS pour l'`id` : un `id` qui change crée
+ * une fiche orpheline et n'emporte pas le travail humain déjà saisi. Voir CLAUDE.md.
+ */
+function annotationsSommaire(titre) {
+  const n = normaliser(titre);
+
+  // « (accessible après bac+2) », « (accessible apres un bac +2) »
+  const acces = n.match(/accessible\s+(?:apres\s+)?(?:un\s+)?bac\s*\+?\s*(\d)/);
+  const niveauAcces = acces && Number(acces[1]) >= 2 && Number(acces[1]) <= 5 ? `bac+${acces[1]}` : null;
+
+  const modalites = [];
+  if (/full ?time/.test(n)) modalites.push("full-time");
+  if (/week-?end/.test(n)) modalites.push("week-end");
+  if (/cours du soir/.test(n)) modalites.push("cours-du-soir");
+  if (/en ligne|a distance/.test(n)) modalites.push("en-ligne");
+
+  const titreNu = titre
+    .replace(/\((?:[^()]*accessible[^()]*)\)/gi, " ")
+    .replace(/\b(full ?time|week-?end|cours du soir|en ligne)\b/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+
+  return { niveauAcces, modalites, titreNu };
+}
+
+/**
  * Le sommaire (« 4 écoles, 26 possibilités ») est la référence de segmentation :
- * il énumère les 26 programmes et donne pour chacun son école et son département.
+ * il énumère les 26 programmes et donne pour chacun son école, son département, son niveau
+ * d'accès et sa modalité.
  */
 function lireSommaire(pages, profil) {
   const page = pages.find((p) => p.numero === profil.sommaire.page);
@@ -253,6 +296,12 @@ function lireSommaire(pages, profil) {
       derniere = null;
     }
   }
+
+  // Les annotations se lisent APRÈS coup : le titre d'une entrée s'accumule sur plusieurs
+  // lignes de même abscisse, et « (accessible après bac+2) full time » arrive souvent sur la
+  // suivante. Les analyser au fil de la lecture n'en verrait que la première moitié.
+  for (const e of entrees) Object.assign(e, annotationsSommaire(e.titre));
+
   return entrees;
 }
 
@@ -325,7 +374,40 @@ function construireFiche(programme, contexte, profil) {
   const texteComplet = [programme?.titre, contexte.entree?.titre, mentions, objectif].filter(Boolean).join(" ");
 
   const niveau = niveauDelivre(programme?.titre || contexte.entree?.titre || "") || "licence";
-  const acces = niveauAcces(texteComplet, niveau, profil);
+
+  /* ── Deux sources pour la modalité et le niveau d'accès ─────────
+   * Le sommaire l'annonce par programme, la page du programme le redit dans sa prose. On
+   * prend l'UNION des modalités, jamais l'une au détriment de l'autre : « Accessible après un
+   * bac+2, en semaine ou en WEEK-END » veut dire les DEUX, présentiel et week-end, pas l'un ou
+   * l'autre. Un choix exclusif retirerait un programme réel du parcours de quelqu'un.
+   *
+   * Le désaccord, lui, se REMONTE au journal au lieu d'être lissé : deux sources qui se
+   * contredisent sur une modalité sont un signal, et c'est la seule façon de l'apprendre avant
+   * qu'un prospect ne s'en aperçoive.
+   * ─────────────────────────────────────────────────────────── */
+  const modalitesPage = detecterModalites(texteComplet, profil);
+  const modalitesSommaire = contexte.entree?.modalites || [];
+  const modalites = [...new Set([...modalitesPage, ...modalitesSommaire])];
+  const manquantesPage = modalitesSommaire.filter((m) => !modalitesPage.includes(m));
+  if (manquantesPage.length && contexte.journal) {
+    contexte.journal.push(
+      `modalité : « ${nom} » — le sommaire annonce ${manquantesPage.join(", ")}, la page ne le redit pas`
+    );
+  }
+
+  // Le niveau d'accès du sommaire est de la donnée de brochure, aussi fiable que la page et
+  // disponible même pour les entrées sans page dédiée. Il ne l'emporte que sur une INFÉRENCE.
+  let acces = niveauAcces(texteComplet, niveau, profil);
+  const accesSommaire = contexte.entree?.niveauAcces || null;
+  if (accesSommaire) {
+    if (acces.source !== "brochure" || !acces.valeur) {
+      acces = { valeur: accesSommaire, source: "brochure" };
+    } else if (acces.valeur !== accesSommaire && contexte.journal) {
+      contexte.journal.push(
+        `niveau d'accès : « ${nom} » — sommaire ${accesSommaire}, page ${acces.valeur} : la page l'emporte`
+      );
+    }
+  }
   const { axes, parts: axesParts, calcules } = compterAxes(modules);
   const partenariats = detecterPartenariats(texteComplet);
   const parcours = normaliserParcours(
@@ -351,7 +433,7 @@ function construireFiche(programme, contexte, profil) {
     },
 
     niveau_acces: tracer("niveau_acces", acces.source, acces.valeur),
-    modalites: tracer("modalites", "brochure", detecterModalites(texteComplet, profil)),
+    modalites: tracer("modalites", "brochure", modalites),
 
     // Notes 1..5 pour l'affichage et les tests ; proportions brutes pour le calcul de
     // corrélation, que l'arrondi de `noter()` rendrait faux — voir « Deux sorties pour
@@ -421,6 +503,9 @@ async function traiterCatalogue(chemin) {
     entree,
     fichier: nomFichier,
     annee,
+    // Le journal voyage avec le contexte : un désaccord entre le sommaire et la page doit se
+    // lire dans `data/_raw/*.txt`, pas se perdre.
+    journal,
   });
 
   let fiches;

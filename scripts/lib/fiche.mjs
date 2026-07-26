@@ -297,6 +297,10 @@ export function detecterModalites(texte, profil) {
   if (/full ?time/.test(t)) set.add("full-time");
   if (/(en ligne|a distance|foad|100% en ligne|hybride)/.test(t)) set.add("en-ligne");
   if (/presentiel/.test(t)) set.add("presentiel");
+  // « en semaine ou en week-end » : les deux, pas l'un ou l'autre. « En semaine » est la façon
+  // dont la brochure Bachelor dit « présentiel » — et sans ce motif, un catalogue dont
+  // `modalitesBase` ne contiendrait pas `presentiel` perdrait la moitié de l'information.
+  if (/en semaine/.test(t)) set.add("presentiel");
   return [...set];
 }
 

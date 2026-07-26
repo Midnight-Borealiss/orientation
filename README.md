@@ -54,6 +54,7 @@ data/brochures/           Catalogues PDF, à plat (l'école se lit DANS le PDF)
 data/filieres/            Fiches JSON générées, une par programme
 data/_comparaisons/       Fiches de comparaison imprimables, une par paire
 data/_contexte.json       Le contexte du moteur en un fichier, pour le navigateur (commité)
+data/_impasses.md         Combinaisons de réponses sans résultat, pour les admissions
 scripts/extract.mjs       Catalogues → fiches brouillon (orchestration + CLI)
 scripts/lib/pdf-layout.mjs  Géométrie : items → colonnes → lignes
 scripts/lib/profils.mjs     Les 3 profils de parsing (en-têtes, sommaire, écoles)
@@ -64,7 +65,8 @@ scripts/distinctivite.mjs Trois mesures de proximité, attributs d'UE, paires à
 scripts/fiches-comparaison.mjs  Le document de travail de l'entretien
 scripts/axes-modules.mjs  Diagnostic : quels axes captent chaque module
 scripts/stats-axes.mjs    Diagnostic : distribution des 5 axes
-scripts/validate.mjs      Contrôle schéma + taxonomie + axes de disposition
+scripts/validate.mjs      Contrôle schéma + taxonomie + axes de disposition + modalités
+scripts/impasses.mjs      Combinaisons sans résultat → data/_impasses.md (pour les admissions)
 src/engine/score.mjs      Corrélation de forme, 3 niveaux, classement
 src/engine/filtres.mjs    niveau_acces et modalites : ils excluent, ils ne notent pas
 src/engine/aiguillage.mjs famille → domaines → candidates
@@ -189,6 +191,32 @@ Le CSV contient une colonne `destinataire` : filtre dessus et chaque responsable
 ```bash
 npm run validate
 ```
+
+Trois contrôles au-delà du schéma : un domaine appartient à une famille et une seule ; toute
+modalité de la taxonomie est **atteignable** par une option de filtre ; toute modalité est
+**portée** par au moins une fiche. Les deux derniers sont distincts et tous deux nécessaires —
+une modalité peut être atteignable sans désigner aucun programme, ou être portée par des fiches
+qu'aucune réponse ne permet d'atteindre. C'est le second qui attrape une extraction manquée : le
+filtre du quiz, lui, se contente de ne rien trouver.
+
+**7 bis. Voir ce que le catalogue ne couvre pas :**
+
+```bash
+npm run impasses     # data/_impasses.md
+```
+
+La liste lisible des combinaisons de réponses qui ne mènent à aucune formation — diplôme, façon
+d'étudier, univers. **Ce n'est pas un rapport de bogues** : le questionnaire fonctionne et ne
+laisse jamais un candidat sans issue. Le document sépare deux natures de manque, parce qu'elles
+n'appellent pas la même décision :
+
+| Nature | Combinaisons | Décision |
+|---|---|---|
+| aucun programme au catalogue | 20 | question d'**offre** |
+| des programmes, mais aucun comparable à un profil | 28 | question de **brochure** — compléter le descriptif les ferait entrer au classement |
+
+Sur 160 combinaisons balayées. Le plus fréquent : les cours du soir et le week-end (14), et les
+candidats au niveau bac (12).
 
 **8. Passer le quiz :**
 

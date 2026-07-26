@@ -4,6 +4,7 @@ data/_manques.csv
 data/_paires.csv
 data/_comparaisons/
 data/_calibration.json
+data/_impasses.md
 .DS_Store
 *.log
 

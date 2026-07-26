@@ -1360,6 +1360,51 @@ Effet mesuré sur le balayage complet : **31 combinaisons sans issue sur 160 →
 restantes sont des faits du catalogue — aucun programme d'ingénierie en ligne, aucun programme
 de droit du soir — et non des bugs.
 
+### Le sommaire annonce aussi la modalité et le niveau d'accès
+
+Le sommaire du catalogue Bachelor est régulier : `Bachelor en Gestion (accessible après bac+2)
+full time`. Niveau d'accès entre parenthèses, modalité en suffixe. L'extraction s'en servait
+déjà pour l'école et le département ; elle en lit désormais **explicitement** ces deux champs.
+
+**Pourquoi, alors que les valeurs ne changent pas.** Elles étaient captées **par accident** : le
+titre brut de l'entrée était concaténé dans le texte servi aux détecteurs, qui y retrouvaient
+« bac+2 » et « full time » par expression régulière. Deux conséquences qu'on ne voit qu'en
+regardant le mécanisme :
+
+- une édition qui poserait la mention sur une ligne séparée du titre, ou l'écrirait autrement,
+  ferait **disparaître la modalité sans aucune alerte** — la fiche sortirait en `presentiel` ;
+- on ne peut rien **croiser** avec la page du programme si la donnée n'existe pas comme champ.
+
+Le croisement est maintenant fait, et c'est lui qui a de la valeur :
+
+| Champ | Règle | Désaccord |
+|---|---|---|
+| `modalites` | **union** du sommaire et de la page | remonté au journal |
+| `niveau_acces` | le sommaire vaut `brochure` ; il ne l'emporte que sur une **inférence** | la page l'emporte, et c'est journalisé |
+
+**Une modalité n'est jamais exclusive.** « Accessible après un bac+2, en semaine ou en WEEK-END »
+veut dire **les deux** — `presentiel` ET `week-end` —, pas l'un ou l'autre. Choisir retirerait un
+programme réel du parcours de quelqu'un qui travaille. `en semaine` est d'ailleurs la façon dont
+la brochure Bachelor dit « présentiel », et le motif a été ajouté.
+
+Le titre nu (`titreNu`) est conservé à part et **n'est pas utilisé pour l'`id`** : un `id` qui
+change crée une fiche orpheline et n'emporte pas le travail humain déjà saisi.
+
+### Toute modalité de la taxonomie doit être portée par une fiche
+
+`validate.mjs` et `npm test` le refusent. **C'est ce contrôle qui aurait attrapé seul un défaut
+d'extraction sur les modalités** : une modalité à zéro fiche est soit une extraction manquée — la
+brochure la déclare et personne ne la lit —, soit une entrée de taxonomie à retirer. Rien d'autre
+ne le signale, parce que le filtre du quiz se contente de ne rien trouver.
+
+Il est **complémentaire** du contrôle sur les questions, et les deux sont nécessaires : une
+modalité peut être *atteignable* par une option sans désigner aucun programme, ou être portée par
+des fiches qu'aucune réponse ne permet d'atteindre.
+
+État actuel : `presentiel` 70 · `en-ligne` 20 · `cours-du-soir` 7 · `week-end` 1 · `full-time` 1.
+Les deux dernières ne tiennent qu'à une fiche chacune — c'est fragile, et c'est précisément
+pourquoi le contrôle existe.
+
 ### Le balayage F1 × F2 × A1 — le test qui ne suppose rien
 
 Il parcourt **toutes** les combinaisons de niveau, de modalité et d'univers, et vérifie que
@@ -1801,6 +1846,11 @@ ré-extraction, contrôle que les champs humains sont intacts, que les champs d'
 - Déduire l'adresse d'admission d'une école. Trois sont documentées, cinq non : c'est une question aux admissions.
 - Afficher un bouton de contact sans destination. Mieux vaut un bouton absent.
 - Publier `web/` seul sur Netlify. `data/_contexte.json` vit en dehors.
+- Laisser une modalité de la taxonomie à zéro fiche. Extraction manquée, ou entrée à retirer — jamais un silence.
+- Lire une annotation du sommaire à travers le titre concaténé. Elle se parse en champ, sinon elle disparaît sans alerte.
+- Choisir entre deux modalités qu'un programme déclare toutes les deux. « En semaine ou en week-end » veut dire les deux.
+- Changer un `id` pour nettoyer un titre. Une orpheline n'emporte pas le travail humain.
+- Traiter `data/_impasses.md` comme un rapport de bogues. C'est une question d'offre et de brochure, adressée aux admissions.
 - Écrire une option de filtre de modalité sur une seule étiquette. Les catalogues n'emploient pas le même mot.
 - Laisser une modalité de la taxonomie hors de toute option de filtre. `validate.mjs` le refuse.
 - Rouvrir le profil en impasse. Ce sont les filtres qui ont vidé le jeu ; le bouton doit rendre la main sur eux.
@@ -1826,6 +1876,7 @@ npm run distinctivite       # + distinctivite/structure_ue/voisines, data/_paire
 npm run comparaisons        # une fiche imprimable par paire → data/_comparaisons/
 npm run validate            # schéma + taxonomie + axes de disposition (aussi en CI)
 npm run report -- --csv     # manques par filière → data/_manques.csv
+npm run impasses            # combinaisons sans résultat → data/_impasses.md (admissions)
 ```
 
 Le moteur, une fois les données en place :
@@ -1893,3 +1944,4 @@ Découpage du code d'extraction :
 | `scripts/simuler.mjs` | calibration des seuils sur la distribution réelle des scores. |
 | `scripts/contexte-web.mjs` | le contexte du moteur en un seul JSON, liste blanche de champs. |
 | `scripts/servir.mjs` | serveur statique local, `node:http` seul. Aucune écriture. |
+| `scripts/impasses.mjs` | les combinaisons sans résultat, en document lisible pour les admissions. |
