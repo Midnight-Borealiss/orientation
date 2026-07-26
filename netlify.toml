@@ -1,0 +1,40 @@
+# Hébergement Netlify — aucun build, aucune dépendance.
+#
+# Le dépôt EST le site : `git push` déploie. C'est la contrainte n°1 de l'écran de résultat,
+# et elle tient parce que rien n'a besoin d'être compilé.
+
+[build]
+  # `.` et non `web/` : `data/_contexte.json` vit en dehors de `web/`, et c'est le seul
+  # fichier que le navigateur charge en plus des modules ES de `src/`.
+  publish = "."
+  command = ""
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+# `nosniff` interdit au navigateur de deviner un type MIME : un `.mjs` mal typé par
+# l'hébergeur serait alors REFUSÉ au lieu d'être exécuté au hasard. On déclare donc le type
+# explicitement, sans quoi les modules ES peuvent ne pas charger du tout.
+[[headers]]
+  for = "/*.mjs"
+  [headers.values]
+    Content-Type = "text/javascript; charset=utf-8"
+
+[[headers]]
+  for = "/data/*.json"
+  [headers.values]
+    Content-Type = "application/json; charset=utf-8"
+
+# Un prospect qui tape l'adresse sans `/web/` tomberait sur une liste de fichiers.
+#
+# CONSÉQUENCE À CONNAÎTRE : cette redirection s'applique à toutes les méthodes, POST compris.
+# L'envoi du formulaire de validation ne va donc PAS vers `/` — il va vers le chemin de la
+# page qui porte le formulaire, `/web/`, ce que Netlify accepte et qui est de toute façon
+# l'usage documenté. Poster vers `/` ici serait redirigé, et l'échec serait silencieux.
+[[redirects]]
+  from = "/"
+  to = "/web/"
+  status = 302

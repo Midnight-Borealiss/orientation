@@ -27,8 +27,13 @@ Le moteur ne connaît aucune filière. Il consomme des fiches de données valid�
 | Aiguillage à deux étages | fait — la famille la plus large passe de 17,8 à 8,8 filières en lice |
 | Calibration des seuils | faite — seuils mesurés, les 3 objectifs de la spec atteints |
 | Axes de disposition (28 domaines) | à collecter auprès des responsables |
-| Écran de résultat | fait — `web/index.html`, 5 états, 96 tests, sans framework |
-| Action « parler à un conseiller » | à câbler avec les admissions |
+| Écran de résultat | fait — `web/index.html`, 5 états, 160 tests, sans framework |
+| Hébergement Netlify | fait — `netlify.toml`, aucun build, `git push` déploie |
+| Collecte des validations étudiantes | faite — Netlify Forms, `?validation=1` |
+| Bouton « parler à un conseiller » | fait — `config/contact.json`, canal email |
+| Thème ISM | fait — `web/theme.css`, contrastes calculés dans les deux modes |
+| Charte et logo officiels | à demander au service communication |
+| Adresse d'admission par école | à demander — 3 documentées sur 8 |
 
 ---
 
@@ -40,6 +45,8 @@ config/questions.json     Les questions du parcours : filtres, aiguillage, profi
 config/domaines_axes.json Les 2 axes de disposition, par domaine — à collecter
 config/departages.json    Questions de départage par paire + seuils du score
 config/reformulation.json Les fragments de « Si je comprends bien… », par axe et par sens
+config/contact.json       Destination du bouton conseiller : canal, gabarits de message
+netlify.toml              Hébergement : racine publiée, types MIME, redirection
 schema/filiere.schema.json  Contrat de données. Rien n'entre sans le respecter.
 data/brochures/           Catalogues PDF, à plat (l'école se lit DANS le PDF)
 data/filieres/            Fiches JSON générées, une par programme
@@ -68,9 +75,12 @@ src/engine/charger.mjs    La seule porte vers le disque + contrôles de cohéren
 scripts/quiz.mjs          Banc d'essai du moteur en ligne de commande
 scripts/simuler.mjs       Calibration des seuils sur la distribution réelle
 scripts/test-moteur.mjs   Les interdits de la spec, sous forme exécutable
-web/index.html            L'écran : le câblage seul — fetch, fragment d'URL, clics, CSS
+web/index.html            L'écran : le câblage seul — fetch, fragment d'URL, clics, structure
+web/theme.css             L'identité visuelle, et elle seule — aucune couleur ailleurs
 src/ui/rendu.mjs          Tout le rendu, en fonctions pures qui rendent des chaînes
 src/ui/etat-url.mjs       Le parcours dans location.hash — réponses, jamais l'état
+src/ui/contact.mjs        Le lien du bouton conseiller — mailto: ou wa.me, selon `canal`
+src/ui/collecte.mjs       Le contrat Netlify Forms : champs, corps de requête, cible
 scripts/contexte-web.mjs  config/ + data/filieres/ → data/_contexte.json
 scripts/servir.mjs        Serveur local (node:http seul) : file:// interdit les modules ES
 scripts/test-interface.mjs  Les 5 états, aucun score dans le rendu, dégradation, reprise
@@ -245,6 +255,60 @@ Le parcours vit dans le fragment d'URL — un prospect peut reprendre plus tard 
 lien à un parent. Ce sont les **réponses** qui y sont écrites, pas l'état du moteur : sinon on
 pourrait forger un profil qu'aucune combinaison de réponses ne peut produire. Aucun
 `localStorage`, aucun cookie, aucun script tiers.
+
+**11. Déployer :**
+
+Le dépôt **est** le site. `netlify.toml` publie la racine — `data/_contexte.json` vit en dehors
+de `web/` — sans aucune commande de build, et redirige `/` vers `/web/`. Après le premier
+déploiement, vérifier que `data/_contexte.json` est servi et que les `.mjs` arrivent en
+`text/javascript` : le fichier déclare les deux types explicitement, parce qu'avec `nosniff` un
+type erroné fait **refuser** les modules ES au lieu de les exécuter au hasard — l'écran
+resterait sur « Chargement… » sans rien dire.
+
+**12. Faire valider par les étudiants actuels :**
+
+```
+https://…/web/?validation=1
+```
+
+Vingt à trente étudiants de 2e ou 3e année passent le quiz. S'il recommande la finance à un
+étudiant de finance content de son choix, le modèle tient ; sinon, on sait quelle école est mal
+calibrée. C'est le seul garde-fou possible : avec une personne par école, aucune vérification
+croisée institutionnelle ne l'est.
+
+Trois questions — filière suivie, année, satisfaction — et **aucune donnée personnelle** : ni
+nom, ni adresse, ni téléphone. L'état de l'écran, le programme recommandé et le niveau de
+correspondance sont joints automatiquement ; le répondant n'a rien à recopier. La question sur
+la satisfaction est indispensable : sans elle, on confondrait un modèle qui se trompe avec un
+étudiant mal orienté.
+
+Le bloc est **absent sans `?validation=1`** — un prospect ordinaire ne doit pas voir un
+formulaire de recherche. Les réponses arrivent dans l'onglet *Forms* de Netlify.
+
+⚠ **Netlify détecte les formulaires en analysant le HTML déployé, pas à l'exécution.** Le
+formulaire est donc écrit littéralement dans `web/index.html`, masqué ; un formulaire généré en
+JavaScript ne serait jamais enregistré et les envois retourneraient 404 sans message. Ne pas le
+supprimer en croyant nettoyer du HTML mort.
+
+**13. Personnaliser :**
+
+| Quoi | Où | Sans toucher au code |
+|---|---|---|
+| destination du bouton conseiller | `config/contact.json > canal` | `email` ↔ `whatsapp` |
+| adresse, objet, corps du message | `config/contact.json` | `{programme}`, `{ecole}`, `{modalite}` |
+| couleurs, logo, mode sombre | `web/theme.css` | variables CSS seules |
+| phrases de reformulation | `config/reformulation.json` | par axe et par sens |
+
+Les couleurs du thème sont **mesurées sur les couvertures 2024, pas officielles** : ce sont des
+couleurs d'impression, et elles diffèrent d'une brochure à l'autre. Demander la charte au
+service communication et les remplacer — le fichier de thème existe pour que ce soit une
+modification d'une ligne. Même chose pour le logo : les variables l'attendent, en SVG de
+préférence, un PNG extrait d'un PDF serait flou sur mobile.
+
+Contrainte à ne pas défaire : l'orange de marque `#F38416` donne **2,6:1** sur blanc, sous le
+minimum de 4,5:1 exigé pour du texte. C'est une couleur de **fond**. Le test calcule les
+contrastes des onze couples texte/fond dans les deux modes plutôt que de les croire — c'est ce
+qui a rattrapé un orange de texte qui échouait sur le fond crème de l'avertissement quantitatif.
 
 ---
 

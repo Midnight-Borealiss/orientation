@@ -45,6 +45,10 @@ export function chargerContexte({ racine = RACINE } = {}) {
     // Les fragments de la phrase « Si je comprends bien… ». C'est de la donnée : le moteur
     // n'en porte aucun en dur, et leur vocabulaire viendra des admissions.
     reformulation: lireJson("config", "reformulation.json"),
+    // La destination du bouton « parler à un conseiller ». Le moteur ne s'en sert pas — c'est
+    // de la présentation —, mais il voyage dans le contexte comme le reste de la donnée, pour
+    // que l'interface n'ait aucun second canal de chargement.
+    contact: lireJson("config", "contact.json"),
     fiches,
   };
 
@@ -149,6 +153,25 @@ export function verifierContexte(contexte) {
       `axes de disposition collectés pour ${collectes} domaine(s) sur ${dispo.length} : le premier étage du départage est inactif`
     );
   }
+  // Un canal de contact mal configuré fait DISPARAÎTRE le bouton « parler à un conseiller ».
+  // Ce n'est pas fatal — le résultat reste juste — mais le parcours ne mène alors plus à un
+  // humain, ce qui était tout son intérêt. Avertissement, donc, et jamais un silence.
+  const contact = contexte.contact || {};
+  if (!["email", "whatsapp"].includes(contact.canal)) {
+    avertissements.push(
+      `config/contact.json > canal vaut « ${contact.canal ?? "absent"} » : aucun bouton de contact ne sera affiché`
+    );
+  } else if (contact.canal === "email" && !contact.email?.adresse) {
+    avertissements.push("config/contact.json > email.adresse manquante : aucun bouton de contact ne sera affiché");
+  } else if (contact.canal === "whatsapp" && !contact.whatsapp?.numero) {
+    avertissements.push("config/contact.json > whatsapp.numero manquant : aucun bouton de contact ne sera affiché");
+  }
+  if (contact.canal === "whatsapp" && /prototype/i.test(contact.whatsapp?._statut || "")) {
+    avertissements.push(
+      "config/contact.json : le canal whatsapp est actif alors que son numéro est encore marqué prototype — à confirmer avec les admissions"
+    );
+  }
+
   const aDisposition = (contexte.questions.profil || []).some((q) =>
     (q.options || []).some((o) => o.poids_disposition)
   );

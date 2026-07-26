@@ -1,0 +1,28 @@
+{
+  "_source": "Coordonnees relevees dans les brochures 2024. Le WhatsApp d'admission n'y figure pas : a confirmer avec le service.",
+
+  "_role": "La destination du bouton « parler a un conseiller ». Basculer d'un canal a l'autre ne doit demander qu'un changement ICI, jamais dans le code : `src/ui/contact.mjs` lit `canal` et construit le lien.",
+
+  "canal": "email",
+
+  "_canal": "Defaut `email` : c'est la seule adresse d'admission documentee dans les brochures. Valeurs reconnues : `email`, `whatsapp`. Une valeur inconnue ne produit AUCUN lien et le signale — mieux vaut un bouton absent qu'un bouton qui ne mene nulle part.",
+
+  "email": {
+    "adresse": "admission.licence@ism.edu.sn",
+    "objet": "Demande d'information — {programme}",
+    "corps": "Bonjour,\n\nJ'ai utilisé l'orientation en ligne et le programme suivant m'a été proposé :\n\n{programme} ({ecole}, {modalite})\n\nJ'aimerais en savoir plus sur les conditions d'admission et le déroulement de la formation.\n\nMerci."
+  },
+
+  "whatsapp": {
+    "_statut": "prototype — numero a confirmer, les deux WhatsApp documentes dans les brochures sont ceux du Career Center et d'Executive Education, pas celui des admissions.",
+    "numero": "221772395050",
+    "message": "Bonjour, je viens de faire l'orientation en ligne. Le programme proposé est : {programme} ({ecole}, {modalite}). J'aimerais avoir plus d'informations."
+  },
+
+  "_substitutions": "{programme}, {ecole} et {modalite} viennent du resultat du moteur. Un jeton sans valeur est laisse VIDE et signale : ecrire « undefined » dans un courriel a une ecole serait pire.",
+
+  "_question_admissions": "ROUTAGE PAR ECOLE — non implemente, et volontairement. La brochure donne `online@ism.edu.sn` pour ISM Online, qui est une adresse distincte de celle des admissions en presentiel. Un programme d'ISM Online ou d'ISF recommande par le moteur enverrait donc aujourd'hui son message a la mauvaise boite. Router par ecole serait justifie mais demande de connaitre l'adresse de CHAQUE ecole : trois sont documentees, cinq ne le sont pas. A demander aux admissions, puis ajouter un bloc `par_ecole` ici — jamais deduire une adresse d'un nom d'ecole.",
+
+  "libelle": "Écrire à un conseiller",
+  "_libelle": "Le texte du bouton. Il doit dire ce qui va se passer : un bouton « etre rappele » qui ouvre un client de messagerie trompe le prospect."
+}

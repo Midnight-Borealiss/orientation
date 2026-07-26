@@ -5,19 +5,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Trouver ta formation</title>
 <meta name="description" content="Quelques questions pour t'orienter vers une formation qui te correspond.">
+<!-- L'identité visuelle vit dans theme.css, et NULLE PART ailleurs : aucune couleur en dur
+     ci-dessous. Changer de charte doit se faire dans ce seul fichier. -->
+<link rel="stylesheet" href="theme.css">
 <style>
-/* Polices SYSTÈME : aucune police à télécharger, premier affichage immédiat sur réseau lent.
+/* Structure et mesures seulement. Toutes les couleurs passent par les variables du thème.
+   Polices SYSTÈME : aucune police à télécharger, premier affichage immédiat sur réseau lent.
    Mobile d'abord, une seule colonne, calibrée sur ~380 px de large. */
-:root {
-  --encre: #16191d;
-  --gris: #5b6470;
-  --trait: #dfe3e8;
-  --fond: #fff;
-  --fond-doux: #f5f7f9;
-  --accent: #14504b;
-  --attention: #7a4b00;
-  --rayon: 10px;
-}
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
 body {
@@ -26,16 +20,27 @@ body {
   color: var(--encre);
   background: var(--fond);
 }
-main { max-width: 34rem; margin: 0 auto; padding: 1.25rem 1rem 4rem; }
-h1 { font-size: 1.05rem; font-weight: 600; color: var(--gris); margin: 0 0 1.25rem; }
+main { max-width: var(--colonne); margin: 0 auto; padding: 1.25rem 1rem 4rem; }
+h1 { font-size: 1.05rem; font-weight: 600; color: var(--gris); margin: 0 0 var(--logo-marge); }
+/* Le logo apparaîtra dès que --logo-source cessera de valoir `none`. Aucun fichier n'est
+   demandé tant qu'il n'existe pas : pas de 404 en production. */
+h1::before {
+  content: "";
+  display: var(--logo-affichage, none);
+  height: var(--logo-hauteur);
+  background: var(--logo-source) no-repeat left center / contain;
+}
 h2 { font-size: 1.2rem; line-height: 1.35; margin: 0 0 .75rem; }
 h3 { font-size: 1.05rem; margin: 0 0 .25rem; }
 h4 { font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--gris); margin: 1.25rem 0 .5rem; }
 p { margin: 0 0 .75rem; }
 ul, ol { margin: 0 0 .75rem; padding-left: 1.1rem; }
 li { margin-bottom: .3rem; }
+a { color: var(--lien); }
 
 /* ── Questions ── */
+.barre { height: 4px; border-radius: 99px; background: var(--fond-neutre); overflow: hidden; margin-bottom: .75rem; }
+.barre span { display: block; height: 100%; background: var(--progression); transform: scaleX(var(--avance, 0)); transform-origin: left; }
 .progression { font-size: .8rem; color: var(--gris); }
 .aide { font-size: .9rem; color: var(--gris); }
 .options { list-style: none; padding: 0; margin-top: 1rem; }
@@ -45,8 +50,8 @@ li { margin-bottom: .3rem; }
   padding: .85rem 1rem; border: 1px solid var(--trait); border-radius: var(--rayon);
   background: var(--fond); font: inherit; color: inherit; cursor: pointer;
 }
-.option:hover, .option:focus-visible { border-color: var(--accent); background: var(--fond-doux); }
-.option--choisie { border-color: var(--accent); border-width: 2px; background: var(--fond-doux); }
+.option:hover, .option:focus-visible { border-color: var(--trait-accent); background: var(--fond-doux); }
+.option--choisie { border-color: var(--trait-accent); border-width: 2px; background: var(--fond-doux); }
 .question--departage { border-top: 1px solid var(--trait); padding-top: 1.25rem; margin-top: 1.5rem; }
 
 /* ── Résultat ── */
@@ -54,24 +59,23 @@ li { margin-bottom: .3rem; }
 .badge {
   display: inline-block; font-size: .78rem; font-weight: 600; letter-spacing: .04em;
   text-transform: uppercase; padding: .25rem .6rem; border-radius: 99px;
-  background: var(--fond-doux); color: var(--gris);
+  background: var(--fond-neutre); color: var(--encre);
 }
-.badge--forte { background: #e3f0ea; color: var(--accent); }
-.badge--bonne { background: #eaf0f5; color: #2b4a63; }
-.badge--possible, .badge--egalite { background: #f3eee4; color: var(--attention); }
-.badge--impasse { background: #f6ecec; color: #7a2b2b; }
+/* L'orange de marque en FOND, avec le bleu profond en texte : posé en texte sur blanc il
+   donnerait 2,6:1, sous le minimum lisible. Voir theme.css. */
+.badge--forte { background: var(--fond-accent); color: var(--sur-accent); }
+.badge--possible, .badge--egalite { background: var(--fond-attention); color: var(--attention); }
+.badge--impasse { background: var(--fond-attention); color: var(--alerte); }
 .posture { color: var(--gris); }
 
 /* La reformulation et son bouton ont le MÊME poids visuel : le bouton transforme un
    verdict en proposition, il ne peut pas être une note de bas de page. */
-.bloc--reformulation {
-  background: var(--fond-doux); border-radius: var(--rayon); padding: 1rem;
-}
+.bloc--reformulation { background: var(--fond-doux); border-radius: var(--rayon); padding: 1rem; }
 .reformulation { font-size: 1.05rem; margin-bottom: .75rem; }
 .reformulation--absente { color: var(--gris); }
 .reprendre {
-  font: inherit; font-size: 1.05rem; color: var(--accent);
-  background: none; border: 0; border-bottom: 2px solid var(--accent);
+  font: inherit; font-size: 1.05rem; color: var(--encre);
+  background: none; border: 0; border-bottom: 2px solid var(--trait-accent);
   padding: 0 0 1px; cursor: pointer;
 }
 
@@ -80,7 +84,7 @@ li { margin-bottom: .3rem; }
 .meta span:not(:last-child)::after { content: " · "; }
 .modalite { font-weight: 600; color: var(--encre); }
 
-.pourquoi { border-left: 3px solid var(--trait); padding-left: .9rem; margin-top: 1rem; }
+.pourquoi { border-left: 3px solid var(--trait-accent); padding-left: .9rem; margin-top: 1rem; }
 .pourquoi ol { padding-left: 1.1rem; font-size: .95rem; }
 
 .cartes { display: flex; flex-direction: column; gap: .75rem; }
@@ -90,19 +94,40 @@ li { margin-bottom: .3rem; }
 .alternative, .non-classe, .contenu { margin-bottom: .75rem; }
 .contenu-de { font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; color: var(--gris); }
 .differenciateur { font-size: .9rem; margin: .5rem 0 0; }
-.bloc--quanti { background: #fbf7ef; border-radius: var(--rayon); padding: 1rem; }
+.bloc--quanti { background: var(--fond-attention); border-radius: var(--rayon); padding: 1rem; }
 .bloc--quanti h4 { margin-top: 0; color: var(--attention); }
 .exemples { color: var(--gris); font-size: .85rem; }
 .bloc--non-classes > p { font-size: .9rem; color: var(--gris); }
 .bloc--conseiller { border: 1px solid var(--trait); border-radius: var(--rayon); padding: 1rem; }
 .bloc--conseiller h4 { margin-top: 0; }
-.conseiller {
-  font: inherit; font-weight: 600; color: #fff; background: var(--accent);
+.conseiller, .envoyer {
+  display: inline-block; font: inherit; font-weight: 600;
+  color: var(--sur-plein); background: var(--plein); text-decoration: none;
   border: 0; border-radius: var(--rayon); padding: .8rem 1.1rem; cursor: pointer;
 }
 .bloc--alertes { font-size: .9rem; color: var(--attention); }
-.etat-chargement, .etat-erreur { color: var(--gris); }
-.etat-erreur { color: #7a2b2b; }
+
+/* ── Validation par les étudiants — visible seulement avec ?validation=1 ── */
+.bloc--validation {
+  border: 2px solid var(--trait-accent); border-radius: var(--rayon);
+  padding: 1rem; background: var(--fond-doux);
+}
+.bloc--validation h4 { margin-top: 0; }
+.champ { display: block; font-weight: 600; margin: 1rem 0 .35rem; }
+.bloc--validation select {
+  width: 100%; font: inherit; padding: .6rem; border-radius: var(--rayon);
+  border: 1px solid var(--trait); background: var(--fond); color: inherit;
+}
+.choix-groupe { display: flex; flex-wrap: wrap; gap: .4rem; margin-bottom: .5rem; }
+.choix {
+  border: 1px solid var(--trait); border-radius: 99px; padding: .45rem .8rem;
+  background: var(--fond); cursor: pointer; font-size: .95rem;
+}
+.choix--pris { border-color: var(--trait-accent); border-width: 2px; }
+.message-envoi { margin-top: .75rem; color: var(--attention); }
+.merci { margin: 0; font-weight: 600; }
+.etat-chargement { color: var(--gris); }
+.etat-erreur { color: var(--alerte); }
 </style>
 </head>
 <body>
@@ -110,6 +135,31 @@ li { margin-bottom: .3rem; }
   <h1>Trouver ta formation</h1>
   <p class="etat-chargement">Chargement…</p>
 </main>
+
+<!--
+  FORMULAIRE DE DÉTECTION — NE PAS SUPPRIMER, NE PAS GÉNÉRER EN JAVASCRIPT.
+
+  Netlify détecte les formulaires en analysant le HTML **déployé**, pas à l'exécution. Un
+  formulaire créé par JavaScript n'est jamais enregistré et les envois retournent 404 sans
+  message clair. Il doit donc être écrit littéralement ici, masqué par `hidden` ; le bloc
+  visible, lui, est construit par le rendu, et l'envoi se fait par une requête dont le corps
+  reprend exactement ces noms de champs.
+
+  Les noms viennent de `src/ui/collecte.mjs` — un test vérifie que les deux listes coïncident,
+  car un champ ajouté d'un seul côté serait perdu en silence.
+
+  `netlify-honeypot` écarte les robots sans imposer de captcha à un étudiant qui nous rend
+  service. AUCUN champ personnel : ni nom, ni adresse, ni téléphone.
+-->
+<form name="validation" data-netlify="true" netlify-honeypot="bot-field" hidden>
+  <input type="text" name="bot-field" />
+  <input type="text" name="etat" />
+  <input type="text" name="recommande" />
+  <input type="text" name="niveau_correspondance" />
+  <input type="text" name="filiere_suivie" />
+  <input type="text" name="annee" />
+  <input type="text" name="satisfait" />
+</form>
 
 <script type="module">
 /**
@@ -123,6 +173,10 @@ import { demarrer, repondre, prochaineQuestion, doitSArreter, resultat, reprendr
   from "../src/engine/moteur.mjs";
 import { rendreQuestion, rendreResultat, rendreDepartage } from "../src/ui/rendu.mjs";
 import { versFragment, depuisFragment } from "../src/ui/etat-url.mjs";
+import { lienContact } from "../src/ui/contact.mjs";
+import { corpsValidation, validerReponses, cibleEnvoi, listeProgrammes, CHAMPS_REPONDANT }
+  from "../src/ui/collecte.mjs";
+import { TEXTES } from "../src/ui/rendu.mjs";
 
 const ecran = document.getElementById("ecran");
 
@@ -132,6 +186,13 @@ let reponseDepartage = null;
 // Les réponses de profil à pré-sélectionner après un « Reprendre ». Pré-sélectionnées, pas
 // appliquées : rien n'avance tant que le prospect n'a pas cliqué.
 let aPreselectionner = {};
+
+/* ── Le bloc de validation ──────────────────────────────────────
+ * Absent en usage normal. Un prospect ordinaire ne doit pas voir un formulaire de recherche :
+ * ça le ferait douter de ce qu'on lui montre.
+ * ─────────────────────────────────────────────────────────── */
+const modeValidation = new URLSearchParams(location.search).get("validation") === "1";
+const collecte = { reponses: {}, message: null, envoye: false, enCours: false };
 
 /* ── Chargement ─────────────────────────────────────────────────
  * Un seul fichier : le moteur n'a pas de `fs`, et 84 requêtes séparées seraient absurdes
@@ -147,6 +208,8 @@ try {
   console.error("contexte injoignable :", erreur);
   throw erreur;
 }
+
+const programmes = listeProgrammes(contexte);
 
 /* ── Rejouer les réponses du fragment ───────────────────────────
  * Le fragment ne porte que les réponses : le profil se recalcule en les rejouant. Une
@@ -175,9 +238,46 @@ function rejouer({ reponses, departage }) {
 const majFragment = () => {
   const fragment = versFragment(etat.reponses, reponseDepartage);
   // `replaceState` et non `location.hash` : on ne veut pas une entrée d'historique par
-  // question, sinon le bouton Retour du téléphone devient inutilisable.
-  history.replaceState(null, "", fragment ? "#" + fragment : location.pathname);
+  // question, sinon le bouton Retour du téléphone devient inutilisable. `location.search`
+  // est conservé, sans quoi `?validation=1` disparaîtrait à la première réponse.
+  history.replaceState(null, "", location.pathname + location.search + (fragment ? "#" + fragment : ""));
 };
+
+/* ── Envoi de la validation ─────────────────────────────────────
+ * L'échec ne doit JAMAIS effacer le résultat affiché : on ne retouche que le bloc de
+ * validation, jamais la page. Et pas de renvoi en double — une fois parti, le bloc est
+ * remplacé par un accusé sobre.
+ * ─────────────────────────────────────────────────────────── */
+async function envoyerValidation(r) {
+  if (collecte.envoye || collecte.enCours) return;
+
+  const controle = validerReponses(collecte.reponses);
+  if (!controle.ok) {
+    collecte.message = TEXTES.validation.incomplet;
+    afficher();
+    return;
+  }
+
+  collecte.enCours = true;
+  collecte.message = null;
+  try {
+    const reponse = await fetch(cibleEnvoi(location.pathname), {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      // `form-name` est dans le corps, posé par corpsValidation : sans lui Netlify ignore
+      // l'envoi, et l'échec est silencieux.
+      body: corpsValidation(r, collecte.reponses),
+    });
+    if (!reponse.ok) throw new Error(reponse.status + " " + reponse.statusText);
+    collecte.envoye = true;
+  } catch (erreur) {
+    console.error("envoi de validation :", erreur);
+    collecte.message = TEXTES.validation.echec;
+  } finally {
+    collecte.enCours = false;
+    afficher();
+  }
+}
 
 /* ── Rendu ─────────────────────────────────────────────────── */
 
@@ -205,9 +305,14 @@ function afficher() {
   }
 
   const r = resultat(etat, contexte, { reponseDepartage });
+
   // La question de départage se pose SOUS le résultat : c'est un affinage, pas une porte.
   // Le prospect a déjà droit à sa recommandation, même s'il ne répond pas.
-  ecran.innerHTML = `<h1>Trouver ta formation</h1>` + rendreResultat(r) +
+  ecran.innerHTML = `<h1>Trouver ta formation</h1>` +
+    rendreResultat(r, {
+      lienConseiller: lienContact(contexte.contact, r.recommandation),
+      validation: modeValidation ? { programmes, ...collecte } : null,
+    }) +
     (reponseDepartage ? "" : rendreDepartage(r.departage));
 
   const reprise = ecran.querySelector('[data-action="reprendre"]');
@@ -232,13 +337,15 @@ function afficher() {
     });
   }
 
-  const conseiller = ecran.querySelector('[data-action="conseiller"]');
-  if (conseiller) {
-    conseiller.addEventListener("click", () => {
-      // À CÂBLER avec les admissions : lien WhatsApp pré-rempli portant le programme, ou
-      // formulaire. Le nom du programme est déjà là, en donnée.
-      console.info("à câbler — programme :", conseiller.dataset.programme);
+  const bloc = ecran.querySelector('[data-validation="ouvert"]');
+  if (bloc) {
+    // Les réponses vivent hors du DOM : un rendu intermédiaire — message d'erreur, réponse
+    // incomplète — ne doit pas effacer ce que le répondant a déjà coché.
+    bloc.addEventListener("change", (evenement) => {
+      const champ = evenement.target;
+      if (CHAMPS_REPONDANT.includes(champ.name)) collecte.reponses[champ.name] = champ.value;
     });
+    bloc.querySelector('[data-action="valider"]').addEventListener("click", () => envoyerValidation(r));
   }
 
   window.scrollTo(0, 0);

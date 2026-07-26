@@ -16,7 +16,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
-import { chargerContexte } from "../src/engine/charger.mjs";
+import { chargerContexte, verifierContexte } from "../src/engine/charger.mjs";
 import { jouer, resultat, demarrer, repondre, reprendreProfil, prochaineQuestion } from "../src/engine/moteur.mjs";
 import { normaliser } from "../src/engine/texte.mjs";
 import {
@@ -27,12 +27,26 @@ import {
   blocQuantitatif,
   blocAlternatives,
   blocNonClasses,
+  blocConseiller,
   lignesPourquoi,
   echapper,
   ORDRE_BLOCS,
   TEXTES,
 } from "../src/ui/rendu.mjs";
 import { versFragment, depuisFragment } from "../src/ui/etat-url.mjs";
+import { lienContact } from "../src/ui/contact.mjs";
+import {
+  NOM_FORMULAIRE,
+  CHAMP_PIEGE,
+  CHAMPS,
+  CHAMPS_REPONDANT,
+  ANNEES,
+  SATISFACTION,
+  corpsValidation,
+  validerReponses,
+  cibleEnvoi,
+  listeProgrammes,
+} from "../src/ui/collecte.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
@@ -596,6 +610,348 @@ console.log(`\n  Écran de question\n`);
       verifier("un parcours réel produit une question de départage", false, "aucun trouvé parmi les cas testés");
     }
   }
+}
+
+/* ── 11. Hébergement Netlify ──────────────────────────────────── */
+
+console.log(`\n  Hébergement\n`);
+
+{
+  const toml = fs.readFileSync(path.join(ROOT, "netlify.toml"), "utf8");
+  verifier(
+    "publie la racine et non web/ — data/_contexte.json vit en dehors",
+    /publish\s*=\s*"\."/.test(toml)
+  );
+  verifier("aucune commande de build", /command\s*=\s*""/.test(toml));
+  verifier(
+    "la racine redirige vers l'écran, pas vers une liste de fichiers",
+    /from\s*=\s*"\/"/.test(toml) && /to\s*=\s*"\/web\/"/.test(toml)
+  );
+  verifier(
+    "les modules ES sont servis avec le bon type MIME",
+    /for\s*=\s*"\/\*\.mjs"/.test(toml) && /text\/javascript/.test(toml)
+  );
+  verifier("nosniff et Referrer-Policy sont posés", /nosniff/.test(toml) && /Referrer-Policy/.test(toml));
+  verifier(
+    "le contexte que le navigateur charge est bien dans le périmètre publié",
+    fs.existsSync(path.join(ROOT, "data", "_contexte.json"))
+  );
+  verifier(
+    "data/_contexte.json n'est pas ignoré par git : `git push` doit suffire à déployer",
+    !fs.readFileSync(path.join(ROOT, ".gitignore"), "utf8").split(/\r?\n/).includes("data/_contexte.json")
+  );
+}
+
+/* ── 12. Collecte des validations — Netlify Forms ──────────────── */
+
+console.log(`\n  Collecte des validations\n`);
+
+{
+  // LA contrainte : Netlify analyse le HTML DÉPLOYÉ. Un formulaire généré en JavaScript n'est
+  // jamais enregistré, et les envois retournent 404 sans message clair.
+  const statique = HTML.match(/<form[^>]*name="validation"[\s\S]*?<\/form>/);
+  verifier("le formulaire de détection est écrit littéralement dans le HTML", Boolean(statique));
+
+  const bloc = statique ? statique[0] : "";
+  verifier("il est masqué : le bloc visible est rendu par ailleurs", /\bhidden\b/.test(bloc));
+  verifier("il porte data-netlify", /data-netlify="true"/.test(bloc));
+  verifier("il porte le piège à robots, sans imposer de captcha", new RegExp(`netlify-honeypot="${CHAMP_PIEGE}"`).test(bloc));
+
+  const declares = [...bloc.matchAll(/name="([^"]+)"/g)].map((m) => m[1]).filter((n) => n !== NOM_FORMULAIRE);
+  verifier(
+    "les champs du HTML statique sont exactement ceux que le code envoie",
+    JSON.stringify(declares) === JSON.stringify(CHAMPS),
+    `HTML ${declares.join(",")} · code ${CHAMPS.join(",")}`
+  );
+
+  // Aucune donnée personnelle : rien à déclarer, rien à protéger, et un répondant plus franc.
+  const personnel = /nom|prenom|email|mail|telephone|tel|adresse|whatsapp|numero|naissance|identi/i;
+  verifier(
+    "aucun champ personnel dans le formulaire",
+    !CHAMPS.some((c) => personnel.test(c)) && !declares.some((c) => personnel.test(c)),
+    CHAMPS.filter((c) => personnel.test(c)).join(", ")
+  );
+
+  const cas = trouves.forte || trouves.bonne || trouves.possible;
+  const reponses = { filiere_suivie: "un-programme", annee: ANNEES[1], satisfait: SATISFACTION[0] };
+  const corps = corpsValidation(cas.resultat, reponses);
+  const relu = new URLSearchParams(corps);
+
+  verifier("l'envoi inclut form-name — sans lui, Netlify l'ignore en silence", relu.get("form-name") === NOM_FORMULAIRE);
+  verifier(
+    "les trois réponses du répondant partent",
+    CHAMPS_REPONDANT.every((c) => relu.get(c) === reponses[c])
+  );
+  verifier(
+    "les trois champs automatiques sont remplis depuis le résultat, sans recopie",
+    relu.get("etat") === cas.resultat.niveau && relu.get("recommande") === cas.resultat.recommandation.id
+  );
+  verifier(
+    "le niveau collecté est un libellé, jamais une valeur numérique",
+    relu.get("niveau_correspondance") === cas.resultat.recommandation.correspondance &&
+      !/\d/.test(relu.get("niveau_correspondance"))
+  );
+  verifier("le corps ne porte aucune donnée personnelle", ![...relu.keys()].some((k) => personnel.test(k)));
+
+  verifier(
+    "une réponse manquante est refusée, pas complétée d'office",
+    !validerReponses({ annee: ANNEES[0] }).ok && validerReponses(reponses).ok
+  );
+
+  // L'envoi ne part PAS vers `/` : netlify.toml y redirige en 302, POST compris.
+  verifier(
+    "l'envoi cible la page qui porte le formulaire, pas la racine redirigée",
+    cibleEnvoi("/web/") === "/web/" && cibleEnvoi("/web/index.html") === "/web/"
+  );
+
+  // Le bloc visible est ABSENT en usage normal : un prospect ne doit pas voir un formulaire
+  // de recherche, ça le ferait douter de ce qu'on lui montre.
+  const sans = rendreResultat(cas.resultat);
+  const avec = rendreResultat(cas.resultat, { validation: { programmes: [{ id: "x", nom: "Un programme" }] } });
+  verifier("le bloc de validation est absent par défaut", !sans.includes("bloc--validation"));
+  verifier("il apparaît quand on le demande", avec.includes('data-validation="ouvert"'));
+  verifier(
+    "il est APRÈS le résultat : il ne doit pas influencer la lecture",
+    avec.indexOf("bloc--validation") > avec.indexOf("bloc--reco")
+  );
+  verifier("il propose les programmes qu'on lui passe, il n'en connaît aucun", avec.includes("Un programme"));
+
+  // La liste doit être choisissable : deux programmes au même intitulé mais en modalités
+  // différentes doivent se distinguer, sinon le répondant tranche au hasard et fausse la
+  // seule vérité terrain dont on dispose.
+  {
+    const liste = listeProgrammes(contexte);
+    verifier("la liste couvre tout le catalogue", liste.length === contexte.fiches.length);
+    const doublons = liste.map((p) => p.nom).filter((n, i, t) => t.indexOf(n) !== i);
+    verifier("aucun libellé n'apparaît deux fois dans la liste", doublons.length === 0, [...new Set(doublons)].join(" · "));
+    verifier(
+      "la modalité fait partie du libellé, en clair et non en identifiant",
+      liste.some((p) => /—/.test(p.nom)) && !liste.some((p) => /presentiel|en-ligne/.test(p.nom))
+    );
+    verifier(
+      "les identifiants renvoyés sont ceux du catalogue",
+      liste.every((p) => contexte.fiches.some((f) => f.id === p.id))
+    );
+  }
+  verifier(
+    "les trois questions sont là, et aucune autre",
+    ["filiere_suivie", "annee", "satisfait"].every((c) => avec.includes(`name="${c}"`)) &&
+      [...avec.matchAll(/name="([^"]+)"/g)].every((m) => CHAMPS_REPONDANT.includes(m[1]))
+  );
+  verifier(
+    "la question sur la satisfaction est présente — sans elle, un étudiant mal orienté passerait pour un modèle en erreur",
+    SATISFACTION.every((s) => avec.includes(s))
+  );
+  verifier(
+    "après envoi, un accusé sobre et plus aucun bouton : pas de renvoi en double",
+    (() => {
+      const envoye = rendreResultat(cas.resultat, { validation: { programmes: [], envoye: true } });
+      return envoye.includes('data-validation="envoye"') && !envoye.includes('data-action="valider"');
+    })()
+  );
+  verifier(
+    "un échec d'envoi n'efface pas le résultat affiché",
+    (() => {
+      const echec = rendreResultat(cas.resultat, {
+        validation: { programmes: [], message: TEXTES.validation.echec },
+      });
+      return echec.includes("bloc--reco") && echec.includes("message-envoi");
+    })()
+  );
+  verifier(
+    "les réponses déjà cochées survivent à un nouveau rendu",
+    rendreResultat(cas.resultat, {
+      validation: { programmes: [], reponses: { satisfait: SATISFACTION[2] } },
+    }).includes("choix--pris")
+  );
+}
+
+/* ── 13. Bouton « parler à un conseiller » ────────────────────── */
+
+console.log(`\n  Contact\n`);
+
+{
+  const config = contexte.contact;
+  const fiche = {
+    nom: "Un programme",
+    ecole_label: "Une école",
+    modalites: ["presentiel"],
+    modalites_labels: ["sur le campus"],
+  };
+
+  verifier("le canal par défaut est l'email — la seule adresse documentée", config.canal === "email");
+  verifier(
+    "le numéro WhatsApp est marqué prototype, il ne passe pas pour confirmé",
+    /prototype/i.test(config.whatsapp?._statut || "")
+  );
+  verifier(
+    "le routage par école est posé comme question aux admissions, pas deviné",
+    /_question_admissions/.test(fs.readFileSync(path.join(ROOT, "config", "contact.json"), "utf8"))
+  );
+
+  const parEmail = lienContact(config, fiche);
+  verifier("l'email construit un mailto", parEmail.href.startsWith("mailto:" + config.email.adresse));
+  verifier("les substitutions sont faites", decodeURIComponent(parEmail.href).includes("Un programme"));
+  verifier(
+    "les retours à la ligne et les accents sont encodés",
+    parEmail.href.includes("%0A") && !/[\n\r]/.test(parEmail.href) && parEmail.href.includes("%C3%A9")
+  );
+  verifier("aucun jeton laissé en clair", !parEmail.href.includes("%7B") && !parEmail.href.includes("{"));
+
+  // Le paramétrage doit être réel : basculer `canal` change la destination, sans une ligne
+  // de code touchée.
+  const parWhatsapp = lienContact({ ...config, canal: "whatsapp" }, fiche);
+  verifier(
+    "basculer canal change la destination sans toucher au code",
+    parWhatsapp.href.startsWith(`https://wa.me/${config.whatsapp.numero}`) && parEmail.href !== parWhatsapp.href
+  );
+  verifier(
+    "un numéro écrit avec des espaces ou un + reste utilisable",
+    lienContact({ canal: "whatsapp", whatsapp: { numero: "+221 77 239 50 50", message: "x" } }, fiche).href ===
+      "https://wa.me/221772395050?text=x"
+  );
+
+  // Mieux vaut un bouton absent qu'un bouton qui ne mène nulle part.
+  for (const [nom, cfg] of [
+    ["canal inconnu", { canal: "sms" }],
+    ["email sans adresse", { canal: "email", email: {} }],
+    ["whatsapp sans numéro", { canal: "whatsapp", whatsapp: {} }],
+  ]) {
+    const lien = lienContact(cfg, fiche);
+    verifier(`${nom} : aucun lien, et le motif est remonté`, lien.href === null && Boolean(lien.motif), lien.motif);
+  }
+  verifier(
+    "sans destination, aucun bouton n'est rendu",
+    !blocConseiller(trouves.forte?.resultat || {}, { href: null }).includes("class=\"conseiller\"")
+  );
+  verifier(
+    "avec destination, le bouton est un vrai lien",
+    blocConseiller(trouves.forte?.resultat || {}, parEmail).includes("<a class=\"conseiller\"")
+  );
+  verifier(
+    "le libellé du bouton vient de la configuration, pas de l'interface",
+    Boolean(config.libelle) && blocConseiller({}, parEmail).includes(config.libelle)
+  );
+
+  // Un jeton sans valeur reste vide : écrire « undefined » dans un courriel à une école
+  // serait pire que la phrase incomplète.
+  const nu = lienContact(config, { nom: "Un programme" });
+  verifier("un jeton sans valeur est laissé vide et signalé", !nu.href.includes("undefined") && Boolean(nu.motif), nu.motif);
+
+  verifier(
+    "un canal mal configuré est signalé par verifierContexte, pas avalé",
+    verifierContexte({ ...contexte, contact: { canal: "sms" } }).avertissements.some((a) => /contact/.test(a))
+  );
+}
+
+/* ── 14. Thème ISM ────────────────────────────────────────────── */
+
+console.log(`\n  Thème\n`);
+
+{
+  const theme = fs.readFileSync(path.join(ROOT, "web", "theme.css"), "utf8");
+
+  /** Luminance relative WCAG d'un `#rrggbb`. */
+  const luminance = (hex) => {
+    const [r, g, b] = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16) / 255);
+    const c = (v) => (v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4);
+    return 0.2126 * c(r) + 0.7152 * c(g) + 0.0722 * c(b);
+  };
+  const contraste = (a, b) => {
+    const [x, y] = [luminance(a), luminance(b)].sort((m, n) => n - m);
+    return (x + 0.05) / (y + 0.05);
+  };
+
+  /** Résout une variable du thème jusqu'à son `#rrggbb`, dans un bloc donné. */
+  const resoudre = (source, nom, vus = new Set()) => {
+    if (vus.has(nom)) return null;
+    vus.add(nom);
+    const declarations = [...source.matchAll(new RegExp(`--${nom}\\s*:\\s*([^;]+);`, "g"))];
+    if (!declarations.length) return null;
+    const valeur = declarations[declarations.length - 1][1].trim();
+    const hex = valeur.match(/#[0-9a-fA-F]{6}/);
+    if (hex) return hex[0];
+    const ref = valeur.match(/var\(\s*--([\w-]+)/);
+    return ref ? resoudre(source, ref[1], vus) : null;
+  };
+
+  const clair = theme.split("@media")[0];
+  const sombre = clair + (theme.match(/@media[\s\S]*$/)?.[0] || "");
+
+  verifier("la palette de marque est déclarée", ["ism-orange", "ism-bleu"].every((v) => resoudre(clair, v)));
+  verifier(
+    "l'orange de marque est bien celui relevé sur la couverture",
+    resoudre(clair, "ism-orange") === "#F38416"
+  );
+
+  // La contrainte qui commande tout : elle se CALCULE, on ne la croit pas sur parole.
+  const orange = resoudre(clair, "ism-orange");
+  verifier(
+    `l'orange de marque est illisible en texte sur blanc (${contraste(orange, "#FFFFFF").toFixed(1)}:1)`,
+    contraste(orange, "#FFFFFF") < 4.5
+  );
+
+  // Chaque couple texte/fond réellement employé doit passer 4,5:1, dans les DEUX modes.
+  const COUPLES = [
+    ["encre", "fond"],
+    ["gris", "fond"],
+    ["encre", "fond-doux"],
+    ["gris", "fond-doux"],
+    ["attention", "fond"],
+    ["attention", "fond-attention"],
+    ["alerte", "fond"],
+    ["lien", "fond"],
+    ["encre", "fond-neutre"],
+    // Le texte POSÉ SUR le fond orange : c'est là que l'orange est légitime.
+    ["sur-accent", "fond-accent"],
+    ["sur-plein", "plein"],
+  ];
+  for (const [mode, source] of [["clair", clair], ["sombre", sombre]]) {
+    const faibles = [];
+    for (const [texte, fond] of COUPLES) {
+      const a = resoudre(source, texte);
+      const b = resoudre(source, fond);
+      if (!a || !b) {
+        faibles.push(`${texte}/${fond} non résolu`);
+        continue;
+      }
+      const r = contraste(a, b);
+      if (r < 4.5) faibles.push(`${texte} sur ${fond} = ${r.toFixed(1)}:1`);
+    }
+    verifier(`mode ${mode} : tous les couples texte/fond atteignent 4,5:1`, faibles.length === 0, faibles.join(" · "));
+  }
+
+  verifier(
+    "l'orange assombri est lisible en texte sur blanc",
+    contraste(resoudre(clair, "ism-orange-texte"), "#FFFFFF") >= 4.5,
+    `${contraste(resoudre(clair, "ism-orange-texte"), "#FFFFFF").toFixed(1)}:1`
+  );
+
+  // Aucune couleur en dur ailleurs : changer d'identité doit se faire dans theme.css seul.
+  const couleursHTML = HTML.match(/#[0-9a-fA-F]{3,8}\b|\brgba?\(|\bhsla?\(/g) || [];
+  verifier("aucune couleur en dur dans le HTML", couleursHTML.length === 0, couleursHTML.join(" "));
+  const couleursRendu = [RENDU, URLS].join("\n").match(/#[0-9a-fA-F]{6}\b|\brgba?\(/g) || [];
+  verifier("aucune couleur en dur dans le rendu", couleursRendu.length === 0, couleursRendu.join(" "));
+  verifier("le thème est chargé par le HTML", /href="theme\.css"/.test(HTML));
+
+  verifier("le mode sombre est conservé", /prefers-color-scheme:\s*dark/.test(theme));
+  verifier(
+    "les variables du logo sont prêtes, sans exiger de fichier",
+    /--logo-hauteur/.test(theme) && /--logo-marge/.test(theme) && /--logo-source:\s*none/.test(theme)
+  );
+  verifier(
+    "aucune image n'est demandée tant que le logo n'existe pas",
+    !/url\(/.test(HTML) && !/url\(/.test(theme)
+  );
+  verifier(
+    "le fichier dit que les valeurs sont mesurées et non officielles",
+    /mesur[ée]/i.test(theme) && /pas officielle/i.test(theme)
+  );
+
+  // La barre de progression emploie une fraction unitaire : « aucun pourcentage » reste ainsi
+  // vérifiable au caractère près sur la page entière.
+  const q = rendreQuestion({ question: contexte.questions.profil[0], posees: 3, plafond: 12 });
+  verifier("la barre de progression n'écrit aucun pourcentage", q.includes("--avance:") && !/%/.test(q));
 }
 
 /* ── Bilan ────────────────────────────────────────────────────── */

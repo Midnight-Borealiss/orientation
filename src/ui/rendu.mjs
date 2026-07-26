@@ -23,6 +23,8 @@
  * une seule interpolation brute suffirait à casser la page sur une apostrophe typographique
  * mal placée ou une esperluette.
  */
+import { ANNEES, SATISFACTION } from "./collecte.mjs";
+
 export function echapper(valeur) {
   return String(valeur ?? "")
     .replace(/&/g, "&amp;")
@@ -78,8 +80,28 @@ export const TEXTES = {
     "Le contenu publié de ces programmes ne permet pas de les comparer à ton profil. C'est un manque de la brochure, pas du programme.",
   conseiller:
     "Ce résultat est une piste, pas une décision. Un conseiller ISM peut la confronter à ton dossier, à tes notes et à ce que tu veux faire ensuite — ce qu'un questionnaire ne saura jamais faire.",
-  conseillerAction: "Être rappelé par un conseiller",
+  // Repli seulement : le libellé vient de `config/contact.json`, parce qu'il doit dire ce qui
+  // va se passer — un bouton « être rappelé » qui ouvre un client de messagerie trompe.
+  conseillerAction: "Contacter un conseiller",
   aucuneReformulation: "Tes réponses sont trop partagées pour qu'on les résume en une phrase.",
+
+  validation: {
+    titre: "Tu es déjà étudiant ? Aide-nous à vérifier",
+    intro:
+      "Trois questions, et rien d'autre : ni nom, ni adresse, ni téléphone. Elles servent à savoir si l'orientation ci-dessus tombe juste pour quelqu'un qui connaît déjà sa filière.",
+    filiere: "Quelle filière suis-tu actuellement ?",
+    filiereVide: "Choisis dans la liste",
+    annee: "En quelle année ?",
+    satisfait: "Es-tu content de ton choix ?",
+    // Cette question décide de la valeur de la réponse : un étudiant qui regrette sa filière
+    // ne peut pas servir de vérité terrain, et sans elle on confondrait un modèle qui se
+    // trompe avec un étudiant mal orienté.
+    satisfaitAide: "Réponds franchement : une réponse négative nous est aussi utile qu'une positive.",
+    envoyer: "Envoyer",
+    incomplet: "Il manque une réponse.",
+    merci: "C'est envoyé, merci. Ça nous dit si le modèle tombe juste.",
+    echec: "L'envoi n'a pas abouti. Ton résultat ci-dessus reste valable — tu peux réessayer.",
+  },
 };
 
 /* ── Ordre des blocs par état ─────────────────────────────────────
@@ -383,12 +405,72 @@ ${liste.map(ligne).join("\n")}
  * formulaire, à trancher avec les admissions. Le bouton porte donc le nom du programme en
  * donnée, prêt à être repris, et aucune destination.
  */
-export function blocConseiller(resultat) {
-  const nom = resultat?.recommandation?.nom || "";
+export function blocConseiller(resultat, lien = null) {
+  const libelle = lien?.libelle || TEXTES.conseillerAction;
+  // Sans destination, PAS de bouton. Un bouton qui ne mène nulle part est pire qu'un bouton
+  // absent : le prospect clique, rien ne se passe, et il en conclut que le site est cassé.
+  const action = lien?.href
+    ? `<a class="conseiller" href="${echapper(lien.href)}">${echapper(libelle)}</a>`
+    : "";
   return `<section class="bloc bloc--conseiller" aria-label="${echapper(TEXTES.titres.conseiller)}">
 <h4>${echapper(TEXTES.titres.conseiller)}</h4>
 <p>${echapper(TEXTES.conseiller)}</p>
-<button type="button" class="conseiller" data-action="conseiller" data-programme="${echapper(nom)}">${echapper(TEXTES.conseillerAction)}</button>
+${action}
+</section>`;
+}
+
+/**
+ * Le bloc de validation par les étudiants actuels.
+ *
+ * APRÈS le résultat, jamais avant : il ne doit pas influencer la lecture. Et **absent en
+ * usage normal** — il n'apparaît qu'avec `?validation=1`. Un prospect ordinaire n'a pas à
+ * voir un formulaire de recherche, et le voir lui ferait douter de ce qu'on lui montre.
+ *
+ * `programmes` est la liste `{ id, nom }` du contexte : l'interface ne connaît aucun
+ * programme, elle affiche ceux qu'on lui passe.
+ *
+ * Trois questions, aucune donnée personnelle. Le formulaire de DÉTECTION, lui, est écrit en
+ * dur dans `web/index.html` : Netlify analyse le HTML déployé, et ce bloc-ci est construit
+ * par JavaScript — il ne serait jamais enregistré.
+ */
+export function blocValidation({ programmes = [], reponses = {}, message = null, envoye = false } = {}) {
+  const T = TEXTES.validation;
+  if (envoye) {
+    return `<section class="bloc bloc--validation" data-validation="envoye" aria-label="${echapper(T.titre)}">
+<p class="merci">${echapper(T.merci)}</p>
+</section>`;
+  }
+
+  const choix = (nom, valeurs, choisie) =>
+    valeurs
+      .map(
+        (v) =>
+          `<label class="choix${choisie === v ? " choix--pris" : ""}"><input type="radio" name="${echapper(nom)}" value="${echapper(v)}"${
+            choisie === v ? " checked" : ""
+          }> ${echapper(v)}</label>`
+      )
+      .join("");
+
+  return `<section class="bloc bloc--validation" data-validation="ouvert" aria-label="${echapper(T.titre)}">
+<h4>${echapper(T.titre)}</h4>
+<p>${echapper(T.intro)}</p>
+<label class="champ" for="filiere_suivie">${echapper(T.filiere)}</label>
+<select id="filiere_suivie" name="filiere_suivie">
+<option value="">${echapper(T.filiereVide)}</option>
+${programmes
+  .map(
+    (p) =>
+      `<option value="${echapper(p.id)}"${reponses.filiere_suivie === p.id ? " selected" : ""}>${echapper(p.nom)}</option>`
+  )
+  .join("")}
+</select>
+<p class="champ">${echapper(T.annee)}</p>
+<div class="choix-groupe">${choix("annee", ANNEES, reponses.annee)}</div>
+<p class="champ">${echapper(T.satisfait)}</p>
+<p class="aide">${echapper(T.satisfaitAide)}</p>
+<div class="choix-groupe">${choix("satisfait", SATISFACTION, reponses.satisfait)}</div>
+<button type="button" class="envoyer" data-action="valider">${echapper(T.envoyer)}</button>
+${message ? `<p class="message-envoi">${echapper(message)}</p>` : ""}
 </section>`;
 }
 
@@ -423,7 +505,7 @@ ${messages.map((m) => `<p>${echapper(m)}</p>`).join("\n")}
  * autres change. C'est la règle de dégradation : jamais un cadre vide, jamais un écran
  * réorganisé parce qu'un champ est arrivé.
  */
-export function rendreResultat(resultat) {
+export function rendreResultat(resultat, { lienConseiller = null, validation = null } = {}) {
   const etat = ORDRE_BLOCS[resultat.niveau] ? resultat.niveau : "possible";
   const enEgalite = etat === "egalite";
   const cartes = enEgalite ? cartesAEgalite(resultat) : [resultat.recommandation].filter(Boolean);
@@ -434,7 +516,7 @@ export function rendreResultat(resultat) {
 
   const construire = {
     reformulation: () => blocReformulation(resultat.reformulation),
-    conseiller: () => blocConseiller(resultat),
+    conseiller: () => blocConseiller(resultat, lienConseiller),
     recommandation: () => blocRecommandation(resultat),
     "deux-cartes": () => blocDeuxCartes(resultat),
     contenu: () => blocContenu(cartes),
@@ -456,6 +538,9 @@ export function rendreResultat(resultat) {
     posture,
     ...blocs,
     blocAlertes(resultat),
+    // APRÈS tout le reste : le bloc de validation ne doit pas influencer la lecture du
+    // résultat, et il n'existe que sur `?validation=1`.
+    validation ? blocValidation(validation) : "",
     `</div>`
   );
 }
@@ -478,7 +563,12 @@ export function rendreQuestion({ question, posees, plafond, choisie = null }) {
       choisie === i ? ' aria-pressed="true"' : ""
     }>${echapper(o.label)}</button></li>`;
 
+  // La barre est une FRACTION unitaire, pas un pourcentage : « aucun pourcentage nulle part »
+  // reste ainsi vérifiable au caractère près sur la page entière, sans exception à écrire.
+  const avance = Math.min(1, (posees + 1) / Math.max(1, plafond));
+
   return `<div class="question" data-question="${echapper(question.id)}">
+<div class="barre" role="presentation"><span style="--avance:${avance.toFixed(3)}"></span></div>
 <p class="progression">Question ${posees + 1} sur ${plafond} au plus</p>
 <h2>${echapper(question.question)}</h2>
 ${question.aide ? `<p class="aide">${echapper(question.aide)}</p>` : ""}

@@ -1,0 +1,96 @@
+/**
+ * theme.css — l'identité visuelle, et elle seule.
+ *
+ * AUCUN composant ne porte de couleur en dur : changer d'identité doit se faire dans ce
+ * fichier, sans toucher au HTML. `npm run test:interface` refuse un `#hex` ou un `rgb()`
+ * ailleurs que dans ce fichier.
+ *
+ * LES VALEURS SONT MESURÉES, PAS OFFICIELLES. Elles ont été relevées sur les couvertures des
+ * catalogues 2024, et elles diffèrent d'une brochure à l'autre — ce sont des couleurs
+ * d'impression, pas une charte écran. À remplacer par la charte du service communication ;
+ * ce fichier existe précisément pour que ce soit une modification d'une ligne.
+ *
+ * LA CONTRAINTE QUI COMMANDE TOUT LE RESTE : l'orange de marque #F38416 sur blanc donne un
+ * contraste de 2,6:1, très en dessous du minimum de 4,5:1 exigé pour du texte. Il est donc
+ * réservé aux FONDS, aux bordures et à la barre de progression. Le texte utilise le bleu
+ * profond, et l'orange assombri #B35A00 (4,8:1 mesuré) quand il faut vraiment de l'orange
+ * lisible. Le test calcule ces contrastes, il ne les croit pas sur parole.
+ */
+
+:root {
+  color-scheme: light dark;
+
+  /* ── Marque, brutes — ne pas utiliser directement dans un composant ── */
+  --ism-orange: #F38416;        /* couverture Bachelor */
+  --ism-orange-clair: #FCA41F;  /* couverture Master */
+  --ism-bleu: #0F274D;          /* couverture Bachelor */
+  --ism-bleu-clair: #084E8B;    /* couverture Master */
+  /* Orange assombri : le SEUL lisible en texte. #B35A00 était la valeur retenue pour du texte
+   * sur blanc (4,8:1 mesuré), mais l'avertissement quantitatif le pose sur un fond crème, où
+   * il retombe à 4,47:1 — sous le minimum. Assombri d'un cran, il passe partout : 5,3:1 sur
+   * blanc, 5,0:1 sur le crème. Un seul jeton vaut mieux que deux variantes qu'on confondrait. */
+  --ism-orange-texte: #A85400;
+
+  /* ── Rôles — c'est ce que les composants emploient ── */
+  --fond: #FFFFFF;
+  --fond-doux: #F4F6F9;
+  --fond-accent: var(--ism-orange);   /* fond, jamais texte */
+  --fond-attention: #FDF6EC;
+  --fond-neutre: #EDF1F6;
+
+  --encre: var(--ism-bleu);
+  --gris: #55606E;
+  --sur-accent: var(--ism-bleu);      /* texte POSÉ SUR un fond orange */
+  --sur-plein: #FFFFFF;               /* texte sur un fond bleu plein */
+  --attention: var(--ism-orange-texte);
+  --lien: var(--ism-bleu-clair);
+  --alerte: #8C2B2B;
+
+  --trait: #DCE2EA;
+  --trait-accent: var(--ism-orange);
+  --plein: var(--ism-bleu);           /* fond des boutons d'action */
+  --progression: var(--ism-orange);
+
+  /* ── Mesures ── */
+  --rayon: 10px;
+  --colonne: 34rem;
+
+  /* ── Logo — variables prêtes, fichier ABSENT ──
+   * À récupérer auprès du service communication, en SVG. Un PNG basse résolution extrait
+   * d'un PDF serait flou sur mobile, et un logo flou dit quelque chose de l'institution.
+   * Tant que `--logo-source` vaut `none`, aucune image n'est demandée : pas de 404. */
+  --logo-source: none;
+  --logo-hauteur: 2rem;
+  --logo-marge: 1.25rem;
+}
+
+/**
+ * Mode sombre, si le navigateur le demande.
+ *
+ * Les deux couleurs de marque fonctionnent sur fond sombre, mais LES CONTRASTES SE
+ * RECALCULENT : le bleu profond devient un fond et ne peut plus servir de texte — 1,4:1 sur
+ * sombre —, et c'est l'orange clair qui devient lisible (9,1:1). Reprendre la palette claire
+ * telle quelle donnerait un écran illisible tout en paraissant « thémé ».
+ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fond: #0F1826;
+    --fond-doux: #17222F;
+    --fond-attention: #241C10;
+    --fond-neutre: #1C2735;
+
+    --encre: #E9EEF4;
+    --gris: #A3AFBD;
+    /* Sur fond sombre, l'orange clair passe en texte ; le bleu profond ne peut plus. */
+    --attention: var(--ism-orange-clair);
+    --lien: #7FB6EE;
+    --alerte: #E9A0A0;
+
+    --trait: #2A3746;
+    --plein: var(--ism-bleu-clair);
+    --sur-plein: #FFFFFF;
+    /* Le fond orange reste orange, et son texte reste le bleu profond : ce couple est
+       indépendant du mode, puisque les deux couleurs sont posées l'une sur l'autre. */
+    --sur-accent: var(--ism-bleu);
+  }
+}

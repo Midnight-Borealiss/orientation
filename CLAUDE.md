@@ -37,7 +37,13 @@ jamais `src/engine/`.
 | Cascade de départage | **faite** — 98 % des égalités tranchées sans les entretiens |
 | Aiguillage à deux étages | **fait** — `entreprise-management` passe de 17,8 à 8,8 filières en lice |
 | Écran de résultat | **fait** — `web/index.html`, cinq états, rendu pur et testé sans navigateur |
-| Action « parler à un conseiller » | à câbler avec les admissions — WhatsApp pré-rempli ou formulaire |
+| Hébergement Netlify | **fait** — `netlify.toml`, aucun build, `git push` déploie |
+| Collecte des validations étudiantes | **faite** — Netlify Forms, formulaire statique, `?validation=1` |
+| Bouton « parler à un conseiller » | **fait** — `config/contact.json`, canal email par défaut |
+| Thème ISM | **fait** — `web/theme.css`, contrastes calculés dans les deux modes |
+| Charte officielle | à demander au service communication — les couleurs sont mesurées |
+| Logo | à récupérer en SVG — les variables du thème l'attendent |
+| Adresse d'admission par école | à demander — 3 documentées sur 8, aucun routage inventé |
 
 ---
 
@@ -1278,9 +1284,13 @@ téléphone, parfois en données limitées.
 
 | Fichier | Responsabilité |
 |---|---|
-| `web/index.html` | le câblage, et lui seul : `fetch`, fragment d'URL, écouteurs de clic, CSS |
+| `web/index.html` | le câblage, et lui seul : `fetch`, fragment d'URL, écouteurs de clic, structure CSS |
+| `web/theme.css` | l'identité visuelle, et elle seule — aucune couleur ailleurs |
 | `src/ui/rendu.mjs` | **tout** le rendu, en fonctions pures qui rendent des chaînes |
 | `src/ui/etat-url.mjs` | le parcours dans `location.hash` — sérialisation et relecture |
+| `src/ui/contact.mjs` | la destination du bouton conseiller, depuis `config/contact.json` |
+| `src/ui/collecte.mjs` | le contrat Netlify Forms : champs, corps de requête, cible d'envoi |
+| `netlify.toml` | hébergement : racine publiée, types MIME, redirection |
 | `scripts/contexte-web.mjs` | `data/_contexte.json`, le contexte du moteur en un seul fichier |
 | `scripts/servir.mjs` | serveur local, `node:http` seul — `file://` interdit les modules ES |
 
@@ -1425,13 +1435,144 @@ contient **aucun en dur** : un fragment codé finirait par contredire le fichier
 personne sache lequel s'affiche. `verifierContexte()` refuse un axe dont un sens manque — la
 phrase serait amputée en silence.
 
-### Ce qui reste à câbler
+### Le bouton « parler à un conseiller » — `config/contact.json`
 
-L'action « parler à un conseiller » n'a pas de destination : lien WhatsApp pré-rempli portant
-le programme recommandé, ou formulaire — à trancher avec les admissions. Le bouton porte déjà
-le nom du programme en donnée. Le texte, lui, est écrit : le résultat est une piste et non une
-décision, ce qui est à la fois plus honnête et l'intérêt d'ISM, puisque ça mène à un humain
-plutôt que de prétendre le remplacer.
+`canal` décide de la destination : `email` construit un `mailto:`, `whatsapp` un lien
+`wa.me`. **Basculer de l'un à l'autre ne demande aucun changement de code**, et `npm test` le
+vérifie en construisant les deux liens depuis la même fonction.
+
+`src/ui/contact.mjs` fait la substitution de `{programme}`, `{ecole}`, `{modalite}` et
+l'encodage. Trois règles apprises en l'écrivant :
+
+- **`email` est le défaut**, parce que c'est la seule adresse d'admission documentée dans les
+  brochures. Les deux WhatsApp qu'on y trouve sont ceux du Career Center et d'Executive
+  Education, pas des admissions : le numéro reste marqué prototype, et `verifierContexte()`
+  avertit si on active ce canal sans l'avoir confirmé ;
+- **sans destination valide, aucun bouton.** Un bouton qui ne mène nulle part est pire qu'un
+  bouton absent : le prospect clique, rien ne se passe, il en conclut que le site est cassé.
+  Le motif remonte dans les avertissements du contexte ;
+- **un jeton sans valeur est laissé vide**, jamais rendu tel quel. Écrire « undefined » dans
+  un courriel adressé à une vraie école serait pire que la phrase incomplète.
+
+L'encodage n'est pas cosmétique : le corps du courriel contient des retours à la ligne et des
+accents, et les deux cassent un `mailto:` mal échappé. Le test vérifie la présence de `%0A` et
+l'absence de tout `\n` dans le lien.
+
+**Question ouverte, à ne pas trancher par déduction :** un programme d'ISM Online ou d'ISF
+recommandé par le moteur envoie aujourd'hui son message à l'adresse des admissions en
+présentiel. La brochure donne `online@ism.edu.sn` pour ISM Online — trois écoles sur huit ont
+une adresse documentée, cinq n'en ont pas. Un routage par école est justifié mais demande de
+les connaître toutes : c'est une question aux admissions, consignée dans
+`config/contact.json > _question_admissions`. **Ne jamais déduire une adresse d'un nom
+d'école.**
+
+## Validation par les étudiants — Netlify Forms
+
+Le bloc de collecte sert la validation par la cohorte étudiante, seul garde-fou du modèle
+puisqu'aucune vérification croisée institutionnelle n'est possible avec une personne par école.
+
+### La contrainte à connaître avant de toucher à ce code
+
+**Netlify détecte les formulaires en analysant le HTML déployé, pas à l'exécution.** Un
+formulaire créé par JavaScript n'est jamais enregistré, et les envois retournent 404 sans
+message clair — l'échec est donc parfaitement silencieux.
+
+Conséquences, toutes vérifiées par `npm run test:interface` :
+
+| Règle | Pourquoi |
+|---|---|
+| le formulaire est écrit **littéralement** dans `web/index.html`, masqué par `hidden` | c'est le seul HTML que Netlify voit |
+| les champs déclarés dans le HTML et ceux envoyés par `collecte.mjs` sont **exactement** les mêmes | un champ ajouté d'un seul côté serait perdu sans bruit |
+| le corps de l'envoi porte **`form-name=validation`** | sans lui Netlify ignore l'envoi |
+| l'envoi va vers **`/web/`**, pas vers `/` | `netlify.toml` redirige `/` en 302, POST compris |
+
+Ce dernier point est un piège réel : la spec demandait un POST vers `/`, mais la redirection
+de la section 1 l'intercepte. On poste donc vers le chemin de la page qui porte le formulaire,
+ce qui est de toute façon l'usage documenté.
+
+### Ce que le répondant voit, et ce qu'il ne voit pas
+
+Trois questions, **aucune donnée personnelle** — ni nom, ni adresse, ni téléphone. Rien à
+déclarer, rien à protéger, et un répondant nettement plus franc sur la troisième. Le test
+refuse l'ajout d'un champ dont le nom évoque une identité.
+
+`etat`, `recommande` et `niveau_correspondance` sont remplis depuis le résultat : le répondant
+n'a rien à recopier. `niveau_correspondance` est le **libellé** du palier — une valeur
+numérique n'a pas plus sa place dans un formulaire que sur l'écran.
+
+**La question « es-tu content de ton choix ? » est indispensable.** Sans elle, on confondrait
+un modèle qui se trompe avec un étudiant mal orienté : celui qui regrette sa filière ne peut
+pas servir de vérité terrain.
+
+La liste des programmes porte **la modalité dans son libellé**. Deux écoles publient le même
+intitulé : sans elle, la liste affiche deux fois la même ligne et le répondant tranche au
+hasard, ce qui fausse silencieusement la seule vérité terrain dont on dispose.
+
+Quatre règles de conduite, chacune testée :
+
+- le bloc est **absent en usage normal**, visible seulement via `?validation=1`. Un prospect
+  ordinaire ne doit pas voir un formulaire de recherche — ça le ferait douter de ce qu'on lui
+  montre ;
+- il est **après** le résultat, jamais avant : il ne doit pas influencer la lecture ;
+- après envoi, un accusé sobre et plus aucun bouton : **pas de renvoi en double** ;
+- **un échec d'envoi n'efface jamais le résultat affiché.** Les réponses vivent hors du DOM,
+  et seul le bloc de validation est retouché.
+
+## Le thème — `web/theme.css`
+
+Un seul fichier, en propriétés personnalisées CSS. **Aucun composant ne porte de couleur en
+dur** : `npm test` refuse un `#hex` ou un `rgb()` dans `web/index.html` comme dans
+`src/ui/`. Changer d'identité est une modification de ce fichier seul.
+
+**Les valeurs sont mesurées, pas officielles** — relevées sur les couvertures des catalogues
+2024, et elles diffèrent d'une brochure à l'autre : ce sont des couleurs d'impression, pas une
+charte écran. À demander au service communication et à remplacer.
+
+| Rôle | Valeur | Provenance |
+|---|---|---|
+| Orange de marque | `#F38416` | couverture Bachelor |
+| Orange, variante | `#FCA41F` | couverture Master |
+| Bleu profond | `#0F274D` | couverture Bachelor |
+| Bleu, variante | `#084E8B` | couverture Master |
+
+### La lisibilité commande la palette, pas l'inverse
+
+`#F38416` sur blanc donne **2,6:1**, très en dessous du minimum de 4,5:1 exigé pour du texte.
+Il est donc réservé aux fonds, bordures et à la barre de progression ; le texte est en bleu
+profond, et l'orange assombri quand il faut vraiment de l'orange.
+
+**Le test calcule les contrastes, il ne les croit pas sur parole.** Il résout chaque variable
+du thème jusqu'à son hexadécimal, puis vérifie onze couples texte/fond réellement employés,
+**dans les deux modes**. C'est ce qui a attrapé une erreur : `#B35A00`, la valeur retenue pour
+du texte sur blanc (4,8:1 mesuré), retombe à **4,47:1** sur le fond crème de l'avertissement
+quantitatif — un fond que la spec ne considérait pas. Assombri à `#A85400`, il passe partout :
+5,3:1 sur blanc, 5,0:1 sur le crème.
+
+Le mode sombre est conservé, avec ses contrastes **recalculés** et non recopiés : sur fond
+sombre le bleu profond tombe à 1,4:1 et ne peut plus servir de texte, c'est l'orange clair qui
+devient lisible (9,1:1). Reprendre la palette claire telle quelle donnerait un écran illisible
+tout en paraissant « thémé ».
+
+La barre de progression emploie une **fraction unitaire** (`--avance: 0.583`) et non un
+pourcentage, pour que « aucun pourcentage nulle part » reste vérifiable au caractère près sur
+la page entière, sans exception à écrire dans le test.
+
+### Le logo
+
+Les variables existent (`--logo-source`, `--logo-hauteur`, `--logo-marge`), **le fichier
+non** : à récupérer auprès du service communication, en SVG. Un PNG basse résolution extrait
+d'un PDF serait flou sur mobile, et un logo flou dit quelque chose de l'institution. Tant que
+`--logo-source` vaut `none`, aucune image n'est demandée — pas de 404 en production.
+
+## Hébergement — `netlify.toml`
+
+`publish = "."`, pas `web/` : `data/_contexte.json` vit en dehors. Aucune commande de build.
+La racine redirige vers `/web/`, sinon un prospect qui tape l'adresse sans le chemin tombe sur
+une liste de fichiers.
+
+Le `Content-Type` des `.mjs` est déclaré explicitement. Combiné à `nosniff`, un type MIME
+erroné ferait **refuser** les modules ES au lieu de les exécuter au hasard : l'écran resterait
+sur « Chargement… » sans rien dire de plus.
 
 ## Conventions de code
 
@@ -1541,6 +1682,21 @@ ré-extraction, contrôle que les champs humains sont intacts, que les champs d'
 - Laisser une alternative se présenter par un libellé déjà cité par la recommandation.
 - Embarquer les `unites_enseignement` dans le contexte du navigateur. Liste blanche explicite, jamais un `delete`.
 - Conclure qu'un état d'écran est inatteignable depuis une grille de recherche étroite. `egalite` ne fait que 2 %.
+- Générer le formulaire de validation en JavaScript. Netlify analyse le HTML **déployé** : il ne serait jamais enregistré.
+- Envoyer le formulaire sans `form-name`. Netlify ignore l'envoi, et l'échec est silencieux.
+- Poster vers `/`. `netlify.toml` y redirige en 302, POST compris.
+- Ajouter un champ personnel au formulaire de validation. Aucun nom, aucune adresse, aucun téléphone.
+- Retirer la question sur la satisfaction. Sans elle, un étudiant mal orienté passe pour un modèle en erreur.
+- Montrer le bloc de validation sans `?validation=1`. Un prospect n'a pas à voir un formulaire de recherche.
+- Effacer le résultat affiché quand un envoi échoue.
+- Lister des programmes sans leur modalité. Deux écoles publient le même intitulé.
+- Écrire une couleur en dur hors de `web/theme.css`.
+- Poser `#F38416` en texte. 2,6:1 sur blanc — c'est une couleur de fond.
+- Recopier la palette claire en mode sombre. Les contrastes se recalculent.
+- Croire un contraste annoncé. Le test le calcule ; `#B35A00` échouait sur un fond que la spec n'avait pas prévu.
+- Déduire l'adresse d'admission d'une école. Trois sont documentées, cinq non : c'est une question aux admissions.
+- Afficher un bouton de contact sans destination. Mieux vaut un bouton absent.
+- Publier `web/` seul sur Netlify. `data/_contexte.json` vit en dehors.
 
 ## Commandes
 
@@ -1561,6 +1717,7 @@ Le moteur, une fois les données en place :
 ```bash
 npm run contexte:web        # config/ + data/filieres/ → data/_contexte.json (à commiter)
 npm run web                 # serveur local, puis http://localhost:8080/web/
+                            # ?validation=1 ouvre le formulaire de collecte étudiante
 npm run quiz                # affiche les questions du parcours
 npm run quiz -- --etat      # contrôles de cohérence du contexte (seuils, axes, familles)
 npm run quiz -- --reponses F1=0,F2=3,A1=3,P1=1,P2=2,P3=0,P4=0,P5=1,P6=0,P7=0

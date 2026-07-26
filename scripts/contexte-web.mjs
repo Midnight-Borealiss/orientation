@@ -82,6 +82,7 @@ const allege = {
   departages: contexte.departages,
   domainesAxes: contexte.domainesAxes,
   reformulation: contexte.reformulation,
+  contact: contexte.contact,
   fiches: contexte.fiches.map(alleger),
 };
 
