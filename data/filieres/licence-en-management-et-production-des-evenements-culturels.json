@@ -1,6 +1,6 @@
 {
   "id": "licence-en-management-et-production-des-evenements-culturels",
-  "nom": "Licence en Management et Production des ÉvÉnements culturels",
+  "nom": "Licence en Management et Production des Événements culturels",
   "ecole": "madiba",
   "niveau": "licence",
   "langue": "francais",
@@ -16,17 +16,21 @@
     "quantitatif": 2,
     "technique": 2,
     "relationnel": 4,
-    "creatif": 2,
+    "creatif": 5,
     "cadre": 1
   },
+  "axes_parts": {
+    "quantitatif": 0.1429,
+    "technique": 0.125,
+    "relationnel": 0.3393,
+    "creatif": 0.4107,
+    "cadre": 0.0714
+  },
   "domaines": [
-    "culture-evenementiel",
-    "communication",
-    "gestion"
+    "culture-evenementiel"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Chargé de diffusion/distribution",
@@ -139,9 +143,15 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
       "exigence_quantitative": "inference",
-      "partenariats": "brochure"
+      "vitrine.description": "brochure",
+      "partenariats": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "ISM_bachelor_brochure.pdf"
@@ -150,5 +160,45 @@
     "double_diplome": "l'iesa arts&culture (paris",
     "diplome_delocalise": null,
     "accreditations": []
-  }
+  },
+  "voisines": [
+    "mba-communication-creativite-et-evenementiel"
+  ],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Histoire de l’art et de l’artisanat en Afrique",
+      "Histoire du spectacle-vivant en Afrique",
+      "Médiation culturelle",
+      "Les métiers du secteur artistique et touristique",
+      "Histoire de l’art et de l’architecture en Afrique",
+      "Histoire des arts européens",
+      "Production d’exposition et de spectacles",
+      "Droit du patrimoine et de la propriété littéraire et artistique"
+    ],
+    "metiers_exclusifs": [
+      "Chargé de diffusion/distribution",
+      "Chargé/responsable de production",
+      "Gestionnaire répartition des droits",
+      "Responsable de produits de tourisme culturel",
+      "Manager /assistant de Galerie",
+      "Chargée des relations exposants d’une foire",
+      "Chargé de développement des publics",
+      "Chargée de communication"
+    ],
+    "recouvrement_max": 0,
+    "plus_proche": null,
+    "correlation_axes_max": 0.853,
+    "plus_proche_axes": "mba-communication-creativite-et-evenementiel"
+  },
+  "structure_ue": {
+    "publiee": true,
+    "nb_ue": 4,
+    "nb_modules": 56,
+    "concentration": 0.554,
+    "blocs_types": [
+      "sciences-humaines-et-sociales",
+      "comportements-professionnels-leadership-langues"
+    ]
+  },
+  "axes_fiables": true
 }

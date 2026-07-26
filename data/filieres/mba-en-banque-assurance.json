@@ -14,20 +14,25 @@
     "cours-du-soir"
   ],
   "axes": {
-    "quantitatif": 4,
+    "quantitatif": 5,
     "technique": 1,
     "relationnel": 1,
     "creatif": 1,
     "cadre": 3
   },
+  "axes_parts": {
+    "quantitatif": 0.6429,
+    "technique": 0,
+    "relationnel": 0.0714,
+    "creatif": 0,
+    "cadre": 0.2857
+  },
   "domaines": [
     "finance",
-    "assurance",
-    "gestion"
+    "assurance"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Analyste de risque crédit",
@@ -79,12 +84,54 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
-      "exigence_quantitative": "inference"
+      "exigence_quantitative": "inference",
+      "vitrine.description": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
     "annee_source": 2024
   },
-  "parcours": "Parcours investissement et gouvernance d’entreprise"
+  "parcours": "Parcours Investissement et gouvernance d’entreprise",
+  "voisines": [
+    "master-en-marche-financier-trading",
+    "master-ingenierie-financiere-en-ligne",
+    "mba-actuariat-big-data-assurance-quantitative"
+  ],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Techniques bancaires",
+      "Techniques d’assurance",
+      "Management des risques en entreprises",
+      "Banque",
+      "Assurance",
+      "Compatibilité des compagnies d’assurances",
+      "Introduction au marché des capitaux",
+      "Droit bancaire et des assurances"
+    ],
+    "metiers_exclusifs": [
+      "Souscripteur en assurances de biens et responsabilités",
+      "Banquier- conseil",
+      "Chef de projet en organisation bancaire",
+      "Comptable bancaire",
+      "Responsable du back office banque"
+    ],
+    "recouvrement_max": 0,
+    "plus_proche": null,
+    "correlation_axes_max": 0.992,
+    "plus_proche_axes": "master-ingenierie-financiere-en-ligne"
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 0,
+    "nb_modules": 14,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": true
 }

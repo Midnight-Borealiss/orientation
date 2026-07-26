@@ -19,14 +19,18 @@
     "creatif": 3,
     "cadre": 4
   },
+  "axes_parts": {
+    "quantitatif": 0.1667,
+    "technique": 0,
+    "relationnel": 0.2778,
+    "creatif": 0.2778,
+    "cadre": 0.3889
+  },
   "domaines": [
-    "gestion",
-    "administration-publique",
-    "marketing"
+    "gestion"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Cadre, chef de service, chef de division d’un établissement public",
@@ -80,9 +84,15 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
       "exigence_quantitative": "inference",
-      "partenariats": "brochure"
+      "vitrine.description": "brochure",
+      "partenariats": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
@@ -92,5 +102,36 @@
     "double_diplome": "double diplôme mentionné",
     "diplome_delocalise": null,
     "accreditations": []
-  }
+  },
+  "voisines": [],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Accompagnement pour la Dynamisation de Carrière",
+      "Outils de conception et de gestion de projet (focus sur la GAR)",
+      "Projet de créativité «libère ta créativité et rêve ton Afrique de demain»",
+      "Droit de l’administration publique",
+      "Management stratégique des organisations publiques",
+      "Décentralisation et marketing territorial",
+      "Pratiques de gouvernance et de management public",
+      "Conception et pilotage de politiques publiques"
+    ],
+    "metiers_exclusifs": [
+      "Cadre, chef de service, chef de division d’un établissement public",
+      "Chef de service ou de département d’un établissement public",
+      "Chargé de mission",
+      "Attaché territorial"
+    ],
+    "recouvrement_max": 0,
+    "plus_proche": null,
+    "correlation_axes_max": 0.66,
+    "plus_proche_axes": "licence-en-droit-gestion"
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 0,
+    "nb_modules": 18,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": true
 }

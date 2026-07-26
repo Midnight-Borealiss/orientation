@@ -19,14 +19,18 @@
     "creatif": 1,
     "cadre": 5
   },
+  "axes_parts": {
+    "quantitatif": 0.05,
+    "technique": 0.35,
+    "relationnel": 0.5,
+    "creatif": 0,
+    "cadre": 0.65
+  },
   "domaines": [
-    "qualite",
-    "comptabilite",
-    "ingenierie"
+    "qualite"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Animateur QHSE",
@@ -83,9 +87,15 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
       "exigence_quantitative": "inference",
-      "partenariats": "brochure"
+      "vitrine.description": "brochure",
+      "partenariats": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "ISM_ONLINE_ISF_BROCHURE.pdf"
@@ -96,5 +106,37 @@
     "accreditations": [
       "Label UEMOA"
     ]
-  }
+  },
+  "voisines": [
+    "mba-qualite-hygiene-securite-et-environnement-qhse"
+  ],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Management Stratégique et RSE",
+      "Normalisation / Infrastructures Qualité",
+      "SMQ : Système de Management de la Qualité",
+      "SMSST : Système de Management de la Sante et de la Sécurité au Travail",
+      "SMSDA : Système de Management et de la Sécurité des Denrées Alimentaires",
+      "SMI : Système de Management intégré",
+      "Management des risques Enseignements M2",
+      "Études des référentiels :"
+    ],
+    "metiers_exclusifs": [
+      "Directeur/Responsable QHSE (client, produits et services…)",
+      "Auditeur QHSE Ingénieur QHSE (processus, produits, services, conseil…)",
+      "Chargé de mission QHSE"
+    ],
+    "recouvrement_max": 0.286,
+    "plus_proche": "mba-qualite-hygiene-securite-et-environnement-qhse",
+    "correlation_axes_max": 0.977,
+    "plus_proche_axes": "mba-qualite-hygiene-securite-et-environnement-qhse"
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 0,
+    "nb_modules": 20,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": true
 }

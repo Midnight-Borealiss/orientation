@@ -91,7 +91,7 @@
     },
     "axes": {
       "type": "object",
-      "description": "Les 5 axes de contenu sont COMPTES depuis unites_enseignement, pas notes a la main. Les 2 axes de disposition (ancrage, abstraction) ne vivent PAS ici : ils sont au niveau du domaine, dans config/domaines_axes.json.",
+      "description": "Les 5 axes de contenu sont COMPTES depuis unites_enseignement, pas notes a la main. Les 2 axes de disposition (ancrage, abstraction) ne vivent PAS ici : ils sont au niveau de la FAMILLE, dans config/familles_axes.json.",
       "required": [
         "quantitatif",
         "technique",
@@ -127,6 +127,30 @@
           "maximum": 5
         }
       }
+    },
+    "axes_parts": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "La MEME mesure que `axes`, non arrondie : part des modules du programme que le lexique de chaque axe capte. C'est cette version que le moteur utilise pour la CORRELATION DE FORME ; `axes` ne sert qu'a l'affichage et aux tests d'ancrage. L'arrondi de noter() ecrase 10 points de proportion dans un entier et fabrique des egalites exactes a r = 1,00 entre programmes de formes differentes. La somme peut depasser 1 : un module compte pour tous les axes qui le captent.",
+      "required": [
+        "quantitatif",
+        "technique",
+        "relationnel",
+        "creatif",
+        "cadre"
+      ],
+      "properties": {
+        "quantitatif": { "type": "number", "minimum": 0, "maximum": 1 },
+        "technique": { "type": "number", "minimum": 0, "maximum": 1 },
+        "relationnel": { "type": "number", "minimum": 0, "maximum": 1 },
+        "creatif": { "type": "number", "minimum": 0, "maximum": 1 },
+        "cadre": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "axes_fiables": {
+      "type": "boolean",
+      "description": "CALCULE par scripts/distinctivite.mjs. Faux quand trop de modules du programme ne sont reconnus par aucun lexique : ses 5 axes ne decrivent alors pas son contenu. Le moteur NE DOIT PAS classer ces programmes par le score — voir CLAUDE.md > Programmes aux axes non fiables. Absent = non evalue (la distinctivite n'a pas tourne), a traiter comme non fiable.",
+      "default": true
     },
     "domaines": {
       "type": "array",
@@ -379,10 +403,45 @@
       ],
       "description": "Diplome EXIGE a l'entree. Distinct de niveau. Present dans les brochures (« accessible apres un bac+2 », « BAC+3 »). FILTRE dur."
     },
+    "structure_ue": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "CALCULE par scripts/distinctivite.mjs. Ce que la STRUCTURE en unites d'enseignement dit du programme, la ou le comptage des axes traite les modules comme un sac de mots. Voir CLAUDE.md > La structure en UE porte des distinctions que les axes ne voient pas.",
+      "properties": {
+        "publiee": {
+          "type": "boolean",
+          "description": "Le catalogue publie-t-il un decoupage en UE pour ce programme ? Faux pour les 54 fiches du catalogue Master, qui n'alignent qu'une liste plate de modules : concentration et blocs_types n'y veulent rien dire."
+        },
+        "nb_ue": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "nb_modules": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "concentration": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Part des modules portee par la plus grosse UE. Proche de 1 = specialise, proche de 1/nb_ue = generaliste. MESURE BRUTE, sans seuil : aucun libelle n'en est derive tant qu'un test n'a pas montre ce qu'il apporte. null si le decoupage n'est pas publie."
+        },
+        "blocs_types": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "UE recurrentes du catalogue que ce programme porte, detectees par similarite d'intitule — pas une liste ecrite a la main. Le bloc management-organisations est la signature d'un programme tourne vers l'entreprise plutot que vers l'approfondissement technique."
+        }
+      }
+    },
     "distinctivite": {
       "type": "object",
       "additionalProperties": false,
-      "description": "CALCULE par scripts/distinctivite.mjs. Ce qui distingue ce programme des autres de son domaine. Alimente les questions de fin de parcours et la justification du resultat.",
+      "description": "CALCULE par scripts/distinctivite.mjs. Ce qui distingue ce programme des autres de son domaine. Alimente les questions de fin de parcours et la justification du resultat. DEUX mesures : le recouvrement de modules dit ce que le catalogue partage, la correlation d'axes dit qui produira un ex aequo au scoring. Elles ne coincident pas.",
       "properties": {
         "modules_exclusifs": {
           "type": "array",
@@ -406,6 +465,19 @@
             "string",
             "null"
           ]
+        },
+        "correlation_axes_max": {
+          "type": "number",
+          "minimum": -1,
+          "maximum": 1,
+          "description": "Correlation de forme la plus elevee avec un programme du meme domaine, calculee comme le score du moteur. C'est CETTE mesure qui predit l'ex aequo, pas le recouvrement de modules."
+        },
+        "plus_proche_axes": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Programme du meme domaine dont la forme d'axes est la plus proche. Souvent different de plus_proche."
         }
       }
     }

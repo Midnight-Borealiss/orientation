@@ -214,15 +214,7 @@ export function assemblerLignes(items) {
 
 /** Comparaison insensible à la casse ET aux accents (la brochure Bachelor écrit « DéBOUCHéS »). */
 // Marques diacritiques Unicode, écrites en échappement : elles seraient invisibles en clair.
-const DIACRITIQUES = new RegExp("[\\u0300-\\u036f]", "g");
-
-export function normaliser(s) {
-  return (s || "")
-    .normalize("NFD")
-    .replace(DIACRITIQUES, "")
-    .replace(/[‘’]/g, "'")
-    .replace(/[–—]/g, "-")
-    .toLowerCase()
-    .replace(/\s+/g, " ")
-    .trim();
-}
+// Unique implémentation : elle vit dans src/engine/texte.mjs, parce que le moteur ne doit
+// dépendre d'aucun script — et surtout pas d'un module de géométrie PDF. Réexportée ici
+// pour que tout ce qui l'importait de ce fichier continue de fonctionner.
+export { normaliser } from "../../src/engine/texte.mjs";

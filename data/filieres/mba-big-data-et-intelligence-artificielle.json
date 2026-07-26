@@ -19,14 +19,18 @@
     "creatif": 2,
     "cadre": 2
   },
+  "axes_parts": {
+    "quantitatif": 0.15,
+    "technique": 0.3,
+    "relationnel": 0.3,
+    "creatif": 0.1,
+    "cadre": 0.1
+  },
   "domaines": [
-    "data",
-    "finance",
-    "management-projet"
+    "data"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Project Management Officer (PMO)",
@@ -95,18 +99,61 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
       "exigence_quantitative": "inference",
-      "partenariats": "brochure"
+      "vitrine.description": "brochure",
+      "partenariats": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
     "annee_source": 2024
   },
-  "parcours": "Parcours innovation entreprenariat et technologies",
+  "parcours": "Parcours Innovation entreprenariat et technologies",
   "partenariats": {
     "double_diplome": null,
     "diplome_delocalise": "deesg paris ce mba explore les techniques avancees d'ia, en mettant l'",
     "accreditations": []
-  }
+  },
+  "voisines": [
+    "mastere-big-data-data-strategie"
+  ],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Stratégie d’entreprises de la Tech",
+      "Finance d’entreprise",
+      "Tech Marketing",
+      "Management de projet Tech",
+      "Start up & financement",
+      "Éthique & régulation dans la Tech",
+      "Data management",
+      "Management des systèmes d’information"
+    ],
+    "metiers_exclusifs": [
+      "Project Management Officer (PMO)",
+      "Chef de projet digital ou IT - PMO",
+      "PMO support",
+      "PMO conformité",
+      "Gestionnaire de projets et programmes",
+      "Coordinateur de développement de projets",
+      "Product owner",
+      "PMO Junior"
+    ],
+    "recouvrement_max": 0,
+    "plus_proche": null,
+    "correlation_axes_max": 0.702,
+    "plus_proche_axes": "mastere-big-data-data-strategie"
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 0,
+    "nb_modules": 20,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": true
 }

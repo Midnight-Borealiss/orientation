@@ -19,14 +19,18 @@
     "creatif": 4,
     "cadre": 1
   },
+  "axes_parts": {
+    "quantitatif": 0,
+    "technique": 0.4118,
+    "relationnel": 0.0588,
+    "creatif": 0.3529,
+    "cadre": 0
+  },
   "domaines": [
-    "design-web",
-    "informatique",
     "management-projet"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Chef de projet multimédia (Internet, Web, mobile)",
@@ -97,10 +101,48 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
-      "exigence_quantitative": "inference"
+      "exigence_quantitative": "inference",
+      "vitrine.description": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "ISM_ONLINE_ISF_BROCHURE.pdf"
-  }
+  },
+  "voisines": [
+    "bachelor-chef-de-projet-digital"
+  ],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Découvrir l’univers du digital",
+      "Javascript / Jquerry",
+      "S’initier à la programmation avec Javascript",
+      "Dynamiser vos sites web avec Javascript",
+      "Comprendre la stratégie d’entreprise",
+      "Définir ses Buyer Personas",
+      "Définir une stratégie d’acquisition, de conversion et",
+      "de fidélisation"
+    ],
+    "metiers_exclusifs": [
+      "Graphiste"
+    ],
+    "recouvrement_max": 0,
+    "plus_proche": null,
+    "correlation_axes_max": 0.909,
+    "plus_proche_axes": "bachelor-chef-de-projet-digital"
+  },
+  "structure_ue": {
+    "publiee": true,
+    "nb_ue": 4,
+    "nb_modules": 17,
+    "concentration": 0.471,
+    "blocs_types": [
+      "culture"
+    ]
+  },
+  "axes_fiables": true
 }

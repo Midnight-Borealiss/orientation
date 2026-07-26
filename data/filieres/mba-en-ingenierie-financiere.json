@@ -15,19 +15,23 @@
   ],
   "axes": {
     "quantitatif": 5,
-    "technique": 2,
+    "technique": 1,
     "relationnel": 1,
     "creatif": 1,
     "cadre": 3
   },
+  "axes_parts": {
+    "quantitatif": 0.7143,
+    "technique": 0.0714,
+    "relationnel": 0,
+    "creatif": 0,
+    "cadre": 0.2143
+  },
   "domaines": [
-    "finance",
-    "marches-financiers",
-    "gestion"
+    "finance"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Directeur financier",
@@ -79,18 +83,57 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
       "exigence_quantitative": "inference",
-      "partenariats": "brochure"
+      "vitrine.description": "brochure",
+      "partenariats": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
     "annee_source": 2024
   },
-  "parcours": "Parcours investissement et gouvernance d’entreprise",
+  "parcours": "Parcours Investissement et gouvernance d’entreprise",
   "partenariats": {
     "double_diplome": "double diplôme mentionné",
     "diplome_delocalise": null,
     "accreditations": []
-  }
+  },
+  "voisines": [
+    "licence-modelisation-statistique-informatique-economique-et",
+    "master-en-marche-financier-trading",
+    "master-ingenierie-financiere-en-ligne"
+  ],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Introduction aux marchés des capitaux",
+      "Elaboration, lecture et diagnostic des états financiers",
+      "Initiation au Trading",
+      "Valeur, risque, finance",
+      "Modélisation et économétrie financière",
+      "Évaluation financière des entreprises",
+      "Application financière sur Excel - VBA"
+    ],
+    "metiers_exclusifs": [
+      "Directeur financier",
+      "Gestionnaire d’actifs (asset manager)",
+      "Opérateur de marché École de Management"
+    ],
+    "recouvrement_max": 0.136,
+    "plus_proche": "master-en-marche-financier-trading",
+    "correlation_axes_max": 0.975,
+    "plus_proche_axes": "licence-modelisation-statistique-informatique-economique-et"
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 0,
+    "nb_modules": 14,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": true
 }

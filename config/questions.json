@@ -1,0 +1,137 @@
+{
+  "_statut": "v0 — formulations et poids a calibrer, voir QUESTIONS.md",
+
+  "_disposition": "Les 2 axes de disposition (ancrage, abstraction) n'ont PAS encore de question. Le moteur les utilise pour departager deux filieres a egalite : cet etage reste donc inactif tant qu'aucune option ne porte de bloc `poids_disposition`, et le moteur le signale au lieu de le masquer. Ajouter la question ne demande aucun code : une entree de plus dans `profil`, avec `poids_disposition: { ancrage: 2 }` sur ses options. Voir CLAUDE.md > Comment les 2 axes de disposition entrent dans le score.",
+
+  "filtres": [
+    {
+      "id": "F1",
+      "question": "Où en es-tu dans tes études ?",
+      "aide": "C'est ton diplôme actuel qui compte, pas celui que tu vises.",
+      "filtre": "niveau_acces",
+      "options": [
+        { "label": "J'ai le bac, ou je le passe cette année", "valeur": "bac" },
+        { "label": "J'ai un bac+2", "valeur": "bac+2" },
+        { "label": "J'ai une licence, ou un bac+3", "valeur": "bac+3" },
+        { "label": "J'ai un bac+4 ou un bac+5", "valeur": "bac+4" }
+      ]
+    },
+    {
+      "id": "F2",
+      "question": "Comment veux-tu suivre ta formation ?",
+      "filtre": "modalites",
+      "options": [
+        { "label": "Sur le campus, en journée", "valeur": "presentiel" },
+        { "label": "À distance, depuis chez moi", "valeur": "en-ligne" },
+        { "label": "Le week-end ou le soir, je travaille", "valeur": "week-end" },
+        { "label": "Peu importe, je suis flexible", "valeur": null }
+      ]
+    }
+  ],
+
+  "_aiguillage": "A2 n'est posee QUE si A1 a designe entreprise-management : cette famille porte 33 fiches sur 84, et la simulation mesure 17,8 filieres encore en lice apres filtres, contre 4,0 pour la plus petite famille — l'aiguillage n'y aiguillait plus. Les cinq autres familles n'ont pas besoin de cette question et ne doivent pas la subir. La table des domaines est DERIVEE de config/taxonomy.json > familles : les 6 domaines de la famille (gestion, management-projet, entrepreneuriat, rh, qualite, rse) sont tous atteignables, aucun n'est orphelin. `validate.mjs` le verifie.",
+
+  "aiguillage": [
+    {
+      "id": "A1",
+      "question": "Parmi ces univers, lequel t'attire le plus ?",
+      "aide": "Ton profil comptera aussi. Ici, c'est le goût qui parle.",
+      "cible": "famille",
+      "options": [
+        { "label": "Diriger une entreprise, une équipe, un projet", "valeur": "entreprise-management" },
+        { "label": "Le droit, l'administration, la vie publique", "valeur": "droit-action-publique" },
+        { "label": "Les chiffres, la finance, la comptabilité", "valeur": "chiffres-finance" },
+        { "label": "Le numérique, les données, les réseaux", "valeur": "numerique" },
+        { "label": "Le commerce, la communication, les médias", "valeur": "commerce-communication" },
+        { "label": "La technique, l'industrie, la logistique", "valeur": "ingenierie-industrie" }
+      ]
+    },
+    {
+      "id": "A2",
+      "question": "Dans cet univers, qu'est-ce que tu te vois gérer ?",
+      "aide": "Rien n'est définitif : la dernière réponse garde tout ouvert.",
+      "cible": "domaines",
+      "si": { "famille": "entreprise-management" },
+      "options": [
+        { "label": "Des personnes, des équipes", "valeur": ["rh"] },
+        { "label": "Des projets, du début à la fin", "valeur": ["management-projet"] },
+        { "label": "Des opérations, de la qualité, des normes", "valeur": ["qualite", "rse"] },
+        { "label": "Ma propre activité, que je crée", "valeur": ["entrepreneuriat"] },
+        { "label": "Je ne veux pas me limiter à un seul de ces registres", "valeur": ["gestion"] }
+      ]
+    }
+  ],
+
+  "profil": [
+    {
+      "id": "P1",
+      "question": "Un gros travail à rendre dans trois semaines. Concrètement, ça se passe comment pour toi ?",
+      "options": [
+        { "label": "Je découpe et j'avance un peu chaque jour", "poids": { "cadre": 2 } },
+        { "label": "Je rassemble tout, puis je fais l'essentiel d'un bloc", "poids": { "technique": 1, "creatif": 1 } },
+        { "label": "Je commence par la partie qui m'intéresse le plus", "poids": { "creatif": 2 } },
+        { "label": "Je demande d'abord ce qui est précisément attendu", "poids": { "cadre": 1, "relationnel": 1 } }
+      ]
+    },
+    {
+      "id": "P2",
+      "question": "Un problème admet plusieurs réponses défendables, sans certitude sur la meilleure.",
+      "options": [
+        { "label": "Ça me stimule, j'aime argumenter", "poids": { "relationnel": 1, "creatif": 1 } },
+        { "label": "Ça m'agace, je veux savoir laquelle est juste", "poids": { "cadre": 2 } },
+        { "label": "Je cherche des données pour trancher", "poids": { "quantitatif": 2 } },
+        { "label": "Je demande l'avis de quelqu'un d'expérimenté", "poids": { "relationnel": 2 } }
+      ]
+    },
+    {
+      "id": "P3",
+      "question": "Dans un travail de groupe, quel rôle prends-tu naturellement ?",
+      "options": [
+        { "label": "Je fais avancer la partie technique", "poids": { "technique": 2 } },
+        { "label": "Je répartis les tâches et je coordonne", "poids": { "relationnel": 1, "cadre": 1 } },
+        { "label": "Je présente et je défends devant les autres", "poids": { "relationnel": 2 } },
+        { "label": "Je vérifie que rien n'a été oublié", "poids": { "cadre": 2 } }
+      ]
+    },
+    {
+      "id": "P4",
+      "question": "Qu'est-ce qui te donne le sentiment d'avoir bien travaillé ?",
+      "options": [
+        { "label": "Voir le résultat concret de ce que j'ai fait", "poids": { "technique": 2 } },
+        { "label": "Avoir compris quelque chose de compliqué", "poids": { "quantitatif": 2 } },
+        { "label": "Que les gens autour soient satisfaits", "poids": { "relationnel": 2 } },
+        { "label": "Avoir produit quelque chose qui n'existait pas", "poids": { "creatif": 2 } }
+      ]
+    },
+    {
+      "id": "P5",
+      "question": "On te donne un cadre précis, avec des règles à respecter.",
+      "options": [
+        { "label": "Ça me rassure, je sais où je vais", "poids": { "cadre": 2 } },
+        { "label": "Je me sens à l'étroit", "poids": { "creatif": 2 } },
+        { "label": "Ça dépend — si les règles ont du sens, ça me va", "poids": { "cadre": 1, "quantitatif": 1 } },
+        { "label": "Je respecte le cadre, puis je cherche les marges", "poids": { "cadre": 1, "creatif": 1 } }
+      ]
+    },
+    {
+      "id": "P6",
+      "question": "Quelque chose ne marche pas et tu ne sais pas pourquoi.",
+      "options": [
+        { "label": "Je démonte pour comprendre le mécanisme", "poids": { "technique": 2 } },
+        { "label": "Je cherche si quelqu'un a déjà eu ce problème", "poids": { "relationnel": 1, "cadre": 1 } },
+        { "label": "Je teste des hypothèses une par une", "poids": { "quantitatif": 2 } },
+        { "label": "Je bricole jusqu'à ce que ça reparte", "poids": { "technique": 1, "creatif": 1 } }
+      ]
+    },
+    {
+      "id": "P7",
+      "question": "Dans quel décor te vois-tu, un mardi ordinaire ?",
+      "options": [
+        { "label": "Devant un écran, au calme", "poids": { "technique": 1, "quantitatif": 1 } },
+        { "label": "En réunion, avec des gens", "poids": { "relationnel": 2 } },
+        { "label": "Sur le terrain, en déplacement", "poids": { "relationnel": 1, "technique": 1 } },
+        { "label": "Ça change tous les jours", "poids": { "creatif": 2 } }
+      ]
+    }
+  ]
+}

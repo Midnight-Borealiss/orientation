@@ -19,14 +19,18 @@
     "creatif": 1,
     "cadre": 3
   },
+  "axes_parts": {
+    "quantitatif": 0.0556,
+    "technique": 0.0556,
+    "relationnel": 0.6111,
+    "creatif": 0,
+    "cadre": 0.2778
+  },
   "domaines": [
-    "rh",
-    "gestion",
-    "rse"
+    "rh"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Directeur des RH",
@@ -80,10 +84,48 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
-      "exigence_quantitative": "inference"
+      "exigence_quantitative": "inference",
+      "vitrine.description": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "ISM_ONLINE_ISF_BROCHURE.pdf"
-  }
+  },
+  "voisines": [
+    "bachelor-en-gestion-option-organisation-rh-en-ligne",
+    "mba-management-des-ressources-humaines"
+  ],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Management stratégique et RSE",
+      "Psychosociologie des Organisations, Gestion du stress et risques psychosociaux",
+      "Gestion de la diversité, de la cohésion et des Crises",
+      "Management des Equipes, des compétences, de la performance et du changement",
+      "Droit des relations individuelles et collectives du travail",
+      "Planification opérationnelle des RH Enseignements M2",
+      "Management stratégique et Éthique dans les affaires",
+      "Hygiène, sécurité, et sante du Travail"
+    ],
+    "metiers_exclusifs": [
+      "Directeur des RH",
+      "Responsable de la formation Responsable rémunération"
+    ],
+    "recouvrement_max": 0.107,
+    "plus_proche": "mba-management-des-ressources-humaines",
+    "correlation_axes_max": 0.977,
+    "plus_proche_axes": "mba-management-des-ressources-humaines"
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 0,
+    "nb_modules": 18,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": true
 }

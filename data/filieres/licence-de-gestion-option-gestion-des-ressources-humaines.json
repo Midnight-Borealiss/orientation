@@ -1,6 +1,6 @@
 {
   "id": "licence-de-gestion-option-gestion-des-ressources-humaines",
-  "nom": "Licence de gestion option Gestion des Ressources Humaines",
+  "nom": "Licence de Gestion option Gestion des Ressources Humaines",
   "ecole": "ism-management",
   "niveau": "licence",
   "langue": "francais",
@@ -14,19 +14,24 @@
   ],
   "axes": {
     "quantitatif": 4,
-    "technique": 2,
+    "technique": 1,
     "relationnel": 3,
     "creatif": 1,
     "cadre": 2
   },
+  "axes_parts": {
+    "quantitatif": 0.3725,
+    "technique": 0.0784,
+    "relationnel": 0.2549,
+    "creatif": 0.098,
+    "cadre": 0.1373
+  },
   "domaines": [
     "gestion",
-    "rh",
-    "marketing"
+    "rh"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Responsable fonctionnel",
@@ -162,12 +167,58 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
-      "exigence_quantitative": "inference"
+      "exigence_quantitative": "inference",
+      "vitrine.description": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "ISM_bachelor_brochure.pdf"
   },
   "option": "Gestion des Ressources Humaines",
-  "programme_parent": "licence-en-gestion"
+  "programme_parent": "licence-en-gestion",
+  "voisines": [
+    "bachelor-en-gestion-option-organisation-rh-en-ligne",
+    "licence-de-gestion-option-agrobusiness",
+    "licence-de-gestion-option-comptabilite-finance",
+    "licence-de-gestion-option-management-international"
+  ],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Informatique appliquée UE. Langues – Civilisations"
+    ],
+    "metiers_exclusifs": [
+      "Responsable fonctionnel",
+      "Assistant DRH",
+      "Chargé de la paie",
+      "Chargé de recrutement",
+      "Conseiller à l’emploi",
+      "Collaborateur dans des cabinets d’expertise comptable"
+    ],
+    "recouvrement_max": 0.827,
+    "plus_proche": "licence-de-gestion-option-comptabilite-finance",
+    "correlation_axes_max": 0.992,
+    "plus_proche_axes": "licence-de-gestion-option-management-international"
+  },
+  "structure_ue": {
+    "publiee": true,
+    "nb_ue": 9,
+    "nb_modules": 51,
+    "concentration": 0.333,
+    "blocs_types": [
+      "management-et-responsabilite-sociale-d-entrepris",
+      "concepts-et-techniques-de-gestion",
+      "comportement-professionnel-culture-juridique-et-",
+      "maitrise-des-techniques-traitement-de-donnees",
+      "outils-et-techniques-de-gestion-approfondies",
+      "initiation-a-la-recherche",
+      "ateliers-d-approfondissement-et-finance-applique",
+      "projet-d-entreprise"
+    ]
+  },
+  "axes_fiables": true
 }

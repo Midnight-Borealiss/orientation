@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trouver ta formation</title>
+<meta name="description" content="Quelques questions pour t'orienter vers une formation qui te correspond.">
+<style>
+/* Polices SYSTÈME : aucune police à télécharger, premier affichage immédiat sur réseau lent.
+   Mobile d'abord, une seule colonne, calibrée sur ~380 px de large. */
+:root {
+  --encre: #16191d;
+  --gris: #5b6470;
+  --trait: #dfe3e8;
+  --fond: #fff;
+  --fond-doux: #f5f7f9;
+  --accent: #14504b;
+  --attention: #7a4b00;
+  --rayon: 10px;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font: 16px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  color: var(--encre);
+  background: var(--fond);
+}
+main { max-width: 34rem; margin: 0 auto; padding: 1.25rem 1rem 4rem; }
+h1 { font-size: 1.05rem; font-weight: 600; color: var(--gris); margin: 0 0 1.25rem; }
+h2 { font-size: 1.2rem; line-height: 1.35; margin: 0 0 .75rem; }
+h3 { font-size: 1.05rem; margin: 0 0 .25rem; }
+h4 { font-size: .8rem; text-transform: uppercase; letter-spacing: .06em; color: var(--gris); margin: 1.25rem 0 .5rem; }
+p { margin: 0 0 .75rem; }
+ul, ol { margin: 0 0 .75rem; padding-left: 1.1rem; }
+li { margin-bottom: .3rem; }
+
+/* ── Questions ── */
+.progression { font-size: .8rem; color: var(--gris); }
+.aide { font-size: .9rem; color: var(--gris); }
+.options { list-style: none; padding: 0; margin-top: 1rem; }
+.options li { margin-bottom: .5rem; }
+.option {
+  display: block; width: 100%; text-align: left;
+  padding: .85rem 1rem; border: 1px solid var(--trait); border-radius: var(--rayon);
+  background: var(--fond); font: inherit; color: inherit; cursor: pointer;
+}
+.option:hover, .option:focus-visible { border-color: var(--accent); background: var(--fond-doux); }
+.option--choisie { border-color: var(--accent); border-width: 2px; background: var(--fond-doux); }
+.question--departage { border-top: 1px solid var(--trait); padding-top: 1.25rem; margin-top: 1.5rem; }
+
+/* ── Résultat ── */
+.bloc { margin-bottom: 1.75rem; }
+.badge {
+  display: inline-block; font-size: .78rem; font-weight: 600; letter-spacing: .04em;
+  text-transform: uppercase; padding: .25rem .6rem; border-radius: 99px;
+  background: var(--fond-doux); color: var(--gris);
+}
+.badge--forte { background: #e3f0ea; color: var(--accent); }
+.badge--bonne { background: #eaf0f5; color: #2b4a63; }
+.badge--possible, .badge--egalite { background: #f3eee4; color: var(--attention); }
+.badge--impasse { background: #f6ecec; color: #7a2b2b; }
+.posture { color: var(--gris); }
+
+/* La reformulation et son bouton ont le MÊME poids visuel : le bouton transforme un
+   verdict en proposition, il ne peut pas être une note de bas de page. */
+.bloc--reformulation {
+  background: var(--fond-doux); border-radius: var(--rayon); padding: 1rem;
+}
+.reformulation { font-size: 1.05rem; margin-bottom: .75rem; }
+.reformulation--absente { color: var(--gris); }
+.reprendre {
+  font: inherit; font-size: 1.05rem; color: var(--accent);
+  background: none; border: 0; border-bottom: 2px solid var(--accent);
+  padding: 0 0 1px; cursor: pointer;
+}
+
+.nom { line-height: 1.3; }
+.meta { font-size: .85rem; color: var(--gris); }
+.meta span:not(:last-child)::after { content: " · "; }
+.modalite { font-weight: 600; color: var(--encre); }
+
+.pourquoi { border-left: 3px solid var(--trait); padding-left: .9rem; margin-top: 1rem; }
+.pourquoi ol { padding-left: 1.1rem; font-size: .95rem; }
+
+.cartes { display: flex; flex-direction: column; gap: .75rem; }
+.carte, .alternative, .non-classe, .contenu {
+  border: 1px solid var(--trait); border-radius: var(--rayon); padding: .9rem;
+}
+.alternative, .non-classe, .contenu { margin-bottom: .75rem; }
+.contenu-de { font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; color: var(--gris); }
+.differenciateur { font-size: .9rem; margin: .5rem 0 0; }
+.bloc--quanti { background: #fbf7ef; border-radius: var(--rayon); padding: 1rem; }
+.bloc--quanti h4 { margin-top: 0; color: var(--attention); }
+.exemples { color: var(--gris); font-size: .85rem; }
+.bloc--non-classes > p { font-size: .9rem; color: var(--gris); }
+.bloc--conseiller { border: 1px solid var(--trait); border-radius: var(--rayon); padding: 1rem; }
+.bloc--conseiller h4 { margin-top: 0; }
+.conseiller {
+  font: inherit; font-weight: 600; color: #fff; background: var(--accent);
+  border: 0; border-radius: var(--rayon); padding: .8rem 1.1rem; cursor: pointer;
+}
+.bloc--alertes { font-size: .9rem; color: var(--attention); }
+.etat-chargement, .etat-erreur { color: var(--gris); }
+.etat-erreur { color: #7a2b2b; }
+</style>
+</head>
+<body>
+<main id="ecran">
+  <h1>Trouver ta formation</h1>
+  <p class="etat-chargement">Chargement…</p>
+</main>
+
+<script type="module">
+/**
+ * Le câblage, et lui seul. Tout le rendu est dans src/ui/rendu.mjs, en fonctions pures qui
+ * rendent des chaînes : c'est ce qui permet de le tester en Node, sans DOM et sans dépendance.
+ *
+ * L'interface AFFICHE et renvoie un indice. Elle ne connaît ni les axes, ni les seuils, ni
+ * une seule filière : aucun nom de programme, d'école ou de domaine n'est écrit ici.
+ */
+import { demarrer, repondre, prochaineQuestion, doitSArreter, resultat, reprendreProfil, MAX_QUESTIONS }
+  from "../src/engine/moteur.mjs";
+import { rendreQuestion, rendreResultat, rendreDepartage } from "../src/ui/rendu.mjs";
+import { versFragment, depuisFragment } from "../src/ui/etat-url.mjs";
+
+const ecran = document.getElementById("ecran");
+
+let contexte = null;
+let etat = null;
+let reponseDepartage = null;
+// Les réponses de profil à pré-sélectionner après un « Reprendre ». Pré-sélectionnées, pas
+// appliquées : rien n'avance tant que le prospect n'a pas cliqué.
+let aPreselectionner = {};
+
+/* ── Chargement ─────────────────────────────────────────────────
+ * Un seul fichier : le moteur n'a pas de `fs`, et 84 requêtes séparées seraient absurdes
+ * sur un réseau lent. Produit par `npm run contexte:web`.
+ * ─────────────────────────────────────────────────────────── */
+try {
+  const reponse = await fetch(new URL("../data/_contexte.json", import.meta.url));
+  if (!reponse.ok) throw new Error(reponse.status + " " + reponse.statusText);
+  contexte = await reponse.json();
+} catch (erreur) {
+  ecran.innerHTML = `<h1>Trouver ta formation</h1>
+<p class="etat-erreur">Le questionnaire n'a pas pu se charger. Réessaie dans un instant.</p>`;
+  console.error("contexte injoignable :", erreur);
+  throw erreur;
+}
+
+/* ── Rejouer les réponses du fragment ───────────────────────────
+ * Le fragment ne porte que les réponses : le profil se recalcule en les rejouant. Une
+ * réponse que le moteur refuse est ignorée, jamais remplacée par un défaut.
+ * ─────────────────────────────────────────────────────────── */
+function rejouer({ reponses, departage }) {
+  let courant = demarrer(contexte);
+  let garde = 0;
+  while (garde++ < MAX_QUESTIONS + 4) {
+    const suivante = prochaineQuestion(courant, contexte);
+    if (!suivante) break;
+    const indice = reponses[suivante.question.id];
+    if (indice === undefined) break;
+    try {
+      courant = repondre(courant, suivante.question.id, indice, contexte);
+    } catch (erreur) {
+      console.warn("réponse ignorée :", suivante.question.id, erreur.message);
+      break;
+    }
+    if (doitSArreter(courant, contexte).arret) break;
+  }
+  reponseDepartage = departage || null;
+  return courant;
+}
+
+const majFragment = () => {
+  const fragment = versFragment(etat.reponses, reponseDepartage);
+  // `replaceState` et non `location.hash` : on ne veut pas une entrée d'historique par
+  // question, sinon le bouton Retour du téléphone devient inutilisable.
+  history.replaceState(null, "", fragment ? "#" + fragment : location.pathname);
+};
+
+/* ── Rendu ─────────────────────────────────────────────────── */
+
+function afficher() {
+  const stop = doitSArreter(etat, contexte);
+  const suivante = stop.arret ? null : prochaineQuestion(etat, contexte);
+
+  if (suivante) {
+    ecran.innerHTML = `<h1>Trouver ta formation</h1>` +
+      rendreQuestion({
+        question: suivante.question,
+        posees: etat.poses,
+        plafond: MAX_QUESTIONS,
+        choisie: aPreselectionner[suivante.question.id] ?? null,
+      });
+    for (const bouton of ecran.querySelectorAll(".option")) {
+      bouton.addEventListener("click", () => {
+        etat = repondre(etat, suivante.question.id, Number(bouton.dataset.indice), contexte);
+        majFragment();
+        afficher();
+      });
+    }
+    window.scrollTo(0, 0);
+    return;
+  }
+
+  const r = resultat(etat, contexte, { reponseDepartage });
+  // La question de départage se pose SOUS le résultat : c'est un affinage, pas une porte.
+  // Le prospect a déjà droit à sa recommandation, même s'il ne répond pas.
+  ecran.innerHTML = `<h1>Trouver ta formation</h1>` + rendreResultat(r) +
+    (reponseDepartage ? "" : rendreDepartage(r.departage));
+
+  const reprise = ecran.querySelector('[data-action="reprendre"]');
+  if (reprise) {
+    reprise.addEventListener("click", () => {
+      // Rouvre les SEULES questions de profil. Refaire les filtres serait punir le
+      // prospect d'avoir corrigé.
+      const repris = reprendreProfil(etat, contexte);
+      etat = repris.etat;
+      aPreselectionner = repris.precedentes;
+      reponseDepartage = null;
+      majFragment();
+      afficher();
+    });
+  }
+
+  for (const bouton of ecran.querySelectorAll(".question--departage .option")) {
+    bouton.addEventListener("click", () => {
+      reponseDepartage = bouton.dataset.vers;
+      majFragment();
+      afficher();
+    });
+  }
+
+  const conseiller = ecran.querySelector('[data-action="conseiller"]');
+  if (conseiller) {
+    conseiller.addEventListener("click", () => {
+      // À CÂBLER avec les admissions : lien WhatsApp pré-rempli portant le programme, ou
+      // formulaire. Le nom du programme est déjà là, en donnée.
+      console.info("à câbler — programme :", conseiller.dataset.programme);
+    });
+  }
+
+  window.scrollTo(0, 0);
+}
+
+etat = rejouer(depuisFragment(location.hash));
+afficher();
+</script>
+</body>
+</html>

@@ -23,6 +23,7 @@ import { lirePdf, normaliser } from "./lib/pdf-layout.mjs";
 import { choisirProfil, typeEntete, rattacherSections } from "./lib/profils.mjs";
 import {
   slug,
+  normaliserTitre,
   construireUE,
   modulesDe,
   extraireMetiers,
@@ -31,6 +32,8 @@ import {
   detecterModalites,
   detecterPartenariats,
   compterAxes,
+  normaliserParcours,
+  cleParcours,
   compterExigenceQuantitative,
   inferDomaines,
 } from "./lib/fiche.mjs";
@@ -83,9 +86,12 @@ function segmenter(pages, profil, journal) {
       const seuilTitre = hMax >= profil.hauteurTitre ? Math.max(hMax / 2, 10) : Infinity;
 
       const titres = dessus.filter((l) => l.h >= seuilTitre).sort((a, b) => b.y - a.y || a.x - b.x);
-      // « Master en Fiscalité- » + « Droit des Affaires » se recolle sans espace.
+      // « Master en Fiscalité- » + « Droit des Affaires » se recolle sans espace,
+      // mais « Executive MBA - » + « parcours en Français » garde le sien : le
+      // trait d'union collé à une lettre coupe un mot, précédé d'une espace il
+      // sépare deux membres du titre.
       const titre = titres
-        .reduce((acc, l) => (acc && !/-$/.test(acc) ? `${acc} ${l.texte}` : acc + l.texte), "")
+        .reduce((acc, l) => (acc && /\p{L}-$/u.test(acc) ? acc + l.texte : acc ? `${acc} ${l.texte}` : l.texte), "")
         .replace(/\s+/g, " ")
         .trim();
 
@@ -308,8 +314,7 @@ function construireFiche(programme, contexte, profil) {
     return valeur;
   };
 
-  const titreBrut = nettoyerTitre(programme?.titre || contexte.entree?.titre || "");
-  const nom = titreBrut.charAt(0).toUpperCase() + titreBrut.slice(1);
+  const nom = normaliserTitre(nettoyerTitre(programme?.titre || contexte.entree?.titre || ""));
 
   const objectif = (programme?.sections.objectif || []).map((l) => l.texte).join(" ").replace(/\s+/g, " ").trim();
   const ue = construireUE(programme?.sections.contenu || [], "Contenus pédagogiques");
@@ -321,9 +326,11 @@ function construireFiche(programme, contexte, profil) {
 
   const niveau = niveauDelivre(programme?.titre || contexte.entree?.titre || "") || "licence";
   const acces = niveauAcces(texteComplet, niveau, profil);
-  const { axes, calcules } = compterAxes(modules);
+  const { axes, parts: axesParts, calcules } = compterAxes(modules);
   const partenariats = detecterPartenariats(texteComplet);
-  const parcours = (programme?.mentions || []).find((m) => /^parcours\b/i.test(m.trim())) || null;
+  const parcours = normaliserParcours(
+    (programme?.mentions || []).find((m) => /^parcours\b/i.test(m.trim()))
+  );
 
   const option = contexte.entree?.option || (programme?.titre.match(/\boption\s+(.+)$/i)?.[1]?.trim() ?? null);
 
@@ -346,8 +353,12 @@ function construireFiche(programme, contexte, profil) {
     niveau_acces: tracer("niveau_acces", acces.source, acces.valeur),
     modalites: tracer("modalites", "brochure", detecterModalites(texteComplet, profil)),
 
+    // Notes 1..5 pour l'affichage et les tests ; proportions brutes pour le calcul de
+    // corrélation, que l'arrondi de `noter()` rendrait faux — voir « Deux sorties pour
+    // une seule mesure » dans lib/fiche.mjs.
     axes,
-    domaines: inferDomaines(programme?.titre || nom, modules, metiers, DOMAINES_OK),
+    axes_parts: axesParts,
+    domaines: inferDomaines(nom, objectif, modules, metiers, DOMAINES_OK),
 
     profil_ideal: [],
     deconseille_si: [],
@@ -360,14 +371,23 @@ function construireFiche(programme, contexte, profil) {
     vitrine: {},
 
     meta: {
-      sources: { ...sources, axes: "inference", domaines: "inference", exigence_quantitative: "inference" },
+      sources: {
+        ...sources,
+        axes: "inference",
+        axes_parts: "inference",
+        domaines: "inference",
+        exigence_quantitative: "inference",
+      },
       statut: "brouillon",
       brochure_fichier: contexte.fichier,
       annee_source: contexte.annee,
     },
   };
 
-  if (objectif) fiche.vitrine.description = objectif.slice(0, 600);
+  if (objectif) {
+    fiche.vitrine.description = objectif.slice(0, 600);
+    fiche.meta.sources["vitrine.description"] = "brochure";
+  }
   if (parcours) fiche.parcours = parcours.replace(/\s+/g, " ").trim();
   if (contexte.entree?.departement) fiche.departement = contexte.entree.departement;
   if (option) fiche.option = option;
@@ -446,7 +466,117 @@ function dumpTexte(pages, programmes, journal, nomFichier) {
   return lignes.join("\n");
 }
 
-export async function extraire({ fichiers, dump = false, ecrire = true }) {
+/* ══ Fusion : une ré-extraction ne détruit pas le travail humain ══
+ *
+ * L'extraction est rejouée à chaque correction de parsing. Si elle écrasait les
+ * fiches, elle effacerait ce que les responsables et les admissions ont mis des
+ * semaines à fournir — et personne n'oserait plus la relancer.
+ *
+ * Règle : `brochure` et `inference` sont rafraîchis, `responsable`, `admissions`
+ * et `manuel` sont intouchables. `meta.statut` est conservé : c'est un état du
+ * cycle de validation, pas une donnée de brochure.
+ * ────────────────────────────────────────────────────────────── */
+
+/** Sources qu'une ré-extraction n'a pas le droit de remplacer. */
+const SOURCES_PROTEGEES = new Set(["responsable", "admissions", "manuel"]);
+
+/**
+ * Champs que l'extraction ne produit JAMAIS. Ils viennent d'un humain (ou d'un
+ * autre script) et sont conservés même si personne n'a pensé à déclarer leur
+ * source : une fusion ne doit pas punir un oubli de traçabilité.
+ */
+const CHAMPS_JAMAIS_EXTRAITS = [
+  "profil_ideal",
+  "deconseille_si",
+  "vitrine.accroche",
+  "vitrine.fait_marquant",
+  "vitrine.couleur",
+  "eligibilite.series_bac",
+  "eligibilite.niveau_maths",
+  "eligibilite.prerequis_autres",
+  "debouches.secteurs",
+  "debouches.poursuite_etudes",
+];
+
+/**
+ * Champs calculés par scripts/distinctivite.mjs. Ils dépendent de l'ensemble des
+ * fiches : après une ré-extraction ils sont périmés, donc retirés — sauf si un
+ * humain les a validés. `report.mjs` signale alors qu'il faut recalculer.
+ */
+const CHAMPS_CALCULES = ["distinctivite", "structure_ue", "axes_fiables", "voisines"];
+
+const lire = (obj, chemin) => chemin.split(".").reduce((o, k) => (o == null ? undefined : o[k]), obj);
+
+function ecrireChemin(obj, chemin, valeur) {
+  const cles = chemin.split(".");
+  const derniere = cles.pop();
+  let cible = obj;
+  for (const c of cles) {
+    if (typeof cible[c] !== "object" || cible[c] === null) cible[c] = {};
+    cible = cible[c];
+  }
+  cible[derniere] = valeur;
+}
+
+const estVide = (v) =>
+  v == null || (Array.isArray(v) && !v.length) || (typeof v === "string" && !v.trim()) ||
+  (typeof v === "object" && !Array.isArray(v) && !Object.keys(v).length);
+
+/**
+ * Fusionne une fiche fraîchement extraite avec celle déjà présente sur le disque.
+ * Retourne la fiche fusionnée et la liste des champs préservés, pour le journal.
+ */
+export function fusionnerFiche(nouvelle, ancienne) {
+  if (!ancienne) return { fiche: nouvelle, preserves: [] };
+
+  const fusion = JSON.parse(JSON.stringify(nouvelle));
+  const sources = { ...(nouvelle.meta?.sources || {}) };
+  const preserves = [];
+
+  // 1. Champs dont la source est protégée : on remet la valeur ET la source d'origine.
+  for (const [champ, source] of Object.entries(ancienne.meta?.sources || {})) {
+    if (!SOURCES_PROTEGEES.has(source)) continue;
+    const valeur = lire(ancienne, champ);
+    if (valeur === undefined) continue;
+    ecrireChemin(fusion, champ, valeur);
+    sources[champ] = source;
+    preserves.push(`${champ} (${source})`);
+  }
+
+  // 2. Champs que l'extraction ne produit pas : conservés s'ils portent quelque chose.
+  for (const champ of CHAMPS_JAMAIS_EXTRAITS) {
+    if (sources[champ] && SOURCES_PROTEGEES.has(sources[champ])) continue; // déjà traité
+    const valeur = lire(ancienne, champ);
+    if (estVide(valeur)) continue;
+    ecrireChemin(fusion, champ, valeur);
+    if (ancienne.meta?.sources?.[champ]) sources[champ] = ancienne.meta.sources[champ];
+    preserves.push(champ);
+  }
+
+  // 3. Champs calculés : périmés après ré-extraction, sauf validation humaine.
+  for (const champ of CHAMPS_CALCULES) {
+    const source = ancienne.meta?.sources?.[champ];
+    if (source && SOURCES_PROTEGEES.has(source)) {
+      fusion[champ] = ancienne[champ];
+      sources[champ] = source;
+      preserves.push(`${champ} (${source})`);
+    } else {
+      delete fusion[champ];
+      delete sources[champ];
+    }
+  }
+  if (!fusion.voisines) fusion.voisines = [];
+
+  // 4. Métadonnées de validation : elles ne se réinventent pas à chaque extraction.
+  fusion.meta.sources = sources;
+  if (ancienne.meta?.statut) fusion.meta.statut = ancienne.meta.statut;
+  if (ancienne.meta?.valide_par) fusion.meta.valide_par = ancienne.meta.valide_par;
+  if (ancienne.meta?.valide_le) fusion.meta.valide_le = ancienne.meta.valide_le;
+
+  return { fiche: fusion, preserves };
+}
+
+export async function extraire({ fichiers, dump = false, ecrire = true, dossierSortie = OUT_DIR }) {
   const resultats = [];
   for (const chemin of fichiers) {
     const r = await traiterCatalogue(chemin);
@@ -480,16 +610,84 @@ export async function extraire({ fichiers, dump = false, ecrire = true }) {
     }
   }
 
-  if (ecrire) {
-    fs.mkdirSync(OUT_DIR, { recursive: true });
+  /* ── Parcours : rapprochement des variantes ────────────────────────
+   * La brochure Master compose ses bandeaux en petites capitales et en inverse
+   * parfois les mots : « Parcours créativité, communication et marketing » et
+   * « Parcours Communication, Créativité et Marketing » désignent le même parcours.
+   * On regroupe par ensemble de mots et on retient le libellé le plus fréquent —
+   * pas une liste écrite à la main, qui se périmerait à la prochaine édition.
+   * ─────────────────────────────────────────────────────────────── */
+  {
+    const variantes = new Map(); // clé de mots → { label → occurrences }
     for (const f of parId.values()) {
-      // Les champs de travail préfixés « _ » ne sortent jamais dans data/.
-      const propre = Object.fromEntries(Object.entries(f).filter(([k]) => !k.startsWith("_")));
-      fs.writeFileSync(path.join(OUT_DIR, `${f.id}.json`), JSON.stringify(propre, null, 2) + "\n");
+      if (!f.parcours) continue;
+      const k = cleParcours(f.parcours);
+      if (!variantes.has(k)) variantes.set(k, new Map());
+      const compte = variantes.get(k);
+      compte.set(f.parcours, (compte.get(f.parcours) || 0) + 1);
+    }
+    const canonique = new Map();
+    for (const [k, compte] of variantes) {
+      const [label] = [...compte.entries()].sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))[0];
+      canonique.set(k, label);
+    }
+    for (const f of parId.values()) {
+      if (!f.parcours) continue;
+      const label = canonique.get(cleParcours(f.parcours));
+      if (label && label !== f.parcours) f.parcours = label;
     }
   }
 
-  return resultats;
+  // Fusion avec l'existant : on ne réécrit jamais par-dessus un apport humain.
+  const anciennes = new Map();
+  if (fs.existsSync(dossierSortie)) {
+    for (const nom of fs.readdirSync(dossierSortie).filter((n) => n.endsWith(".json"))) {
+      try {
+        const f = JSON.parse(fs.readFileSync(path.join(dossierSortie, nom), "utf8"));
+        anciennes.set(f.id || nom.replace(/\.json$/, ""), f);
+      } catch {
+        console.log(`  ⚠ ${nom} illisible, ignoré à la fusion`);
+      }
+    }
+  }
+
+  const fusion = { preserves: 0, fiches: 0, statuts: 0, calculesPerdus: 0 };
+  for (const r of resultats) {
+    r.fiches = r.fiches.map((nouvelle) => {
+      const ancienne = anciennes.get(nouvelle.id);
+      const { fiche, preserves } = fusionnerFiche(nouvelle, ancienne);
+      if (preserves.length) {
+        fusion.preserves += preserves.length;
+        fusion.fiches++;
+        r.journal.push(`fusion ${fiche.id} : ${preserves.join(", ")}`);
+      }
+      if (ancienne?.meta?.statut && ancienne.meta.statut !== "brouillon") fusion.statuts++;
+      if (ancienne?.distinctivite && !fiche.distinctivite) fusion.calculesPerdus++;
+      return fiche;
+    });
+  }
+
+  // Une fiche présente sur le disque et plus produite par l'extraction n'est pas
+  // supprimée : elle peut porter du travail humain. On la signale (programme
+  // fermé ou renommé dans le catalogue).
+  const produits = new Set(resultats.flatMap((r) => r.fiches.map((f) => f.id)));
+  const catalogues = new Set(fichiers.map((f) => path.basename(f)));
+  const orphelines = [...anciennes.values()].filter(
+    (f) => !produits.has(f.id) && catalogues.has(f.meta?.brochure_fichier)
+  );
+
+  if (ecrire) {
+    fs.mkdirSync(dossierSortie, { recursive: true });
+    for (const r of resultats) {
+      for (const f of r.fiches) {
+        // Les champs de travail préfixés « _ » ne sortent jamais dans data/.
+        const propre = Object.fromEntries(Object.entries(f).filter(([k]) => !k.startsWith("_")));
+        fs.writeFileSync(path.join(dossierSortie, `${f.id}.json`), JSON.stringify(propre, null, 2) + "\n");
+      }
+    }
+  }
+
+  return Object.assign(resultats, { fusion, orphelines });
 }
 
 /* ══ CLI ═══════════════════════════════════════════════════════ */
@@ -536,9 +734,24 @@ async function main() {
     total += r.fiches.length;
   }
 
+  const { fusion, orphelines } = resultats;
+  if (fusion.fiches) {
+    console.log(
+      `\n  Fusion : ${fusion.preserves} champ(s) humain(s) préservés sur ${fusion.fiches} fiche(s) déjà travaillées`
+    );
+    if (fusion.statuts) console.log(`     ${fusion.statuts} fiche(s) gardent leur statut de validation`);
+  }
+  if (fusion.calculesPerdus) {
+    console.log(`     ${fusion.calculesPerdus} fiche(s) ont perdu leur distinctivité (périmée) → npm run distinctivite`);
+  }
+  for (const o of orphelines) {
+    console.log(`  ⚠ ${o.id}.json n'est plus produit par le catalogue (programme fermé ou renommé ?) — fiche conservée`);
+  }
+
   console.log(`\n  ${total} fiches écrites dans data/filieres/`);
   if (dump) console.log(`  Texte segmenté + journal : data/_raw/`);
-  console.log(`\n  Étapes suivantes :  npm test   puis   npm run report\n`);
+  // L'extraction réécrit les fiches : la distinctivité doit être recalculée après.
+  console.log(`\n  Étapes suivantes :  npm test   puis   npm run distinctivite   puis   npm run report\n`);
 }
 
 // Lancé directement, pas importé (le test importe extraire() sans exécuter le CLI).

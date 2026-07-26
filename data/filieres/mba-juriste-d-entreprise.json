@@ -19,13 +19,18 @@
     "creatif": 1,
     "cadre": 5
   },
+  "axes_parts": {
+    "quantitatif": 0,
+    "technique": 0,
+    "relationnel": 0.2857,
+    "creatif": 0,
+    "cadre": 1
+  },
   "domaines": [
-    "droit",
-    "gestion"
+    "droit"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Fonctionnels : Juriste",
@@ -81,9 +86,15 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
       "exigence_quantitative": "inference",
-      "partenariats": "brochure"
+      "vitrine.description": "brochure",
+      "partenariats": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
@@ -93,5 +104,41 @@
     "double_diplome": null,
     "diplome_delocalise": "deelije du groupe esg paris specialiste du droit, la mission du jurist",
     "accreditations": []
-  }
+  },
+  "voisines": [
+    "master-droit-des-affaires-en-ligne"
+  ],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Gestion des chantiers et de la vie juridique de l’organisation",
+      "Analyse et gestion des risques juridiques",
+      "Pilotage de la veille juridique",
+      "Conseil juridique et opérationnel aux collaborateurs et à la direction",
+      "Sensibilisation et formation des collaborateurs sur les enjeux juridiques clés",
+      "Mise en place et déploiement d’outils de suivi des documents juridiques et de la bonne exécution des contrats pour les acteurs internes.",
+      "Définition de la stratégie et des procédures judiciaires à engager en coordination avec les conseils externes."
+    ],
+    "metiers_exclusifs": [
+      "Fonctionnels : Juriste",
+      "Juriste groupe",
+      "Juriste corporate",
+      "Juriste international",
+      "Juriste négociateur",
+      "Sectoriels : Juriste en immobilier",
+      "Juriste en droit commercial",
+      "Juriste en droit bancaire - financier"
+    ],
+    "recouvrement_max": 0,
+    "plus_proche": null,
+    "correlation_axes_max": 0.995,
+    "plus_proche_axes": "master-droit-des-affaires-en-ligne"
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 0,
+    "nb_modules": 7,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": true
 }

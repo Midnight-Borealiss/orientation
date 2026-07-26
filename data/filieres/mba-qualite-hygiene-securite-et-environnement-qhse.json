@@ -20,14 +20,18 @@
     "creatif": 1,
     "cadre": 5
   },
+  "axes_parts": {
+    "quantitatif": 0.0625,
+    "technique": 0.1875,
+    "relationnel": 0.3125,
+    "creatif": 0,
+    "cadre": 0.5
+  },
   "domaines": [
-    "qualite",
-    "comptabilite",
-    "ingenierie"
+    "qualite"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Animateur QHSE",
@@ -81,20 +85,59 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
       "exigence_quantitative": "inference",
-      "partenariats": "brochure"
+      "vitrine.description": "brochure",
+      "partenariats": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
     "annee_source": 2024
   },
-  "parcours": "Parcours Responsabilité, Organisation et Management",
+  "parcours": "Parcours Responsabilité, organisation et management",
   "partenariats": {
     "double_diplome": null,
     "diplome_delocalise": null,
     "accreditations": [
       "Label UEMOA"
     ]
-  }
+  },
+  "voisines": [
+    "master-management-de-la-qualite-hygiene-securite-environneme-en-ligne"
+  ],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Introduction à la normalisation",
+      "Infrastructures qualité",
+      "Fondamentaux SMQ, SMSST, SMSDA, SMI",
+      "Management des risques",
+      "Référentiel ISO: 9001 VS 2015",
+      "ISO 45001 VS 2018",
+      "SMSDA: ISO 22000",
+      "SME: Étude du référentiel 14001"
+    ],
+    "metiers_exclusifs": [
+      "Directeur QHSE",
+      "Auditeur QHSE",
+      "Ingénieur QHSE (processus, produits, Services, Conseil..)",
+      "Chargéde mission QHSE"
+    ],
+    "recouvrement_max": 0.286,
+    "plus_proche": "master-management-de-la-qualite-hygiene-securite-environneme-en-ligne",
+    "correlation_axes_max": 0.977,
+    "plus_proche_axes": "master-management-de-la-qualite-hygiene-securite-environneme-en-ligne"
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 0,
+    "nb_modules": 16,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": false
 }

@@ -20,14 +20,18 @@
     "creatif": 1,
     "cadre": 5
   },
+  "axes_parts": {
+    "quantitatif": 0.0417,
+    "technique": 0,
+    "relationnel": 0.0833,
+    "creatif": 0,
+    "cadre": 0.8333
+  },
   "domaines": [
-    "droit",
-    "finance",
-    "marketing"
+    "droit"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Assistant dans un cabinet d’avocat, d’huissier de justice ou de notaire",
@@ -97,9 +101,15 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
       "exigence_quantitative": "inference",
-      "partenariats": "brochure"
+      "vitrine.description": "brochure",
+      "partenariats": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "ISM_bachelor_brochure.pdf"
@@ -108,5 +118,31 @@
     "double_diplome": null,
     "diplome_delocalise": "l'inu champollion d'albi/toulouse",
     "accreditations": []
-  }
+  },
+  "voisines": [],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Droit constitutionnel de la Ve République",
+      "Droit privé 1 : Droit de la famille et des personnes",
+      "Finances publiques de l’État",
+      "Droit général de l’Union Européenne 1",
+      "Droit privé 2 : Droit des biens",
+      "Droit commercial",
+      "Droit général de l’Union Européenne 2",
+      "Anglais Semestre 5"
+    ],
+    "metiers_exclusifs": [],
+    "recouvrement_max": 0.093,
+    "plus_proche": "licence-en-droit-gestion",
+    "correlation_axes_max": 0.987,
+    "plus_proche_axes": "licence-en-droit-des-affaires"
+  },
+  "structure_ue": {
+    "publiee": true,
+    "nb_ue": 3,
+    "nb_modules": 24,
+    "concentration": 0.5,
+    "blocs_types": []
+  },
+  "axes_fiables": true
 }

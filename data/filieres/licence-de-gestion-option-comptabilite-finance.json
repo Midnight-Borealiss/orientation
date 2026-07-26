@@ -1,6 +1,6 @@
 {
   "id": "licence-de-gestion-option-comptabilite-finance",
-  "nom": "Licence de gestion option Comptabilité - Finance",
+  "nom": "Licence de Gestion option Comptabilité - Finance",
   "ecole": "ism-management",
   "niveau": "licence",
   "langue": "francais",
@@ -13,20 +13,25 @@
     "presentiel"
   ],
   "axes": {
-    "quantitatif": 3,
+    "quantitatif": 4,
     "technique": 1,
     "relationnel": 3,
-    "creatif": 1,
+    "creatif": 2,
     "cadre": 2
+  },
+  "axes_parts": {
+    "quantitatif": 0.3182,
+    "technique": 0.0227,
+    "relationnel": 0.2955,
+    "creatif": 0.1136,
+    "cadre": 0.1591
   },
   "domaines": [
     "comptabilite",
-    "gestion",
-    "finance"
+    "gestion"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Comptable",
@@ -149,12 +154,52 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
-      "exigence_quantitative": "inference"
+      "exigence_quantitative": "inference",
+      "vitrine.description": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "ISM_bachelor_brochure.pdf"
   },
   "option": "Comptabilité - Finance",
-  "programme_parent": "licence-en-gestion"
+  "programme_parent": "licence-en-gestion",
+  "voisines": [
+    "licence-de-gestion-option-gestion-des-ressources-humaines",
+    "master-audit-controle-de-gestion-et-aide-a-la-decision-en-ligne",
+    "mba-en-audit-controle-de-gestion-et-aide-a-la-decision"
+  ],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Actions de recherche encadrées UE. Langues – Civilisations"
+    ],
+    "metiers_exclusifs": [
+      "Chargé du service administratif et financier",
+      "Gestionnaire portefeuille"
+    ],
+    "recouvrement_max": 0.827,
+    "plus_proche": "licence-de-gestion-option-gestion-des-ressources-humaines",
+    "correlation_axes_max": 0.967,
+    "plus_proche_axes": "licence-de-gestion-option-agrobusiness"
+  },
+  "structure_ue": {
+    "publiee": true,
+    "nb_ue": 9,
+    "nb_modules": 44,
+    "concentration": 0.386,
+    "blocs_types": [
+      "management-et-responsabilite-sociale-d-entrepris",
+      "concepts-et-techniques-de-gestion",
+      "comportement-professionnel-culture-juridique-et-",
+      "outils-et-techniques-de-gestion-approfondies",
+      "initiation-a-la-recherche",
+      "ateliers-d-approfondissement-et-finance-applique",
+      "projet-d-entreprise"
+    ]
+  },
+  "axes_fiables": true
 }

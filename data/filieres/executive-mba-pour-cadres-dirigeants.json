@@ -1,6 +1,6 @@
 {
   "id": "executive-mba-pour-cadres-dirigeants",
-  "nom": "EXECUTIVE MBA POUR CADRES DIRIGEANTS",
+  "nom": "Executive MBA pour Cadres Dirigeants",
   "ecole": "ism-executive",
   "niveau": "mba",
   "langue": "bilingue",
@@ -20,12 +20,18 @@
     "creatif": 2,
     "cadre": 1
   },
+  "axes_parts": {
+    "quantitatif": 0,
+    "technique": 0.0625,
+    "relationnel": 0.4375,
+    "creatif": 0.1875,
+    "cadre": 0
+  },
   "domaines": [
-    "design-web"
+    "gestion"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [],
     "secteurs": [],
@@ -72,11 +78,43 @@
       "modalites": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
-      "exigence_quantitative": "inference"
+      "exigence_quantitative": "inference",
+      "vitrine.description": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
     "annee_source": 2024
-  }
+  },
+  "voisines": [],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "PEOPLE, MANAGEMENT & POLICY",
+      "Leadership and effective teams",
+      "Human Resources Strategy",
+      "Business Negotiation Techniques",
+      "Organization Change & Behavior",
+      "INNOVATION & SYSTEMS",
+      "Management of Innovation",
+      "Ethics & Corporate Governance"
+    ],
+    "metiers_exclusifs": [],
+    "recouvrement_max": 0.051,
+    "plus_proche": "executive-mba-parcours-full-english-en-ligne",
+    "correlation_axes_max": 0.702,
+    "plus_proche_axes": "executive-mba-parcours-full-english-en-ligne"
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 0,
+    "nb_modules": 16,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": false
 }

@@ -1,0 +1,42 @@
+{
+  "_role": "Les fragments de la phrase « Si je comprends bien… ». Un par axe compté et par sens, a la deuxieme personne. AUCUN appel reseau, aucune generation de texte : le site reste statique, et une phrase pre-ecrite est la seule qu'on puisse relire avant de l'afficher a un prospect.",
+
+  "_pourquoi_ici_et_pas_dans_le_code": "C'est de la donnee, pas de la logique. Le vocabulaire definitif viendra des admissions, qui parlent aux prospects tous les jours ; il doit pouvoir changer sans toucher a src/engine/. Le moteur recoit ces fragments dans son contexte, comme les questions.",
+
+  "_statut": "v0 — a remplacer par les formulations recueillies aux admissions, voir CLAUDE.md > Regles de redaction des questions.",
+
+  "_regles": [
+    "Un fragment est un BOUT DE PHRASE, jamais une etiquette : « tu es a l'aise avec les chiffres » se lit, « quantitatif : 4/5 » se subit.",
+    "Aucun des deux sens n'est valorise. « les chiffres ne sont pas ce qui te motive » n'est pas un manque, c'est une orientation.",
+    "Aucun chiffre, aucun pourcentage, aucune note.",
+    "Les deux sens sont obligatoires pour chaque axe compte : un axe marque vers le bas doit pouvoir se dire aussi. `verifierContexte()` le refuse sinon."
+  ],
+
+  "fragments": {
+    "quantitatif": {
+      "fort": "tu es à l'aise avec les chiffres",
+      "faible": "les chiffres ne sont pas ce qui te motive"
+    },
+    "technique": {
+      "fort": "tu as besoin de voir concrètement à quoi ça sert",
+      "faible": "tu préfères les idées aux machines"
+    },
+    "relationnel": {
+      "fort": "tu avances mieux avec des gens autour",
+      "faible": "tu travailles bien seul"
+    },
+    "creatif": {
+      "fort": "tu as besoin de produire quelque chose à toi",
+      "faible": "tu préfères améliorer l'existant que partir d'une page blanche"
+    },
+    "cadre": {
+      "fort": "tu préfères un cadre clair",
+      "faible": "un cadre trop serré t'étouffe"
+    }
+  },
+
+  "_assemblage": "« Si je comprends bien : {1}, {2}, et {3}. » Deux fragments si le troisieme axe est peu marque — le seuil est dans reformulation.mjs (0,6 ecart-type), pas ici.",
+
+  "reprise": "Ce n'est pas ça ? Reprendre",
+  "_reprise": "Le bouton a le meme poids visuel que la phrase : il transforme un verdict en proposition. Il rouvre les SEULES questions de profil, en conservant filtres et aiguillage — refaire les filtres serait punir le prospect d'avoir corrige."
+}

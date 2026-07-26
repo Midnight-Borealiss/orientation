@@ -17,16 +17,20 @@
     "technique": 1,
     "relationnel": 2,
     "creatif": 1,
-    "cadre": 1
+    "cadre": 2
+  },
+  "axes_parts": {
+    "quantitatif": 0.2813,
+    "technique": 0.0313,
+    "relationnel": 0.1563,
+    "creatif": 0.0313,
+    "cadre": 0.125
   },
   "domaines": [
-    "gestion",
-    "informatique",
-    "management-projet"
+    "administration-publique"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Cadre supérieur dans l’administration territoriale",
@@ -99,11 +103,52 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
-      "exigence_quantitative": "inference"
+      "exigence_quantitative": "inference",
+      "vitrine.description": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
     "annee_source": 2024
-  }
+  },
+  "voisines": [
+    "licence-en-administration-publique"
+  ],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Déconcentration / Décentralisation",
+      "Planification locale et développement Durable",
+      "Management des organisations",
+      "Leadership",
+      "Économie",
+      "Statistiques",
+      "Logiciels (Excel avancé, base de données et SIG)",
+      "Management stratégique"
+    ],
+    "metiers_exclusifs": [
+      "Cadre supérieur dans l’administration territoriale",
+      "Chef de projet d’une ONG",
+      "Assistant parlementaire",
+      "Conseiller territorial",
+      "Responsable de projets de développement territorial des organismes internationaux",
+      "Responsable en planifcation et de développement local"
+    ],
+    "recouvrement_max": 0.037,
+    "plus_proche": "licence-en-administration-publique",
+    "correlation_axes_max": 0.241,
+    "plus_proche_axes": null
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 0,
+    "nb_modules": 32,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": false
 }

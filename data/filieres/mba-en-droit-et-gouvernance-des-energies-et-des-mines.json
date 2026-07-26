@@ -15,16 +15,23 @@
   "axes": {
     "quantitatif": 2,
     "technique": 1,
-    "relationnel": 4,
+    "relationnel": 5,
     "creatif": 1,
     "cadre": 4
   },
+  "axes_parts": {
+    "quantitatif": 0.1667,
+    "technique": 0,
+    "relationnel": 0.4167,
+    "creatif": 0,
+    "cadre": 0.3333
+  },
   "domaines": [
-    "droit"
+    "droit",
+    "energie"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Cette formation permet de rejoindre des structures telles que les :",
@@ -77,11 +84,50 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
-      "exigence_quantitative": "inference"
+      "exigence_quantitative": "inference",
+      "vitrine.description": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
     "annee_source": 2024
-  }
+  },
+  "voisines": [
+    "master-en-fiscalite-droit-des-affaires-option-droit-des-affa",
+    "mba-management-des-energies-petrolieres-et-gazieres"
+  ],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Analyse de différentes sources d’énergie et de leur régime juridique",
+      "Énergie et protection de l’environnement",
+      "Droit de la maîtrise de l’énergie",
+      "Energie et responsabilité"
+    ],
+    "metiers_exclusifs": [
+      "Cette formation permet de rejoindre des structures telles que les :",
+      "Grandes compagnies pétrolières",
+      "Collectivités territoriales",
+      "Cabinets d’avocats ou de conseil",
+      "Sociétés d’État",
+      "Organismes Internationaux…",
+      "École de Droit"
+    ],
+    "recouvrement_max": 0.533,
+    "plus_proche": "master-en-fiscalite-droit-des-affaires-option-fiscalite",
+    "correlation_axes_max": 0.996,
+    "plus_proche_axes": "master-en-fiscalite-droit-des-affaires-option-droit-des-affa"
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 0,
+    "nb_modules": 12,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": true
 }

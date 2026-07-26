@@ -19,14 +19,19 @@
     "creatif": 5,
     "cadre": 1
   },
+  "axes_parts": {
+    "quantitatif": 0.0625,
+    "technique": 0.3125,
+    "relationnel": 0.3125,
+    "creatif": 0.6875,
+    "cadre": 0
+  },
   "domaines": [
     "communication",
-    "culture-evenementiel",
-    "marketing"
+    "culture-evenementiel"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Directeur ou responsable marketing",
@@ -78,18 +83,59 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
       "exigence_quantitative": "inference",
-      "partenariats": "brochure"
+      "vitrine.description": "brochure",
+      "partenariats": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
     "annee_source": 2024
   },
-  "parcours": "Parcours créativité, communication et marketing",
+  "parcours": "Parcours Communication, créativité et marketing",
   "partenariats": {
     "double_diplome": "double diplôme mentionné",
     "diplome_delocalise": null,
     "accreditations": []
-  }
+  },
+  "voisines": [
+    "licence-en-communication-et-medias",
+    "licence-en-management-et-production-des-evenements-culturels",
+    "master-marketing-communication-vente-relation-client-en-ligne"
+  ],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Études de marché",
+      "Webmarketing",
+      "Politique de communication",
+      "Relations publiques - Relations presse",
+      "Design thinking",
+      "Informatique appliquée au Marketing",
+      "Infographie et création publicitaire",
+      "Ateliers de création de site Web et de blog"
+    ],
+    "metiers_exclusifs": [
+      "Directeur ou responsable marketing",
+      "Responsable de la communication événementielle",
+      "Ingénieur commercial",
+      "Responsable des ventes École de Management"
+    ],
+    "recouvrement_max": 0.029,
+    "plus_proche": "master-marketing-communication-vente-relation-client-en-ligne",
+    "correlation_axes_max": 0.853,
+    "plus_proche_axes": "licence-en-management-et-production-des-evenements-culturels"
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 0,
+    "nb_modules": 16,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": true
 }

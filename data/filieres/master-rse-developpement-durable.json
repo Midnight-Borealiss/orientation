@@ -14,19 +14,23 @@
   ],
   "axes": {
     "quantitatif": 1,
-    "technique": 5,
+    "technique": 1,
     "relationnel": 4,
     "creatif": 1,
-    "cadre": 1
+    "cadre": 5
+  },
+  "axes_parts": {
+    "quantitatif": 0,
+    "technique": 0,
+    "relationnel": 0.3333,
+    "creatif": 0.0833,
+    "cadre": 0.6667
   },
   "domaines": [
-    "rse",
-    "informatique",
-    "qualite"
+    "rse"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Spécialiste de la RSE",
@@ -77,12 +81,52 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
-      "exigence_quantitative": "inference"
+      "exigence_quantitative": "inference",
+      "vitrine.description": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
     "annee_source": 2024
   },
-  "parcours": "Parcours responsabilité, organisation et management"
+  "parcours": "Parcours Responsabilité, organisation et management",
+  "voisines": [],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Identifier les enjeux stratégiques de la Responsabilité Sociétale des Entreprises (RSE) et du Développement Durable pour les entreprises, organisations, collectivités.",
+      "Élargir ses compétences et la maîtrise d’outils dédiés à l’environnement et à la RSE pour accompagner les entreprises et les organisations dans l’accélération de leur transition.",
+      "Raisonner dans une logique de performance globale d’entreprise basée sur le management des risques et l’amélioration continue.",
+      "Accompagner les évolutions managériales et culturelles indispensables pour répondre aux nouveaux enjeux RSE.",
+      "Partager les bonnes pratiques des entreprises performantes.",
+      "Maîtriser des outils et méthodes permettant la mise en œuvre de la RSE.",
+      "Réaliser le diagnostic RSE / Développement Durable.",
+      "Définir la politique et la démarche stratégique RSE / Développement Durable."
+    ],
+    "metiers_exclusifs": [
+      "Spécialiste de la RSE",
+      "Spécialiste de l’économie verte",
+      "Responsable des démarches en DD",
+      "Responsable RSE",
+      "Agent de veille sur la santé au travail",
+      "Gestionnaire des risques sociaux et environnementaux",
+      "Conseiller santé, sécurité, environnement École de Management"
+    ],
+    "recouvrement_max": 0,
+    "plus_proche": null,
+    "correlation_axes_max": 0,
+    "plus_proche_axes": null
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 0,
+    "nb_modules": 12,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": true
 }

@@ -1,6 +1,6 @@
 {
   "id": "licence-en-journalisme-et-metiers-de-l-information",
-  "nom": "Licence en Journalisme et MÉtiers de l'information",
+  "nom": "Licence en Journalisme et Métiers de l'information",
   "ecole": "madiba",
   "niveau": "licence",
   "langue": "francais",
@@ -16,17 +16,21 @@
     "quantitatif": 2,
     "technique": 1,
     "relationnel": 4,
-    "creatif": 2,
+    "creatif": 4,
     "cadre": 1
   },
+  "axes_parts": {
+    "quantitatif": 0.1707,
+    "technique": 0.0976,
+    "relationnel": 0.3415,
+    "creatif": 0.3415,
+    "cadre": 0.0244
+  },
   "domaines": [
-    "communication",
-    "journalisme",
-    "gestion"
+    "journalisme"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Journaliste reporter d’images (JRI)",
@@ -123,10 +127,54 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
-      "exigence_quantitative": "inference"
+      "exigence_quantitative": "inference",
+      "vitrine.description": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "ISM_bachelor_brochure.pdf"
-  }
+  },
+  "voisines": [],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Théorie de l’information et de la communication",
+      "Communication et image : sémiologie",
+      "Communication des organisations",
+      "Médias et société",
+      "Economie des médias",
+      "Ecriture médiatique,",
+      "Communication politique et institutionnelle",
+      "Plan de communication et démarche qualité"
+    ],
+    "metiers_exclusifs": [
+      "Journaliste reporter d’images (JRI)",
+      "Journaliste télé",
+      "Journalisme radio",
+      "Journaliste en presse écrite",
+      "Grand reporter",
+      "Consultant en communication",
+      "Concepteur-rédacteur",
+      "Attaché de presse"
+    ],
+    "recouvrement_max": 0,
+    "plus_proche": null,
+    "correlation_axes_max": 0,
+    "plus_proche_axes": null
+  },
+  "structure_ue": {
+    "publiee": true,
+    "nb_ue": 4,
+    "nb_modules": 41,
+    "concentration": 0.512,
+    "blocs_types": [
+      "sciences-humaines-et-sociales",
+      "comportements-professionnels-leadership-langues"
+    ]
+  },
+  "axes_fiables": true
 }

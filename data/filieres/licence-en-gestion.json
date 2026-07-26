@@ -19,12 +19,18 @@
     "creatif": 3,
     "cadre": 3
   },
+  "axes_parts": {
+    "quantitatif": 0,
+    "technique": 0,
+    "relationnel": 0,
+    "creatif": 0,
+    "cadre": 0
+  },
   "domaines": [
     "gestion"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [],
     "secteurs": [],
@@ -45,10 +51,32 @@
       "niveau_acces": "inference",
       "modalites": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
-      "exigence_quantitative": "inference"
+      "exigence_quantitative": "inference",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "ISM_bachelor_brochure.pdf"
-  }
+  },
+  "voisines": [],
+  "distinctivite": {
+    "modules_exclusifs": [],
+    "metiers_exclusifs": [],
+    "recouvrement_max": 0,
+    "plus_proche": null,
+    "correlation_axes_max": 0,
+    "plus_proche_axes": null
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 0,
+    "nb_modules": 0,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": false
 }

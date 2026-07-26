@@ -45,6 +45,70 @@
     "week-end",
     "full-time"
   ],
+
+  "_libelles": "Les identifiants ci-dessus et ceux de `niveaux` sont des slugs : « presentiel », « mba ». Ce qu'un prospect doit lire est ici, et NON dans l'interface — l'ecran ne doit porter aucun mot du vocabulaire des donnees, sans quoi renommer une modalite demanderait de toucher au HTML. Un identifiant sans libelle s'affiche tel quel : c'est visible, donc corrigeable.",
+
+  "modalites_libelles": {
+    "presentiel": "sur le campus",
+    "en-ligne": "à distance",
+    "cours-du-soir": "cours du soir",
+    "week-end": "le week-end",
+    "full-time": "temps plein"
+  },
+
+  "niveaux_libelles": {
+    "bts": "BTS",
+    "licence": "Licence",
+    "bachelor": "Bachelor",
+    "licence-pro": "Licence professionnelle",
+    "master": "Master",
+    "mba": "MBA",
+    "dba": "Doctorat (DBA)",
+    "certificat": "Certificat"
+  },
+
+  "niveaux_acces_libelles": {
+    "bac": "avec le bac",
+    "bac+2": "avec un bac+2",
+    "bac+3": "avec une licence ou un bac+3",
+    "bac+4": "avec un bac+4",
+    "bac+5": "avec un bac+5"
+  },
+  "_familles": "Niveau au-dessus des domaines. Un domaine appartient a UNE famille et une seule ; validate.mjs le verifie. C'est la famille que le prospect choisit (question 3 du parcours) et c'est a ce niveau que vivent les 2 axes de disposition (config/familles_axes.json) : 30 domaines etaient trop fins pour un tri de portraits, et une reponse par domaine aurait demande 30 seances.",
+
+  "familles": [
+    {
+      "id": "chiffres-finance",
+      "label": "Chiffres, finance et comptabilité",
+      "domaines": ["finance", "marches-financiers", "comptabilite", "fiscalite", "assurance", "mathematiques"]
+    },
+    {
+      "id": "entreprise-management",
+      "label": "Entreprise, management et ressources humaines",
+      "domaines": ["gestion", "management-projet", "entrepreneuriat", "rh", "qualite", "rse"]
+    },
+    {
+      "id": "commerce-communication",
+      "label": "Commerce, marketing et communication",
+      "domaines": ["marketing", "commerce-international", "communication", "journalisme", "culture-evenementiel"]
+    },
+    {
+      "id": "numerique",
+      "label": "Numérique et technologies de l'information",
+      "domaines": ["informatique", "reseaux", "cybersecurite", "data", "design-web"]
+    },
+    {
+      "id": "ingenierie-industrie",
+      "label": "Ingénierie, industrie et logistique",
+      "domaines": ["ingenierie", "electronique", "energie", "agrobusiness", "logistique"]
+    },
+    {
+      "id": "droit-action-publique",
+      "label": "Droit et action publique",
+      "domaines": ["droit", "science-politique", "administration-publique"]
+    }
+  ],
+
   "domaines": [
     {
       "id": "finance",
@@ -133,6 +197,10 @@
     {
       "id": "agrobusiness",
       "label": "Agrobusiness et agroalimentaire"
+    },
+    {
+      "id": "energie",
+      "label": "Énergies, pétrole, gaz et mines"
     },
     {
       "id": "commerce-international",

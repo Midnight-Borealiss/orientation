@@ -2,7 +2,7 @@ name: Validation des fiches
 
 on:
   push:
-    paths: ["data/filieres/**", "schema/**", "config/**", "scripts/**"]
+    paths: ["data/filieres/**", "schema/**", "config/**", "scripts/**", "src/**", "web/**"]
   pull_request:
 
 jobs:
@@ -16,7 +16,19 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run validate
+      # Le moteur se teste sur les fiches du dépôt : aucun PDF requis.
+      - run: npm run test:moteur
+      # L'écran de résultat : aucun score dans le DOM, aucun nom de filière dans le code,
+      # dégradation quand la donnée manque. Le rendu est pur, il se teste sans navigateur.
+      - run: npm run test:interface
+      # Le contexte servi au navigateur doit rester en phase avec config/ et data/ : le
+      # script refuse d'écrire s'il n'est plus servable, et `git diff` dit s'il a bougé.
+      - run: npm run contexte:web
+      - run: git diff --exit-code -- data/_contexte.json
       # Test de segmentation : la brochure Bachelor doit produire 26 fiches.
       # Ignoré si les catalogues PDF ne sont pas dans le dépôt.
-      - run: npm test
+      - run: npm run test:donnees
         if: hashFiles('data/brochures/*.pdf') != ''
+      # Les seuils doivent rester conformes aux trois objectifs de la spec :
+      # simuler.mjs sort en erreur sinon.
+      - run: npm run simuler

@@ -16,17 +16,21 @@
     "quantitatif": 1,
     "technique": 5,
     "relationnel": 1,
-    "creatif": 3,
+    "creatif": 4,
     "cadre": 3
   },
+  "axes_parts": {
+    "quantitatif": 0,
+    "technique": 0.7222,
+    "relationnel": 0,
+    "creatif": 0.3333,
+    "cadre": 0.2222
+  },
   "domaines": [
-    "informatique",
-    "design-web",
-    "cybersecurite"
+    "informatique"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Lead Developer (Front-end, Back-end, Mobile)",
@@ -84,11 +88,49 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
-      "exigence_quantitative": "inference"
+      "exigence_quantitative": "inference",
+      "vitrine.description": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
     "annee_source": 2024
-  }
+  },
+  "voisines": [],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "PHP orienté objet (POO)",
+      "Administration système",
+      "Sécurisation et partage",
+      "Framework Symfony -Laravel",
+      "Algorithmie",
+      "UML, Design pattern",
+      "Normes et protocoles",
+      "Cyber sécurité"
+    ],
+    "metiers_exclusifs": [
+      "Lead Developer (Front-end, Back-end, Mobile)",
+      "DevOps",
+      "Architecte (Logiciel, Base de Données, Solutions",
+      "Cloud)",
+      "Responsable qualité et performances"
+    ],
+    "recouvrement_max": 0.125,
+    "plus_proche": "bachelor-concepteur-et-developpeur-de-solutions-digitales",
+    "correlation_axes_max": 0.943,
+    "plus_proche_axes": "bachelor-concepteur-et-developpeur-de-solutions-digitales"
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 0,
+    "nb_modules": 18,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": true
 }

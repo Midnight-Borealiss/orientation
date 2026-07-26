@@ -4,12 +4,23 @@
   "description": "Moteur d'orientation reutilisable : quiz guide pilote par les donnees",
   "type": "module",
   "license": "MIT",
-  "engines": { "node": ">=18" },
+  "engines": {
+    "node": ">=18"
+  },
   "scripts": {
     "extract": "node scripts/extract.mjs",
-    "test": "node scripts/test-extract.mjs",
+    "test": "node scripts/test-extract.mjs && node scripts/test-moteur.mjs && node scripts/test-interface.mjs",
+    "test:donnees": "node scripts/test-extract.mjs",
+    "test:moteur": "node scripts/test-moteur.mjs",
+    "quiz": "node scripts/quiz.mjs",
+    "simuler": "node scripts/simuler.mjs",
+    "distinctivite": "node scripts/distinctivite.mjs",
+    "comparaisons": "node scripts/fiches-comparaison.mjs",
     "report": "node scripts/report.mjs",
-    "validate": "node scripts/validate.mjs"
+    "validate": "node scripts/validate.mjs",
+    "test:interface": "node scripts/test-interface.mjs",
+    "contexte:web": "node scripts/contexte-web.mjs",
+    "web": "node scripts/servir.mjs"
   },
   "dependencies": {
     "ajv": "^8.17.1",

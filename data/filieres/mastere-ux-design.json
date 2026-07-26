@@ -16,16 +16,21 @@
     "quantitatif": 1,
     "technique": 4,
     "relationnel": 2,
-    "creatif": 1,
+    "creatif": 4,
     "cadre": 1
   },
+  "axes_parts": {
+    "quantitatif": 0,
+    "technique": 0.3636,
+    "relationnel": 0.1818,
+    "creatif": 0.3636,
+    "cadre": 0
+  },
   "domaines": [
-    "design-web",
-    "qualite"
+    "design-web"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "UX strategist",
@@ -83,11 +88,52 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
-      "exigence_quantitative": "inference"
+      "exigence_quantitative": "inference",
+      "vitrine.description": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
     "annee_source": 2024
-  }
+  },
+  "voisines": [],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Connaissance de l’utilisateur et Conception orientée",
+      "Sciences de l’information",
+      "Maîtrise de l’interface",
+      "Objectifs de marque",
+      "Technologies UX",
+      "Culture et environnement digital",
+      "Environnement international",
+      "Communication globale et digitale"
+    ],
+    "metiers_exclusifs": [
+      "UX strategist",
+      "UX researcher",
+      "UX analyst",
+      "Architecte de l’information",
+      "Interaction designer",
+      "Wireframer",
+      "UX designer",
+      "Visual designer"
+    ],
+    "recouvrement_max": 0,
+    "plus_proche": null,
+    "correlation_axes_max": 0,
+    "plus_proche_axes": null
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 0,
+    "nb_modules": 11,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": true
 }

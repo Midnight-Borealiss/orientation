@@ -19,14 +19,19 @@
     "creatif": 1,
     "cadre": 4
   },
+  "axes_parts": {
+    "quantitatif": 0.2308,
+    "technique": 0,
+    "relationnel": 0.3846,
+    "creatif": 0,
+    "cadre": 0.3846
+  },
   "domaines": [
     "droit",
-    "fiscalite",
-    "gestion"
+    "fiscalite"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Conseiller en gestion de patrimoine",
@@ -80,12 +85,43 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
-      "exigence_quantitative": "inference"
+      "exigence_quantitative": "inference",
+      "vitrine.description": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
     "annee_source": 2024
   },
-  "option": "Fiscalité"
+  "option": "Fiscalité",
+  "voisines": [
+    "master-en-droit-notarial-et-gestion-du-patrimoine",
+    "master-en-fiscalite-droit-des-affaires-option-affaires-inter",
+    "master-en-fiscalite-droit-des-affaires-option-droit-des-affa"
+  ],
+  "distinctivite": {
+    "modules_exclusifs": [],
+    "metiers_exclusifs": [
+      "Juriste d’entreprise publique ou privée (secteurs du commerce, de l’assurance, de l’immobilier, de l’industrie…)",
+      "Juriste en cabinet d’avocats",
+      "Fiscaliste École de Droit"
+    ],
+    "recouvrement_max": 0.917,
+    "plus_proche": "master-en-fiscalite-droit-des-affaires-option-droit-des-affa",
+    "correlation_axes_max": 0.991,
+    "plus_proche_axes": "master-en-fiscalite-droit-des-affaires-option-droit-des-affa"
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 0,
+    "nb_modules": 13,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": true
 }

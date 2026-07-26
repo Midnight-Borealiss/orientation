@@ -20,14 +20,19 @@
     "creatif": 1,
     "cadre": 2
   },
+  "axes_parts": {
+    "quantitatif": 0.2727,
+    "technique": 0.5,
+    "relationnel": 0.1364,
+    "creatif": 0.0909,
+    "cadre": 0.1818
+  },
   "domaines": [
     "informatique",
-    "gestion",
-    "reseaux"
+    "gestion"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Assistant Chef de projet / Technico-commercial",
@@ -105,11 +110,52 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
-      "exigence_quantitative": "inference"
+      "exigence_quantitative": "inference",
+      "vitrine.description": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "ISM_bachelor_brochure.pdf"
   },
-  "departement": "Management et Technologies"
+  "departement": "Management et Technologies",
+  "voisines": [
+    "licence-en-genie-logiciel-reseaux-et-systemes",
+    "licence-en-informatique"
+  ],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Web marketing",
+      "Marketing Média et plan de communication",
+      "Management des Processus UE. Réseaux et Systèmes informatiques",
+      "Architectures systèmes et réseaux informatiques",
+      "Systèmes de gestion de bases de données",
+      "Webmastering",
+      "Technologies JAVA & .NET"
+    ],
+    "metiers_exclusifs": [
+      "Certification CISCO Gratuite et intégrée dans le curiculum de formation ( IT Essentials - CCNA)"
+    ],
+    "recouvrement_max": 0.375,
+    "plus_proche": "licence-en-genie-logiciel-reseaux-et-systemes",
+    "correlation_axes_max": 0.977,
+    "plus_proche_axes": "bachelor-en-informatique-appliquee-a-la-gestion-des-entrepri-en-ligne"
+  },
+  "structure_ue": {
+    "publiee": true,
+    "nb_ue": 4,
+    "nb_modules": 22,
+    "concentration": 0.409,
+    "blocs_types": [
+      "methodologie-entrepreneurship",
+      "management-organisations",
+      "programmation-developpement-web-et-d-application",
+      "mathematiques-et-techniques-quantitatives-de-ges"
+    ]
+  },
+  "axes_fiables": true
 }

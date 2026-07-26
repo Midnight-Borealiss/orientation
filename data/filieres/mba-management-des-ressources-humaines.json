@@ -20,13 +20,18 @@
     "creatif": 1,
     "cadre": 3
   },
+  "axes_parts": {
+    "quantitatif": 0.0769,
+    "technique": 0,
+    "relationnel": 0.6154,
+    "creatif": 0.0769,
+    "cadre": 0.2308
+  },
   "domaines": [
-    "rh",
-    "gestion"
+    "rh"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Directeur des Ressources Humaines",
@@ -76,18 +81,57 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
       "exigence_quantitative": "inference",
-      "partenariats": "brochure"
+      "vitrine.description": "brochure",
+      "partenariats": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
     "annee_source": 2024
   },
-  "parcours": "Parcours Responsabilité, Organisation et Management",
+  "parcours": "Parcours Responsabilité, organisation et management",
   "partenariats": {
     "double_diplome": "double diplôme mentionné",
     "diplome_delocalise": null,
     "accreditations": []
-  }
+  },
+  "voisines": [
+    "bachelor-en-gestion-option-organisation-rh-en-ligne",
+    "master-management-des-ressources-humaines-en-ligne"
+  ],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Management des équipes",
+      "Gestion opérationnelle des RH",
+      "Psychosociologie des organisations",
+      "Droit du Travail",
+      "Communication 2.0",
+      "Gestion des compétences",
+      "Paie et Politique de Rémunération",
+      "Hygiène, sécurité et santé au travail"
+    ],
+    "metiers_exclusifs": [
+      "Directeur des Ressources Humaines",
+      "Responsable de la formation",
+      "Responsable rémunération"
+    ],
+    "recouvrement_max": 0.107,
+    "plus_proche": "master-management-des-ressources-humaines-en-ligne",
+    "correlation_axes_max": 0.977,
+    "plus_proche_axes": "master-management-des-ressources-humaines-en-ligne"
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 0,
+    "nb_modules": 13,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": true
 }

@@ -19,14 +19,18 @@
     "creatif": 1,
     "cadre": 2
   },
+  "axes_parts": {
+    "quantitatif": 0.2857,
+    "technique": 0.0476,
+    "relationnel": 0.4286,
+    "creatif": 0.0476,
+    "cadre": 0.1429
+  },
   "domaines": [
-    "management-projet",
-    "gestion",
-    "finance"
+    "management-projet"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Chef de projets (tous secteurs, notamment services, ONG…)",
@@ -85,10 +89,49 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
-      "exigence_quantitative": "inference"
+      "exigence_quantitative": "inference",
+      "vitrine.description": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "ISM_ONLINE_ISF_BROCHURE.pdf"
-  }
+  },
+  "voisines": [
+    "mba-management-de-projets",
+    "mba-management-de-projets-internationaux"
+  ],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Droit du travail et relations individuelles",
+      "Finance publique",
+      "Management du changement",
+      "Technique de montage projet",
+      "Analyse économique et financière de projet",
+      "Management des risques de projet",
+      "Management de la qualité de projet",
+      "Management de la communication d’un projet"
+    ],
+    "metiers_exclusifs": [
+      "Consultant en gestion et montage de projet, de programme ou de portefeuille",
+      "Ingénieur planning",
+      "Contrôleur / Suivi-évaluateur de projet"
+    ],
+    "recouvrement_max": 0.077,
+    "plus_proche": "mba-management-de-projets",
+    "correlation_axes_max": 0.952,
+    "plus_proche_axes": "mba-management-de-projets"
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 0,
+    "nb_modules": 21,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": true
 }

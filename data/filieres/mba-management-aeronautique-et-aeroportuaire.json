@@ -19,13 +19,18 @@
     "creatif": 1,
     "cadre": 2
   },
+  "axes_parts": {
+    "quantitatif": 0.0625,
+    "technique": 0.25,
+    "relationnel": 0.125,
+    "creatif": 0,
+    "cadre": 0.1875
+  },
   "domaines": [
-    "logistique",
-    "gestion"
+    "logistique"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Responsable de l’exploitation aéroportuaire",
@@ -78,12 +83,52 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
-      "exigence_quantitative": "inference"
+      "exigence_quantitative": "inference",
+      "vitrine.description": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
     "annee_source": 2024
   },
-  "parcours": "Parcours Responsabilité, Organisation et Management"
+  "parcours": "Parcours Responsabilité, organisation et management",
+  "voisines": [
+    "licence-en-technologie-transport-et-logistique"
+  ],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Aéronef et systèmes du transport aérien",
+      "Ground handling",
+      "Organisation et fonctionnement des aéroports",
+      "Droit international de l’aviation civile",
+      "Gestion des opérations",
+      "Sécurité aérienne du transport de marchandises dangereuses",
+      "Optimisation des recettes (revenue management)",
+      "Compagnies aériennes et industries du transport aérien"
+    ],
+    "metiers_exclusifs": [
+      "Responsable de l’exploitation aéroportuaire",
+      "Directeur exploitation aéroportuaire",
+      "Responsable exploitation sûreté opérationnelle",
+      "Agent d’escale commerciale",
+      "Agent d’opération École de Management"
+    ],
+    "recouvrement_max": 0,
+    "plus_proche": null,
+    "correlation_axes_max": 0.518,
+    "plus_proche_axes": "licence-en-technologie-transport-et-logistique"
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 0,
+    "nb_modules": 16,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": false
 }

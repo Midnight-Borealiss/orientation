@@ -19,14 +19,19 @@
     "creatif": 1,
     "cadre": 3
   },
+  "axes_parts": {
+    "quantitatif": 0.25,
+    "technique": 0,
+    "relationnel": 0.5,
+    "creatif": 0,
+    "cadre": 0.25
+  },
   "domaines": [
     "gestion",
-    "droit",
-    "culture-evenementiel"
+    "droit"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Conseiller en gestion de patrimoine",
@@ -77,11 +82,43 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
-      "exigence_quantitative": "inference"
+      "exigence_quantitative": "inference",
+      "vitrine.description": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
     "annee_source": 2024
-  }
+  },
+  "voisines": [
+    "bachelor-en-gestion-option-organisation-rh-en-ligne",
+    "master-en-fiscalite-droit-des-affaires-option-droit-des-affa",
+    "master-en-fiscalite-droit-des-affaires-option-fiscalite"
+  ],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Théories et pratiques Notariales"
+    ],
+    "metiers_exclusifs": [
+      "Clerc de notaire",
+      "Juriste spécialisé en gestion du patrimoine"
+    ],
+    "recouvrement_max": 0.846,
+    "plus_proche": "master-en-fiscalite-droit-des-affaires-option-droit-des-affa",
+    "correlation_axes_max": 0.98,
+    "plus_proche_axes": "bachelor-en-gestion-option-organisation-rh-en-ligne"
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 0,
+    "nb_modules": 12,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": true
 }

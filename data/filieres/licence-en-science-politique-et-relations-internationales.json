@@ -19,14 +19,18 @@
     "creatif": 1,
     "cadre": 2
   },
+  "axes_parts": {
+    "quantitatif": 0.1351,
+    "technique": 0.0541,
+    "relationnel": 0.2432,
+    "creatif": 0.027,
+    "cadre": 0.1622
+  },
   "domaines": [
-    "science-politique",
-    "droit",
-    "gestion"
+    "science-politique"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Administration publique et territoriale",
@@ -115,10 +119,52 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
-      "exigence_quantitative": "inference"
+      "exigence_quantitative": "inference",
+      "vitrine.description": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "ISM_bachelor_brochure.pdf"
-  }
+  },
+  "voisines": [
+    "mba-en-science-politique-et-relations-internationales"
+  ],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Introduction à la Science politique",
+      "Histoire des idées politiques",
+      "Etudes des systèmes politiques",
+      "Institutions internationales",
+      "Enjeux et pratiques des relations internationales",
+      "Analyse et évaluation des politiques publiques",
+      "Politiques contemporaines",
+      "Droit constitutionnel"
+    ],
+    "metiers_exclusifs": [
+      "Administration publique et territoriale",
+      "Organisations internationales",
+      "Entreprises privées",
+      "Cabinets de conseil",
+      "Associations et autres structures humanitaires"
+    ],
+    "recouvrement_max": 0.017,
+    "plus_proche": "mba-en-science-politique-et-relations-internationales",
+    "correlation_axes_max": 0.948,
+    "plus_proche_axes": "mba-en-science-politique-et-relations-internationales"
+  },
+  "structure_ue": {
+    "publiee": true,
+    "nb_ue": 4,
+    "nb_modules": 37,
+    "concentration": 0.459,
+    "blocs_types": [
+      "sciences-humaines-et-sociales"
+    ]
+  },
+  "axes_fiables": false
 }

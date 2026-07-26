@@ -17,6 +17,58 @@ export const slug = (s) =>
     .slice(0, 60)
     .replace(/-$/, "");
 
+/* ── Titres ───────────────────────────────────────────────────────
+ * Les catalogues composent leurs titres en petites capitales. La police n'a pas
+ * de glyphe minuscule pour les lettres accentuées : InDesign retombe sur la
+ * capitale pleine, et l'extraction lit « MÉtiers », « ÉvÉnements », « MÉdias ».
+ * D'autres titres sortent tout en capitales, ou tout en minuscules.
+ * ─────────────────────────────────────────────────────────────── */
+
+const CAPITALES_ACCENTUEES = /(?<=\p{L})[ÀÂÄÉÈÊËÎÏÔÖÙÛÜŸÇ]/gu;
+
+// Sigles à ne pas décapitaliser lors de la remise en casse d'un titre.
+const SIGLES = new Set([
+  "MBA", "DBA", "MSC", "DSG", "QHSE", "RSE", "RH", "GRH", "SI", "IT", "UX", "UI",
+  "ISM", "ISF", "IESA", "INU", "ESG", "RNCP", "CAMES", "BRVM", "FOREX", "OHADA",
+  "UEMOA", "PME", "IA", "BTP", "IOT", "ERP", "CISCO", "BAC", "M1", "M2", "L3",
+]);
+
+// Mots qui restent en minuscules au milieu d'un titre.
+const MOTS_MINEURS = new Set([
+  "en", "et", "de", "des", "du", "d", "la", "le", "les", "l", "au", "aux", "à",
+  "pour", "dans", "sur", "par", "option", "parcours", "in", "of", "the", "and", "with",
+]);
+
+export function normaliserTitre(brut) {
+  let t = (brut || "").replace(/\s+/g, " ").trim();
+  if (!t) return t;
+
+  // 1. Petites capitales mal encodées, mot par mot : un mot entièrement en
+  //    capitales est laissé tel quel, sinon « MASTÈRE » deviendrait « MAStère ».
+  t = t
+    .split(/(\s+)/)
+    .map((mot) => (/\p{Ll}/u.test(mot) ? mot.replace(CAPITALES_ACCENTUEES, (c) => c.toLowerCase()) : mot))
+    .join("");
+
+  // 2. Titre tout en capitales ou tout en minuscules : remise en casse. Un titre
+  //    déjà composé par la brochure (casse mixte) n'est pas touché.
+  const toutCapitales = t === t.toUpperCase() && /\p{Lu}{4}/u.test(t);
+  const commenceMinuscule = /^\p{Ll}/u.test(t);
+  if (toutCapitales || commenceMinuscule) {
+    let premier = true;
+    t = t.replace(/[\p{L}\p{N}][\p{L}\p{N}'’]*/gu, (mot) => {
+      const maj = mot.toUpperCase();
+      if (SIGLES.has(maj)) return maj;
+      const bas = mot.toLowerCase();
+      if (!premier && MOTS_MINEURS.has(bas)) return bas;
+      premier = false;
+      return bas.charAt(0).toUpperCase() + bas.slice(1);
+    });
+  }
+
+  return t.charAt(0).toUpperCase() + t.slice(1);
+}
+
 /* ── Unités d'enseignement ────────────────────────────────────────
  * Une ligne ouvre une UE si elle porte un mot d'ouverture (UE, semestre,
  * enseignements M1/M2, première année…) ou si sa police dépasse nettement
@@ -24,6 +76,35 @@ export const slug = (s) =>
  * la brochure Bachelor distingue les UE par la taille (8pt contre 6pt) là où
  * la brochure Online les distingue par le préfixe « *UE: » à taille égale.
  * ─────────────────────────────────────────────────────────────── */
+
+/**
+ * Bandeau thématique du catalogue Master (« Parcours investissement et gouvernance
+ * d'entreprise »), composé en petites capitales et donc casé au hasard d'une page à
+ * l'autre : la brochure écrit « Parcours responsabilité, organisation et management »
+ * ET « Parcours Responsabilité, Organisation et Management » pour le même parcours.
+ *
+ * Ce n'est PAS une unité d'enseignement — c'est un regroupement de portefeuille, quatre
+ * thèmes pour 44 programmes. Voir « La structure en UE ne couvre que les licences et
+ * bachelors » dans CLAUDE.md. On normalise ici la casse ; le rapprochement des variantes
+ * d'ordre des mots se fait en fin d'extraction, quand tous les parcours sont connus.
+ */
+export function normaliserParcours(brut) {
+  if (!brut) return null;
+  const sansPrefixe = brut.trim().replace(/^parcours\s*:?\s*/i, "");
+  if (!sansPrefixe) return null;
+  const bas = sansPrefixe.toLocaleLowerCase("fr");
+  return `Parcours ${bas.charAt(0).toLocaleUpperCase("fr")}${bas.slice(1)}`;
+}
+
+/** Clé de rapprochement de deux parcours : mêmes mots, ordre indifférent. */
+export function cleParcours(label) {
+  return normaliser(label || "")
+    .replace(/^parcours\s*/, "")
+    .split(/[^a-z0-9]+/)
+    .filter((m) => m.length > 2 && !["les", "des", "aux", "une", "and", "the"].includes(m))
+    .sort()
+    .join(" ");
+}
 
 const OUVRE_UE =
   /^(ue\b|ue[.*:]|\*ue|semestre\b|enseignements?\b|premiere annee|deuxieme annee|troisieme annee|module\b)/;
@@ -233,37 +314,96 @@ export function detecterPartenariats(texte) {
   return p;
 }
 
-/* ── Axes : comptage sur les modules, jamais sur la prose ─────── */
+/* ── Axes : comptage sur les modules, jamais sur la prose ──────────────────
+ *
+ * NORMALISATION (documentée dans CLAUDE.md, section « Normalisation des cinq axes ») :
+ * la note est la PART des modules du programme que le lexique de l'axe capte,
+ * passée dans `noter()`. Le dénominateur est le nombre de modules du programme —
+ * ni le maximum du catalogue, ni la somme des autres axes.
+ *
+ * Corollaire : les cinq axes sont INDÉPENDANTS. Un module compté par `technique`
+ * ne retire rien à `creatif`, il peut nourrir les deux. Un axe bas ne signifie donc
+ * jamais « un autre axe l'a pris » : il signifie « le lexique n'a pas reconnu les
+ * modules », ou « le tronc commun dilue le dénominateur ». C'est ce diagnostic que
+ * `node scripts/axes-modules.mjs <id>` rend lisible.
+ *
+ * Un lexique s'élargit toujours depuis les modules RÉELS d'un programme emblématique,
+ * jamais depuis une liste de mots plausibles — et se relit ensuite sur les programmes
+ * des autres axes, où il fabrique des faux positifs. Les gardes ci-dessous
+ * (`developpement personnel`, `patrimoine`, `redaction`) viennent tous de là.
+ * ───────────────────────────────────────────────────────────────────────── */
 
 const LEXIQUE_AXES = {
   quantitatif:
-    /(math|statis|probabilit|econometr|calcul|stochast|actuar|comptab|financ|budget|fiscal|audit|monnaie|econom|tresorerie|quantitat|analyse de donnees|analyse predictive|evaluation|diagnostic financier|marches? des capitaux|bourse|boursier|portefeuille)/,
+    /(math|statis|probabilit|econometr|calcul|stochast|actuar|comptab|financ|budget|fiscal|audit|monnaie|econom|tresorerie|quantitat|analyse de donnees|analyse predictive|evaluation|diagnostic financier|marches? des capitaux|bourse|boursier|portefeuille|recherche operationnelle|optimisation|modelisation|tableau de bord|indicateur|banqu|bancaire)/,
+  // `developp` : les brochures écrivent aussi « développement personnel » et
+  // « développement durable », qui ne sont pas de la technique.
   technique:
-    /(informatiq|logiciel|programm|developp|reseau|systeme|base de donnees|linux|windows|web|javascript|php|symfony|angular|framework|algorithm|cyber|securite des|machine learning|\bdata\b|technolog|electroniq|telecom|embarque|api|uml|excel|erp|progiciel|saari|numeriq|digital|maintenance|production|architectur|devops|infrastructure)/,
+    /(informatiq|logiciel|programm|developp(?!ement (durable|personnel|local|economique|des competences))|reseau|systeme|bases? de donnees|linux|windows|web|javascript|php|symfony|angular|framework|algorithm|cyber|securite des|machine learning|\bdata\b|technolog|electroniq|telecom|embarque|\bapi\b|\buml\b|excel|\berp\b|progiciel|saari|numeriq|digital|maintenance|production|architectur|devops|infrastructure|oracle|\bsql\b|serveur|\bjava\b|python)/,
   relationnel:
-    /(management|ressources humaines|\brh\b|negocia|vente|commercial|client|communication|equipe|leadership|recrutement|relation|conseil|coaching|service|social|paie|personnel|entretien|mediation|animation|accompagn)/,
+    /(management|ressources humaines|\brh\b|negocia|vente|commercial|client|communication|equipe|leadership|recrutement|relation|conseil|coaching|service|social|paie|personnel|entretien|mediation|animation|accompagn|prise de parole|comportement|psychosocio)/,
+  // Élargi depuis les modules réels de Mastère UX Design (conception, interface,
+  // utilisateur, marque), de la Licence Journalisme (médias, écriture, presse,
+  // rédactionnel) et de la Licence Événements culturels (spectacle, exposition,
+  // arts, œuvres, culturel). `redaction` seul marquait « Rédaction d'actes » et
+  // « Rédaction de mémoire » : restreint aux écritures éditoriales.
   creatif:
-    /(creativ|design|graphi|redaction|contenu|publicit|marketing|evenement|image|typographi|illustrator|photoshop|video|audiovisuel|innovation|brand|\bux\b|\bui\b|motion|\bart\b|scenar|editorial|dataviz|data visualisation)/,
+    /(creativ|design|graphi|redaction (web|editorial|journalistique|mediatique|publicitaire)|redactionnel|contenu|publicit|marketing|evenement|image|typographi|illustrator|photoshop|video|audiovisuel|innovation|brand|marque|\bux\b|\bui\b|motion|\barts?\b|artistiq|artisan|scenar|editorial|dataviz|data visualisation|conception|interface|utilisateur|\bmedias?\b|mediatique|ecriture|presse|journalis|sources? d information|reportage|documentaire|spectacle|exposition|patrimoine (immateriel|culturel|architectural|artistique)|\boeuvres\b|cinemato|musiq|culturel|esthetiq|storytelling)/,
   cadre:
-    /(droit|juridiq|norme|procedur|reglementa|conformite|qualite|securite|controle|contentieux|ethique|gouvernance|deontolog|\biso\b|certifica|protocol|penal|obligation|contrat|audit|fiscal|risque|prudentiel|compliance)/,
+    /(droit|juridiq|judiciaire|norme|procedur|reglementa|conformite|qualite|securite|controle|contentieux|ethique|gouvernance|deontolog|\biso\b|certifica|protocol|penal|obligation|contrat|audit|fiscal|risque|prudentiel|compliance|societaire|propriete (intellectuelle|litteraire)|\brse\b|public-prive)/,
 };
 
 const LEXIQUE_QUANTITATIF =
   /(math|statis|probabilit|econometr|calcul|stochast|actuar|modelisation|quantitat|algebre|analyse numerique|suites numeriques|matriciel|combinatoire)/;
 
-/** 1..5 depuis un taux de recouvrement des modules. Pas de note à la main. */
+export const AXES = Object.keys(LEXIQUE_AXES);
+
+/**
+ * Les axes qui captent ce module. Un module peut en alimenter PLUSIEURS :
+ * « Droit fiscal des entreprises » est du cadre et du quantitatif, et il l'est
+ * vraiment. Aucune attribution exclusive, aucun ordre de priorité — voir
+ * « Normalisation des cinq axes » dans CLAUDE.md.
+ */
+export function axesDunModule(module) {
+  const m = normaliser(module);
+  return AXES.filter((axe) => LEXIQUE_AXES[axe].test(m));
+}
+
+/**
+ * 1..5 depuis la PART des modules du programme qui touchent l'axe.
+ * Seuils absolus sur une proportion : 10 % de modules par point, 40 % suffisent
+ * pour un 5. Le dénominateur est le nombre de modules du programme, jamais le
+ * total du catalogue ni la somme des autres axes.
+ */
 function noter(taux) {
   return Math.max(1, Math.min(5, 1 + Math.floor(taux / 0.1)));
 }
 
+/**
+ * Deux sorties pour une seule mesure, et il ne faut pas les confondre :
+ *
+ *   `axes`       notes 1..5, pour l'AFFICHAGE et les tests d'ancrage. Un entier se lit,
+ *                se discute avec un responsable et se compare d'une édition à l'autre.
+ *   `axes_parts` la proportion brute, pour le CALCUL de corrélation. `noter()` écrase
+ *                10 points de proportion dans un seul entier : sur 5 dimensions, cet
+ *                arrondi fabrique des égalités exactes à r = 1,00 entre programmes qui
+ *                n'ont pas la même forme, et le moteur ne peut alors plus les classer.
+ *
+ * Les notes ne se recalculent jamais depuis `axes_parts` arrondi : les deux sortent du
+ * même comptage, au même moment.
+ */
 export function compterAxes(modules) {
   const axes = { quantitatif: 3, technique: 3, relationnel: 3, creatif: 3, cadre: 3 };
-  if (!modules.length) return { axes, calcules: false };
+  const parts = { quantitatif: 0, technique: 0, relationnel: 0, creatif: 0, cadre: 0 };
+  if (!modules.length) return { axes, parts, calcules: false };
   const n = modules.map(normaliser);
   for (const [axe, re] of Object.entries(LEXIQUE_AXES)) {
-    axes[axe] = noter(n.filter((m) => re.test(m)).length / n.length);
+    const taux = n.filter((m) => re.test(m)).length / n.length;
+    // 4 décimales : un module sur 56 vaut 0,0179, il faut le distinguer de 0,0182.
+    parts[axe] = Math.round(taux * 10000) / 10000;
+    axes[axe] = noter(taux);
   }
-  return { axes, calcules: true };
+  return { axes, parts, calcules: true };
 }
 
 export function compterExigenceQuantitative(modules) {
@@ -283,43 +423,84 @@ const LEXIQUE_DOMAINES = {
   "marches-financiers": /(marche financier|marches? des capitaux|trading|bourse|boursier|brvm|forex|produits derives|opcvm|portefeuille)/,
   comptabilite: /(comptab|audit|controle de gestion|controle interne|ifrs|revision)/,
   fiscalite: /(fiscal|impot|taxe)/,
-  gestion: /(gestion|administration des|management des organisations|organisation|pilotage|secretariat)/,
+  // « management » seul est volontairement absent : il colle à tout. Les programmes
+  // de management général sont attrapés par leurs formules propres.
+  gestion:
+    /(gestion|administration des|management des organisations|management general|management strategique|business administration|executive mba|cadres dirigeants|direction generale|organisation|pilotage|secretariat)/,
   "management-projet": /(management de projet|gestion de projet|chef de projet|cadre logique|passation de marche|suivi-evaluation)/,
   entrepreneuriat: /(entrepreneur|business plan|creation d'entreprise|incubat|startup|intrepreunariat)/,
   marketing: /(marketing|vente|commercial|merchandising|distribution|relation client|fidelisation)/,
   communication: /(communication|media|relations publiques|publicit|community manager)/,
-  informatique: /(developpement|logiciel|programmation|genie logiciel|php|javascript|symfony|angular|application|informatique appliquee|web)/,
+  // « développement durable » et « développement personnel » ne sont pas de
+  // l'informatique : le mot seul ne suffit pas.
+  informatique:
+    /(developpement(?! durable| personnel| local| economique| des competences)|logiciel|programmation|genie logiciel|php|javascript|symfony|angular|application|informatique appliquee|web)/,
   reseaux: /(reseau|telecommunication|administration systeme|interconnexion|linux server|windows server)/,
   cybersecurite: /(cyber|securite des systemes|securite informatique|compliance informatique)/,
   data: /(\bdata\b|donnees massives|big data|intelligence artificielle|business intelligence|datascience|machine learning|dataviz)/,
   ingenierie: /(ingenieur|mecaniq|industriel|automatis|electrotechniq|process industriel)/,
   qualite: /(qhse|qualite|hygiene|securite au travail|environnement|iso|smi\b|smq)/,
   logistique: /(logistiq|transport|supply chain|approvisionnement|chaine logistique|aeroportuaire|aeronautique)/,
+  energie: /(energies? (petrolieres|renouvelables|et des mines)|petrolier|gazier|hydrocarbure|solaire|mines?)/,
   rh: /(ressources humaines|\brh\b|recrutement|paie|gpec|bilan social|formation professionnelle)/,
   droit: /(droit|juridiq|contentieux|arbitrage|notarial|penal|obligations|societes commerciales)/,
-  "science-politique": /(science politique|relations internationales|geopolitiq|diplomat|organisations internationales)/,
+  "science-politique": /(science politique|relations internationales|geopolitiq|diplomat|organisations internationales|paix et securite|resolution des conflits|securite internationale)/,
   rse: /(\brse\b|responsabilite sociale|developpement durable|ethique)/,
   assurance: /(assurance|actuar|souscripteur|prevoyance)/,
   agrobusiness: /(agrobusiness|agro-?alimentaire|agricole|agronom)/,
-  "commerce-international": /(commerce international|import|export|douane|incoterm)/,
+  "commerce-international": /(commerce international|management international|import|export|douane|incoterm)/,
   journalisme: /(journalis|reportage|redaction de presse|information et media)/,
   "culture-evenementiel": /(evenementiel|culturel|spectacle|patrimoine|production des evenements)/,
-  "administration-publique": /(administration publique|finances publiques|collectivites locales|marches publics|service public)/,
+  "administration-publique": /(administration publique|finances publiques|collectivites (locales|territoriales)|marches publics|service public|decentralisation|gouvernance territoriale)/,
   "design-web": /(design|graphis|\bux\b|\bui\b|webdesign|photoshop|illustrator|typographi|identite visuelle)/,
   electronique: /(electroniq|systemes embarques|microcontroleur|automatique|signal)/,
   mathematiques: /(mathematiques appliquees|econometr|modelisation statistique|probabilit|stochast|analyse numerique)/,
 };
 
-export function inferDomaines(titre, modules, metiers, domainesAutorises) {
-  const cible = [titre, ...modules, ...metiers].map(normaliser);
+/** Nombre maximal de domaines par fiche. Deux, pas trois : l'aiguillage doit trancher. */
+const MAX_DOMAINES = 2;
+
+/**
+ * Un domaine n'est retenu que si son vocabulaire apparaît dans le TITRE ou dans
+ * l'OBJECTIF du programme. Les modules seuls ne suffisent pas : toute filière
+ * enseigne de la gestion, du droit et de la comptabilité en tronc commun, et s'y
+ * fier collait « gestion » à 48 fiches sur 84 — un aiguillage qui n'aiguille rien.
+ *
+ * Les modules et les métiers ne servent donc plus qu'à ORDONNER les candidats
+ * déjà légitimés par le titre ou l'objectif.
+ */
+export function inferDomaines(titre, objectif, modules, metiers, domainesAutorises) {
+  const nTitre = normaliser(titre);
+  const nObjectif = normaliser(objectif || "");
+  const appuis = [...modules, ...metiers].map(normaliser);
+
   const scores = [];
   for (const [id, re] of Object.entries(LEXIQUE_DOMAINES)) {
     if (!domainesAutorises.has(id)) continue;
-    let n = cible.filter((s) => re.test(s)).length;
-    if (re.test(normaliser(titre))) n += 4; // le titre pèse plus que les modules
-    if (n) scores.push({ id, n });
+    const dansTitre = re.test(nTitre);
+    const dansObjectif = re.test(nObjectif);
+    if (!dansTitre && !dansObjectif) continue;
+    const appui = appuis.filter((s) => re.test(s)).length;
+    // Un domaine tiré du seul objectif doit être corroboré par les modules :
+    // l'objectif est de la prose marketing, un mot y passe sans rien engager.
+    if (!dansTitre && appui < 2) continue;
+    const n = (dansTitre ? 8 : 0) + (dansObjectif ? 3 : 0) + appui;
+    scores.push({ id, n, dansTitre });
   }
   scores.sort((a, b) => b.n - a.n || a.id.localeCompare(b.id));
-  const retenus = scores.filter((s) => s.n >= 2).slice(0, 3).map((s) => s.id);
-  return retenus.length ? retenus : scores.slice(0, 1).map((s) => s.id);
+
+  // Si le titre suffit à désigner des domaines, l'objectif ne vient pas les diluer.
+  const parTitre = scores.filter((s) => s.dansTitre);
+  const retenus = (parTitre.length ? parTitre : scores).slice(0, MAX_DOMAINES).map((s) => s.id);
+  if (retenus.length) return retenus;
+
+  // Dernier recours : le vocabulaire des modules, un seul domaine, jamais deux.
+  const surModules = [];
+  for (const [id, re] of Object.entries(LEXIQUE_DOMAINES)) {
+    if (!domainesAutorises.has(id)) continue;
+    const n = appuis.filter((s) => re.test(s)).length;
+    if (n) surModules.push({ id, n });
+  }
+  surModules.sort((a, b) => b.n - a.n || a.id.localeCompare(b.id));
+  return surModules.slice(0, 1).map((s) => s.id);
 }

@@ -1,6 +1,9 @@
 node_modules/
 data/_raw/
 data/_manques.csv
+data/_paires.csv
+data/_comparaisons/
+data/_calibration.json
 .DS_Store
 *.log
 

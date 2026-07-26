@@ -14,19 +14,23 @@
   ],
   "axes": {
     "quantitatif": 3,
-    "technique": 2,
+    "technique": 1,
     "relationnel": 3,
     "creatif": 1,
     "cadre": 3
   },
+  "axes_parts": {
+    "quantitatif": 0.2,
+    "technique": 0.05,
+    "relationnel": 0.25,
+    "creatif": 0,
+    "cadre": 0.25
+  },
   "domaines": [
-    "gestion",
-    "logistique",
-    "qualite"
+    "energie"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Chef de Projet dans l’industrie pétrolière et/ou gazière",
@@ -87,18 +91,61 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
       "exigence_quantitative": "inference",
-      "partenariats": "brochure"
+      "vitrine.description": "brochure",
+      "partenariats": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
     "annee_source": 2024
   },
-  "parcours": "Parcours Responsabilité, Organisation et Management",
+  "parcours": "Parcours Responsabilité, organisation et management",
   "partenariats": {
     "double_diplome": null,
     "diplome_delocalise": "l'univeriste senghor-egypte l'objectif de ce programme est de former d",
     "accreditations": []
-  }
+  },
+  "voisines": [
+    "mba-en-droit-et-gouvernance-des-energies-et-des-mines"
+  ],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Management des organisations énergétiques",
+      "Énergies - RSE et développement durable",
+      "Économie du pétrole, du gaz et de l’énergie",
+      "Gestion de projets énergétiques",
+      "Passation des marchés et partenariat public privé énergie",
+      "Gestion de la chaîne logistique",
+      "Technique de négociation commerciale",
+      "Comptabilité et finance internationale"
+    ],
+    "metiers_exclusifs": [
+      "Chef de Projet dans l’industrie pétrolière et/ou gazière",
+      "Manager Chargé d’exploitation",
+      "Manager QHSE - Risk Manager",
+      "Manager spécialisé dans les processus, produits et services pétroliers et gaziers",
+      "Chargé de mission",
+      "Chargé d’approvisionnement",
+      "Analyste des Risques Politiques et Environnementaux",
+      "Opérateur de Trading"
+    ],
+    "recouvrement_max": 0,
+    "plus_proche": null,
+    "correlation_axes_max": 0.935,
+    "plus_proche_axes": "mba-en-droit-et-gouvernance-des-energies-et-des-mines"
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 0,
+    "nb_modules": 20,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": true
 }

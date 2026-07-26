@@ -15,18 +15,23 @@
   "axes": {
     "quantitatif": 4,
     "technique": 2,
-    "relationnel": 3,
+    "relationnel": 4,
     "creatif": 1,
     "cadre": 5
   },
+  "axes_parts": {
+    "quantitatif": 0.3913,
+    "technique": 0.1304,
+    "relationnel": 0.3043,
+    "creatif": 0,
+    "cadre": 0.4783
+  },
   "domaines": [
     "droit",
-    "finance",
-    "fiscalite"
+    "finance"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Juriste de banque",
@@ -91,12 +96,50 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
-      "exigence_quantitative": "inference"
+      "exigence_quantitative": "inference",
+      "vitrine.description": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
     "annee_source": 2024
   },
-  "option": "Juriste de Banque et Compliance"
+  "option": "Juriste de Banque et Compliance",
+  "voisines": [],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Organisation et base technique de l’activité bancaire",
+      "Droit de la régulation",
+      "Éthique des affaires",
+      "Audit et gestion des risques juridiques",
+      "Gestion des risques de non-conformité et des comportements non-éthiques",
+      "Fraude et Risk Management",
+      "Commissariat aux comptes",
+      "Les risques du métier de banquier et le ratio de Bâle"
+    ],
+    "metiers_exclusifs": [
+      "Cabinet d’avocats",
+      "Responsable de conformité",
+      "Directeur juridique",
+      "Avocat",
+      "Auditeur"
+    ],
+    "recouvrement_max": 0.323,
+    "plus_proche": "master-en-fiscalite-droit-des-affaires-option-affaires-inter",
+    "correlation_axes_max": 0.923,
+    "plus_proche_axes": "master-en-fiscalite-droit-des-affaires-option-affaires-inter"
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 0,
+    "nb_modules": 23,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": true
 }

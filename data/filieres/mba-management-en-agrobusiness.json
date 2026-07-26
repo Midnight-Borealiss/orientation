@@ -19,14 +19,18 @@
     "creatif": 2,
     "cadre": 2
   },
+  "axes_parts": {
+    "quantitatif": 0.0769,
+    "technique": 0,
+    "relationnel": 0.3077,
+    "creatif": 0.1538,
+    "cadre": 0.1538
+  },
   "domaines": [
-    "agrobusiness",
-    "marketing",
-    "qualite"
+    "agrobusiness"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Chef de projet en logistique et approvisionnement",
@@ -81,12 +85,53 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
-      "exigence_quantitative": "inference"
+      "exigence_quantitative": "inference",
+      "vitrine.description": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
     "annee_source": 2024
   },
-  "parcours": "Parcours responsabilité, organisation et management"
+  "parcours": "Parcours Responsabilité, organisation et management",
+  "voisines": [],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Management Organisationnel",
+      "Environnement Agro Business",
+      "Marketing & Innovation",
+      "Commercialisation & Chaîne logistique",
+      "Gestion financière",
+      "Management & Communication",
+      "Qualité totale",
+      "Environnement des organisations"
+    ],
+    "metiers_exclusifs": [
+      "Chef de projet en logistique et approvisionnement",
+      "Responsable d’affaires agroalimentaires",
+      "Responsable de commercialisation des produits agricoles",
+      "Responsable Qualité, Hygiène, Sécurité, Environnement",
+      "Gestionnaire du processus de production agricole",
+      "Technicien supérieur de recherche agricole",
+      "Responsable d’usine",
+      "Responsable Supply Chain"
+    ],
+    "recouvrement_max": 0,
+    "plus_proche": null,
+    "correlation_axes_max": 0.349,
+    "plus_proche_axes": null
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 0,
+    "nb_modules": 13,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": false
 }

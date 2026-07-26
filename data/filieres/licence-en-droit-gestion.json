@@ -1,6 +1,6 @@
 {
   "id": "licence-en-droit-gestion",
-  "nom": "LICENCE EN DROIT - GESTION",
+  "nom": "Licence en Droit - Gestion",
   "ecole": "ism-droit",
   "niveau": "licence",
   "langue": "francais",
@@ -20,14 +20,19 @@
     "creatif": 1,
     "cadre": 5
   },
+  "axes_parts": {
+    "quantitatif": 0.25,
+    "technique": 0.0417,
+    "relationnel": 0.125,
+    "creatif": 0.0833,
+    "cadre": 0.5
+  },
   "domaines": [
     "droit",
-    "gestion",
-    "comptabilite"
+    "gestion"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Le titulaire de la Licence en Droit - Gestion peut, en début de carrière, occuper les fonctions suivantes :",
@@ -100,9 +105,15 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
       "exigence_quantitative": "inference",
-      "partenariats": "brochure"
+      "vitrine.description": "brochure",
+      "partenariats": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "ISM_bachelor_brochure.pdf"
@@ -111,5 +122,38 @@
     "double_diplome": null,
     "diplome_delocalise": "l'inu champollion d'albi/toulouse",
     "accreditations": []
-  }
+  },
+  "voisines": [],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Droit de la famille et des personnes",
+      "Droit fiscal",
+      "Management des organisations",
+      "Introduction aux marchés financiers et monétaires",
+      "Comptabilité analytique Semestre 5",
+      "Droit des sociétés 1",
+      "Droit des obligations 1",
+      "Droit des affaires 1"
+    ],
+    "metiers_exclusifs": [
+      "Le titulaire de la Licence en Droit - Gestion peut, en début de carrière, occuper les fonctions suivantes :",
+      "Assistant comptable",
+      "Assistant RH",
+      "Agent marketing",
+      "Assistant dans une Société de Gestion et d’Intermédiation",
+      "Employé de banque ou de compagnie d’assurances"
+    ],
+    "recouvrement_max": 0.093,
+    "plus_proche": "licence-en-droit-prive-fondamental",
+    "correlation_axes_max": 0.974,
+    "plus_proche_axes": "master-droit-de-l-entreprise"
+  },
+  "structure_ue": {
+    "publiee": true,
+    "nb_ue": 3,
+    "nb_modules": 24,
+    "concentration": 0.5,
+    "blocs_types": []
+  },
+  "axes_fiables": true
 }

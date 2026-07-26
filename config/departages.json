@@ -2,19 +2,22 @@
   "_comment": "Questions de departage entre filieres proches. Une entree par PAIRE, jamais dupliquee dans les fiches. Renseigne par le service des admissions a partir des confusions reellement observees.",
 
   "_seuils": {
-    "ecart_declenchant_departage": 5,
-    "correspondance_forte": 85,
-    "correspondance_bonne": 70
+    "_echelle": "Le score est une CORRELATION DE FORME (Pearson sur les 5 axes comptes), donc dans [-1, 1]. Ce n'est pas un pourcentage et il ne s'affiche jamais. Les valeurs 85/70 des versions precedentes supposaient une echelle 0-100 et une distance euclidienne : les deux sont ecartees, voir CLAUDE.md > Calcul du score.",
+    "_statut": "calibre par simulation — npm run simuler, 1942 vecteurs de profil x 6 familles x 4 niveaux d'acces, 46 608 classements. Les bornes sont DEDUITES des objectifs de la spec (forte minoritaire, possible non majoritaire, departage sur au plus un tiers), pas choisies : chaque objectif fixe une proportion cible, donc un quantile de la distribution observee. A rejouer apres toute modification de config/questions.json ou des lexiques d'axes.",
+    "_mesure": "avec ces valeurs : 25 % de correspondance forte, 40 % de bonne, 35 % de possible, departage sur 32 % des profils. Les valeurs precedentes (0.60 / 0.30 / 0.10), posees avant toute observation, declenchaient le departage sur un profil sur deux et distribuaient 40 % de correspondance forte.",
+    "correspondance_forte": 0.76,
+    "correspondance_bonne": 0.28,
+    "ecart_declenchant_departage": 0.05
   },
 
   "paires": [
     {
-      "entre": ["licence-droit-des-affaires", "licence-administration-publique"],
+      "entre": ["licence-en-droit-des-affaires", "licence-en-administration-publique"],
       "difference": "Exercice en entreprise privee ou cabinet, contre preparation aux concours de la fonction publique.",
       "question": "Te vois-tu plutot en entreprise ou dans l'administration publique ?",
       "reponses": [
-        { "label": "En entreprise ou en cabinet", "vers": "licence-droit-des-affaires" },
-        { "label": "Dans l'administration publique", "vers": "licence-administration-publique" }
+        { "label": "En entreprise ou en cabinet", "vers": "licence-en-droit-des-affaires" },
+        { "label": "Dans l'administration publique", "vers": "licence-en-administration-publique" }
       ],
       "source": "exemple"
     }

@@ -16,17 +16,21 @@
     "quantitatif": 1,
     "technique": 1,
     "relationnel": 5,
-    "creatif": 2,
+    "creatif": 3,
     "cadre": 2
   },
+  "axes_parts": {
+    "quantitatif": 0.0714,
+    "technique": 0.0357,
+    "relationnel": 0.7143,
+    "creatif": 0.2143,
+    "cadre": 0.1071
+  },
   "domaines": [
-    "communication",
-    "gestion",
-    "culture-evenementiel"
+    "communication"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Responsable des relations publiques",
@@ -95,11 +99,55 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
-      "exigence_quantitative": "inference"
+      "exigence_quantitative": "inference",
+      "vitrine.description": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
     "annee_source": 2024
-  }
+  },
+  "voisines": [
+    "licence-en-communication-et-medias",
+    "master-marketing-communication-vente-relation-client-en-ligne"
+  ],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Audit et diagnostic organisationnel",
+      "Fondamentaux de la communication",
+      "Communication d’entreprise",
+      "Fondamentaux des relations publiques",
+      "Communication d’influence et Lobbying",
+      "Droit des médias",
+      "Economie des médias",
+      "Management opérationnel"
+    ],
+    "metiers_exclusifs": [
+      "Responsable des relations publiques",
+      "Chargé de communication",
+      "Agent d’affaires publiques",
+      "Lobbyiste",
+      "Chef d’agence de communication",
+      "Conseiller en image",
+      "Coach en média training",
+      "Chargé de projetévénementiel Madiba Leadearship Institute p.61"
+    ],
+    "recouvrement_max": 0.075,
+    "plus_proche": "licence-en-communication-et-medias",
+    "correlation_axes_max": 0.989,
+    "plus_proche_axes": "master-marketing-communication-vente-relation-client-en-ligne"
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 0,
+    "nb_modules": 28,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": true
 }

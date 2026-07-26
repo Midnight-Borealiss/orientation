@@ -19,14 +19,18 @@
     "creatif": 2,
     "cadre": 1
   },
+  "axes_parts": {
+    "quantitatif": 0,
+    "technique": 0.4545,
+    "relationnel": 0.1818,
+    "creatif": 0.1818,
+    "cadre": 0
+  },
   "domaines": [
-    "data",
-    "management-projet",
-    "informatique"
+    "data"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Data scientist",
@@ -74,11 +78,51 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
-      "exigence_quantitative": "inference"
+      "exigence_quantitative": "inference",
+      "vitrine.description": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
     "annee_source": 2024
-  }
+  },
+  "voisines": [
+    "mba-big-data-et-intelligence-artificielle"
+  ],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Datascience / Techniques De Traitement De Données Massives",
+      "Design / Techniques De Conception Et De Design De La Donnée",
+      "Développement / Langages De Développement Spécifiques Aux Dataviz Interactives",
+      "Gestion de Projet Agile",
+      "Business Data",
+      "Culture & Environnement Digital",
+      "Environnement International",
+      "Communication globale et digitale"
+    ],
+    "metiers_exclusifs": [
+      "Data scientist",
+      "Chief Data officer",
+      "Analyste data",
+      "Chef de projet data",
+      "Chef de projet web"
+    ],
+    "recouvrement_max": 0,
+    "plus_proche": null,
+    "correlation_axes_max": 0.702,
+    "plus_proche_axes": "mba-big-data-et-intelligence-artificielle"
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 0,
+    "nb_modules": 11,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": true
 }

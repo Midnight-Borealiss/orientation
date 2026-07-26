@@ -1,6 +1,6 @@
 {
   "id": "licence-de-gestion-option-agrobusiness",
-  "nom": "Licence de gestion option Agrobusiness",
+  "nom": "Licence de Gestion option Agrobusiness",
   "ecole": "ism-management",
   "niveau": "licence",
   "langue": "francais",
@@ -14,19 +14,24 @@
   ],
   "axes": {
     "quantitatif": 3,
-    "technique": 2,
+    "technique": 1,
     "relationnel": 3,
     "creatif": 1,
     "cadre": 2
   },
+  "axes_parts": {
+    "quantitatif": 0.2941,
+    "technique": 0.0735,
+    "relationnel": 0.2353,
+    "creatif": 0.0882,
+    "cadre": 0.1471
+  },
   "domaines": [
     "agrobusiness",
-    "gestion",
-    "marketing"
+    "gestion"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Commercial des entreprises para-agricoles",
@@ -203,12 +208,62 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
-      "exigence_quantitative": "inference"
+      "exigence_quantitative": "inference",
+      "vitrine.description": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "ISM_bachelor_brochure.pdf"
   },
   "option": "Agrobusiness",
-  "programme_parent": "licence-en-gestion"
+  "programme_parent": "licence-en-gestion",
+  "voisines": [
+    "licence-de-gestion-option-gestion-des-ressources-humaines"
+  ],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Marketing des produits agricoles",
+      "Droit de l’environnement",
+      "Droit des sociétés et des groupements",
+      "OMC : La loi du marché",
+      "Entreprises agricoles en difficulté",
+      "Actions de recherche encadrées (domaine agricole ou agroalimentaire)",
+      "Business Communication UE. Initiation à la Recherche et Service à la",
+      "Actions de terrain encadrées (domaine agricole ou agroalimentaire)"
+    ],
+    "metiers_exclusifs": [
+      "Commercial des entreprises para-agricoles",
+      "Responsable de magasin ou de rayon",
+      "Assistant financier et marketing",
+      "Assistant en gestion administrative",
+      "Assistant responsable achat-approvisionnement"
+    ],
+    "recouvrement_max": 0.595,
+    "plus_proche": "licence-de-gestion-option-gestion-des-ressources-humaines",
+    "correlation_axes_max": 0.986,
+    "plus_proche_axes": "licence-de-gestion-option-gestion-des-ressources-humaines"
+  },
+  "structure_ue": {
+    "publiee": true,
+    "nb_ue": 14,
+    "nb_modules": 68,
+    "concentration": 0.265,
+    "blocs_types": [
+      "management-et-responsabilite-sociale-d-entrepris",
+      "concepts-et-techniques-de-gestion",
+      "comportement-professionnel-culture-juridique-et-",
+      "maitrise-des-techniques-traitement-de-donnees",
+      "outils-et-techniques-de-gestion-approfondies",
+      "initiation-a-la-recherche",
+      "langues-civilisations",
+      "ateliers-d-approfondissement-et-finance-applique",
+      "projet-d-entreprise"
+    ]
+  },
+  "axes_fiables": true
 }

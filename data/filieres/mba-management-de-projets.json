@@ -19,14 +19,18 @@
     "creatif": 1,
     "cadre": 2
   },
+  "axes_parts": {
+    "quantitatif": 0.2222,
+    "technique": 0.1111,
+    "relationnel": 0.4444,
+    "creatif": 0,
+    "cadre": 0.1111
+  },
   "domaines": [
-    "management-projet",
-    "gestion",
-    "marches-financiers"
+    "management-projet"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Chef de projets (tous secteurs, notamment services, ONG…)",
@@ -74,12 +78,48 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
-      "exigence_quantitative": "inference"
+      "exigence_quantitative": "inference",
+      "vitrine.description": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
     "annee_source": 2024
   },
-  "parcours": "Parcours innovation entreprenariat et technologies"
+  "parcours": "Parcours Innovation entreprenariat et technologies",
+  "voisines": [
+    "master-management-de-projet-en-ligne"
+  ],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Outils de gestion et de management",
+      "Fondements du management des projets et des risques",
+      "Techniques quantitatives et gestion de l’information",
+      "Outils de Communication et d’efficacité professionnelle",
+      "Planification et montage de projets",
+      "Techniques et méthodes informatiques et de gestion appliquée aux projets",
+      "Passation de marchés et suivi-évaluation dans les projets"
+    ],
+    "metiers_exclusifs": [
+      "Consultant en gestion et montage de projet, de programme ou de portefeuille Ingénieur planning",
+      "Contrôleur de projet"
+    ],
+    "recouvrement_max": 0.077,
+    "plus_proche": "master-management-de-projet-en-ligne",
+    "correlation_axes_max": 0.952,
+    "plus_proche_axes": "master-management-de-projet-en-ligne"
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 0,
+    "nb_modules": 9,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": true
 }

@@ -19,6 +19,8 @@ import Ajv from "ajv";
 import addFormats from "ajv-formats";
 
 import { extraire } from "./extract.mjs";
+import { calculerDistinctivite, couvertureLexicale, MODULES_MIN, SEUIL_PAIRE } from "./distinctivite.mjs";
+import { AXES, axesDunModule, cleParcours } from "./lib/fiche.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
@@ -79,7 +81,7 @@ function verifierFiches(etiquette, fiches) {
   );
 }
 
-/* ── 1. Brochure Bachelor : 26 fiches, ni 24 ni 28 ────────────── */
+/* ── Extraction unique, les trois catalogues ──────────────────── */
 
 const bachelor = trouver(/bachelor/i);
 if (!bachelor) {
@@ -87,8 +89,14 @@ if (!bachelor) {
   process.exit(1);
 }
 
+const catalogues = [bachelor, trouver(/master/i), trouver(/online|isf/i)].filter(Boolean);
+const resultats = await extraire({ fichiers: catalogues, ecrire: false });
+const rBachelor = resultats.find((r) => r.chemin === bachelor);
+const toutesFiches = resultats.flatMap((r) => r.fiches);
+
+/* ── 1. Brochure Bachelor : 26 fiches, ni 24 ni 28 ────────────── */
+
 console.log("\n  Brochure Bachelor — test de référence du sommaire\n");
-const [rBachelor] = await extraire({ fichiers: [bachelor], ecrire: false });
 
 verifier(
   "le sommaire p.13 énumère 26 programmes",
@@ -154,12 +162,12 @@ const autres = [
 
 for (const a of autres) {
   const fichier = trouver(a.motif);
-  if (!fichier) {
+  const r = resultats.find((x) => x.chemin === fichier);
+  if (!r) {
     console.log(`\n  ! catalogue ${a.etiquette} absent — ignoré`);
     continue;
   }
   console.log(`\n  Catalogue ${a.etiquette}\n`);
-  const [r] = await extraire({ fichiers: [fichier], ecrire: false });
   verifier(`${a.etiquette} — profil retenu : ${a.profil}`, r.profil.nom === a.profil, r.profil.nom);
   verifier(
     `${a.etiquette} — au moins ${a.mini} programmes segmentés`,
@@ -177,6 +185,581 @@ for (const a of autres) {
     r.fiches.filter((f) => !f.unites_enseignement?.length).map((f) => f.id).join(", ")
   );
   verifierFiches(a.etiquette, r.fiches);
+}
+
+/* ── 3. Fusion : une fiche travaillée à la main survit ────────── */
+
+console.log(`\n  Fusion d'une ré-extraction\n`);
+
+// Bac à sable dans data/, jamais ailleurs : les scripts n'écrivent pas hors de data/.
+const SABLE = path.join(ROOT, "data", "_test-fusion");
+fs.rmSync(SABLE, { recursive: true, force: true });
+
+await extraire({ fichiers: [bachelor], ecrire: true, dossierSortie: SABLE });
+
+const cible = path.join(SABLE, "licence-en-droit-des-affaires.json");
+if (!fs.existsSync(cible)) {
+  echecs++;
+  console.log("  ✗ fiche témoin absente du bac à sable");
+} else {
+  const avant = JSON.parse(fs.readFileSync(cible, "utf8"));
+
+  // Travail humain : trois sources protégées, un statut, et une valeur d'inférence
+  // volontairement fausse qui DOIT être écrasée.
+  const edite = JSON.parse(JSON.stringify(avant));
+  edite.profil_ideal = ["méthodique", "à l'aise à l'écrit"];
+  edite.deconseille_si = ["ne supporte pas les textes longs"];
+  edite.vitrine.accroche = "Le droit qui fait tourner les entreprises.";
+  edite.niveau_acces = "bac+2";
+  edite.eligibilite.niveau_maths = "faible";
+  edite.domaines = ["droit"];
+  edite.axes.quantitatif = 5; // source inference : doit être recalculé
+  edite.meta.statut = "a_valider";
+  edite.meta.valide_par = "responsable École de Droit";
+  edite.meta.sources = {
+    ...edite.meta.sources,
+    profil_ideal: "responsable",
+    deconseille_si: "responsable",
+    "vitrine.accroche": "manuel",
+    niveau_acces: "admissions",
+    eligibilite: "admissions",
+    domaines: "responsable",
+  };
+  fs.writeFileSync(cible, JSON.stringify(edite, null, 2) + "\n");
+
+  const [rFusion] = await extraire({ fichiers: [bachelor], ecrire: true, dossierSortie: SABLE });
+  const apres = JSON.parse(fs.readFileSync(cible, "utf8"));
+
+  verifier(
+    "les champs « responsable » survivent à la ré-extraction",
+    JSON.stringify(apres.profil_ideal) === JSON.stringify(edite.profil_ideal) &&
+      JSON.stringify(apres.deconseille_si) === JSON.stringify(edite.deconseille_si) &&
+      JSON.stringify(apres.domaines) === JSON.stringify(["droit"]),
+    `profil_ideal: ${JSON.stringify(apres.profil_ideal)}, domaines: ${JSON.stringify(apres.domaines)}`
+  );
+  verifier(
+    "les champs « admissions » survivent",
+    apres.niveau_acces === "bac+2" && apres.eligibilite.niveau_maths === "faible",
+    `niveau_acces: ${apres.niveau_acces}, niveau_maths: ${apres.eligibilite?.niveau_maths}`
+  );
+  verifier(
+    "les champs « manuel » survivent",
+    apres.vitrine.accroche === edite.vitrine.accroche,
+    `accroche: ${apres.vitrine.accroche}`
+  );
+  verifier(
+    "les sources protégées restent déclarées comme telles",
+    apres.meta.sources.niveau_acces === "admissions" &&
+      apres.meta.sources.profil_ideal === "responsable" &&
+      apres.meta.sources["vitrine.accroche"] === "manuel"
+  );
+  verifier(
+    "meta.statut et meta.valide_par sont conservés",
+    apres.meta.statut === "a_valider" && apres.meta.valide_par === "responsable École de Droit",
+    `statut: ${apres.meta.statut}`
+  );
+  verifier(
+    "les champs « inference » sont, eux, recalculés",
+    apres.axes.quantitatif === avant.axes.quantitatif,
+    `quantitatif: ${apres.axes.quantitatif} au lieu de ${avant.axes.quantitatif}`
+  );
+  verifier(
+    "les champs « brochure » sont rafraîchis, pas figés",
+    apres.unites_enseignement.length === avant.unites_enseignement.length &&
+      apres.meta.sources.unites_enseignement === "brochure" &&
+      apres.vitrine.description === avant.vitrine.description
+  );
+  verifier(
+    "la fusion est comptée dans le journal de l'extraction",
+    rFusion.journal.some((l) => l.startsWith("fusion licence-en-droit-des-affaires")),
+    rFusion.journal.filter((l) => l.startsWith("fusion")).slice(0, 2).join(" | ")
+  );
+
+  // Les 25 autres fiches du catalogue n'ont pas été touchées par un humain :
+  // elles doivent rester strictement identiques à la première extraction.
+  const intactes = fs
+    .readdirSync(SABLE)
+    .filter((n) => n.endsWith(".json") && n !== "licence-en-droit-des-affaires.json");
+  verifier(
+    "une ré-extraction sans apport humain ne change rien",
+    intactes.length === 25,
+    `${intactes.length} fiches`
+  );
+}
+
+fs.rmSync(SABLE, { recursive: true, force: true });
+
+/* ── 4. Titres et aiguillage ──────────────────────────────────── */
+
+console.log(`\n  Titres et domaines\n`);
+
+// Petites capitales InDesign : une capitale accentuée au milieu d'un mot.
+const petitesCaps = toutesFiches.filter((f) => /\p{Ll}\p{Lu}|\p{Lu}[ÀÂÉÈÊËÎÏÔÖÙÛÜÇ]\p{Ll}/u.test(f.nom));
+verifier(
+  "aucun titre ne garde de petite capitale mal encodée (« MÉtiers »)",
+  !petitesCaps.length,
+  petitesCaps.map((f) => f.nom).join(", ")
+);
+
+const toutCaps = toutesFiches.filter((f) => f.nom === f.nom.toUpperCase() && f.nom.length > 8);
+verifier("aucun titre n'est resté tout en capitales", !toutCaps.length, toutCaps.map((f) => f.nom).join(", "));
+
+// Familles : le prospect choisit une famille (question 3). Un domaine sans famille
+// sortirait du parcours sans prévenir.
+const familleDe = new Map();
+for (const fam of taxo.familles || []) for (const d of fam.domaines) familleDe.set(d, fam.id);
+
+verifier(
+  `${(taxo.familles || []).length} familles couvrent tous les domaines utilisés`,
+  toutesFiches.every((f) => f.domaines.every((d) => familleDe.has(d))),
+  [...new Set(toutesFiches.flatMap((f) => f.domaines).filter((d) => !familleDe.has(d)))].join(", ")
+);
+verifier(
+  "6 à 8 familles : assez pour aiguiller, assez peu pour tenir en une question",
+  (taxo.familles || []).length >= 6 && (taxo.familles || []).length <= 8,
+  `${(taxo.familles || []).length} familles`
+);
+
+// Les 2 axes de disposition vivent au niveau DOMAINE, pas famille : au niveau famille
+// ils seraient identiques pour tous les candidats d'une même famille, donc sans pouvoir
+// discriminant là où le scoring en a besoin.
+const axesDomaines = JSON.parse(fs.readFileSync(path.join(ROOT, "config", "domaines_axes.json"), "utf8"));
+const domainesUtilises = [...new Set(toutesFiches.flatMap((f) => f.domaines))].sort();
+
+verifier(
+  "chaque domaine utilisé a son entrée dans domaines_axes.json",
+  domainesUtilises.every((d) => axesDomaines.domaines?.[d]),
+  domainesUtilises.filter((d) => !axesDomaines.domaines?.[d]).join(", ")
+);
+verifier(
+  "config/familles_axes.json n'existe plus (les axes de disposition ne sont plus au niveau famille)",
+  !fs.existsSync(path.join(ROOT, "config", "familles_axes.json"))
+);
+
+// Les seuils vivent dans [-1, 1] : le score est une corrélation, pas un pourcentage.
+// Les valeurs 85/70 des versions précédentes supposaient une distance euclidienne
+// sur 0-100, écartée. Un seuil hors de [-1, 1] rendrait tout classement absurde.
+const departages = JSON.parse(fs.readFileSync(path.join(ROOT, "config", "departages.json"), "utf8"));
+const seuils = departages._seuils || {};
+verifier(
+  "les 3 seuils sont dans [-1, 1] — le score est une corrélation, pas un pourcentage",
+  ["correspondance_forte", "correspondance_bonne", "ecart_declenchant_departage"].every(
+    (k) => typeof seuils[k] === "number" && seuils[k] >= -1 && seuils[k] <= 1
+  ),
+  JSON.stringify(seuils)
+);
+verifier(
+  "correspondance_forte est au-dessus de correspondance_bonne",
+  seuils.correspondance_forte > seuils.correspondance_bonne
+);
+// Un seuil sans provenance est un seuil qu'on ne peut plus discuter : soit il se
+// déclare provisoire, soit il dit par quelle simulation il a été calibré.
+verifier(
+  "les seuils déclarent leur provenance — provisoires, ou calibrés par simulation",
+  typeof seuils._statut === "string" && /provisoire|calibre/i.test(seuils._statut),
+  seuils._statut || "aucun _statut"
+);
+
+verifier(
+  "au plus 2 domaines par fiche",
+  toutesFiches.every((f) => f.domaines.length >= 1 && f.domaines.length <= 2),
+  toutesFiches.filter((f) => f.domaines.length > 2).map((f) => `${f.id} (${f.domaines.length})`).join(", ")
+);
+
+// L'aiguillage doit trancher : un domaine porté par plus de la moitié du catalogue
+// ne réduit plus l'ensemble candidat.
+const frequences = {};
+for (const f of toutesFiches) for (const d of f.domaines) frequences[d] = (frequences[d] || 0) + 1;
+const envahissants = Object.entries(frequences).filter(([, n]) => n > toutesFiches.length / 3);
+verifier(
+  "aucun domaine ne couvre plus d'un tiers du catalogue",
+  !envahissants.length,
+  envahissants.map(([d, n]) => `${d}: ${n}/${toutesFiches.length}`).join(", ")
+);
+
+/* ── 5. Axes : ancrages lexicaux ───────────────────────────────────────────
+ *
+ * Un lexique d'axe est de la donnée déguisée en code : il se dégrade en silence
+ * dès qu'un module change de libellé. Ces quatre ancrages sont les programmes
+ * dont personne ne discute la note : si UX Design n'est plus créatif, ce n'est
+ * pas le programme qui a changé, c'est le lexique qui s'est cassé.
+ *
+ * Ancrage, pas seuil de qualité : ils constatent qu'un axe capte encore son
+ * vocabulaire évident, ils ne prétendent pas que les 84 notes sont justes.
+ * ───────────────────────────────────────────────────────────────────────── */
+
+console.log(`\n  Axes\n`);
+
+const ANCRAGES = [
+  ["mastere-ux-design", "creatif"],
+  ["licence-en-mathematiques-appliquees-informatique-et-economet", "quantitatif"],
+  ["licence-en-genie-logiciel-reseaux-et-systemes", "technique"],
+  ["licence-en-droit-des-affaires", "cadre"],
+];
+
+const parIdAxes = new Map(toutesFiches.map((f) => [f.id, f]));
+
+for (const [id, axe] of ANCRAGES) {
+  const f = parIdAxes.get(id);
+  verifier(
+    `${axe} ≥ 4 pour ${f ? f.nom : id}`,
+    f && f.axes?.[axe] >= 4,
+    f ? `${axe} = ${f.axes?.[axe]}` : "fiche absente (id changé ?)"
+  );
+}
+
+// Les cinq axes sont indépendants : un module peut nourrir plusieurs axes, aucun
+// ne se les dispute. Un axe bas se lit donc « lexique muet », jamais « axe évincé ».
+const multiAxes = toutesFiches
+  .flatMap((f) => (f.unites_enseignement || []).flatMap((ue) => ue.modules || []))
+  .some((m) => axesDunModule(m).length >= 2);
+verifier("un module peut alimenter plusieurs axes à la fois", multiAxes);
+
+// Faux positifs vus sur les vraies données : « Développement personnel » comptait
+// pour technique, « Rédaction d'actes » et « Rédaction de mémoire » pour créatif.
+const FAUX_POSITIFS = [
+  ["Développement personnel", "technique"],
+  ["Développement durable", "technique"],
+  ["Rédaction d'actes", "creatif"],
+  ["Rédaction et Soutenance de Mémoire", "creatif"],
+  ["Marchés des capitaux", "technique"],
+  ["Gestion du patrimoine", "creatif"],
+];
+for (const [module, axe] of FAUX_POSITIFS) {
+  verifier(
+    `« ${module} » n'est pas compté en ${axe}`,
+    !axesDunModule(module).includes(axe),
+    axesDunModule(module).join(", ")
+  );
+}
+
+/* ── Notes et proportions : deux sorties d'une seule mesure ───────
+ * `axes` (1..5) pour l'affichage et les ancrages, `axes_parts` pour la corrélation.
+ * L'arrondi de noter() fabriquait des égalités exactes à r = 1,00 entre programmes de
+ * formes différentes : un ex æquo parfait n'est pas classable.
+ * ─────────────────────────────────────────────────────────────── */
+
+verifier(
+  "chaque fiche porte ses 5 proportions brutes à côté de ses notes",
+  toutesFiches.every((f) => f.axes_parts && AXES.every((a) => Number.isFinite(f.axes_parts[a]))),
+  toutesFiches.filter((f) => !f.axes_parts).map((f) => f.id).slice(0, 3).join(", ")
+);
+
+verifier(
+  "les proportions sont dans [0, 1]",
+  toutesFiches.every((f) => AXES.every((a) => f.axes_parts[a] >= 0 && f.axes_parts[a] <= 1))
+);
+
+verifier(
+  "chaque note est cohérente avec sa proportion",
+  toutesFiches.every((f) =>
+    AXES.every((a) => {
+      const attendue = Math.max(1, Math.min(5, 1 + Math.floor(f.axes_parts[a] / 0.1)));
+      // Les fiches sans module gardent la note par défaut 3 pour une proportion de 0.
+      return f.axes[a] === attendue || (!f.axes_parts[a] && f.axes[a] === 3);
+    })
+  ),
+  toutesFiches
+    .filter((f) => AXES.some((a) => f.axes[a] !== Math.max(1, Math.min(5, 1 + Math.floor(f.axes_parts[a] / 0.1))) && f.axes_parts[a]))
+    .map((f) => f.id)
+    .slice(0, 3)
+    .join(", ")
+);
+
+{
+  // La mesure qui justifie le champ : les égalités exactes disparaissent.
+  const pearson = (va, vb) => {
+    const moy = (v) => v.reduce((s, n) => s + n, 0) / v.length;
+    const ma = moy(va);
+    const mb = moy(vb);
+    let num = 0;
+    let da = 0;
+    let db = 0;
+    for (let i = 0; i < va.length; i++) {
+      num += (va[i] - ma) * (vb[i] - mb);
+      da += (va[i] - ma) ** 2;
+      db += (vb[i] - mb) ** 2;
+    }
+    return da && db ? num / Math.sqrt(da * db) : null;
+  };
+  let surNotes = 0;
+  let surParts = 0;
+  for (let i = 0; i < toutesFiches.length; i++) {
+    for (let j = i + 1; j < toutesFiches.length; j++) {
+      const a = toutesFiches[i];
+      const b = toutesFiches[j];
+      if (!a.domaines.some((d) => b.domaines.includes(d))) continue;
+      const rn = pearson(AXES.map((x) => a.axes[x]), AXES.map((x) => b.axes[x]));
+      const rp = pearson(AXES.map((x) => a.axes_parts[x]), AXES.map((x) => b.axes_parts[x]));
+      if (rn != null && Math.abs(rn - 1) < 1e-9) surNotes++;
+      if (rp != null && Math.abs(rp - 1) < 1e-9) surParts++;
+    }
+  }
+  verifier(
+    "aucune égalité exacte à r = 1,00 sur les proportions, là où les notes en produisaient",
+    surParts === 0 && surNotes > 0,
+    `notes : ${surNotes} paire(s) à r = 1,00 · proportions : ${surParts}`
+  );
+}
+
+// Un axe qui ne distingue plus personne ne sert à rien dans une comparaison de vecteurs.
+for (const axe of AXES) {
+  const notes = toutesFiches.map((f) => f.axes[axe]);
+  verifier(
+    `l'axe ${axe} prend au moins 3 valeurs distinctes sur le catalogue`,
+    new Set(notes).size >= 3,
+    `valeurs : ${[...new Set(notes)].sort().join(", ")}`
+  );
+}
+
+/* ── 6. Distinctivité ─────────────────────────────────────────── */
+
+console.log(`\n  Distinctivité\n`);
+
+const { resultats: dist, paires, blocs } = calculerDistinctivite(toutesFiches, SEUIL_PAIRE);
+
+verifier("un résultat de distinctivité par fiche", dist.length === toutesFiches.length);
+
+verifier(
+  "aucune fiche n'est sa propre plus proche voisine",
+  dist.every((r) => r.distinctivite.plus_proche !== r.id),
+  dist.filter((r) => r.distinctivite.plus_proche === r.id).map((r) => r.id).join(", ")
+);
+
+verifier(
+  "recouvrement_max toujours entre 0 et 1",
+  dist.every((r) => r.distinctivite.recouvrement_max >= 0 && r.distinctivite.recouvrement_max <= 1)
+);
+
+verifier(
+  "une paire ne se compte qu'une fois",
+  new Set(paires.map((p) => [p.a.id, p.b.id].sort().join("|")).map((k) => k)).size === paires.length
+);
+
+/* ── Les DEUX mesures de proximité ────────────────────────────────
+ * Le recouvrement de modules dit ce que le catalogue partage, la corrélation d'axes
+ * dit qui produira un ex æquo au scoring. Un seuil unique sur la première laisse
+ * passer les paires qui feront pourtant trébucher le moteur.
+ * ─────────────────────────────────────────────────────────────── */
+
+verifier(
+  "chaque paire retenue dit par quelle mesure elle l'a été",
+  paires.every((p) => p.motifs.length && p.motifs.every((m) => m === "modules" || m === "axes")),
+  paires.filter((p) => !p.motifs.length).map((p) => p.a.id).join(", ")
+);
+
+verifier(
+  "les deux mesures retiennent chacune des paires que l'autre ignore",
+  paires.some((p) => p.motifs.length === 1 && p.motifs[0] === "modules") &&
+    paires.some((p) => p.motifs.length === 1 && p.motifs[0] === "axes"),
+  `modules seuls : ${paires.filter((p) => p.motifs.join() === "modules").length}, axes seuls : ${
+    paires.filter((p) => p.motifs.join() === "axes").length
+  }`
+);
+
+verifier(
+  "les paires retenues par les deux mesures viennent en tête",
+  paires.every((p, i) => i === 0 || paires[i - 1].motifs.length >= p.motifs.length)
+);
+
+verifier(
+  "correlation_axes_max reste dans [-1, 1]",
+  dist.every((r) => r.distinctivite.correlation_axes_max >= -1 && r.distinctivite.correlation_axes_max <= 1)
+);
+
+// L'exemple de la spec : ces deux programmes n'atteignent PAS 80 % de modules communs,
+// et un seuil unique les aurait manqués. Leur corrélation d'axes, elle, les désigne.
+const paireIngenieurs = paires.find(
+  (p) =>
+    [p.a.id, p.b.id].includes("licence-en-genie-logiciel-reseaux-et-systemes") &&
+    [p.a.id, p.b.id].some((x) => x.startsWith("licence-en-electronique"))
+);
+verifier(
+  "Génie logiciel et Électronique-Télécoms sont retenus malgré un recouvrement sous 80 %",
+  paireIngenieurs && paireIngenieurs.taux < SEUIL_PAIRE && paireIngenieurs.correlation >= 0.8,
+  paireIngenieurs
+    ? `modules ${Math.round(paireIngenieurs.taux * 100)} %, r = ${paireIngenieurs.correlation}`
+    : "paire absente"
+);
+
+/* ── Structure en UE ─────────────────────────────────────────────
+ * Le comptage traite les modules comme un sac de mots. La structure en UE porte des
+ * distinctions que ni les modules ni les axes ne voient.
+ * ─────────────────────────────────────────────────────────────── */
+
+verifier(
+  "les UE récurrentes sont détectées, sans liste écrite à la main",
+  blocs.length >= 10 && blocs.every((b) => b.programmes.length >= 3),
+  `${blocs.length} blocs`
+);
+
+// Le marqueur vérifié à la main : Génie logiciel et Maths appliquées portent l'UE
+// Management & Organisations, Électronique et Modélisation statistique ne l'ont pas.
+const blocManagement = blocs.find((b) => b.id === "management-organisations");
+verifier(
+  "l'UE « Management & Organisations » est reconnue comme bloc récurrent",
+  Boolean(blocManagement),
+  blocs.map((b) => b.id).slice(0, 10).join(", ")
+);
+if (blocManagement) {
+  const porte = (id) => dist.find((r) => r.id === id)?.structure_ue.blocs_types.includes("management-organisations");
+  verifier(
+    "ce bloc sépare Génie logiciel d'Électronique-Télécoms",
+    porte("licence-en-genie-logiciel-reseaux-et-systemes") === true &&
+      dist
+        .filter((r) => r.id.startsWith("licence-en-electronique"))
+        .every((r) => !r.structure_ue.blocs_types.includes("management-organisations"))
+  );
+  verifier(
+    "et Maths appliquées de Modélisation statistique",
+    porte("licence-en-mathematiques-appliquees-informatique-et-economet") === true &&
+      dist
+        .filter((r) => r.id.startsWith("licence-modelisation-statistique"))
+        .every((r) => !r.structure_ue.blocs_types.includes("management-organisations"))
+  );
+}
+
+verifier(
+  "la concentration n'est calculée que là où le catalogue publie un découpage en UE",
+  dist.every((r) => (r.structure_ue.publiee ? r.structure_ue.concentration != null : r.structure_ue.concentration === null)),
+  dist
+    .filter((r) => r.structure_ue.publiee !== (r.structure_ue.concentration != null))
+    .map((r) => r.id)
+    .join(", ")
+);
+
+verifier(
+  "les conteneurs génériques du catalogue Master ne comptent pas comme UE",
+  dist.filter((r) => r.structure_ue.publiee).length < toutesFiches.length / 2,
+  `${dist.filter((r) => r.structure_ue.publiee).length} fiches avec UE publiées`
+);
+
+/* ── Couverture des lexiques ─────────────────────────────────────
+ * C'est ce contrôle, et lui seul, qui aurait détecté le bug d'UX Design : 55 % de
+ * modules non reconnus quand la moyenne du catalogue était à 26 %.
+ * ─────────────────────────────────────────────────────────────── */
+
+const couv = couvertureLexicale(toutesFiches);
+verifier(
+  "la couverture des lexiques est mesurée et la moyenne reste sous 35 %",
+  couv.moyenne > 0 && couv.moyenne < 0.35,
+  `${Math.round(couv.moyenne * 100)} % de modules non reconnus`
+);
+verifier(
+  "UX Design ne fait plus partie des programmes signalés pour couverture",
+  !couv.signales.some((x) => x.id === "mastere-ux-design"),
+  couv.signales.map((x) => x.id).slice(0, 5).join(", ")
+);
+
+/* ── axes_fiables ────────────────────────────────────────────────
+ * Le moteur ne doit pas classer par le score un programme dont les axes ne décrivent
+ * pas le contenu. Trois causes, une seule conséquence.
+ * ─────────────────────────────────────────────────────────────── */
+
+verifier(
+  "chaque fiche porte axes_fiables",
+  dist.every((r) => typeof r.axes_fiables === "boolean")
+);
+
+verifier(
+  "les programmes à couverture insuffisante sont marqués non fiables",
+  couv.signales.every((x) => dist.find((r) => r.id === x.id)?.axes_fiables === false),
+  couv.signales.filter((x) => dist.find((r) => r.id === x.id)?.axes_fiables !== false).map((x) => x.id).join(", ")
+);
+
+verifier(
+  "une fiche sans module n'a jamais d'axes fiables — sa note 3 est une valeur par défaut",
+  dist.filter((r) => !r.structure_ue.nb_modules).every((r) => r.axes_fiables === false),
+  dist.filter((r) => !r.structure_ue.nb_modules && r.axes_fiables).map((r) => r.id).join(", ")
+);
+
+verifier(
+  `une fiche sous ${MODULES_MIN} modules n'a pas d'axes fiables — la proportion n'y mesure rien`,
+  dist.filter((r) => r.structure_ue.nb_modules && r.structure_ue.nb_modules < MODULES_MIN).every((r) => !r.axes_fiables)
+);
+
+verifier(
+  "les 4 ancrages restent sur des fiches aux axes fiables",
+  ANCRAGES.every(([id]) => dist.find((r) => r.id === id)?.axes_fiables === true),
+  ANCRAGES.filter(([id]) => dist.find((r) => r.id === id)?.axes_fiables !== true).map(([id]) => id).join(", ")
+);
+
+verifier(
+  "les non fiables restent minoritaires : au plus un quart du catalogue",
+  dist.filter((r) => !r.axes_fiables).length <= toutesFiches.length / 4,
+  `${dist.filter((r) => !r.axes_fiables).length} / ${toutesFiches.length}`
+);
+
+/* ── Parcours — la seule structure thématique hors licences ──────
+ * Le catalogue Master ne publie aucune UE : une liste plate de puces. Son seul
+ * regroupement thématique est le bandeau « Parcours … », composé en petites capitales
+ * et parfois avec les mots dans un autre ordre.
+ * ─────────────────────────────────────────────────────────────── */
+
+const parcoursVus = [...new Set(toutesFiches.map((f) => f.parcours).filter(Boolean))];
+verifier(
+  "les variantes de casse et d'ordre des mots d'un parcours sont rapprochées",
+  new Set(parcoursVus.map(cleParcours)).size === parcoursVus.length,
+  parcoursVus.join(" | ")
+);
+verifier(
+  "les parcours restent un regroupement grossier : moins de 6 pour tout le catalogue",
+  parcoursVus.length > 0 && parcoursVus.length < 6,
+  `${parcoursVus.length} parcours`
+);
+
+// Deux options d'un même programme partagent leur tronc commun : un recouvrement
+// élevé y est attendu et se tranche par le nom de l'option, sans mobiliser personne.
+const soeurs = paires.filter((p) => p.soeurs);
+const ambigues = paires.filter((p) => !p.soeurs);
+verifier(
+  "les paires d'options sœurs sont séparées des vraies ambiguïtés",
+  soeurs.length > 0 && ambigues.length > 0,
+  `${soeurs.length} sœurs, ${ambigues.length} ambiguës`
+);
+verifier(
+  "aucune paire d'options sœurs n'est adressée à un responsable",
+  soeurs.every(
+    (p) =>
+      (p.a.programme_parent && p.a.programme_parent === p.b.programme_parent) ||
+      (p.a.option && p.b.option)
+  ),
+  soeurs.map((p) => `${p.a.id} / ${p.b.id}`).join(" ; ")
+);
+verifier(
+  "les options de la Licence en Gestion sont reconnues comme sœurs, pas comme ambiguïté",
+  !ambigues.some((p) => p.a.programme_parent && p.a.programme_parent === p.b.programme_parent),
+  ambigues.map((p) => `${p.a.id} / ${p.b.id}`).join(" ; ")
+);
+
+verifier(
+  "les voisines pointent vers des fiches existantes",
+  dist.every((r) => r.voisines.every((v) => toutesFiches.some((f) => f.id === v))),
+  dist.flatMap((r) => r.voisines.filter((v) => !toutesFiches.some((f) => f.id === v))).join(", ")
+);
+
+// Exemple vérifié à la main dans CLAUDE.md : le catalogue sépare seul ces deux
+// programmes, malgré des intitulés que le prospect confond.
+const trading = dist.find((r) => r.id === "master-en-marche-financier-trading");
+const banque = toutesFiches.find((f) => f.id === "mba-en-banque-assurance");
+if (trading && banque) {
+  const modulesTrading = new Set(
+    (toutesFiches.find((f) => f.id === trading.id).unites_enseignement || []).flatMap((u) => u.modules)
+  );
+  const modulesBanque = new Set((banque.unites_enseignement || []).flatMap((u) => u.modules));
+  const communs = [...modulesTrading].filter((m) => modulesBanque.has(m)).length;
+  verifier(
+    "Marché Financier & Trading et Banque-Assurance sont séparés par le catalogue seul",
+    communs === 0 && trading.distinctivite.plus_proche !== "mba-en-banque-assurance",
+    `${communs} module(s) commun(s), plus proche : ${trading.distinctivite.plus_proche}`
+  );
+  verifier(
+    "chacun garde des modules exclusifs dans son domaine",
+    trading.totalModulesExclusifs > 3 &&
+      dist.find((r) => r.id === "mba-en-banque-assurance").totalModulesExclusifs > 3
+  );
+} else {
+  console.log("  ! fiches de référence absentes — contrôle de distinctivité ignoré");
 }
 
 console.log(

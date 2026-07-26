@@ -19,14 +19,19 @@
     "creatif": 1,
     "cadre": 5
   },
+  "axes_parts": {
+    "quantitatif": 0.5833,
+    "technique": 0.125,
+    "relationnel": 0.25,
+    "creatif": 0,
+    "cadre": 0.625
+  },
   "domaines": [
     "comptabilite",
-    "gestion",
-    "finance"
+    "gestion"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Auditeur Interne",
@@ -87,10 +92,48 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
-      "exigence_quantitative": "inference"
+      "exigence_quantitative": "inference",
+      "vitrine.description": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "ISM_ONLINE_ISF_BROCHURE.pdf"
-  }
+  },
+  "voisines": [
+    "licence-de-gestion-option-comptabilite-finance",
+    "mba-en-audit-controle-de-gestion-et-aide-a-la-decision"
+  ],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Management Stratégique et RSE",
+      "Techniques comptables approfondies",
+      "Diagnostic Financier - Etats financiers",
+      "Normes internationales IFRS",
+      "Planification et gestion budgétaire",
+      "Comptabilité des groupes",
+      "Audit - Contrôle Interne - Contrôle de Gestion",
+      "Droit Spécial des Sociétés"
+    ],
+    "metiers_exclusifs": [
+      "Contrôleur de gestion Trésorier",
+      "Contrôleur budgétaire Risk manager"
+    ],
+    "recouvrement_max": 0.296,
+    "plus_proche": "mba-en-audit-controle-de-gestion-et-aide-a-la-decision",
+    "correlation_axes_max": 0.957,
+    "plus_proche_axes": "mba-en-audit-controle-de-gestion-et-aide-a-la-decision"
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 0,
+    "nb_modules": 24,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": true
 }

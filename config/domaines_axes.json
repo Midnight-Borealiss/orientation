@@ -1,21 +1,332 @@
 {
-  "_comment": "Les 2 axes de DISPOSITION, au niveau du domaine et non de la filiere. Seule donnee que le catalogue ne contient pas : elle vient du tri de portraits fait par les 5 responsables d'ecole. Echelle 1-5.",
-
+  "_comment": "Les 2 axes de DISPOSITION, au niveau du DOMAINE. Seule donnee du moteur que le catalogue ne contient pas : elle vient des responsables d ecole. Echelle 1-5. Remplace config/familles_axes.json : au niveau famille, ancrage et abstraction auraient ete identiques pour tous les programmes d une meme famille, donc sans aucun pouvoir discriminant la ou le scoring en a besoin — voir CLAUDE.md > Les axes de disposition se collectent par DOMAINE.",
   "_axes": {
     "ancrage": "1 = bureau, ecran, dossiers  |  5 = terrain, deplacement, contact direct",
     "abstraction": "1 = concret, resultat visible vite  |  5 = abstrait, conceptuel, plusieurs reponses defendables"
   },
-
   "_statut": "a_collecter",
-
+  "_protocole": "Chaque responsable CLASSE ses domaines, deux fois : du plus bureau-et-dossiers au plus terrain-et-deplacement, puis du plus concret au plus abstrait. Pas de tri de portraits fictifs : un classement de domaines reels est plus rapide et plus fiable. Les domaines sont listes du plus porte au moins porte : commencer par les premiers.",
+  "_reperes": {
+    "_comment": "Domaines reperes inseres dans CHAQUE classement, y compris hors de l ecole concernee. Sans eux les cinq classements ne sont pas comparables entre eux : un 3 chez Madiba et un 3 chez Ingenieurs ne voudraient rien dire ensemble.",
+    "domaines": [
+      "logistique",
+      "droit"
+    ]
+  },
+  "_domaines_partages": {
+    "_comment": "Un domaine porte par plusieurs ecoles (gestion : 6 ecoles, finance : 4) est classe par plusieurs responsables. TRANCHE : moyenne des reponses, PAS de proprietaire unique — un proprietaire unique effacerait le fait que gestion ne designe pas la meme chose a l Ecole d Ingenieurs et a Madiba. Les reponses individuelles se consignent dans _reponses, et un ecart de 2 points ou plus entre deux responsables est un signal a examiner, jamais a lisser.",
+    "regle": "moyenne",
+    "_reponses_format": "{ \"ism-management\": { \"ancrage\": 2, \"abstraction\": 4 } }"
+  },
+  "_filiere_a_deux_domaines": "19 fiches sur 84 portent deux domaines. Leurs valeurs de disposition sont la MOYENNE SIMPLE de celles de leurs domaines. Aucune ponderation : rien ne dit que le premier domaine pese plus que le second.",
   "domaines": {
-    "finance": { "ancrage": null, "abstraction": null },
-    "comptabilite": { "ancrage": null, "abstraction": null },
-    "marketing": { "ancrage": null, "abstraction": null },
-    "rh": { "ancrage": null, "abstraction": null },
-    "droit": { "ancrage": null, "abstraction": null },
-    "informatique": { "ancrage": null, "abstraction": null },
-    "logistique": { "ancrage": null, "abstraction": null },
-    "communication": { "ancrage": null, "abstraction": null }
+    "gestion": {
+      "ancrage": null,
+      "abstraction": null,
+      "_nom": "gestion",
+      "_famille": "entreprise-management",
+      "_filieres": 23,
+      "_ecoles": [
+        "ism-droit",
+        "ism-executive",
+        "ism-ingenieurs",
+        "ism-management",
+        "ism-online",
+        "madiba"
+      ]
+    },
+    "droit": {
+      "ancrage": null,
+      "abstraction": null,
+      "_nom": "droit",
+      "_famille": "droit-action-publique",
+      "_filieres": 15,
+      "_ecoles": [
+        "ism-droit",
+        "ism-online"
+      ],
+      "_repere": true
+    },
+    "finance": {
+      "ancrage": null,
+      "abstraction": null,
+      "_nom": "finance",
+      "_famille": "chiffres-finance",
+      "_filieres": 8,
+      "_ecoles": [
+        "ism-droit",
+        "ism-ingenieurs",
+        "ism-management",
+        "ism-online"
+      ]
+    },
+    "informatique": {
+      "ancrage": null,
+      "abstraction": null,
+      "_nom": "informatique",
+      "_famille": "numerique",
+      "_filieres": 6,
+      "_ecoles": [
+        "ism-digital-campus",
+        "ism-ingenieurs",
+        "ism-online"
+      ]
+    },
+    "management-projet": {
+      "ancrage": null,
+      "abstraction": null,
+      "_nom": "management-projet",
+      "_famille": "entreprise-management",
+      "_filieres": 5,
+      "_ecoles": [
+        "ism-digital-campus",
+        "ism-ingenieurs",
+        "ism-online"
+      ]
+    },
+    "marketing": {
+      "ancrage": null,
+      "abstraction": null,
+      "_nom": "marketing",
+      "_famille": "commerce-communication",
+      "_filieres": 5,
+      "_ecoles": [
+        "ism-digital-campus",
+        "ism-management",
+        "ism-online"
+      ]
+    },
+    "communication": {
+      "ancrage": null,
+      "abstraction": null,
+      "_nom": "communication",
+      "_famille": "commerce-communication",
+      "_filieres": 4,
+      "_ecoles": [
+        "ism-management",
+        "ism-online",
+        "madiba"
+      ]
+    },
+    "rh": {
+      "ancrage": null,
+      "abstraction": null,
+      "_nom": "rh",
+      "_famille": "entreprise-management",
+      "_filieres": 4,
+      "_ecoles": [
+        "ism-management",
+        "ism-online"
+      ]
+    },
+    "science-politique": {
+      "ancrage": null,
+      "abstraction": null,
+      "_nom": "science-politique",
+      "_famille": "droit-action-publique",
+      "_filieres": 4,
+      "_ecoles": [
+        "madiba"
+      ]
+    },
+    "comptabilite": {
+      "ancrage": null,
+      "abstraction": null,
+      "_nom": "comptabilite",
+      "_famille": "chiffres-finance",
+      "_filieres": 3,
+      "_ecoles": [
+        "ism-management",
+        "ism-online"
+      ]
+    },
+    "data": {
+      "ancrage": null,
+      "abstraction": null,
+      "_nom": "data",
+      "_famille": "numerique",
+      "_filieres": 3,
+      "_ecoles": [
+        "ism-digital-campus",
+        "ism-ingenieurs"
+      ]
+    },
+    "fiscalite": {
+      "ancrage": null,
+      "abstraction": null,
+      "_nom": "fiscalite",
+      "_famille": "chiffres-finance",
+      "_filieres": 3,
+      "_ecoles": [
+        "ism-droit"
+      ]
+    },
+    "logistique": {
+      "ancrage": null,
+      "abstraction": null,
+      "_nom": "logistique",
+      "_famille": "ingenierie-industrie",
+      "_filieres": 3,
+      "_ecoles": [
+        "ism-ingenieurs",
+        "ism-management"
+      ],
+      "_repere": true
+    },
+    "reseaux": {
+      "ancrage": null,
+      "abstraction": null,
+      "_nom": "reseaux",
+      "_famille": "numerique",
+      "_filieres": 3,
+      "_ecoles": [
+        "ism-ingenieurs"
+      ]
+    },
+    "administration-publique": {
+      "ancrage": null,
+      "abstraction": null,
+      "_nom": "administration-publique",
+      "_famille": "droit-action-publique",
+      "_filieres": 2,
+      "_ecoles": [
+        "ism-droit",
+        "madiba"
+      ]
+    },
+    "agrobusiness": {
+      "ancrage": null,
+      "abstraction": null,
+      "_nom": "agrobusiness",
+      "_famille": "ingenierie-industrie",
+      "_filieres": 2,
+      "_ecoles": [
+        "ism-management"
+      ]
+    },
+    "assurance": {
+      "ancrage": null,
+      "abstraction": null,
+      "_nom": "assurance",
+      "_famille": "chiffres-finance",
+      "_filieres": 2,
+      "_ecoles": [
+        "ism-ingenieurs",
+        "ism-management"
+      ]
+    },
+    "commerce-international": {
+      "ancrage": null,
+      "abstraction": null,
+      "_nom": "commerce-international",
+      "_famille": "commerce-communication",
+      "_filieres": 2,
+      "_ecoles": [
+        "ism-management"
+      ]
+    },
+    "culture-evenementiel": {
+      "ancrage": null,
+      "abstraction": null,
+      "_nom": "culture-evenementiel",
+      "_famille": "commerce-communication",
+      "_filieres": 2,
+      "_ecoles": [
+        "ism-management",
+        "madiba"
+      ]
+    },
+    "energie": {
+      "ancrage": null,
+      "abstraction": null,
+      "_nom": "energie",
+      "_famille": "ingenierie-industrie",
+      "_filieres": 2,
+      "_ecoles": [
+        "ism-droit",
+        "ism-management"
+      ]
+    },
+    "mathematiques": {
+      "ancrage": null,
+      "abstraction": null,
+      "_nom": "mathematiques",
+      "_famille": "chiffres-finance",
+      "_filieres": 2,
+      "_ecoles": [
+        "ism-ingenieurs"
+      ]
+    },
+    "qualite": {
+      "ancrage": null,
+      "abstraction": null,
+      "_nom": "qualite",
+      "_famille": "entreprise-management",
+      "_filieres": 2,
+      "_ecoles": [
+        "ism-management",
+        "ism-online"
+      ]
+    },
+    "cybersecurite": {
+      "ancrage": null,
+      "abstraction": null,
+      "_nom": "cybersecurite",
+      "_famille": "numerique",
+      "_filieres": 1,
+      "_ecoles": [
+        "ism-ingenieurs"
+      ]
+    },
+    "design-web": {
+      "ancrage": null,
+      "abstraction": null,
+      "_nom": "design-web",
+      "_famille": "numerique",
+      "_filieres": 1,
+      "_ecoles": [
+        "ism-digital-campus"
+      ]
+    },
+    "electronique": {
+      "ancrage": null,
+      "abstraction": null,
+      "_nom": "electronique",
+      "_famille": "ingenierie-industrie",
+      "_filieres": 1,
+      "_ecoles": [
+        "ism-ingenieurs"
+      ]
+    },
+    "journalisme": {
+      "ancrage": null,
+      "abstraction": null,
+      "_nom": "journalisme",
+      "_famille": "commerce-communication",
+      "_filieres": 1,
+      "_ecoles": [
+        "madiba"
+      ]
+    },
+    "marches-financiers": {
+      "ancrage": null,
+      "abstraction": null,
+      "_nom": "marches-financiers",
+      "_famille": "chiffres-finance",
+      "_filieres": 1,
+      "_ecoles": [
+        "ism-management"
+      ]
+    },
+    "rse": {
+      "ancrage": null,
+      "abstraction": null,
+      "_nom": "rse",
+      "_famille": "entreprise-management",
+      "_filieres": 1,
+      "_ecoles": [
+        "ism-management"
+      ]
+    }
   }
 }

@@ -1,6 +1,6 @@
 {
   "id": "doctorate-in-business-administration-dba",
-  "nom": "DOCTORATE IN BUSINESS ADMINISTRATION (DBA)",
+  "nom": "Doctorate in Business Administration (DBA)",
   "ecole": "ism-executive",
   "niveau": "dba",
   "langue": "bilingue",
@@ -19,12 +19,18 @@
     "creatif": 1,
     "cadre": 1
   },
+  "axes_parts": {
+    "quantitatif": 0,
+    "technique": 0.2308,
+    "relationnel": 0,
+    "creatif": 0,
+    "cadre": 0
+  },
   "domaines": [
-    "reseaux"
+    "gestion"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [],
     "secteurs": [],
@@ -68,9 +74,15 @@
       "modalites": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
       "exigence_quantitative": "inference",
-      "partenariats": "brochure"
+      "vitrine.description": "brochure",
+      "partenariats": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
@@ -80,5 +92,31 @@
     "double_diplome": null,
     "diplome_delocalise": "deesg paris le dba de l'esg paris et du groupe ism vise a offrir aux c",
     "accreditations": []
-  }
+  },
+  "voisines": [],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Séminaire n°1:",
+      "Séminaire n°2:",
+      "Séminaire n°3:",
+      "Séminaire n°4: Deuxième année : Expérience Terrain, Réseautage et Élaboration de la Recherche Les ateliers incluent :",
+      "Atelier n°1 :",
+      "Atelier n°2 :",
+      "Atelier n°3 :",
+      "Atelier n°4 : Troisième année : La Thèse Doctorate in Business Administration La thèse est un élément central du programme DBA. Elle doit:"
+    ],
+    "metiers_exclusifs": [],
+    "recouvrement_max": 0,
+    "plus_proche": null,
+    "correlation_axes_max": 0.959,
+    "plus_proche_axes": "bachelor-en-informatique-appliquee-a-la-gestion-des-entrepri-en-ligne"
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 1,
+    "nb_modules": 13,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": false
 }

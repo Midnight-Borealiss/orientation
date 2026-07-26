@@ -15,18 +15,22 @@
   "axes": {
     "quantitatif": 1,
     "technique": 5,
-    "relationnel": 1,
-    "creatif": 3,
+    "relationnel": 2,
+    "creatif": 4,
     "cadre": 1
   },
+  "axes_parts": {
+    "quantitatif": 0,
+    "technique": 0.5517,
+    "relationnel": 0.1034,
+    "creatif": 0.3103,
+    "cadre": 0.069
+  },
   "domaines": [
-    "informatique",
-    "design-web",
-    "communication"
+    "informatique"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Développeur(euse) front end ou back end",
@@ -123,10 +127,53 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
-      "exigence_quantitative": "inference"
+      "exigence_quantitative": "inference",
+      "vitrine.description": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "ISM_bachelor_brochure.pdf"
-  }
+  },
+  "voisines": [],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Prototypage",
+      "Motion design",
+      "Integration Web – CMS",
+      "HTML /CSS - Projet Portfolio – Intégration - BootStrap / Sass /",
+      "Less - Javascript / jQuery - CMS Wordpress / CMS Prestashop /",
+      "WooCommerce - CMS Drupal – etc…",
+      "Application web et mobile",
+      "PHP orienté objet (POO) / Mysql - Projet Portfolio – Administration"
+    ],
+    "metiers_exclusifs": [
+      "Développeur(euse) front end ou back end",
+      "Développeur(euse) fullstack",
+      "Développeur(euse) web",
+      "Développeur(euse) application mobile",
+      "Intégrateur(trice) web",
+      "Lead développeur(euse)",
+      "Chef(fe) de projet",
+      "Ingénieur(e) développement ou R&D plateforme"
+    ],
+    "recouvrement_max": 0.125,
+    "plus_proche": "mastere-concepteur-et-developpeur-de-solutions-digitales",
+    "correlation_axes_max": 0.943,
+    "plus_proche_axes": "mastere-concepteur-et-developpeur-de-solutions-digitales"
+  },
+  "structure_ue": {
+    "publiee": true,
+    "nb_ue": 6,
+    "nb_modules": 29,
+    "concentration": 0.517,
+    "blocs_types": [
+      "culture"
+    ]
+  },
+  "axes_fiables": true
 }

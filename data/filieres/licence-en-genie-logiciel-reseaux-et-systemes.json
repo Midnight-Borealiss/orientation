@@ -13,20 +13,25 @@
     "presentiel"
   ],
   "axes": {
-    "quantitatif": 2,
-    "technique": 4,
+    "quantitatif": 3,
+    "technique": 5,
     "relationnel": 2,
     "creatif": 1,
     "cadre": 2
   },
+  "axes_parts": {
+    "quantitatif": 0.2,
+    "technique": 0.4571,
+    "relationnel": 0.1714,
+    "creatif": 0.0286,
+    "cadre": 0.1143
+  },
   "domaines": [
     "reseaux",
-    "informatique",
-    "droit"
+    "informatique"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Assistant ingénieurs dans les domaines suivants :",
@@ -129,11 +134,53 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
-      "exigence_quantitative": "inference"
+      "exigence_quantitative": "inference",
+      "vitrine.description": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "ISM_bachelor_brochure.pdf"
   },
-  "departement": "Sciences et Technologies appliquées"
+  "departement": "Sciences et Technologies appliquées",
+  "voisines": [
+    "bachelor-en-informatique-appliquee-a-la-gestion-des-entrepri-en-ligne",
+    "licence-en-electronique-telecommunications-et-systemes-embar",
+    "licence-en-informatique",
+    "licence-en-informatique-appliquee-a-la-gestion-des-entrepris",
+    "mba-ingenierie-reseaux-et-systemes-decisionnels"
+  ],
+  "distinctivite": {
+    "modules_exclusifs": [],
+    "metiers_exclusifs": [
+      "Assistant ingénieurs dans les domaines suivants :",
+      "Développement – Administration et gestion des systèmes logiciels",
+      "Analyste programmeur",
+      "Concepteur et développeur d’application",
+      "Administrateur de réseaux et systèmes",
+      "Architecte réseau / Responsable d’exploitation"
+    ],
+    "recouvrement_max": 0.846,
+    "plus_proche": "licence-en-informatique",
+    "correlation_axes_max": 0.997,
+    "plus_proche_axes": "licence-en-informatique"
+  },
+  "structure_ue": {
+    "publiee": true,
+    "nb_ue": 6,
+    "nb_modules": 35,
+    "concentration": 0.257,
+    "blocs_types": [
+      "maitrise-des-comportements-professionnels",
+      "methodologie-entrepreneurship",
+      "management-organisations",
+      "programmation-developpement-web-et-d-application",
+      "mathematiques-et-techniques-quantitatives-de-ges"
+    ]
+  },
+  "axes_fiables": true
 }

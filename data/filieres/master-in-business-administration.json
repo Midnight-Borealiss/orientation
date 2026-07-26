@@ -14,19 +14,23 @@
   ],
   "axes": {
     "quantitatif": 3,
-    "technique": 2,
+    "technique": 1,
     "relationnel": 3,
-    "creatif": 1,
+    "creatif": 2,
     "cadre": 3
   },
+  "axes_parts": {
+    "quantitatif": 0.2593,
+    "technique": 0.0741,
+    "relationnel": 0.2222,
+    "creatif": 0.1111,
+    "cadre": 0.2593
+  },
   "domaines": [
-    "comptabilite",
-    "gestion",
-    "droit"
+    "gestion"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Gestionnaires",
@@ -93,12 +97,52 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
-      "exigence_quantitative": "inference"
+      "exigence_quantitative": "inference",
+      "vitrine.description": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
     "annee_source": 2024
   },
-  "parcours": "Parcours responsabilité, organisation et management"
+  "parcours": "Parcours Responsabilité, organisation et management",
+  "voisines": [],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Leadership & Management",
+      "RSE & Développement durable",
+      "Ethique des affaires",
+      "Marketing stratégique et opérationnel",
+      "Innovation & transformation digitale",
+      "Management des projets",
+      "Prise de décision",
+      "Comptabilité pour managers"
+    ],
+    "metiers_exclusifs": [
+      "Gestionnaires",
+      "Directeur / cadre supérieur de PME et de cabinets d’études et de conseil",
+      "Consultant free-lance",
+      "Business coordinateur",
+      "Directeur d’agence",
+      "Directeur des opérations",
+      "Gérant d’entreprise"
+    ],
+    "recouvrement_max": 0.045,
+    "plus_proche": "executive-mba-parcours-en-francais-en-ligne",
+    "correlation_axes_max": 0.899,
+    "plus_proche_axes": "bachelor-en-gestion-option-compta-finance-en-ligne"
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 0,
+    "nb_modules": 27,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": true
 }

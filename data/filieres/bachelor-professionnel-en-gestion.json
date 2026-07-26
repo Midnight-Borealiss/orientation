@@ -1,6 +1,6 @@
 {
   "id": "bachelor-professionnel-en-gestion",
-  "nom": "BACHELOR PROFESSIONNEL EN GESTION",
+  "nom": "Bachelor Professionnel en Gestion",
   "ecole": "ism-management",
   "niveau": "bachelor",
   "langue": "francais",
@@ -20,13 +20,18 @@
     "creatif": 1,
     "cadre": 3
   },
+  "axes_parts": {
+    "quantitatif": 0.25,
+    "technique": 0,
+    "relationnel": 0.75,
+    "creatif": 0,
+    "cadre": 0.25
+  },
   "domaines": [
-    "gestion",
-    "comptabilite"
+    "gestion"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Gestionnaire des entreprises / administrative",
@@ -69,9 +74,15 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
       "exigence_quantitative": "inference",
-      "partenariats": "brochure"
+      "vitrine.description": "brochure",
+      "partenariats": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "ISM_bachelor_brochure.pdf"
@@ -82,5 +93,33 @@
     "accreditations": [
       "Cames"
     ]
-  }
+  },
+  "voisines": [],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Outils du management des organisations",
+      "management juridique et outils de gouvernance",
+      "Gestion comptable financière de l’entreprise",
+      "Leadership et Soft skills"
+    ],
+    "metiers_exclusifs": [
+      "Gestionnaire des entreprises / administrative",
+      "Marketeur",
+      "Manageur de la qualité",
+      "Chargé des relations externes",
+      "Responsable des achats et approvisionnement"
+    ],
+    "recouvrement_max": 0,
+    "plus_proche": null,
+    "correlation_axes_max": 0.976,
+    "plus_proche_axes": "master-en-droit-notarial-et-gestion-du-patrimoine"
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 1,
+    "nb_modules": 4,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": false
 }

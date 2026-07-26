@@ -14,19 +14,24 @@
     "en-ligne"
   ],
   "axes": {
-    "quantitatif": 2,
+    "quantitatif": 3,
     "technique": 1,
     "relationnel": 2,
     "creatif": 1,
     "cadre": 5
   },
+  "axes_parts": {
+    "quantitatif": 0.2222,
+    "technique": 0,
+    "relationnel": 0.1111,
+    "creatif": 0,
+    "cadre": 1
+  },
   "domaines": [
-    "droit",
-    "finance"
+    "droit"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Juriste d’entreprise",
@@ -71,9 +76,15 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
       "exigence_quantitative": "inference",
-      "partenariats": "brochure"
+      "vitrine.description": "brochure",
+      "partenariats": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
@@ -83,5 +94,34 @@
     "double_diplome": null,
     "diplome_delocalise": "l'universite publique jean francois champollion de toulouse /albi fond",
     "accreditations": []
-  }
+  },
+  "voisines": [],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Droit des affaires approfondi (entreprises en difficulté, Instruments et paiement de crédits)",
+      "Droit des assurances et de la banque",
+      "Droit international des affaires",
+      "Droit du travail approfondi",
+      "Droit des restructurations des entreprises",
+      "Fiscalité des entreprises",
+      "Contentieux du travail"
+    ],
+    "metiers_exclusifs": [
+      "Juriste d’entreprise",
+      "Conseiller juridique",
+      "Collaborateur en cabinet d’avocat spécialisé"
+    ],
+    "recouvrement_max": 0.04,
+    "plus_proche": "master-droit-des-affaires-en-ligne",
+    "correlation_axes_max": 0.985,
+    "plus_proche_axes": "licence-en-droit-prive-fondamental"
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 0,
+    "nb_modules": 9,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": true
 }

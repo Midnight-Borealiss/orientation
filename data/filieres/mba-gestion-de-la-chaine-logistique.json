@@ -14,20 +14,25 @@
     "cours-du-soir"
   ],
   "axes": {
-    "quantitatif": 1,
+    "quantitatif": 4,
     "technique": 2,
     "relationnel": 1,
     "creatif": 1,
     "cadre": 2
   },
+  "axes_parts": {
+    "quantitatif": 0.3333,
+    "technique": 0.1667,
+    "relationnel": 0.0833,
+    "creatif": 0,
+    "cadre": 0.1667
+  },
   "domaines": [
     "logistique",
-    "gestion",
-    "qualite"
+    "gestion"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
-  "voisines": [],
   "debouches": {
     "metiers": [
       "Chef de service logistique",
@@ -79,12 +84,53 @@
       "debouches.metiers": "brochure",
       "unites_enseignement": "brochure",
       "axes": "inference",
+      "axes_parts": "inference",
       "domaines": "inference",
-      "exigence_quantitative": "inference"
+      "exigence_quantitative": "inference",
+      "vitrine.description": "brochure",
+      "distinctivite": "inference",
+      "structure_ue": "inference",
+      "axes_fiables": "inference",
+      "voisines": "inference"
     },
     "statut": "brouillon",
     "brochure_fichier": "Brochure Master - MAJ2 2024 - Groupe ISM.pdf",
     "annee_source": 2024
   },
-  "parcours": "Parcours responsabilité, organisation et management"
+  "parcours": "Parcours Responsabilité, organisation et management",
+  "voisines": [],
+  "distinctivite": {
+    "modules_exclusifs": [
+      "Fondement de la logistique et de la Supply Chain",
+      "Achats approvisionnement et gestion des stocks",
+      "Théorie des jeux et gestion de la chaîne d’approvisionnement",
+      "Gestion des systèmes d’entreposage",
+      "Logistique humanitaire",
+      "Audit et diagnostic logistique",
+      "Fondements de l’optimisation des algorithmes",
+      "Gestion des opérations logistiques"
+    ],
+    "metiers_exclusifs": [
+      "Chef de service logistique",
+      "Responsable de la sûreté opérationnelle",
+      "Responsable des relations territoriales",
+      "Coordonnateur de projet",
+      "Ingénieur chargé d’affaires",
+      "Contrôleur des travaux",
+      "Agent d’escale commercial",
+      "Agent import-export École de Management"
+    ],
+    "recouvrement_max": 0,
+    "plus_proche": null,
+    "correlation_axes_max": 0.885,
+    "plus_proche_axes": "mba-en-audit-controle-de-gestion-et-aide-a-la-decision"
+  },
+  "structure_ue": {
+    "publiee": false,
+    "nb_ue": 0,
+    "nb_modules": 12,
+    "concentration": null,
+    "blocs_types": []
+  },
+  "axes_fiables": false
 }
