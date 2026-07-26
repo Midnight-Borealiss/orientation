@@ -21,7 +21,7 @@
   },
   "axes_parts": {
     "quantitatif": 0,
-    "technique": 0.2308,
+    "technique": 0.2143,
     "relationnel": 0,
     "creatif": 0,
     "cadre": 0
@@ -38,8 +38,9 @@
   },
   "unites_enseignement": [
     {
-      "intitule": "Première année : Fondations et Méthodologie de Recherche Quatre séminaires fondamentaux sont inclus :",
+      "intitule": "Première année",
       "modules": [
+        "Fondations et Méthodologie de Recherche Quatre séminaires fondamentaux sont inclus :",
         "Séminaire n°1:",
         "Séminaire n°2:",
         "Séminaire n°3:",
@@ -96,14 +97,14 @@
   "voisines": [],
   "distinctivite": {
     "modules_exclusifs": [
+      "Fondations et Méthodologie de Recherche Quatre séminaires fondamentaux sont inclus :",
       "Séminaire n°1:",
       "Séminaire n°2:",
       "Séminaire n°3:",
       "Séminaire n°4: Deuxième année : Expérience Terrain, Réseautage et Élaboration de la Recherche Les ateliers incluent :",
       "Atelier n°1 :",
       "Atelier n°2 :",
-      "Atelier n°3 :",
-      "Atelier n°4 : Troisième année : La Thèse Doctorate in Business Administration La thèse est un élément central du programme DBA. Elle doit:"
+      "Atelier n°3 :"
     ],
     "metiers_exclusifs": [],
     "recouvrement_max": 0,
@@ -114,7 +115,7 @@
   "structure_ue": {
     "publiee": false,
     "nb_ue": 1,
-    "nb_modules": 13,
+    "nb_modules": 14,
     "concentration": null,
     "blocs_types": []
   },

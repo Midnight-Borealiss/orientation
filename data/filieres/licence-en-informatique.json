@@ -44,7 +44,7 @@
   },
   "unites_enseignement": [
     {
-      "intitule": "UE Maîtrise des comportements professionnels",
+      "intitule": "professionnels",
       "modules": [
         "Communication professionnelle",
         "Leadership - Team Bulding & Soft Skills",
@@ -55,7 +55,7 @@
       ]
     },
     {
-      "intitule": "UE Mathématiques et techniques quantitatives de gestion",
+      "intitule": "quantitatives de gestion",
       "modules": [
         "Mathématiques appliquées",
         "Recherche opérationnelle",
@@ -187,11 +187,10 @@
     "nb_modules": 41,
     "concentration": 0.22,
     "blocs_types": [
-      "maitrise-des-comportements-professionnels",
       "methodologie-entrepreneurship",
       "management-organisations",
       "programmation-developpement-web-et-d-application",
-      "mathematiques-et-techniques-quantitatives-de-ges"
+      "professionnels"
     ]
   },
   "axes_fiables": true

@@ -29,14 +29,16 @@ jamais `src/engine/`.
 | Métrique de score | **tranchée** — corrélation de forme, l'euclidienne est écartée |
 | Attributs d'UE (bloc type, concentration) | **faits** — mais 28 fiches sur 84 seulement, licences et bachelors |
 | Proportions brutes des axes | **faites** — `axes_parts`, plus aucune égalité exacte à r = 1,00 |
-| Programmes non notables | **marqués** — 16 fiches `axes_fiables: false` |
+| Programmes non notables | **marqués** — 15 fiches `axes_fiables: false` |
 | Axes de disposition (2 × 28 domaines) | à collecter auprès des responsables |
 | Questions du quiz | **v0** — `config/questions.json`, formulations à remplacer par celles des entretiens |
-| Moteur de scoring | **écrit** — `src/engine/`, 66 tests |
+| Moteur de scoring | **écrit** — `src/engine/`, 96 tests |
 | Calibration des seuils par simulation | **faite** — seuils mesurés, les 3 objectifs atteints |
 | Cascade de départage | **faite** — 98 % des égalités tranchées sans les entretiens |
 | Aiguillage à deux étages | **fait** — `entreprise-management` passe de 17,8 à 8,8 filières en lice |
-| Écran de résultat | **fait** — `web/index.html`, cinq états, rendu pur et testé sans navigateur |
+| Écran de résultat | **fait** — `web/index.html`, six états, rendu pur et testé sans navigateur |
+| UE perdues à l'extraction | **corrigées** — +19 modules sur 4 fiches, contrôle des lignes non reprises |
+| Candidat unique | **traité à part** — affiché sans être noté, 28 combinaisons de filtres |
 | Hébergement Netlify | **fait** — `netlify.toml`, aucun build, `git push` déploie |
 | Collecte des validations étudiantes | **faite** — Netlify Forms, formulaire statique, `?validation=1` |
 | Bouton « parler à un conseiller » | **fait** — `config/contact.json`, canal email par défaut |
@@ -176,6 +178,72 @@ colonne** ; si la colonne n'en a aucun (3e colonne d'UE du Bachelor), on emprunt
 celui de la colonne la plus proche qui en a un. Une recherche « au-dessus, toutes
 colonnes confondues » y verrait le `DéBOUCHéS` de la première colonne et verserait
 la moitié des modules dans les métiers.
+
+### Un retour à la ligne se reconnaît au mot qui n'y tenait plus
+
+Un intitulé d'UE tient parfois sur deux lignes (« UE. Maitrise des comportements » /
+« professionnels »). Le recoller est nécessaire — mais **la règle qui décide de recoller ne
+peut se fonder ni sur la taille de police ni sur la puce**, parce que les trois catalogues
+distinguent leurs UE de trois façons différentes :
+
+| Catalogue | Ce qui marque l'UE | Modules |
+|---|---|---|
+| Bachelor, cas général | police plus grande (8 pt contre 6 pt) | sans puce |
+| Online | préfixe `*UE:` | puce `•`, **même taille** |
+| Bachelor, page du Bachelor Professionnel | rien — « UE semestre 1 », « UE semestre 2 » | **même taille**, sans puce |
+
+Le critère retenu est le **mécanisme réel d'un retour à la ligne : le premier mot de la ligne
+suivante ne tenait plus avant la marge du bloc.** La largeur d'un glyphe se déduit de la ligne
+elle-même — sa longueur en points divisée par son nombre de caractères —, donc sans connaître
+la police. Mesuré : `*UE: Outils et techniques de` finit à 522 dans un bloc qui va jusqu'à 559,
+et c'est bien « gestion » (35 pts) qui n'y tenait pas ; `UE semestre 2` finit à 91 dans un bloc
+large de 157, donc rien ne l'a coupé.
+
+Trois précisions, chacune tirée d'un faux résultat observé :
+
+- **la marge se mesure sur le BLOC, pas sur la section** — les lignes qui partagent le même
+  alignement à gauche. Une section porte parfois une ligne étrangère bien plus large (un reste
+  de colonne voisine), et prendre le maximum de la section faisait passer la marge de 558 à
+  768 : plus aucun intitulé n'était jugé coupé ;
+- **« atteindre la marge » ne suffit pas** — un intitulé s'arrête là où le mot suivant cesse de
+  tenir, souvent plusieurs dizaines de points avant la marge ;
+- **un `:` final n'est pas une phrase coupée, il annonce une liste.** La règle générale
+  « précédente terminée par un tiret ou deux-points » ne vaut donc pas pour un intitulé, sinon
+  « UE. Maitrise des comportements professionnels : » avale son premier module.
+
+**Conséquence mesurée, et c'est elle qui justifie tout ce détail.** `bachelor-professionnel-en-gestion`
+sortait avec **4 modules au lieu de 8** : ses deux UE étant composées à la taille de leurs
+modules, la seconde absorbait les siens dans son intitulé, finissait vide, et était écartée.
+4 modules, c'est sous le seuil de 6 : la fiche était `axes_fiables: false`, donc **jamais
+classée** — un défaut de mise en page produisait une conséquence visible par le prospect.
+La correction ramène 19 modules sur 4 fiches et rend cette fiche classable.
+
+**Limite connue, à ne pas « corriger » à l'aveugle :** quand l'intitulé est lui-même la ligne
+la plus large de son bloc, on ne peut pas savoir s'il a été coupé. Un intitulé garde alors un
+fragment de trop (`licence-de-gestion-option-comptabilite-finance`). C'est cosmétique — aucun
+module n'est perdu — et deux tentatives de garde supplémentaire ont chacune cassé ailleurs :
+un critère de police régressait sur tout le catalogue Online, et interdire à la taille seule
+d'ouvrir une UE fabriquait quatre UE fantômes sur `licence-en-informatique`. **Mesurer l'effet
+sur les 84 fiches avant de toucher à cette fonction.**
+
+### Le contrôle qui rend une UE perdue visible
+
+Une UE perdue ne laisse **aucune trace** dans la fiche : elle a simplement moins de modules, et
+rien ne dit combien elle aurait dû en avoir. Le seul témoin est géométrique — les lignes de
+contenu qu'aucune UE n'a reprises se trouvent **en bas** de la section.
+
+`extract.mjs` compare donc les lignes de la section au contenu retenu et remonte
+`ALERTE UE` pour celles qui manquent sous la dernière UE. Deux détails sans lesquels il ne
+mesure rien :
+
+- la comparaison se fait sur une **clé insensible à la ponctuation et aux puces** — l'intitulé
+  retenu est nettoyé (`UE.` → `UE`), et une puce numérotée (`1. comptabilité pour la finance`)
+  n'est pas dans le libellé stocké. Sans cela, 20 alertes dont 17 fausses ;
+- il reste **lisible** : 3 alertes sur 84 fiches, et `npm test` refuse qu'il en remonte plus de
+  8. Trente alertes ne seraient pas lues, zéro voudrait dire qu'il a cessé de mesurer.
+
+Les 3 alertes actuelles sont des faits, pas des bogues à corriger : deux UE que la brochure
+tronque en fin de colonne, et une note sur une certification CISCO qui n'est pas un module.
 
 ### Conséquence n°4 — aucune condition d'admission dans les brochures
 
@@ -469,7 +537,7 @@ Calculé par `distinctivite.mjs`, trois causes possibles, une seule conséquence
 **`axes_fiables` absent se lit comme `false`**, pas comme `true` : cela signifie que la
 distinctivité n'a pas tourné depuis la dernière extraction, donc que rien n'a été évalué.
 
-16 fiches sur 84 sont concernées. C'est un signalement, pas une fatalité : élargir les lexiques
+15 fiches sur 84 sont concernées. C'est un signalement, pas une fatalité : élargir les lexiques
 sur la science politique, la diplomatie, la logistique et l'aéronautique ferait repasser une
 partie de ces programmes au classement. La liste est produite par `npm run distinctivite`.
 
@@ -1387,8 +1455,27 @@ veut dire **les deux** — `presentiel` ET `week-end` —, pas l'un ou l'autre. 
 programme réel du parcours de quelqu'un qui travaille. `en semaine` est d'ailleurs la façon dont
 la brochure Bachelor dit « présentiel », et le motif a été ajouté.
 
-Le titre nu (`titreNu`) est conservé à part et **n'est pas utilisé pour l'`id`** : un `id` qui
-change crée une fiche orpheline et n'emporte pas le travail humain déjà saisi.
+### L'affichage se dissocie de l'identité
+
+Tranché : **l'`id` reste calculé sur le titre tel que lu**, annotations comprises. Le changer
+créerait une fiche orpheline et n'emporterait pas le travail humain déjà saisi.
+
+**Le `nom`, lui, prend le titre nettoyé de ces annotations.** Une seule fiche était concernée —
+`bachelor-en-gestion-full-time`, dont le nom passe de « Bachelor en Gestion full time » à
+« Bachelor en Gestion ». Deux raisons, la seconde étant la vraie :
+
+- la modalité est déjà affichée à côté du nom, l'avoir dans le titre est redondant ;
+- surtout, « Bachelor en Gestion full time » et « Bachelor Professionnel en Gestion » se
+  ressemblent assez pour qu'un candidat croie à **deux programmes sans lien**, alors que leur
+  vraie différence est la modalité. C'est le doublon présentiel / en ligne sous une autre
+  forme, et il se règle de la même façon : **le nom nomme le programme, la modalité se lit à
+  côté.**
+
+La page reste la source du titre quand elle existe ; le nettoyage s'applique au titre retenu,
+d'où qu'il vienne. `npm test` refuse qu'un `nom` porte sa propre modalité, vérifie que l'`id`
+survit au nettoyage, et exige que deux homonymes se distinguent **toujours** par leur modalité —
+`Bachelor Chef de Projet Digital` existe deux fois, en présentiel et en ligne, et c'est
+précisément pour ce cas que la modalité est toujours affichée.
 
 ### Toute modalité de la taxonomie doit être portée par une fiche
 
@@ -1422,9 +1509,14 @@ L'écran affichait « aucune formation » en cachant des programmes réels. C'es
 symétrique de celle de l'impasse bavarde : **ne jamais annoncer un contenu absent, ne jamais
 taire un contenu présent.**
 
-### Les cinq états, et l'ordre des blocs
+Ces 28 combinaisons sont depuis retombées à **0** : dans chacune, un seul programme survivait aux
+filtres, et le candidat unique se traite désormais à part. Le total des combinaisons sans résultat
+passe ainsi de **48 à 20 sur 160**, toutes des questions d'offre. Le balayage vérifie en plus que
+**toute combinaison ne laissant qu'un programme l'affiche en recommandation.**
 
-Un même gabarit pour les cinq serait malhonnête. `ORDRE_BLOCS` est écrit en **listes
+### Les six états, et l'ordre des blocs
+
+Un même gabarit pour tous serait malhonnête. `ORDRE_BLOCS` est écrit en **listes
 ordonnées** et non en numéros : la table de la spec porte deux fois le rang 4 sur l'état
 `bonne`, où les alternatives passent « avant le contenu ».
 
@@ -1434,6 +1526,7 @@ ordonnées** et non en numéros : la table de la spec porte deux fois le rang 4 
 | `bonne` | 40 % | recommandation, alternatives remontées avant le contenu |
 | `possible` | 35 % | **le conseiller passe en deuxième position** — quand le moteur est moins sûr, un humain vaut mieux qu'un écran |
 | `egalite` | 2 % | deux cartes de même poids, **aucune titrée « recommandation »** |
+| `unique` | 28 combinaisons de filtres | un seul programme a survécu : **aucun score, aucune comparaison** ; le bouton rouvre **les filtres** |
 | `impasse` | rare | rien à recommander ; le bouton rouvre alors **les filtres**, pas le profil |
 
 **`impasse` a deux visages, et les confondre a produit deux défauts opposés :**
@@ -1441,7 +1534,39 @@ ordonnées** et non en numéros : la table de la spec porte deux fois le rang 4 
 | Situation | Ce qui existe | Ce que l'écran fait |
 |---|---|---|
 | aucun candidat | rien | dit qu'aucun programme ne réunit ces réponses, et rouvre F1/F2 |
-| des candidats, **aucun comparable** | 28 combinaisons | les **affiche sans les classer**, manque attribué à la brochure |
+| des candidats, **aucun comparable** | 0 combinaison aujourd'hui | les **affiche sans les classer**, manque attribué à la brochure |
+
+Le second visage était mesuré à 28 combinaisons ; il est tombé à **0** depuis que le candidat
+unique est traité à part — voir ci-dessous. Le cas reste implémenté et testé : il redeviendra
+atteignable dès qu'un prospect aura **plusieurs** programmes dont aucun n'est classable.
+
+### Un seul candidat : le classement n'a plus d'objet
+
+Quand les filtres ne laissent qu'un programme, il n'y a **rien à comparer et rien à départager**.
+Le noter est au mieux inutile ; sur un `axes_fiables: false` c'est nuisible — il partait en zone
+non classée, et le prospect lisait qu'on ne sait pas comparer ce programme à son profil **alors
+que c'est sa seule option**. C'est la faute la plus difficile à voir, parce que l'écran paraît
+fonctionner.
+
+Le moteur court-circuite donc le score : `classees` porte l'unique fiche avec `score: null` —
+jamais `0`, qui se lirait comme une correspondance nulle —, `code: "unique"`, aucune
+alternative, aucun départage, `parcours.candidat_unique: true`. **Quels que soient ses axes.**
+
+| | Ce que l'écran dit |
+|---|---|
+| badge | « La seule qui réunit tes réponses » — ni « correspondance », ni « piste » : rien n'a été comparé |
+| posture | la justification vient des **filtres** : niveau, façon de suivre les cours, univers |
+| conseiller | **en haut**, comme en `possible` : le prospect n'a qu'une option et le moteur ne l'a pas choisie pour lui |
+| Reprendre | rouvre **les filtres** — le profil n'a joué aucun rôle, le rouvrir ne changerait rien |
+
+Le contenu et les débouchés s'affichent normalement : ils sont réels, seuls les axes ne
+l'étaient pas.
+
+Le cas n'est pas théorique — **7 combinaisons de filtres, 28 en comptant l'aiguillage fin** —, et
+`npm run test:interface` vérifie au balayage que **toute combinaison ne laissant qu'un programme
+l'affiche en recommandation, jamais en zone non classée**. `npm run test:moteur` vérifie en plus
+qu'un `axes_fiables: false` y est bien recommandé, **et que ce cas existe dans le catalogue** :
+sans ce second contrôle, le premier passerait en ne vérifiant rien.
 
 **L'élargissement n'est PAS une impasse.** Quand l'aiguillage fin vide le jeu, le moteur revient
 à la famille : il a donc une liste. Le traiter comme une impasse faisait afficher « voici
@@ -1459,7 +1584,7 @@ qu'aucun prospect ne verra.
 
 ### Ce que l'écran refuse de faire
 
-Ce sont des tests, pas des intentions — `npm run test:interface`, 96 contrôles :
+Ce sont des tests, pas des intentions — `npm run test:interface`, 218 contrôles :
 
 - **aucune valeur de score, sous aucune forme.** Le test extrait les scores réels du
   résultat, puis cherche dans la page toutes leurs écritures plausibles : brut, arrondi à une
@@ -1503,9 +1628,12 @@ la place du prospect serait pire que perdre sa réponse.
 | État | Reprendre rouvre | Fonction |
 |---|---|---|
 | forte · bonne · possible · egalite | les 7 questions de profil, filtres et aiguillage conservés | `reprendreProfil` |
-| **impasse** | **F1 et F2**, aiguillage et profil conservés | `reprendreFiltres` |
+| **impasse** · **unique** | **F1 et F2**, aiguillage et profil conservés | `reprendreFiltres` |
 
-Hors impasse, la reformulation porte sur le profil et refaire les filtres serait punir le
+`unique` rejoint `impasse` pour la même raison : le profil n'a joué aucun rôle dans le résultat,
+donc le rouvrir ne changerait rien. Ce sont les filtres qui ont réduit le jeu à un programme.
+
+Hors ces deux cas, la reformulation porte sur le profil et refaire les filtres serait punir le
 prospect d'avoir corrigé. **En impasse c'est l'inverse** : ce sont les filtres qui ont vidé le
 jeu, rouvrir le profil ne corrigerait rien, et l'écran était un cul-de-sac — le seul défaut
 vraiment inacceptable ici. `ECRAN-RESULTAT.md` § 5 prescrivait le profil dans tous les cas ; la
@@ -1800,6 +1928,12 @@ ré-extraction, contrôle que les champs humains sont intacts, que les champs d'
 - Supprimer une fiche que le catalogue ne produit plus. La signaler, elle porte peut-être du travail humain.
 - Rattacher un domaine à deux familles, ou l'oublier. `validate.mjs` refuse les deux.
 - Envoyer une paire d'options sœurs à un responsable. Le nom de l'option tranche déjà.
+- Classer un candidat unique. Il n'y a rien à comparer : on l'affiche, avec la justification des filtres.
+- Laisser un `axes_fiables: false` en zone non classée quand il est la seule option. Ce serait la pire réponse possible.
+- Décider qu'une ligne poursuit la précédente d'après sa taille de police ou sa puce. Les trois catalogues marquent leurs UE de trois façons ; seul le mot qui n'y tenait plus est un fait.
+- Mesurer la marge d'un retour à la ligne sur la section. Sur le **bloc** — les lignes alignées à gauche —, sinon une ligne étrangère fait passer la marge de 558 à 768.
+- Lire un `:` final comme une phrase coupée. Il annonce une liste : ce qui suit est un élément.
+- Toucher à `construireUE` sans mesurer l'effet sur les 84 fiches. Deux gardes plausibles ont chacune cassé un autre catalogue.
 - Regrouper les items d'une page par Y seul. Les colonnes d'abord, toujours.
 - Supposer qu'un catalogue est mono-colonne parce qu'une page l'est.
 - Noter un axe de contenu à la main. Ils se comptent depuis les modules.
@@ -1851,6 +1985,10 @@ ré-extraction, contrôle que les champs humains sont intacts, que les champs d'
 - Choisir entre deux modalités qu'un programme déclare toutes les deux. « En semaine ou en week-end » veut dire les deux.
 - Changer un `id` pour nettoyer un titre. Une orpheline n'emporte pas le travail humain.
 - Traiter `data/_impasses.md` comme un rapport de bogues. C'est une question d'offre et de brochure, adressée aux admissions.
+- Lire « 20 sur 160 » comme « 13 % des candidats ». Les combinaisons ne sont pas équiprobables, et le taux pondéré n'est pas connu.
+- Laisser une règle systématique se déduire d'une liste. Une règle s'énonce en tête ; quatorze lignes ne se comprennent pas.
+- Écrire à la main une règle du catalogue. Elle se calcule, sinon elle se périme en gardant l'air d'un fait.
+- Mettre la modalité dans le `nom` d'une fiche. Le nom nomme le programme, la modalité se lit à côté.
 - Écrire une option de filtre de modalité sur une seule étiquette. Les catalogues n'emploient pas le même mot.
 - Laisser une modalité de la taxonomie hors de toute option de filtre. `validate.mjs` le refuse.
 - Rouvrir le profil en impasse. Ce sont les filtres qui ont vidé le jeu ; le bouton doit rendre la main sur eux.
@@ -1916,6 +2054,18 @@ node scripts/axes-modules.mjs mastere-ux-design # quel(s) axe(s) captent chaque 
 orphelins (trou lexical) et ceux captés par plusieurs axes. Voir « Normalisation des cinq
 axes ».
 
+Pour une UE mal découpée, `UE_DEBUG=1` imprime chaque ligne de section avec son abscisse, sa
+**borne droite**, sa taille de police et sa puce — les quatre grandeurs dont dépend le
+recollement des retours à la ligne :
+
+```bash
+UE_DEBUG=1 npm run extract 2>&1 | grep -B2 -A6 "UE semestre 2"   # ou l'intitulé suspect
+```
+
+C'est ce qui a montré que « UE semestre 2 » s'arrêtait 65 pts avant la marge de son bloc, là
+où les vrais retours à la ligne la touchent. Voir « Un retour à la ligne se reconnaît au mot
+qui n'y tenait plus ».
+
 `npm run extract` fusionne avec l'existant (voir « L'extraction fusionne ») mais retire
 `distinctivite`, périmée dès qu'une fiche change : relancer
 `npm run distinctivite` après chaque extraction.
@@ -1945,3 +2095,43 @@ Découpage du code d'extraction :
 | `scripts/contexte-web.mjs` | le contexte du moteur en un seul JSON, liste blanche de champs. |
 | `scripts/servir.mjs` | serveur statique local, `node:http` seul. Aucune écriture. |
 | `scripts/impasses.mjs` | les combinaisons sans résultat, en document lisible pour les admissions. |
+
+## `data/_impasses.md` — ce que le catalogue ne couvre pas
+
+Destiné aux **admissions**, pas au débogage. Deux règles de rédaction, toutes deux apprises en
+relisant la première version :
+
+**Les règles d'abord, la liste ensuite.** Une règle s'énonce et se comprend ; quatorze lignes
+dont il faut déduire la règle ne se comprennent pas. Le document ouvre donc sur ce qui est
+systématique, et les règles sont **calculées** sur les fiches — une règle recopiée à la main se
+périmerait à la prochaine édition en gardant l'air d'un fait. Huit sont détectées aujourd'hui,
+dont la plus actionnable :
+
+> **Aucune formation hors journée n'est accessible avec le bac seul.** Les 7 programmes en cours
+> du soir sont tous à `bac+3`, le week-end et le temps plein à `bac+2`. **Un bachelier qui
+> travaille n'a donc aucune option, dans aucune famille** — à lui seul, ce fait produit 10 des
+> combinaisons sans issue.
+
+Les autres, du même type : `week-end` et `full-time` n'existent que dans
+`entreprise-management` ; aucun cours du soir en `numerique` ni en `droit-action-publique` ;
+aucun programme en ligne en `ingenierie-industrie` ; et trois familles n'ont aucune entrée à
+`bac+2`.
+
+**Le taux global ne se lit pas comme une proportion de candidats.** « 20 sur 160 » n'est **pas**
+« 13 % des candidats » : les combinaisons comptent chacune pour une alors que la grande majorité
+des candidats sont des bacheliers cherchant du présentiel — profil qui ne rencontre aucune
+impasse. Le document le dit explicitement, parce que sans cette précision les admissions
+liraient « un tiers des candidats ne trouve rien », ce qui est faux et alarmant à tort.
+
+**Le taux pondéré n'est pas connu et le document le dit.** L'estimer demanderait la répartition
+réelle des candidatures par diplôme, modalité et domaine — une donnée des admissions, pas du
+catalogue. La simulation, elle, pondère les **réponses de profil**, pas les filtres : elle ne
+peut donc pas y répondre. En attendant, la lecture honnête est le tableau **par profil** : 9 des
+16 couples diplôme × modalité ne rencontrent aucune impasse ; un bachelier qui demande le soir ou
+le week-end n'obtient rien dans les 10 cas.
+
+**Une section à zéro ne s'affiche pas en tableau vide.** La section 2 — « des programmes existent
+mais aucun n'est comparable » — vaut 0 depuis le traitement du candidat unique. Elle dit alors en
+une phrase pourquoi elle vaut zéro et ce qui la ferait remonter, et la colonne correspondante
+disparaît du tableau par profil : quatorze tirets d'affilée se lisent comme une donnée manquante,
+alors que c'est un zéro mesuré.

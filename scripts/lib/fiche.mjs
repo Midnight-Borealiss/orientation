@@ -110,6 +110,20 @@ const OUVRE_UE =
   /^(ue\b|ue[.*:]|\*ue|semestre\b|enseignements?\b|premiere annee|deuxieme annee|troisieme annee|module\b)/;
 const PUCE = /^\s*([•·▪◦*-]|\d+[.)])\s*/;
 
+/**
+ * Le premier mot de `suite` aurait-il tenu au bout de la ligne `ligne` ?
+ *
+ * La largeur d'un glyphe se déduit de la ligne elle-même — sa longueur en points divisée
+ * par son nombre de caractères —, ce qui évite d'avoir à connaître la police. Si le mot
+ * tenait, la ligne n'a pas été coupée : ce qui suit est un nouvel élément, pas sa suite.
+ */
+function tenaitEncore(ligne, suite, margeDroite) {
+  if (ligne.x2 == null || !ligne.texte) return true; // sans géométrie, on ne conclut pas
+  const glyphe = (ligne.x2 - ligne.x) / Math.max(ligne.texte.length, 1);
+  const mot = (suite.trim().split(/\s+/)[0] || "").length;
+  return ligne.x2 + glyphe * (mot + 1) <= margeDroite;
+}
+
 export function construireUE(lignes, intituleParDefaut) {
   if (!lignes.length) return [];
 
@@ -129,9 +143,26 @@ export function construireUE(lignes, intituleParDefaut) {
     Object.entries(hauteurs).sort((a, b) => b[1] - a[1] || Number(b[0]) - Number(a[0]))[0][0]
   );
 
+  /* Marge droite, mesurée sur le BLOC et non sur la section : la plus grande borne
+   * droite parmi les lignes qui partagent le même alignement à gauche. Une section
+   * peut porter une ligne étrangère bien plus large — un pied de page, un reste de
+   * colonne voisine —, et prendre le maximum de la section faisait passer la marge de
+   * 558 à 768. Aucun intitulé n'était alors jugé coupé, et les retours à la ligne
+   * repartaient en modules. */
+  const margeDroiteDe = (x) => {
+    const bloc = propres.filter((l) => Math.abs(l.x - x) <= 12 && l.x2 != null);
+    return bloc.length ? Math.max(...bloc.map((l) => l.x2)) : 0;
+  };
+
+  if (process.env.UE_DEBUG) {
+    console.error(`--- section (hModale ${hModale})`);
+    for (const l of propres) console.error(`  x${l.x} x2:${l.x2} h${l.h} puce:${l.puce ? 1 : 0} | ${l.texte}`);
+  }
+
   const ue = [];
   let courante = null;
   let precedente = null; // dernière ligne écrite, pour recoller les retours à la ligne
+  let intituleOuvert = false; // l'intitulé courant peut-il encore recevoir un fragment ?
 
   for (const l of propres) {
     const n = normaliser(l.texte);
@@ -141,16 +172,35 @@ export function construireUE(lignes, intituleParDefaut) {
     // précédente coupée sur un tiret / deux-points. Un intitulé d'UE, lui, se
     // poursuit à la même indentation et à la même taille de police
     // (« UE. Maitrise des Comportements » / « Professionnels »).
+    //
+    // Ce recollement exige que l'intitulé ait été COUPÉ faute de place : son premier
+    // mot suivant ne tenait plus avant la marge du bloc. C'est le mécanisme réel d'un
+    // retour à la ligne, et il se mesure — « atteindre la marge » ne suffit pas, un
+    // intitulé s'arrête là où le mot suivant cesse de tenir : « *UE: Outils et
+    // techniques de » finit à 522 quand son bloc va jusqu'à 559, et c'est bien
+    // « gestion » (35 pts) qui n'y tenait pas. « UE semestre 2 », lui, s'arrête à 91
+    // dans un bloc large de 157 : rien ne l'a coupé, donc la ligne suivante est un
+    // module. Sans cette condition, un intitulé court avalait tous ses modules, l'UE
+    // finissait vide, donc écartée, et les modules disparaissaient en silence.
+    //
+    // Ni la taille de police ni la puce ne peuvent servir ici : la brochure Bachelor
+    // distingue ses UE par la taille, la brochure Online par le préfixe « *UE: » à
+    // taille égale, et la page du Bachelor Professionnel n'emploie ni l'un ni l'autre.
+    const intituleCoupe = precedente && !tenaitEncore(precedente, l.texte, margeDroiteDe(precedente.x));
     const suiteIntitule =
       precedente &&
       precedente.cible === "intitule" &&
+      intituleOuvert &&
+      intituleCoupe &&
       !l.puce &&
       !OUVRE_UE.test(n) &&
       Math.abs(l.h - precedente.h) < 0.6;
-    const continuation =
-      precedente &&
-      !l.puce &&
-      (suiteIntitule || l.x > precedente.x + 8 || /[-–:]$/.test(precedente.texte));
+    // Un « : » final n'est pas une phrase coupée : il ANNONCE une liste, donc ce qui
+    // suit est un élément, pas la suite de l'intitulé. « UE. Maitrise des comportements
+    // professionnels : » était ainsi suivi de son premier module, absorbé dans le titre.
+    const ponctuationOuverte = /[-–]$/.test(precedente?.texte || "") ||
+      (precedente?.cible !== "intitule" && /:$/.test(precedente?.texte || ""));
+    const continuation = precedente && !l.puce && (suiteIntitule || l.x > precedente.x + 8 || ponctuationOuverte);
 
     if (continuation) {
       if (precedente.cible === "intitule" && courante) {
@@ -166,6 +216,7 @@ export function construireUE(lignes, intituleParDefaut) {
       courante = { intitule: nettoyerIntitule(l.texte), modules: [] };
       ue.push(courante);
       precedente = { ...l, cible: "intitule" };
+      intituleOuvert = true;
       continue;
     }
 
@@ -175,11 +226,12 @@ export function construireUE(lignes, intituleParDefaut) {
     }
     courante.modules.push(l.texte.replace(PUCE, "").trim());
     precedente = { ...l, cible: "module" };
+    intituleOuvert = false;
   }
 
   return ue
     .map((u) => ({
-      intitule: u.intitule,
+      intitule: nettoyerIntitule(u.intitule),
       modules: u.modules.map((m) => m.replace(/\s+/g, " ").trim()).filter((m) => m.length > 2),
     }))
     .filter((u) => u.intitule && (u.modules.length || ue.length === 1));
@@ -189,6 +241,7 @@ function nettoyerIntitule(s) {
   return s
     .replace(/^\s*\*?\s*ue\s*[.*:–-]*\s*/i, "UE ")
     .replace(/\s+/g, " ")
+    .replace(/\s*[:;,–-]\s*$/, "") // ponctuation d'annonce de la brochure, pas un mot
     .trim();
 }
 

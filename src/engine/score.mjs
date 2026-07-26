@@ -101,12 +101,21 @@ export function codeCorrespondance(r, seuils) {
   return "possible";
 }
 
-/** Le libellé des trois paliers. Aucun autre endroit ne doit les réécrire. */
+/**
+ * Le libellé des trois paliers. Aucun autre endroit ne doit les réécrire.
+ *
+ * `unique` n'est pas un palier de score : c'est le cas où un seul programme a survécu aux
+ * filtres, donc où aucune comparaison n'a eu lieu. Il vit ici parce que tout vocabulaire de
+ * correspondance doit se lire au même endroit — pas parce qu'il se calcule.
+ */
 const LIBELLES = {
   forte: "correspondance forte",
   bonne: "bonne correspondance",
   possible: "correspondance possible",
+  unique: "seule formation possible",
 };
+
+export const LIBELLE_UNIQUE = LIBELLES.unique;
 
 /**
  * Le niveau AFFICHÉ. Le score exact ne sort jamais de l'écran : l'écart entre 0,78 et

@@ -17,15 +17,15 @@
     "quantitatif": 3,
     "technique": 1,
     "relationnel": 5,
-    "creatif": 1,
-    "cadre": 3
+    "creatif": 2,
+    "cadre": 2
   },
   "axes_parts": {
     "quantitatif": 0.25,
     "technique": 0,
-    "relationnel": 0.75,
-    "creatif": 0,
-    "cadre": 0.25
+    "relationnel": 0.5,
+    "creatif": 0.125,
+    "cadre": 0.125
   },
   "domaines": [
     "gestion"
@@ -53,6 +53,15 @@
         "management juridique et outils de gouvernance",
         "Gestion comptable financière de l’entreprise",
         "Leadership et Soft skills"
+      ]
+    },
+    {
+      "intitule": "UE semestre 2",
+      "modules": [
+        "Gestion comptable et financière",
+        "Stratégie et marketing",
+        "Entrepreneuriat et leadership",
+        "Rapport Junior business activities"
       ]
     }
   ],
@@ -100,7 +109,11 @@
       "Outils du management des organisations",
       "management juridique et outils de gouvernance",
       "Gestion comptable financière de l’entreprise",
-      "Leadership et Soft skills"
+      "Leadership et Soft skills",
+      "Gestion comptable et financière",
+      "Stratégie et marketing",
+      "Entrepreneuriat et leadership",
+      "Rapport Junior business activities"
     ],
     "metiers_exclusifs": [
       "Gestionnaire des entreprises / administrative",
@@ -111,15 +124,15 @@
     ],
     "recouvrement_max": 0,
     "plus_proche": null,
-    "correlation_axes_max": 0.976,
+    "correlation_axes_max": 0.906,
     "plus_proche_axes": "master-en-droit-notarial-et-gestion-du-patrimoine"
   },
   "structure_ue": {
-    "publiee": false,
-    "nb_ue": 1,
-    "nb_modules": 4,
-    "concentration": null,
+    "publiee": true,
+    "nb_ue": 2,
+    "nb_modules": 8,
+    "concentration": 0.5,
     "blocs_types": []
   },
-  "axes_fiables": false
+  "axes_fiables": true
 }

@@ -20,7 +20,7 @@ Le moteur ne connaît aucune filière. Il consomme des fiches de données valid�
 | Métrique de score | tranchée — corrélation de forme, pas une distance |
 | Attributs de structure d'UE | faits — mais 28 fiches sur 84, licences et bachelors seuls |
 | Proportions brutes des axes | faites — `axes_parts`, plus d'ex æquo parfait |
-| Programmes non notables | marqués — 16 fiches `axes_fiables: false` |
+| Programmes non notables | marqués — 15 fiches `axes_fiables: false` |
 | Questions du quiz | v0 — formulations à remplacer par celles des entretiens |
 | Moteur de scoring | fait — `src/engine/`, 88 tests |
 | Cascade de départage | faite — 98 % des égalités tranchées sans les entretiens |
@@ -205,18 +205,32 @@ filtre du quiz, lui, se contente de ne rien trouver.
 npm run impasses     # data/_impasses.md
 ```
 
-La liste lisible des combinaisons de réponses qui ne mènent à aucune formation — diplôme, façon
-d'étudier, univers. **Ce n'est pas un rapport de bogues** : le questionnaire fonctionne et ne
-laisse jamais un candidat sans issue. Le document sépare deux natures de manque, parce qu'elles
-n'appellent pas la même décision :
+Un document pour les admissions — **pas un rapport de bogues** : le questionnaire fonctionne et
+ne laisse jamais un candidat sans issue. Il ouvre sur les **règles**, calculées et non recopiées,
+parce qu'une règle se comprend là où quatorze lignes de tableau ne se comprennent pas. La plus
+actionnable :
+
+> **Aucune formation hors journée n'est accessible avec le bac seul.** Les 7 programmes en cours
+> du soir sont tous à bac+3, le week-end et le temps plein à bac+2. Un bachelier qui travaille
+> n'a donc aucune option, dans aucune famille.
+
+Puis les combinaisons, séparées en deux natures parce qu'elles n'appellent pas la même décision :
 
 | Nature | Combinaisons | Décision |
 |---|---|---|
 | aucun programme au catalogue | 20 | question d'**offre** |
-| des programmes, mais aucun comparable à un profil | 28 | question de **brochure** — compléter le descriptif les ferait entrer au classement |
+| des programmes, mais aucun comparable à un profil | 0 | question de **brochure** — compléter le descriptif les ferait entrer au classement |
 
-Sur 160 combinaisons balayées. Le plus fréquent : les cours du soir et le week-end (14), et les
-candidats au niveau bac (12).
+La seconde nature valait 28 combinaisons : dans chacune, **un seul** programme survivait aux
+filtres, et ce cas se traite désormais à part — on l'affiche sans chercher à le comparer, parce
+qu'il n'y a rien à comparer. Elle redeviendra non nulle dès qu'un candidat aura plusieurs
+programmes dont aucun n'est assez décrit pour être classé.
+
+⚠ **« 20 sur 160 » n'est pas « 13 % des candidats ».** Les combinaisons ne sont pas
+équiprobables : la grande majorité des candidats sont des bacheliers cherchant du présentiel, et
+ce profil ne rencontre aucune impasse. Le taux pondéré n'est pas connu — il demanderait la
+répartition réelle des candidatures, qui est une donnée des admissions. Le document le dit et
+donne à la place la lecture **par profil** : 9 des 16 couples diplôme × modalité sont indemnes.
 
 **8. Passer le quiz :**
 
@@ -266,7 +280,7 @@ ne contient pas les `unites_enseignement` : le moteur ne les lit jamais, et les 
 ferait payer au prospect 165 ko qui ne changent rien à ce qu'il voit. À régénérer après toute
 modification de `config/` ou de `data/filieres/` ; la CI refuse un `git diff` non vide.
 
-L'écran a **cinq états**, et pas un gabarit unique — une recommandation affirmée et une piste
+L'écran a **six états**, et pas un gabarit unique — une recommandation affirmée et une piste
 à explorer ne se lisent pas de la même façon :
 
 | État | Part des profils | Ce qui change |
@@ -275,6 +289,7 @@ L'écran a **cinq états**, et pas un gabarit unique — une recommandation affi
 | `bonne` | 40 % | les alternatives remontent avant le contenu |
 | `possible` | 35 % | le conseiller passe en haut, et le badge dit « une piste à explorer » |
 | `egalite` | 2 % | deux cartes de même poids, aucune titrée « recommandation » |
+| `unique` | 28 combinaisons de filtres | un seul programme a survécu : affiché **sans être noté**, justifié par les filtres |
 | `impasse` | rare | on dit que le choix a vidé le jeu, on n'élargit jamais en silence |
 
 Le « pourquoi » tient en trois lignes tirées de la chaîne de décision : l'univers retenu, le

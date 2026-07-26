@@ -65,7 +65,7 @@
       ]
     },
     {
-      "intitule": "UE Comportement Professionnel - Culture juridique et politique",
+      "intitule": "UE Comportement Professionnel Culture juridique et politique",
       "modules": [
         "Geopolitics",
         "Droit",
@@ -76,7 +76,7 @@
       ]
     },
     {
-      "intitule": "UE Maîtrise des Techniques - Traitement de données",
+      "intitule": "UE Maîtrise des Techniques Traitement de données",
       "modules": [
         "Mathématiques : Statistiques Descriptives",
         "Informatique Appliquée",
@@ -118,7 +118,7 @@
       ]
     },
     {
-      "intitule": "UE Management et Responsabilité Sociale d’Entreprise",
+      "intitule": "Sociale d’Entreprise",
       "modules": [
         "Corporate Strategy",
         "RSE et Développement Durable",
@@ -202,7 +202,6 @@
     "nb_modules": 48,
     "concentration": 0.292,
     "blocs_types": [
-      "management-et-responsabilite-sociale-d-entrepris",
       "concepts-et-techniques-de-gestion",
       "comportement-professionnel-culture-juridique-et-",
       "maitrise-des-techniques-traitement-de-donnees",

@@ -47,7 +47,7 @@
   },
   "unites_enseignement": [
     {
-      "intitule": "UE Maitrise des Comportements Professionnels",
+      "intitule": "Professionnels",
       "modules": [
         "Communication Professionnelle",
         "Leadership - Team Bulding & Soft Skills",
@@ -57,7 +57,7 @@
       ]
     },
     {
-      "intitule": "UE Outils Mathématiques, Réseaux et Systèmes Informatiques",
+      "intitule": "et Systèmes Informatiques",
       "modules": [
         "Mathématiques Appliquées - Lois de Probabilité",
         "Recherche Opérationnelle",
@@ -170,9 +170,9 @@
     "nb_modules": 26,
     "concentration": 0.231,
     "blocs_types": [
-      "maitrise-des-comportements-professionnels",
       "methodologie-entrepreneurship",
-      "programmation-developpement-web-et-d-application"
+      "programmation-developpement-web-et-d-application",
+      "professionnels"
     ]
   },
   "axes_fiables": true

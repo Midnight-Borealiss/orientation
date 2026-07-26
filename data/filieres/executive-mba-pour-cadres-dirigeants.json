@@ -106,8 +106,8 @@
     "metiers_exclusifs": [],
     "recouvrement_max": 0.051,
     "plus_proche": "executive-mba-parcours-full-english-en-ligne",
-    "correlation_axes_max": 0.702,
-    "plus_proche_axes": "executive-mba-parcours-full-english-en-ligne"
+    "correlation_axes_max": 0.749,
+    "plus_proche_axes": "bachelor-professionnel-en-gestion"
   },
   "structure_ue": {
     "publiee": false,

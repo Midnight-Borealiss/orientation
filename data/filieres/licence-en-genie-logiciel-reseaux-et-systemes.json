@@ -47,7 +47,7 @@
   },
   "unites_enseignement": [
     {
-      "intitule": "UE Maîtrise des comportements professionnels",
+      "intitule": "professionnels",
       "modules": [
         "Communication professionnelle",
         "Leadership - Team Bulding & Soft Skills",
@@ -58,7 +58,7 @@
       ]
     },
     {
-      "intitule": "UE Mathématiques et techniques quantitatives de gestion",
+      "intitule": "quantitatives de gestion",
       "modules": [
         "Mathématiques appliquées",
         "Recherche opérationnelle",
@@ -148,7 +148,6 @@
   },
   "departement": "Sciences et Technologies appliquées",
   "voisines": [
-    "bachelor-en-informatique-appliquee-a-la-gestion-des-entrepri-en-ligne",
     "licence-en-electronique-telecommunications-et-systemes-embar",
     "licence-en-informatique",
     "licence-en-informatique-appliquee-a-la-gestion-des-entrepris",
@@ -175,11 +174,10 @@
     "nb_modules": 35,
     "concentration": 0.257,
     "blocs_types": [
-      "maitrise-des-comportements-professionnels",
       "methodologie-entrepreneurship",
       "management-organisations",
       "programmation-developpement-web-et-d-application",
-      "mathematiques-et-techniques-quantitatives-de-ges"
+      "professionnels"
     ]
   },
   "axes_fiables": true

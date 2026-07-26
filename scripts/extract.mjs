@@ -363,11 +363,58 @@ function construireFiche(programme, contexte, profil) {
     return valeur;
   };
 
-  const nom = normaliserTitre(nettoyerTitre(programme?.titre || contexte.entree?.titre || ""));
+  /* ── L'AFFICHAGE SE DISSOCIE DE L'IDENTITÉ ──────────────────────
+   * L'`id` reste calculé sur le titre TEL QUE LU, annotations comprises : un `id` qui change
+   * crée une fiche orpheline et n'emporte pas le travail humain déjà saisi (voir CLAUDE.md).
+   *
+   * Le `nom`, lui, prend le titre débarrassé des annotations du sommaire. Deux raisons :
+   *   - la modalité est déjà affichée à côté du nom, l'avoir dans le titre est redondant ;
+   *   - surtout, deux programmes dont la seule différence réelle est la modalité doivent se
+   *     ressembler à l'écran. Un intitulé qui absorbe « full time » d'un côté et pas de
+   *     l'autre fait croire à deux programmes sans lien. C'est le doublon présentiel / en
+   *     ligne sous une autre forme, et il se règle de la même façon : le nom nomme le
+   *     programme, la modalité se lit à côté.
+   * ─────────────────────────────────────────────────────────── */
+  const titreLu = programme?.titre || contexte.entree?.titre || "";
+  const idBase = slug(normaliserTitre(nettoyerTitre(titreLu)));
+  // La page reste la source du titre quand elle existe — le sommaire ne fournit le titre que
+  // pour les entrées sans page dédiée. On retire les annotations de CE titre-là, quelle qu'en
+  // soit la provenance : un titre de page qui en porterait serait nettoyé de la même façon.
+  const nom = normaliserTitre(nettoyerTitre(annotationsSommaire(titreLu).titreNu || titreLu));
 
   const objectif = (programme?.sections.objectif || []).map((l) => l.texte).join(" ").replace(/\s+/g, " ").trim();
   const ue = construireUE(programme?.sections.contenu || [], "Contenus pédagogiques");
   const modules = modulesDe(ue);
+
+  /* ── Contrôle : la dernière UE finit-elle là où la section finit ? ──
+   * Une UE perdue ne laisse aucune trace dans la fiche — elle a simplement moins de
+   * modules, et rien ne dit combien elle aurait dû en avoir. Le seul témoin est
+   * géométrique : les lignes de contenu que la construction n'a pas consommées se
+   * trouvent EN BAS de la section. Une fiche dont la dernière UE s'arrête loin de la
+   * fin de sa section est donc suspecte, et c'est ce contrôle — pas une relecture —
+   * qui a rendu visibles les 4 modules manquants du Bachelor Professionnel.
+   * ─────────────────────────────────────────────────────────── */
+  const lignesContenu = programme?.sections.contenu || [];
+  if (lignesContenu.length && ue.length && contexte.journal) {
+    // Clé insensible à la ponctuation : l'intitulé retenu est nettoyé (« UE. » → « UE »),
+    // comparer les chaînes brutes signalerait comme perdue chaque UE réellement présente.
+    const cle = (t) => normaliser(t).replace(/[^a-z0-9]/g, "");
+    const repris = [...modules, ...ue.map((u) => u.intitule)].map(cle);
+    const orphelines = lignesContenu.filter((l) => {
+      const t = cle(l.texte.replace(/^\s*([•·▪◦*]|\d+[.)])\s*/, ""));
+      return t.length > 3 && !repris.some((v) => v.includes(t));
+    });
+    // Les lignes non reprises ne comptent que si elles sont sous la dernière UE : au-dessus,
+    // ce sont des restes d'en-tête déjà écartés à dessein.
+    const yMin = Math.min(...lignesContenu.map((l) => l.y));
+    const perduesEnBas = orphelines.filter((l) => l.y <= yMin + 40);
+    if (perduesEnBas.length) {
+      contexte.journal.push(
+        `ALERTE UE : « ${nom} » — ${perduesEnBas.length} ligne(s) de contenu non reprise(s) en bas de section : ` +
+          perduesEnBas.map((l) => `« ${l.texte} »`).join(", ")
+      );
+    }
+  }
   const metiers = extraireMetiers(programme?.sections.debouches || [], profil.separateurMetiers);
 
   const mentions = (programme?.mentions || []).join(" ");
@@ -417,7 +464,7 @@ function construireFiche(programme, contexte, profil) {
   const option = contexte.entree?.option || (programme?.titre.match(/\boption\s+(.+)$/i)?.[1]?.trim() ?? null);
 
   const fiche = {
-    id: slug(nom) + (profil.suffixeId || ""),
+    id: idBase + (profil.suffixeId || ""),
     nom: tracer("nom", "brochure", nom),
     ecole: tracer("ecole", "brochure", contexte.ecole || null),
     niveau: tracer("niveau", "brochure", niveau),

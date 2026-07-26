@@ -118,7 +118,6 @@
     "brochure_fichier": "ISM_ONLINE_ISF_BROCHURE.pdf"
   },
   "voisines": [
-    "licence-en-genie-logiciel-reseaux-et-systemes",
     "licence-en-informatique"
   ],
   "distinctivite": {
@@ -133,8 +132,8 @@
       "Fondamentaux de la sécurité informatique"
     ],
     "metiers_exclusifs": [],
-    "recouvrement_max": 0.064,
-    "plus_proche": "licence-en-genie-logiciel-reseaux-et-systemes",
+    "recouvrement_max": 0.071,
+    "plus_proche": "licence-en-informatique-appliquee-a-la-gestion-des-entrepris",
     "correlation_axes_max": 0.994,
     "plus_proche_axes": "licence-en-informatique"
   },

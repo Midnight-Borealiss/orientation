@@ -69,7 +69,7 @@
       ]
     },
     {
-      "intitule": "UE Comportement professionnel - Culture juridique et politique",
+      "intitule": "UE Comportement professionnel Culture juridique et politique",
       "modules": [
         "Géopolitique",
         "Droit",
@@ -80,7 +80,7 @@
       ]
     },
     {
-      "intitule": "UE Maitrise des techniques - Traitement de données",
+      "intitule": "UE Maitrise des techniques Traitement de données",
       "modules": [
         "Mathématiques : Statistiques Descriptives",
         "Informatique",
@@ -102,7 +102,7 @@
       ]
     },
     {
-      "intitule": "UE Entrepreneuriat – Communication et Service à la Communauté",
+      "intitule": "et Service à la Communauté",
       "modules": [
         "Entrepreneuriat",
         "Techniques de recherche d’emploi",
@@ -121,14 +121,14 @@
       ]
     },
     {
-      "intitule": "UE Management et Responsabilité Sociale d’Entreprise",
+      "intitule": "Sociale d’Entreprise",
       "modules": [
         "Stratégie d’entreprise",
         "RSE et Développement Durable"
       ]
     },
     {
-      "intitule": "UE Ateliers d’approfondissement et Finance appliquée",
+      "intitule": "et Finance appliquée",
       "modules": [
         "Appui et Financement des PME",
         "Introduction à l’Audit et au Contrôle interne",
@@ -184,12 +184,14 @@
   "voisines": [
     "bachelor-en-gestion-option-organisation-rh-en-ligne",
     "licence-de-gestion-option-agrobusiness",
-    "licence-de-gestion-option-comptabilite-finance",
     "licence-de-gestion-option-management-international"
   ],
   "distinctivite": {
     "modules_exclusifs": [
-      "Informatique appliquée UE. Langues – Civilisations"
+      "Informatique appliquée UE. Langues – Civilisations",
+      "Entrepreneuriat",
+      "Création d’entreprise",
+      "Soutenance du Business Plan"
     ],
     "metiers_exclusifs": [
       "Responsable fonctionnel",
@@ -199,8 +201,8 @@
       "Conseiller à l’emploi",
       "Collaborateur dans des cabinets d’expertise comptable"
     ],
-    "recouvrement_max": 0.827,
-    "plus_proche": "licence-de-gestion-option-comptabilite-finance",
+    "recouvrement_max": 0.595,
+    "plus_proche": "licence-de-gestion-option-agrobusiness",
     "correlation_axes_max": 0.992,
     "plus_proche_axes": "licence-de-gestion-option-management-international"
   },
@@ -210,13 +212,11 @@
     "nb_modules": 51,
     "concentration": 0.333,
     "blocs_types": [
-      "management-et-responsabilite-sociale-d-entrepris",
       "concepts-et-techniques-de-gestion",
       "comportement-professionnel-culture-juridique-et-",
       "maitrise-des-techniques-traitement-de-donnees",
       "outils-et-techniques-de-gestion-approfondies",
       "initiation-a-la-recherche",
-      "ateliers-d-approfondissement-et-finance-applique",
       "projet-d-entreprise"
     ]
   },

@@ -173,9 +173,9 @@
     "nb_modules": 34,
     "concentration": 0.412,
     "blocs_types": [
-      "maitrise-des-comportements-professionnels",
       "methodologie-entrepreneurship",
-      "management-organisations"
+      "management-organisations",
+      "maitrise-des-comportements-professionnels"
     ]
   },
   "axes_fiables": true

@@ -178,10 +178,9 @@
     "nb_modules": 37,
     "concentration": 0.297,
     "blocs_types": [
-      "maitrise-des-comportements-professionnels",
       "methodologie-entrepreneurship",
       "management-organisations",
-      "mathematiques-et-techniques-quantitatives-de-ges"
+      "maitrise-des-comportements-professionnels"
     ]
   },
   "axes_fiables": true

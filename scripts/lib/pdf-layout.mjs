@@ -206,6 +206,9 @@ export function assemblerLignes(items) {
     return {
       y: Math.round(y * 10) / 10,
       x: Math.round(tries[0].x * 10) / 10,
+      // Borne droite réelle de la ligne : c'est elle qui dit si la ligne a rempli sa
+      // colonne, donc si la suivante peut être son retour à la ligne.
+      x2: Math.round(Math.max(...tries.map((i) => i.x + i.l)) * 10) / 10,
       h: Math.max(...tries.map((i) => i.h)),
       texte: texte.replace(/\s+/g, " ").trim(),
     };

@@ -119,11 +119,16 @@ function chercherEtat(vise) {
   const profil = contexte.questions.profil;
   const familles = contexte.questions.aiguillage.find((q) => q.cible === "famille").options.length;
 
+  const modalites = contexte.questions.filtres[1].options.length;
+
   for (let motif = 0; motif < 400; motif++) {
     for (let f1 = 0; f1 < 4; f1++) {
+      // La modalité se balaie elle aussi : `impasse` et `unique` dépendent d'elle bien plus
+      // que du profil, et la figer à une seule valeur les rendait faussement inatteignables.
+      for (let f2 = 0; f2 < modalites; f2++) {
       for (let a1 = 0; a1 < familles; a1++) {
         for (let a2 = 0; a2 < 5; a2++) {
-          const reponses = { F1: f1, F2: 3, A1: a1, A2: a2 };
+          const reponses = { F1: f1, F2: f2, A1: a1, A2: a2 };
           // Un balayage déterministe de l'espace des réponses : chaque question prend une
           // base différente, ce qui parcourt les combinaisons sans les énumérer toutes.
           profil.forEach((q, i) => {
@@ -132,6 +137,7 @@ function chercherEtat(vise) {
           const { resultat: r } = jouer(reponses, contexte);
           if (r.niveau === vise) return { reponses, resultat: r };
         }
+      }
       }
     }
   }
@@ -655,6 +661,8 @@ console.log(`\n  Balayage F1 × F2 × A1\n`);
   const sansAction = [];
   const sansIssue = [];
   const etatsVus = new Set();
+  const uniquesMalRendus = [];
+  let uniques = 0;
   let total = 0;
 
   for (let i = 0; i < F[0].options.length; i++) {
@@ -684,6 +692,22 @@ console.log(`\n  Balayage F1 × F2 × A1\n`);
             (html.match(/<button/g) || []).length + (html.match(/<a class="conseiller"/g) || []).length;
           if (!actions) sansAction.push(etiquette);
 
+          /* ── Candidat unique : jamais en zone non classée ────────────
+           * Quand les filtres ne laissent qu'un programme, il n'y a rien à comparer et le
+           * classement n'a plus d'objet. Le prospect n'a qu'une option : lui lire qu'on ne
+           * sait pas la comparer à son profil serait la pire réponse possible, et c'est
+           * pourtant ce qui arrivait à un `axes_fiables: false`. On exige donc qu'il sorte
+           * en recommandation, quels que soient ses axes.
+           * ─────────────────────────────────────────────────────── */
+          if (r.parcours.apres_aiguillage === 1) {
+            uniques++;
+            const enReco = r.recommandation?.id && r.sans_classement.length === 0;
+            const nomAffiche = r.recommandation && html.includes(echapper(r.recommandation.nom));
+            if (!enReco || !nomAffiche || r.niveau !== "unique") {
+              uniquesMalRendus.push(`${etiquette} (état ${r.niveau}, non classés ${r.sans_classement.length})`);
+            }
+          }
+
           // Une impasse doit rendre la main sur ce qui l'a causée, pas sur le profil.
           if (r.niveau === "impasse" && r.reprise !== "filtres") sansAction.push(`${etiquette} (reprise=${r.reprise})`);
           // Et elle ne doit jamais annoncer une liste qu'elle n'affiche pas.
@@ -705,6 +729,13 @@ console.log(`\n  Balayage F1 × F2 × A1\n`);
     "en impasse, le bouton rouvre les filtres — rouvrir le profil ne corrigerait rien",
     !sansAction.some((s) => s.includes("reprise=")),
     sansAction.filter((s) => s.includes("reprise=")).slice(0, 3).join(" · ")
+  );
+
+  console.log(`      ${uniques} combinaison(s) ne laissant qu'un seul programme`);
+  verifier(
+    "toute combinaison ne laissant qu'un programme l'affiche en recommandation, jamais en zone non classée",
+    uniques > 0 && uniquesMalRendus.length === 0,
+    uniquesMalRendus.slice(0, 4).join(" · ") || `${uniques} cas`
   );
 
   // Le nombre d'impasses est un FAIT du catalogue, pas une cible. On l'imprime pour qu'une

@@ -17,7 +17,7 @@
  *   AVERTISSEMENT exigence quantitative — informe, n'exclut ni ne note
  */
 
-import { axesComptes, axesDisposition, classer } from "./score.mjs";
+import { axesComptes, axesDisposition, classer, LIBELLE_UNIQUE } from "./score.mjs";
 import { appliquerFiltres } from "./filtres.mjs";
 import { aiguiller } from "./aiguillage.mjs";
 import { cascadeDepartage, appliquerDepartage, tete } from "./departage.mjs";
@@ -238,7 +238,10 @@ export function reprendreFiltres(etat, contexte) {
  * pas l'interface : c'est lui qui sait pourquoi le jeu candidat est vide.
  */
 export function cibleReprise(niveau) {
-  return niveau === "impasse" ? "filtres" : "profil";
+  // `unique` rejoint `impasse` : le profil n'a joué aucun rôle dans le résultat, donc le
+  // rouvrir ne changerait rien. Ce sont les filtres qui ont réduit le jeu à un programme,
+  // et ce sont eux que le prospect doit pouvoir rouvrir s'il veut voir autre chose.
+  return niveau === "impasse" || niveau === "unique" ? "filtres" : "profil";
 }
 
 /** `reprendreProfil` ou `reprendreFiltres`, selon l'état affiché. */
@@ -437,7 +440,26 @@ export function resultat(etat, contexte, { reponseDepartage = null } = {}) {
   const jeu = candidates(etat, contexte);
   const alertes = [...etat.alertes, ...jeu.alertes];
 
-  const { classees, ecartees, repli, alertes: alertesScore } = classer(etat.profil, jeu.retenues, { axes, seuils });
+  /* ── Un seul candidat : le classement n'a plus d'objet ───────────
+   * Quand les filtres ne laissent qu'un programme, il n'y a rien à comparer et rien à
+   * départager. Le noter serait au mieux inutile, au pire faux : un `axes_fiables: false`
+   * partirait en zone non classée et le prospect lirait qu'on ne sait pas comparer ce
+   * programme à son profil — alors que c'est sa SEULE option. On l'affiche donc
+   * directement, avec la justification que les filtres fournissent, quels que soient ses
+   * axes. Le cas n'est pas théorique : 7 combinaisons de filtres y mènent.
+   * ─────────────────────────────────────────────────────────── */
+  const candidatUnique = jeu.retenues.length === 1;
+  const { classees, ecartees, repli, alertes: alertesScore } = candidatUnique
+    ? {
+        // `score: null` et non 0 : aucune corrélation n'a été calculée, et un 0 se lirait
+        // comme une correspondance nulle. Rien à écarter, donc l'invariant
+        // « classées + écartées = candidates » tient toujours.
+        classees: [{ fiche: jeu.retenues[0], score: null, niveau: LIBELLE_UNIQUE, code: "unique" }],
+        ecartees: [],
+        repli: false,
+        alertes: [],
+      }
+    : classer(etat.profil, jeu.retenues, { axes, seuils });
   alertes.push(...alertesScore);
 
   /* ── Départage : la cascade à cinq étages ───────────────────────
@@ -583,6 +605,9 @@ export function resultat(etat, contexte, { reponseDepartage = null } = {}) {
       apres_filtres: jeu.apresFiltres,
       apres_aiguillage: jeu.retenues.length,
       classees: classees.length,
+      // Un seul programme a survécu aux filtres : il est affiché sans avoir été comparé.
+      // L'écran doit pouvoir le dire, et le balayage doit pouvoir le vérifier.
+      candidat_unique: candidatUnique,
       famille: jeu.famille,
       domaines: jeu.domaines,
       retour_famille: jeu.retourFamille,

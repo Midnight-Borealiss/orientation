@@ -69,7 +69,7 @@
       ]
     },
     {
-      "intitule": "UE Comportement Professionnel - Culture juridique et politique",
+      "intitule": "UE Comportement Professionnel Culture juridique et politique",
       "modules": [
         "Géopolitique",
         "Droit",
@@ -84,7 +84,7 @@
       ]
     },
     {
-      "intitule": "UE Maîtrise des Techniques - Traitement de données",
+      "intitule": "UE Maîtrise des Techniques Traitement de données",
       "modules": [
         "Mathématiques : Statistiques Descriptives",
         "Informatique",
@@ -168,7 +168,7 @@
       ]
     },
     {
-      "intitule": "UE Outils et Techniques de gestion des entreprises agricoles et agroalimentaires",
+      "intitule": "des entreprises agricoles et agroalimentaires",
       "modules": [
         "Tableau de bord",
         "Gestion de la production/Application MS Project"
@@ -254,14 +254,13 @@
     "nb_modules": 68,
     "concentration": 0.265,
     "blocs_types": [
-      "management-et-responsabilite-sociale-d-entrepris",
       "concepts-et-techniques-de-gestion",
       "comportement-professionnel-culture-juridique-et-",
+      "management-et-responsabilite-sociale-d-entrepris",
       "maitrise-des-techniques-traitement-de-donnees",
       "outils-et-techniques-de-gestion-approfondies",
       "initiation-a-la-recherche",
       "langues-civilisations",
-      "ateliers-d-approfondissement-et-finance-applique",
       "projet-d-entreprise"
     ]
   },

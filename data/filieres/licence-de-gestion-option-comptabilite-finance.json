@@ -16,19 +16,19 @@
     "quantitatif": 4,
     "technique": 1,
     "relationnel": 3,
-    "creatif": 2,
+    "creatif": 1,
     "cadre": 2
   },
   "axes_parts": {
-    "quantitatif": 0.3182,
-    "technique": 0.0227,
-    "relationnel": 0.2955,
-    "creatif": 0.1136,
-    "cadre": 0.1591
+    "quantitatif": 0.3654,
+    "technique": 0.0769,
+    "relationnel": 0.25,
+    "creatif": 0.0962,
+    "cadre": 0.1346
   },
   "domaines": [
-    "comptabilite",
-    "gestion"
+    "finance",
+    "comptabilite"
   ],
   "profil_ideal": [],
   "deconseille_si": [],
@@ -69,7 +69,7 @@
       ]
     },
     {
-      "intitule": "UE Comportement professionnel - Culture juridique et politique",
+      "intitule": "UE Comportement professionnel Culture juridique et politique",
       "modules": [
         "Géopolitique",
         "Droit",
@@ -77,6 +77,19 @@
         "Leadership",
         "Droit Commercial et des Sociétés",
         "Développement personnel"
+      ]
+    },
+    {
+      "intitule": "UE Maitrise des techniques - Traitement de données Mathématiques",
+      "modules": [
+        "Statistiques Descriptives",
+        "Informatique",
+        "Suites Numériques & Systèmes d’équation",
+        "Calculs Matriciels & Fonctions à plusieurs variables",
+        "Analyses Combinatoires et Calculs des Probabilités",
+        "Mathématiques Financières",
+        "Décisions financières",
+        "Informatique appliquée"
       ]
     },
     {
@@ -137,9 +150,15 @@
     }
   ],
   "exigence_quantitative": {
-    "modules_comptes": 0,
-    "modules_exemples": [],
-    "niveau": "faible"
+    "modules_comptes": 5,
+    "modules_exemples": [
+      "Statistiques Descriptives",
+      "Suites Numériques & Systèmes d’équation",
+      "Calculs Matriciels & Fonctions à plusieurs variables",
+      "Analyses Combinatoires et Calculs des Probabilités",
+      "Mathématiques Financières"
+    ],
+    "niveau": "eleve"
   },
   "vitrine": {
     "description": "Ce parcours vise à doter les étudiants des compétences clés dans ces domaines pour une insertion réussie en entreprise. Il propose aussi de développer des aptitudes en marketing et management pour leur assurer une bonne maîtrise de l’environnement professionnel. À l’issue de leur formation, les diplômés pourront choisir de s’insérer directement dans le marché du travail ou de poursuivre leur cursus en master."
@@ -169,35 +188,41 @@
   "option": "Comptabilité - Finance",
   "programme_parent": "licence-en-gestion",
   "voisines": [
-    "licence-de-gestion-option-gestion-des-ressources-humaines",
+    "bachelor-en-gestion-option-compta-finance-en-ligne",
     "master-audit-controle-de-gestion-et-aide-a-la-decision-en-ligne",
     "mba-en-audit-controle-de-gestion-et-aide-a-la-decision"
   ],
   "distinctivite": {
     "modules_exclusifs": [
-      "Actions de recherche encadrées UE. Langues – Civilisations"
+      "Management",
+      "Marketing : Comportement du Consommateur",
+      "Comptabilité Générale",
+      "Analyse Financière",
+      "Comptabilité Analytique",
+      "Typologies et Culture Organisationnelle",
+      "Marketing : Etude de Marché",
+      "Management Multiculturel"
     ],
     "metiers_exclusifs": [
       "Chargé du service administratif et financier",
       "Gestionnaire portefeuille"
     ],
-    "recouvrement_max": 0.827,
-    "plus_proche": "licence-de-gestion-option-gestion-des-ressources-humaines",
-    "correlation_axes_max": 0.967,
-    "plus_proche_axes": "licence-de-gestion-option-agrobusiness"
+    "recouvrement_max": 0.167,
+    "plus_proche": "bachelor-en-gestion-option-compta-finance-en-ligne",
+    "correlation_axes_max": 0.945,
+    "plus_proche_axes": "bachelor-en-gestion-option-compta-finance-en-ligne"
   },
   "structure_ue": {
     "publiee": true,
-    "nb_ue": 9,
-    "nb_modules": 44,
-    "concentration": 0.386,
+    "nb_ue": 10,
+    "nb_modules": 52,
+    "concentration": 0.327,
     "blocs_types": [
-      "management-et-responsabilite-sociale-d-entrepris",
       "concepts-et-techniques-de-gestion",
       "comportement-professionnel-culture-juridique-et-",
+      "management-et-responsabilite-sociale-d-entrepris",
       "outils-et-techniques-de-gestion-approfondies",
       "initiation-a-la-recherche",
-      "ateliers-d-approfondissement-et-finance-applique",
       "projet-d-entreprise"
     ]
   },

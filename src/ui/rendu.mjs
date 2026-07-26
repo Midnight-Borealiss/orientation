@@ -49,6 +49,8 @@ export const TEXTES = {
     // « correspondance faible » ferait lire un verdict là où il y a une direction.
     possible: "Une piste à explorer",
     egalite: "Deux voies, à égalité",
+    // Ni « correspondance », ni « piste » : rien n'a été comparé. Le badge dit le FAIT.
+    unique: "La seule qui réunit tes réponses",
     impasse: "Aucune formation",
     impasseNonComparables: "Non comparables à ton profil",
   },
@@ -57,6 +59,11 @@ export const TEXTES = {
     bonne: "Voici la formation qui correspond le mieux, et deux autres à regarder de près.",
     possible: "Ce n'est pas une réponse, c'est une direction. Prends-la comme un point de départ.",
     egalite: "Ces deux formations te correspondent également. Rien ne permet de les séparer sur ton profil, et c'est une information en soi : le choix t'appartient.",
+    // UN SEUL CANDIDAT. La justification vient des FILTRES, pas d'un score : il n'y avait
+    // rien à comparer. Surtout, on ne dit jamais ici qu'on ne sait pas comparer ce programme
+    // à ce profil — c'est la seule option du prospect, et ce serait la pire chose à lui lire.
+    unique:
+      "C'est la seule formation qui corresponde à la fois à ton niveau d'études, à ta façon de suivre les cours et à l'univers que tu as choisi. Il n'y avait donc rien à comparer : tes réponses sur ta façon de travailler n'ont pas servi à la choisir.",
     // AUCUNE PROMESSE DE LISTE ICI. En impasse, il n'y a rien à montrer : le texte précédent
     // annonçait « voici l'ensemble de l'univers que tu as retenu » et rien ne suivait. On dit
     // ce qui s'est passé, et on rend la main sur ce qui a bloqué — les deux premières réponses.
@@ -142,6 +149,11 @@ export const ORDRE_BLOCS = {
   // Le conseiller passe en HAUT : quand le moteur n'est pas sûr, un humain vaut mieux qu'un écran.
   possible: ["reformulation", "elargissement", "conseiller", "recommandation", "contenu", "quantitatif", "alternatives", "non-classes"],
   egalite: ["reformulation", "elargissement", "deux-cartes", "contenu", "quantitatif", "alternatives", "non-classes", "conseiller"],
+  /* Un seul candidat : ni alternatives ni non-classés, les deux sont vides par construction.
+   * Le conseiller passe HAUT, comme en `possible` et pour la même raison : le prospect n'a
+   * qu'une option et le moteur ne l'a pas choisie pour lui — un humain vaut mieux qu'un écran
+   * pour lui dire si elle lui convient vraiment. */
+  unique: ["reformulation", "conseiller", "recommandation", "contenu", "quantitatif"],
   // En impasse, il n'y a aucune recommandation ni alternative — les blocs correspondants
   // seraient toujours vides. Mais `non-classes` RESTE : le balayage a montré 28 combinaisons
   // où des programmes existent sans qu'aucun soit comparable à un profil. Les omettre les

@@ -245,6 +245,82 @@ verifier(
   JSON.stringify(r1.sans_classement[0] || null)
 );
 
+/* ── 4 bis. Un seul candidat : le classement n'a plus d'objet ──────
+ * Quand les filtres ne laissent qu'un programme, il n'y a rien à comparer. Le noter est au
+ * mieux inutile ; sur un `axes_fiables: false` c'est nuisible, parce qu'il part en zone non
+ * classée et que le prospect lit qu'on ne sait pas comparer ce programme à son profil —
+ * alors que c'est sa SEULE option. C'est la faute la plus dure à voir, parce que l'écran
+ * paraît fonctionner.
+ * ─────────────────────────────────────────────────────────── */
+
+console.log(`\n  Candidat unique\n`);
+
+{
+  const F = contexte.questions.filtres;
+  const A1 = contexte.questions.aiguillage.find((q) => q.cible === "famille");
+  const cas = [];
+  for (let i = 0; i < F[0].options.length; i++) {
+    for (let j = 0; j < F[1].options.length; j++) {
+      for (let k = 0; k < A1.options.length; k++) {
+        let e = demarrer(contexte);
+        e = repondre(e, F[0].id, i, contexte);
+        e = repondre(e, F[1].id, j, contexte);
+        e = repondre(e, A1.id, k, contexte);
+        const jeu = candidates(e, contexte);
+        if (jeu.retenues.length === 1) cas.push({ etat: e, fiche: jeu.retenues[0] });
+      }
+    }
+  }
+
+  verifier(`${cas.length} combinaison(s) de filtres ne laissent qu'un programme`, cas.length > 0);
+
+  const resultats = cas.map((c) => resultat(c.etat, contexte));
+  verifier(
+    "un candidat unique sort toujours en recommandation",
+    resultats.every((r) => r.recommandation && r.sans_classement.length === 0),
+    resultats.filter((r) => !r.recommandation).length + " sans recommandation"
+  );
+  verifier(
+    "l'écran le dit en un état distinct, pas sous un palier de correspondance emprunté",
+    resultats.every((r) => r.niveau === "unique" && r.parcours.candidat_unique === true),
+    [...new Set(resultats.map((r) => r.niveau))].join(", ")
+  );
+  verifier(
+    "aucun score n'a été calculé : il n'y avait rien à comparer",
+    resultats.every((r) => r.recommandation._score === null),
+    JSON.stringify(resultats.map((r) => r.recommandation._score).slice(0, 3))
+  );
+  verifier(
+    "aucun départage, aucune alternative : il n'y a rien d'autre",
+    resultats.every((r) => !r.departage.declenche && r.alternatives.length === 0),
+    resultats.filter((r) => r.departage.declenche).length + " départagé(s)"
+  );
+  // Le profil n'a joué aucun rôle : rouvrir les questions de profil ne changerait rien, ce
+  // sont les filtres qui ont réduit le jeu à un seul programme.
+  verifier(
+    "le bouton Reprendre rouvre les filtres, pas le profil",
+    resultats.every((r) => r.reprise === "filtres"),
+    [...new Set(resultats.map((r) => r.reprise))].join(", ")
+  );
+
+  // Le cas qui motive tout ceci : un programme dont les axes ne sont pas fiables et qui est
+  // pourtant la seule option. Il doit être recommandé comme un autre.
+  const avecNonFiable = cas.filter((c) => c.fiche.axes_fiables !== true);
+  verifier(
+    "un programme aux axes non fiables reste recommandé quand il est la seule option",
+    avecNonFiable.length === 0 ||
+      avecNonFiable.every((c) => resultat(c.etat, contexte).recommandation?.id === c.fiche.id),
+    `${avecNonFiable.length} cas concerné(s)`
+  );
+  // Ce contrôle n'a de valeur que si le cas existe : sans lui, la ligne ci-dessus passerait
+  // en ne vérifiant rien. On le dit plutôt que de le supposer.
+  verifier(
+    "et ce cas existe bien dans le catalogue, sinon le contrôle ne vérifie rien",
+    avecNonFiable.length > 0,
+    avecNonFiable.map((c) => c.fiche.id).join(", ")
+  );
+}
+
 /* ── 5. Filtres : ils excluent, ils ne notent pas ─────────────── */
 
 console.log(`\n  Filtres durs\n`);

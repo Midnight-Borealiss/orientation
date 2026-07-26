@@ -131,8 +131,8 @@
     ],
     "recouvrement_max": 0.045,
     "plus_proche": "master-in-business-administration",
-    "correlation_axes_max": 0.9,
-    "plus_proche_axes": "licence-de-gestion-option-comptabilite-finance"
+    "correlation_axes_max": 0.875,
+    "plus_proche_axes": "executive-mba-parcours-full-english-en-ligne"
   },
   "structure_ue": {
     "publiee": true,

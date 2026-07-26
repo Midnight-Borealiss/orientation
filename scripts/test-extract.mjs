@@ -109,7 +109,10 @@ verifier(
   `fiches produites : ${rBachelor.fiches.length}`
 );
 
-const orphelins = rBachelor.journal.filter((l) => l.startsWith("ALERTE"));
+// Le motif est celui de l'appariement au sommaire, et lui seul : les autres alertes du
+// journal (« ALERTE UE ») portent sur autre chose et ne doivent pas faire échouer ce
+// contrôle-ci, sinon on finirait par relâcher le motif au lieu de corriger la cause.
+const orphelins = rBachelor.journal.filter((l) => /^ALERTE p\.\d+/.test(l));
 verifier("aucun programme de page absent du sommaire", !orphelins.length, orphelins.join("\n      "));
 
 /* ── 1 bis. Le sommaire annonce aussi la modalité et le niveau d'accès ──
@@ -162,6 +165,72 @@ verifier("aucun programme de page absent du sommaire", !orphelins.length, orphel
   );
 }
 
+/* ── 1 bis². Une UE dont l'intitulé n'est pas distingué typographiquement ──
+ * La page du Bachelor Professionnel nomme ses UE par semestre — « UE semestre 1 », « UE
+ * semestre 2 » — et les compose à la MÊME taille que leurs modules, là où les autres pages
+ * du catalogue les composent plus grand. La règle de recollement des retours à la ligne
+ * versait donc les quatre modules de la seconde UE dans son intitulé ; l'UE finissait sans
+ * module, elle était écartée, et la fiche sortait avec 4 modules au lieu de 8 — sous le seuil
+ * de 6 qui la rendait non classable. Un défaut de mise en page produisait une conséquence
+ * visible par le prospect.
+ *
+ * Le critère retenu est le mécanisme réel d'un retour à la ligne : le mot suivant ne tenait
+ * plus avant la marge du bloc. Ni la taille de police ni la puce ne pouvaient servir — les
+ * trois catalogues distinguent leurs UE de trois façons différentes.
+ * ─────────────────────────────────────────────────────────── */
+{
+  const parId = new Map(rBachelor.fiches.map((f) => [f.id, f]));
+  const bp = parId.get("bachelor-professionnel-en-gestion");
+  const ue = bp?.unites_enseignement || [];
+  verifier(
+    "une UE nommée par semestre est reconnue au même titre qu'une UE nommée par thème",
+    ue.length === 2,
+    ue.map((u) => `${u.intitule} [${u.modules.length}]`).join(" | ")
+  );
+  verifier(
+    "et ses modules ne sont pas versés dans son intitulé",
+    ue.reduce((s, u) => s + u.modules.length, 0) === 8 && ue.every((u) => u.modules.length === 4),
+    JSON.stringify(ue.map((u) => u.modules.length))
+  );
+  verifier(
+    "aucun intitulé d'UE n'a avalé une liste de modules",
+    ue.every((u) => u.intitule.split(/\s+/).length <= 10),
+    ue.map((u) => u.intitule).join(" | ")
+  );
+
+  // Conséquence directe, et c'est elle qui compte : la fiche repasse au-dessus du seuil de
+  // 6 modules, donc elle redevient comparable à un profil. Voir « Programmes aux axes non
+  // fiables » — 8 modules ne la rendent pas exemplaire, mais ne la disqualifient plus.
+  // `axes_fiables` est posé par la distinctivité, pas par l'extraction : on le lit donc sur
+  // le disque. Absent se lit comme `false` — cela voudrait dire que la distinctivité n'a pas
+  // tourné depuis la dernière extraction, donc que rien n'a été évalué.
+  const chemin = path.join(ROOT, "data", "filieres", "bachelor-professionnel-en-gestion.json");
+  const surDisque = fs.existsSync(chemin) ? JSON.parse(fs.readFileSync(chemin, "utf8")) : null;
+  verifier(
+    "et la fiche repasse au-dessus du seuil de 6 modules, donc redevient classable",
+    surDisque?.axes_fiables === true,
+    `axes_fiables=${surDisque?.axes_fiables} · ${surDisque ? "" : "fiche absente du disque"}`
+  );
+
+  /* Le contrôle générique, celui qui rend cette classe de défaut visible sans la chercher :
+   * les lignes de contenu qu'aucune UE n'a reprises se trouvent EN BAS de la section. Une
+   * fiche dont la dernière UE s'arrête loin de la fin de sa section est suspecte. On vérifie
+   * ici que le contrôle EXISTE et qu'il reste lisible — 3 alertes sur 84 fiches. S'il en
+   * remontait trente, personne ne les lirait ; s'il n'en remontait aucune, il aurait cessé
+   * de mesurer quoi que ce soit. */
+  const alertesUE = resultats.flatMap((r) => r.journal).filter((l) => l.startsWith("ALERTE UE"));
+  verifier(
+    "le contrôle des lignes de contenu non reprises est actif et reste lisible",
+    alertesUE.length >= 1 && alertesUE.length <= 8,
+    `${alertesUE.length} alerte(s)`
+  );
+  verifier(
+    "et la fiche corrigée n'y figure plus",
+    !alertesUE.some((l) => l.includes("Bachelor Professionnel en Gestion")),
+    alertesUE.join(" · ").slice(0, 160)
+  );
+}
+
 /* ── 1 ter. Toute modalité de la taxonomie est portée ──────────────
  * Le contrôle qui aurait attrapé seul un défaut d'extraction sur les modalités. Une modalité à
  * zéro fiche est soit une extraction manquée, soit une entrée de taxonomie à retirer — le
@@ -183,6 +252,45 @@ verifier("aucun programme de page absent du sommaire", !orphelins.length, orphel
     vides.length ? `à zéro : ${vides.join(", ")}` : [...compte.entries()].map(([m, n]) => `${m} ${n}`).join(" · ")
   );
   verifier("aucune fiche ne porte de modalité hors taxonomie", !intrus.size, [...intrus].join(", "));
+}
+
+/* ── 1 quater. Le nom ne porte jamais la modalité ──────────────────
+ * L'affichage est dissocié de l'identité : l'`id` reste calculé sur le titre tel que lu — le
+ * changer créerait une orpheline —, mais le `nom` est débarrassé des annotations du sommaire.
+ *
+ * Ce n'est pas de la cosmétique. « Bachelor en Gestion full time » et « Bachelor Professionnel
+ * en Gestion » se ressemblent assez pour qu'un candidat croie à deux programmes sans lien,
+ * alors que leur vraie différence est la modalité. C'est le doublon présentiel / en ligne sous
+ * une autre forme : le nom nomme le programme, la modalité se lit à côté.
+ * ─────────────────────────────────────────────────────────── */
+{
+  const sales = toutesFiches.filter((f) =>
+    /full ?time|week-?end|cours du soir|\ben ligne\b|à distance|presentiel|présentiel/i.test(f.nom)
+  );
+  verifier(
+    "aucun nom de fiche ne porte sa propre modalité",
+    !sales.length,
+    sales.map((f) => `${f.id} → « ${f.nom} »`).join(" · ")
+  );
+
+  const ft = toutesFiches.find((f) => f.id === "bachelor-en-gestion-full-time");
+  verifier(
+    "l'id survit au nettoyage du nom — sinon la fiche deviendrait orpheline",
+    Boolean(ft),
+    "bachelor-en-gestion-full-time introuvable"
+  );
+  verifier("et son nom ne dit plus que le programme", ft?.nom === "Bachelor en Gestion", ft?.nom);
+
+  // Deux fiches peuvent légitimement porter le même intitulé : c'est le cas présentiel /
+  // en ligne, et c'est pour cela que la modalité est toujours affichée à côté du nom.
+  const parNom = new Map();
+  for (const f of toutesFiches) parNom.set(f.nom, [...(parNom.get(f.nom) || []), f]);
+  const homonymes = [...parNom.values()].filter((g) => g.length > 1);
+  verifier(
+    "deux homonymes se distinguent toujours par leur modalité, jamais par rien",
+    homonymes.every((g) => new Set(g.map((f) => (f.modalites || []).join(","))).size === g.length),
+    homonymes.map((g) => g.map((f) => `${f.id} [${f.modalites}]`).join(" vs ")).join(" · ")
+  );
 }
 
 verifier(

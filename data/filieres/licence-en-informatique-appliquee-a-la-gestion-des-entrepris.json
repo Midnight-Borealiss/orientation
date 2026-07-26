@@ -15,17 +15,17 @@
   ],
   "axes": {
     "quantitatif": 3,
-    "technique": 5,
-    "relationnel": 2,
-    "creatif": 1,
+    "technique": 4,
+    "relationnel": 3,
+    "creatif": 2,
     "cadre": 2
   },
   "axes_parts": {
-    "quantitatif": 0.2727,
-    "technique": 0.5,
-    "relationnel": 0.1364,
-    "creatif": 0.0909,
-    "cadre": 0.1818
+    "quantitatif": 0.2143,
+    "technique": 0.3929,
+    "relationnel": 0.2143,
+    "creatif": 0.1071,
+    "cadre": 0.1429
   },
   "domaines": [
     "informatique",
@@ -46,6 +46,17 @@
     "poursuite_etudes": []
   },
   "unites_enseignement": [
+    {
+      "intitule": "UE Maitrise des comportements professionnels",
+      "modules": [
+        "Communication professionnelle",
+        "Leadership - Team Bulding & Soft Skills",
+        "Techniques de recherche d’emploi",
+        "Business English & Com",
+        "English For IT",
+        "Creativity & Social Involvement"
+      ]
+    },
     {
       "intitule": "UE Mathématiques et techniques quantitatives de gestion",
       "modules": [
@@ -140,21 +151,21 @@
     "metiers_exclusifs": [
       "Certification CISCO Gratuite et intégrée dans le curiculum de formation ( IT Essentials - CCNA)"
     ],
-    "recouvrement_max": 0.375,
+    "recouvrement_max": 0.525,
     "plus_proche": "licence-en-genie-logiciel-reseaux-et-systemes",
-    "correlation_axes_max": 0.977,
-    "plus_proche_axes": "bachelor-en-informatique-appliquee-a-la-gestion-des-entrepri-en-ligne"
+    "correlation_axes_max": 0.994,
+    "plus_proche_axes": "licence-en-genie-logiciel-reseaux-et-systemes"
   },
   "structure_ue": {
     "publiee": true,
-    "nb_ue": 4,
-    "nb_modules": 22,
-    "concentration": 0.409,
+    "nb_ue": 5,
+    "nb_modules": 28,
+    "concentration": 0.321,
     "blocs_types": [
       "methodologie-entrepreneurship",
       "management-organisations",
-      "programmation-developpement-web-et-d-application",
-      "mathematiques-et-techniques-quantitatives-de-ges"
+      "maitrise-des-comportements-professionnels",
+      "programmation-developpement-web-et-d-application"
     ]
   },
   "axes_fiables": true
