@@ -35,7 +35,7 @@ jamais `src/engine/`.
 | Moteur de scoring | **écrit** — `src/engine/`, 96 tests |
 | Calibration des seuils par simulation | **faite** — seuils mesurés, les 3 objectifs atteints |
 | Cascade de départage | **faite** — 98 % des égalités tranchées sans les entretiens |
-| Aiguillage à deux étages | **fait** — `entreprise-management` passe de 17,8 à 8,8 filières en lice |
+| Aiguillage à deux étages | **fait** — `entreprise-management` passe de 17,8 à 8,6 filières en lice |
 | Écran de résultat | **fait** — `web/index.html`, six états, rendu pur et testé sans navigateur |
 | UE perdues à l'extraction | **corrigées** — +19 modules sur 4 fiches, contrôle des lignes non reprises |
 | Candidat unique | **traité à part** — affiché sans être noté, 28 combinaisons de filtres |
@@ -475,7 +475,7 @@ réévalue : une question à quatre branches serait illisible.
 
 **Deux options du même programme ne reçoivent pas de question générée.** Ce qui les sépare est le
 nom de l'option, déjà imprimé — la Licence de Gestion option Comptabilité-Finance et l'option RH
-ont 43 modules identiques. On affiche les deux intitulés et on laisse choisir. `sontSoeurs()` vit
+ont 49 modules identiques sur 54. On affiche les deux intitulés et on laisse choisir. `sontSoeurs()` vit
 dans `src/engine/parente.mjs`, **unique implémentation**, réexportée par `distinctivite.mjs` :
 deux copies feraient qu'une paire serait « sœur » d'un côté et « ambiguë » de l'autre.
 
@@ -599,10 +599,10 @@ corriger** ; la mesure par famille, elle, le dit :
 
 | Famille | Fiches | Classées | Départage | Ex æquo |
 |---|---|---|---|---|
-| `entreprise-management` | 33 (39 %) | **8,8** (17,8 avant) | 22 % | 2,2 |
+| `entreprise-management` | 32 (38 %) | **8,6** (17,8 avant) | 22 % | 2,2 |
 | `droit-action-publique` | 21 (25 %) | 10,5 | **61 %** ⚠ | 2,9 |
-| `chiffres-finance` | 16 (19 %) | 9,3 | 24 % | 2,3 |
-| `numerique` | 13 (15 %) | 9,0 | 25 % | 2,6 |
+| `chiffres-finance` | 16 (19 %) | 9,3 | 26 % | 2,3 |
+| `numerique` | 13 (15 %) | 9,0 | 33 % | 2,6 |
 | `commerce-communication` | 12 (14 %) | 8,0 | 36 % | 2,3 |
 | `ingenierie-industrie` | 8 (10 %) | 4,0 | 12 % | 2,0 |
 
@@ -610,7 +610,7 @@ corriger** ; la mesure par famille, elle, le dit :
 
 - **la largeur de l'entonnoir** — `entreprise-management` laissait 17,8 filières en lice, contre
   4,0 pour la plus petite famille. C'est un problème d'aiguillage, réglé par un second étage
-  conditionnel : 17,8 → **8,8**, en ligne avec les autres familles ;
+  conditionnel : 17,8 → **8,6**, en ligne avec les autres familles ;
 - **le pouvoir de discrimination du score** — c'est `droit-action-publique` qui départage le plus,
   **61 %** des profils, loin devant tout le reste. Ce n'était PAS `entreprise-management`, qui est
   à 22 %, en dessous de la moyenne. Explication déjà connue par ailleurs : l'École de Droit partage
@@ -631,7 +631,7 @@ inatteignable — mais le repli reste implémenté et testé, parce qu'une refon
 pourrait le rendre atteignable sans que personne y pense.
 
 **Il ne reste que 1 % des profils dont l'égalité n'est tranchée par rien** (étage 5). C'est cela,
-et non les 59 paires de la distinctivité, l'ordre du jour réel des entretiens.
+et non les 57 paires de la distinctivité, l'ordre du jour réel des entretiens.
 
 ### Limite connue du scoring
 
@@ -653,7 +653,7 @@ Les 6 familles, dans `config/taxonomy.json > familles` :
 
 | id | Domaines regroupés | Fiches |
 |---|---|---|
-| `entreprise-management` | gestion, management-projet, entrepreneuriat, rh, qualite, rse | 33 |
+| `entreprise-management` | gestion, management-projet, entrepreneuriat, rh, qualite, rse | 32 |
 | `droit-action-publique` | droit, science-politique, administration-publique | 21 |
 | `chiffres-finance` | finance, marches-financiers, comptabilite, fiscalite, assurance, mathematiques | 16 |
 | `numerique` | informatique, reseaux, cybersecurite, data, design-web | 13 |
@@ -668,7 +668,7 @@ domaine — voir « L'aiguillage a deux étages ».
 Invariant vérifié par `validate.mjs` : **un domaine appartient à une famille et une seule**, et
 aucun domaine n'est orphelin. Un domaine hors famille sortirait du parcours sans prévenir. La
 liste des domaines d'une famille est l'unique source de vérité — les fiches ne portent pas de
-champ `famille`, il se déduit de la taxonomie. 19 fiches sur 84 relèvent de deux familles, par
+champ `famille`, il se déduit de la taxonomie. 18 fiches sur 84 relèvent de deux familles, par
 leurs deux domaines : c'est voulu, une licence Droit-Gestion appartient bien aux deux.
 
 ### Les axes de disposition se collectent par DOMAINE, jamais par famille
@@ -683,7 +683,7 @@ où on en a précisément besoin**. Au niveau domaine, ils varient à l'intérie
 environ 5 domaines par famille.
 
 `config/domaines_axes.json` porte donc une entrée par domaine réellement utilisé, **28**, triées
-du plus porté au moins porté (`gestion` 23 fiches, `droit` 15, … `rse` 1). `config/familles_axes.json`
+du plus porté au moins porté (`gestion` 22 fiches, `droit` 15, … `rse` 1). `config/familles_axes.json`
 n'existe plus. Deux règles y sont écrites, parce qu'elles se posent dès la première séance :
 
 - **domaine partagé entre écoles.** `gestion` est porté par 6 écoles, `finance` par 4. Tranché :
@@ -730,11 +730,11 @@ l'appartenance réelle des domaines** dans `config/taxonomy.json`, pas écrite �
 
 **Aucun domaine de la famille ne doit rester inatteignable** — `validate.mjs` et `npm test` le
 refusent, parce qu'un domaine inatteignable retirerait ses fiches du parcours quelle que soit la
-réponse, sans que rien ne le dise. La dernière option est indispensable : `gestion` porte 23 fiches
+réponse, sans que rien ne le dise. La dernière option est indispensable : `gestion` porte 22 fiches
 légitimement généralistes, et un prospect qui hésite entre plusieurs registres ne doit pas être
 forcé.
 
-Résultat mesuré : **17,8 → 8,8** filières en lice, et le taux de départage de la branche passe de
+Résultat mesuré : **17,8 → 8,6** filières en lice, et le taux de départage de la branche passe de
 31 % à 22 %.
 
 Deux cas que la donnée réelle a imposés :
@@ -753,8 +753,14 @@ Les modules ne servent qu'à ordonner les candidats déjà légitimés.
 
 Raison mesurée : toute filière ISM enseigne de la gestion, du droit et de la comptabilité en tronc
 commun. En comptant les modules, `gestion` se collait à **48 fiches sur 84** et l'aiguillage
-n'aiguillait plus rien. Avec la règle titre-ou-objectif et un plafond de 2 domaines : 23 fiches
-pour `gestion`, 57 fiches à un seul domaine. `npm test` refuse qu'un domaine dépasse le tiers du
+n'aiguillait plus rien. Avec la règle titre-ou-objectif et un plafond de 2 domaines : 22 fiches
+pour `gestion`, 57 fiches à un seul domaine.
+
+**Le plafond de 2 déplace un domaine quand un troisième se corrobore mieux, et c'est un effet à
+surveiller après toute correction d'extraction.** Huit modules retrouvés sur
+`licence-de-gestion-option-comptabilite-finance` ont fait passer sa paire de domaines de
+`comptabilite + gestion` à `finance + comptabilite` : la fiche a **changé de famille** et n'est
+plus comparée aux autres options de son propre programme. Voir « Options sœurs ». `npm test` refuse qu'un domaine dépasse le tiers du
 catalogue.
 
 Deux garde-fous appris sur les données :
@@ -810,7 +816,7 @@ maximum du catalogue. Deux conséquences qu'il faut avoir en tête :
 - **le comptage absolu est écarté**, et c'est volontaire : Journalisme aligne 41 modules,
   UX Design 11. En valeur absolue, un programme court ne pourrait jamais être marqué sur
   quoi que ce soit ;
-- **le tronc commun dilue.** 26 % des 1918 modules du catalogue ne relèvent d'aucun axe
+- **le tronc commun dilue.** 23 % des 1937 modules du catalogue ne relèvent d'aucun axe
   (anglais, langues, méthodologie, actions de recherche encadrées, projet d'entreprise,
   philosophie). Ils restent au dénominateur, ce qui tire toute la distribution vers le bas :
   la moyenne des cinq axes est **2,4 et non 3**. Un profil de prospect centré sur 3
@@ -964,11 +970,11 @@ deux programmes obtiendront des scores voisins et le départage se déclenchera 
 à 80 % sur les modules les aurait laissés passer. `npm test` vérifie exactement ce cas.
 
 **Sélection retenue : les 3 paires les plus proches PAR DOMAINE, selon chacune des deux premières
-mesures.** Sur le catalogue 2024 : **59 paires**, dont 32 par les modules, 44 par les axes, 17 par
+mesures.** Sur le catalogue 2024 : **57 paires**, dont 32 par les modules, 44 par les axes, 19 par
 les deux. Seules 4 dépassent l'ancien seuil unique de 80 % — l'écart mesure exactement ce que ce
 seuil manquait. Chaque paire porte ses deux valeurs et le motif de sa sélection (`retenue_par`).
 
-Fait à connaître avant de toucher au calcul : **la corrélation sature.** 18 des 59 paires retenues
+Fait à connaître avant de toucher au calcul : **la corrélation sature.** 19 des 57 paires retenues
 sont à `r ≥ 0,97` — Pearson est invariant d'échelle, donc deux formes proportionnelles corrèlent à 1
 sans avoir le même vecteur. Les quasi-ex æquo sont le régime normal.
 
@@ -1004,10 +1010,24 @@ Les fiches sous 6 modules sont exclues du contrôle : un seul orphelin y ferait 
 ### Options sœurs — un recouvrement élevé qui n'est pas un problème
 
 Deux options d'un même programme partagent forcément leur tronc commun. La Licence de Gestion
-option Comptabilité-Finance et l'option RH ont **43 modules identiques** : c'est attendu, pas un
-défaut du catalogue, et ça ne se soumet pas à un responsable — ce qui les sépare est déjà écrit
-dans la brochure, à savoir le nom de l'option et les quelques modules exclusifs de chacune. La
-question de départage s'y **génère**, elle ne se demande pas.
+option Comptabilité-Finance et l'option RH ont **49 modules identiques sur 54**, soit 91 % : c'est
+attendu, pas un défaut du catalogue, et ça ne se soumet pas à un responsable — ce qui les sépare
+est déjà écrit dans la brochure, à savoir le nom de l'option et les quelques modules exclusifs de
+chacune. La question de départage s'y **génère**, elle ne se demande pas.
+
+**Angle mort à connaître, découvert en recalculant l'aval :** cette paire ne figure plus dans
+`_paires.csv`. La distinctivité ne compare que des programmes **partageant un domaine**, et les
+deux options n'en partagent plus aucun — l'option Comptabilité-Finance est passée de
+`comptabilite + gestion` à `finance + comptabilite` quand une UE retrouvée à l'extraction (huit
+modules, dont « Mathématiques Financières » et « Décisions financières ») a corroboré `finance`,
+qui a déplacé `gestion` sous le plafond de 2 domaines.
+
+**Sans conséquence pour le moteur, et il faut savoir pourquoi** : les deux options relèvent
+désormais de deux familles différentes, donc l'aiguillage ne les met jamais en concurrence — il
+n'y a jamais de départage à produire entre elles. L'angle mort est celui de la *mesure*, pas du
+parcours : une paire à 91 % n'est plus visible dans les sorties de la distinctivité. Si un jour
+elle doit l'être, la comparaison doit inclure les **fiches sœurs** indépendamment du domaine,
+`sontSoeurs()` étant déjà là pour les reconnaître.
 
 `_paires.csv` porte donc une colonne `type` (`ambigue` / `option-soeurs`) et une colonne
 `destinataire` (`responsable` / `code`), les vraies ambiguïtés d'abord : le CSV s'envoie tel quel,
@@ -1021,20 +1041,19 @@ publier de page pour le programme lui-même, donc sans `programme_parent` à quo
 
 ### Résultat sur le catalogue 2024
 
-**59 paires retenues**, dont 7 d'options sœurs traitées par le code. **52 vont aux responsables.**
-Les 4 paires au-delà de 80 % de modules communs, toutes explicables :
+**57 paires retenues**, dont 6 d'options sœurs traitées par le code. **51 vont aux responsables.**
+Les 3 paires au-delà de 80 % de modules communs, toutes explicables :
 
 | Recouvrement | Type | Paire | Lecture |
 |---|---|---|---|
+| 92 % | option sœur | Fiscalité-Droit des Affaires, options *Droit des Affaires* / *Fiscalité* | 11 modules communs, 1 propre — l'option nomme la différence |
 | 85 % | **ambiguë** | Licence Génie logiciel – Réseaux et Systèmes / Licence Informatique | 33 modules communs, la seconde est le diplôme délocalisé INU : rien n'indique au prospect comment choisir |
 | 85 % | **ambiguë** | Master Droit Notarial et Gestion du Patrimoine / Fiscalité-Droit des Affaires | tronc commun de l'École de Droit |
-| 92 % | option sœur | Fiscalité-Droit des Affaires, options *Droit des Affaires* / *Fiscalité* | 11 modules communs, 1 propre — l'option nomme la différence |
-| 83 % | option sœur | Licence de Gestion, options *Comptabilité-Finance* / *RH* | 43 modules communs : les options divergent tard, mais leur nom tranche |
 
 76 programmes sur 84 gardent au moins un module exclusif dans leur domaine : le catalogue fait
-donc l'essentiel du travail de discrimination. Les 52 paires restantes ne sont pas 52 fiches à
-relire — ce sont **52 comparaisons ciblées**, réparties entre cinq personnes (23 documents pour
-ISM Online, 23 pour Management, 15 pour Ingénieurs, 10 pour Madiba, 8 pour Droit, 3 pour Digital
+donc l'essentiel du travail de discrimination. Les 51 paires restantes ne sont pas 51 fiches à
+relire — ce sont **51 comparaisons ciblées**, réparties entre cinq personnes (23 documents pour
+Management, 22 pour ISM Online, 14 pour Ingénieurs, 10 pour Madiba, 8 pour Droit, 3 pour Digital
 Campus). Le volume se règle par `--par-domaine`, aujourd'hui à 3.
 
 Sorties : `distinctivite`, `structure_ue` et `voisines` écrits dans chaque fiche, plus
@@ -1062,15 +1081,15 @@ les candidats. Leur demander de rédiger une question d'orientation produirait u
 qui aurait l'apparence d'une donnée. La rédaction des questions du quiz est un travail de
 conception, fait ensuite, à partir de leur substance et du vocabulaire recueilli aux admissions.
 
-**Paires à cheval sur deux écoles** — 30 sur 52, par exemple Master Audit à ISM Online et MBA Audit
+**Paires à cheval sur deux écoles** — 29 sur 51, par exemple Master Audit à ISM Online et MBA Audit
 à Management : le script produit alors **deux demi-fiches**, chacune portant trois questions sur le
 seul programme que ce responsable connaît. Le contraste est reconstruit ensuite, par nous. Demander
 à un responsable de comparer son programme à un autre qu'il n'a jamais vu produirait une réponse
-polie et fausse. D'où 82 documents pour 52 paires.
+polie et fausse. D'où 80 documents pour 51 paires.
 
 ## La structure en UE porte des distinctions que les axes ne voient pas
 
-Le comptage des axes traite les 1918 modules comme un **sac de mots** et jette la structure en
+Le comptage des axes traite les 1937 modules comme un **sac de mots** et jette la structure en
 unités d'enseignement. Or c'est elle qui porte la distinction que ni les modules ni les axes ne
 voient : une **direction** — qu'est-ce qui sert à quoi — et une **étendue**.
 
@@ -1928,6 +1947,8 @@ ré-extraction, contrôle que les champs humains sont intacts, que les champs d'
 - Supprimer une fiche que le catalogue ne produit plus. La signaler, elle porte peut-être du travail humain.
 - Rattacher un domaine à deux familles, ou l'oublier. `validate.mjs` refuse les deux.
 - Envoyer une paire d'options sœurs à un responsable. Le nom de l'option tranche déjà.
+- S'arrêter à `npm run distinctivite` après une correction d'extraction. Les fiches de comparaison sont gitignorées : leur péremption ne fait aucun diff, et ce sont elles qui partent aux responsables.
+- Supposer qu'un gain de modules ne touche que les modules. Il déplace les axes, les paires, et parfois les `domaines` — donc la famille.
 - Classer un candidat unique. Il n'y a rien à comparer : on l'affiche, avec la justification des filtres.
 - Laisser un `axes_fiables: false` en zone non classée quand il est la seule option. Ce serait la pire réponse possible.
 - Décider qu'une ligne poursuit la précédente d'après sa taille de police ou sa puce. Les trois catalogues marquent leurs UE de trois façons ; seul le mot qui n'y tenait plus est un fait.
@@ -2006,6 +2027,24 @@ ré-extraction, contrôle que les champs humains sont intacts, que les champs d'
 
 L'ordre compte : la distinctivité enrichit les fiches produites par l'extraction, et
 le rapport des manques s'appuie sur les paires qu'elle a trouvées.
+
+**La chaîne se relance en ENTIER, jamais partiellement, et `git status` ne le dira pas.**
+`data/_paires.csv`, `data/_comparaisons/`, `data/_manques.csv` et `data/_impasses.md` sont
+**ignorés par git** : une sortie périmée ne produit donc aucun diff et se voit uniquement à
+l'horodatage des fichiers. C'est arrivé — les 80 fiches de comparaison ont continué de citer des
+modules exclusifs d'avant une correction d'extraction, et ce sont précisément les documents qui
+partent aux responsables. Après toute modification de `data/filieres/`, relancer jusqu'au bout :
+
+```bash
+npm run extract && npm run distinctivite && npm run comparaisons \
+  && npm run validate && npm run report -- --csv && npm run impasses \
+  && npm run contexte:web && npm test && npm run simuler
+```
+
+Une correction d'extraction ne s'arrête jamais aux fiches : elle déplace les `axes` et
+`axes_parts` (le dénominateur est le nombre de modules **du programme**), donc les corrélations,
+donc les paires retenues, donc les fiches de comparaison — et elle peut déplacer les `domaines`,
+parce qu'un domaine tiré de l'objectif exige d'être corroboré par des modules.
 
 ```bash
 npm run extract -- --dump   # catalogues → fiches + texte segmenté dans data/_raw/

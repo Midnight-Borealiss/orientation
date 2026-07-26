@@ -27,6 +27,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { sontSoeurs } from "./distinctivite.mjs";
+import { modulesDe } from "./lib/fiche.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
@@ -191,6 +192,40 @@ console.log(`\n  Axes de disposition (ancrage, abstraction) — par DOMAINE, jam
 console.log(`    ${aCollecter.length} domaine(s) sur ${domainesUtilises.length} à renseigner dans config/domaines_axes.json`);
 if (sansEntree.length) console.log(`    ! domaine(s) sans entrée dans domaines_axes.json : ${sansEntree.join(", ")}`);
 if (sansFamille.length) console.log(`    ! domaine(s) hors famille dans taxonomy.json : ${sansFamille.join(", ")}`);
+
+/* ── Programmes qu'aucun profil ne peut faire remonter ─────────────
+ * Un manque d'une autre nature, et qui n'apparaissait nulle part dans ce rapport : ces
+ * programmes sont accessibles par les filtres et l'aiguillage, mais leurs axes ne décrivent
+ * pas leur contenu, donc le score ne les classe jamais. Un prospect ne les voit qu'en zone
+ * « sans classement » — sauf s'ils sont sa seule option, auquel cas ils sont recommandés
+ * directement.
+ *
+ * Ce n'est PAS une question aux responsables et ça n'entre pas dans le CSV : le remède est
+ * documentaire (des intitulés de modules exploitables) ou lexical (élargir les cinq lexiques),
+ * pas déclaratif. Demander à un responsable de « confirmer » un comptage reviendrait à le lui
+ * faire refaire à la main. C'est un compte à suivre, pas une réponse à attendre.
+ * ─────────────────────────────────────────────────────────── */
+{
+  // Absent se lit comme `false` : cela veut dire que la distinctivité n'a pas tourné depuis la
+  // dernière extraction, donc que rien n'a été évalué.
+  const nonNotables = fiches.filter((f) => f.axes_fiables !== true);
+  console.log(`\n  Programmes que le score ne classe jamais (axes_fiables: false) :`);
+  console.log(
+    `    ${nonNotables.length} sur ${fiches.length} — accessibles par les filtres et l'aiguillage, jamais notés`
+  );
+  if (nonNotables.length) {
+    const sansModules = nonNotables.filter((f) => !modulesDe(f.unites_enseignement || []).length).length;
+    const troppeu = nonNotables.filter((f) => {
+      const n = modulesDe(f.unites_enseignement || []).length;
+      return n > 0 && n < 6;
+    }).length;
+    console.log(
+      `    dont ${sansModules} sans aucun module, ${troppeu} sous 6 modules, ` +
+        `${nonNotables.length - sansModules - troppeu} à couverture lexicale insuffisante`
+    );
+    console.log(`    La liste nommée est produite par  npm run distinctivite`);
+  }
+}
 
 const avecDistinctivite = fiches.filter((f) => f.distinctivite).length;
 if (!avecDistinctivite) {
