@@ -20,10 +20,11 @@
       "id": "F2",
       "question": "Comment veux-tu suivre ta formation ?",
       "filtre": "modalites",
+      "_valeur": "Une option designe PLUSIEURS modalites, et une seule correspondance suffit. Les deux catalogues n'emploient pas le meme mot pour la meme chose : le catalogue Master ecrit « cours du soir » (5 fois, jamais « week-end »), le catalogue Bachelor ecrit « week-end » et « full time » (jamais « cours du soir »). L'option du soir filtrait sur `week-end` seul : elle ne trouvait QU'UNE fiche sur 84, et un candidat a bac+3 tombait en impasse alors que 7 MBA du soir lui sont ouverts. `validate.mjs` refuse desormais qu'une modalite de la taxonomie ne soit atteignable par aucune option.",
       "options": [
-        { "label": "Sur le campus, en journée", "valeur": "presentiel" },
-        { "label": "À distance, depuis chez moi", "valeur": "en-ligne" },
-        { "label": "Le week-end ou le soir, je travaille", "valeur": "week-end" },
+        { "label": "Sur le campus, en journée", "valeur": ["presentiel", "full-time"] },
+        { "label": "À distance, depuis chez moi", "valeur": ["en-ligne"] },
+        { "label": "Le week-end ou le soir, je travaille", "valeur": ["week-end", "cours-du-soir"] },
         { "label": "Peu importe, je suis flexible", "valeur": null }
       ]
     }

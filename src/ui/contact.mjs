@@ -67,6 +67,28 @@ export function lienContact(config, fiche) {
   const bloc = config[canal] || {};
   const libelle = config.libelle || null;
 
+  /* AUCUN PROGRAMME À CITER : on ne préremplit rien.
+   * En impasse le moteur ne recommande rien, et les gabarits sont tous construits autour du
+   * programme. Les remplir quand même produirait un objet « Demande d'information — » suivi de
+   * rien, et un corps annonçant un programme absent. Un message vide que le prospect écrit
+   * lui-même vaut mieux qu'un message prérempli qui n'a pas de sens. */
+  if (!valeurs.programme) {
+    const nu =
+      canal === "email"
+        ? bloc.adresse
+          ? `mailto:${bloc.adresse}`
+          : null
+        : String(bloc.numero || "").replace(/\D/g, "")
+          ? `https://wa.me/${String(bloc.numero).replace(/\D/g, "")}`
+          : null;
+    return {
+      href: nu,
+      canal,
+      libelle,
+      motif: nu ? "aucun programme recommandé : le message n'est pas prérempli" : "configuration incomplète",
+    };
+  }
+
   if (canal === "email") {
     if (!bloc.adresse) {
       return { href: null, canal, libelle, motif: "config/contact.json > email.adresse manquante" };

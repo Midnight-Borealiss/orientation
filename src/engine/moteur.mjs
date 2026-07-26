@@ -194,6 +194,58 @@ export function reprendreProfil(etat, contexte) {
   };
 }
 
+/**
+ * Rouvrir les FILTRES — la sortie d'une impasse.
+ *
+ * Quand aucun programme ne réunit le niveau et la modalité demandés, rouvrir les questions de
+ * profil ne sert à rien : ce n'est pas le profil qui a vidé le jeu. Le bouton doit alors
+ * rendre au prospect la main sur ce qui l'a réellement bloqué, sinon l'écran est un
+ * cul-de-sac — et un cul-de-sac est le seul défaut vraiment inacceptable ici. Une impasse est
+ * légitime : 25 combinaisons de niveau, modalité et univers ne correspondent à aucun
+ * programme du catalogue 2024, et c'est un fait, pas un bug.
+ *
+ * L'aiguillage et le profil sont CONSERVÉS : ils restent valables, et les refaire punirait le
+ * prospect d'avoir corrigé — même raison que pour `reprendreProfil`.
+ */
+export function reprendreFiltres(etat, contexte) {
+  const q = questionsDans(contexte);
+  const idsFiltres = new Set(q.filtres.map((x) => x.id));
+
+  const reponses = {};
+  const precedentes = {};
+  for (const [id, indice] of Object.entries(etat.reponses)) {
+    if (idsFiltres.has(id)) precedentes[id] = indice;
+    else reponses[id] = indice;
+  }
+
+  return {
+    etat: {
+      ...etat,
+      etape: "filtre",
+      reponses,
+      // Le profil n'est PAS remis à zéro : il vient des questions de profil, qu'on garde.
+      poses: Object.keys(reponses).length,
+      alertes: [...etat.alertes],
+      fini: false,
+      motifArret: undefined,
+    },
+    precedentes,
+  };
+}
+
+/**
+ * Ce que le bouton « Reprendre » doit rouvrir, selon l'état de l'écran. Le moteur le tranche,
+ * pas l'interface : c'est lui qui sait pourquoi le jeu candidat est vide.
+ */
+export function cibleReprise(niveau) {
+  return niveau === "impasse" ? "filtres" : "profil";
+}
+
+/** `reprendreProfil` ou `reprendreFiltres`, selon l'état affiché. */
+export function reprendre(etat, contexte, niveau) {
+  return cibleReprise(niveau) === "filtres" ? reprendreFiltres(etat, contexte) : reprendreProfil(etat, contexte);
+}
+
 /* ── Sélection du jeu candidat ────────────────────────────────── */
 
 /** Filtres puis aiguillage, dans cet ordre. Aucune note n'intervient ici. */
@@ -291,16 +343,21 @@ export function doitSArreter(etat, contexte) {
  * texte qu'une direction à explorer, et un même gabarit pour les cinq serait malhonnête.
  *
  * Ordre de priorité, du plus grave au plus favorable :
- *   impasse   rien à recommander, ou l'aiguillage fin a vidé le jeu et on est revenu à
- *             la famille. On le DIT : un prospect qui croit avoir été entendu alors qu'on
- *             a ignoré sa réponse est plus mal traité qu'un prospect à qui l'on dit la vérité.
+ *   impasse   RIEN à recommander. L'écran n'a aucune liste à montrer, donc il ne doit rien
+ *             promettre : il dit qu'aucun programme ne réunit ces réponses, et rend la main
+ *             sur les filtres — voir `cibleReprise`.
  *   egalite   la cascade est allée jusqu'au bout sans rien trouver pour trancher. Ce n'est
  *             PAS un échec : deux voies se valent, et l'écran montre deux cartes de même poids.
  *   sinon     le palier de correspondance de la tête.
+ *
+ * L'ÉLARGISSEMENT N'EST PAS UNE IMPASSE, et les confondre était une erreur. Quand l'aiguillage
+ * fin a vidé le jeu, le moteur revient à la famille : il a donc bel et bien une liste à
+ * montrer. La traiter comme une impasse faisait afficher « voici l'ensemble de l'univers que
+ * tu as retenu » sans que rien ne suive. L'élargissement se signale par une MENTION visible,
+ * `parcours.retour_famille`, au-dessus d'un classement bien réel.
  */
-export function niveauEcran({ recommandation, departage, jeu }) {
+export function niveauEcran({ recommandation, departage }) {
   if (!recommandation) return "impasse";
-  if (jeu?.retourFamille) return "impasse";
   if (departage?.declenche && departage.etage === "egalite") return "egalite";
   return recommandation.correspondance_code;
 }
@@ -488,11 +545,19 @@ export function resultat(etat, contexte, { reponseDepartage = null } = {}) {
   return {
     // L'état de l'écran, en un mot. C'est le moteur qui le tranche : l'interface le
     // déduirait de plusieurs champs, et deux interfaces le déduiraient différemment.
-    niveau: niveauEcran({ recommandation, departage, jeu }),
+    niveau: niveauEcran({ recommandation, departage }),
+    // Ce que le bouton « Reprendre » doit rouvrir. En impasse, rouvrir le profil ne
+    // corrigerait rien : c'est un filtre qui a vidé le jeu.
+    reprise: cibleReprise(niveauEcran({ recommandation, departage })),
     // Le vecteur du prospect, pour la reformulation. Ce ne sont pas des scores de
     // correspondance : ce sont ses propres réponses agrégées.
     profil: { ...etat.profil },
-    reformulation: reformuler(etat.profil, axes, contexte.reformulation),
+    reformulation: reformuler(etat.profil, axes, contexte.reformulation, {
+      // Combien de questions de profil ont réellement été posées. Sans ce compte, un parcours
+      // arrêté par les filtres se verrait reprocher des « réponses trop partagées » qu'il n'a
+      // jamais données.
+      questionsPosees: (contexte.questions.profil || []).filter((x) => etat.reponses[x.id] !== undefined).length,
+    }),
     recommandation,
     chaine,
     alternatives: ordre.slice(1, 1 + NB_ALTERNATIVES).map(presenterAlternative),

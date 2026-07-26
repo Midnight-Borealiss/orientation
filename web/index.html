@@ -126,6 +126,26 @@ a { color: var(--lien); }
 .choix--pris { border-color: var(--trait-accent); border-width: 2px; }
 .message-envoi { margin-top: .75rem; color: var(--attention); }
 .merci { margin: 0; font-weight: 600; }
+
+/* ── Signalement des testeurs — visible seulement avec ?test=1 ──
+   En bas du contenu, discret, jamais en travers du parcours. */
+.bloc--avis { margin-top: 2.5rem; padding-top: 1rem; border-top: 1px dashed var(--trait); }
+.avis-signaler {
+  font: inherit; font-size: .9rem; color: var(--gris);
+  background: none; border: 1px solid var(--trait); border-radius: 99px;
+  padding: .5rem .9rem; cursor: pointer;
+}
+.avis-signaler:hover, .avis-signaler:focus-visible { color: var(--encre); border-color: var(--trait-accent); }
+.avis-label { display: block; font-weight: 600; margin-bottom: .25rem; }
+.bloc--avis textarea {
+  width: 100%; font: inherit; padding: .6rem; border-radius: var(--rayon);
+  border: 1px solid var(--trait); background: var(--fond); color: inherit; margin-bottom: .5rem;
+}
+.avis-envoyer {
+  font: inherit; font-weight: 600; color: var(--sur-plein); background: var(--plein);
+  border: 0; border-radius: var(--rayon); padding: .6rem 1rem; cursor: pointer;
+}
+.avis-merci { font-size: .9rem; color: var(--gris); margin: 0; }
 .etat-chargement { color: var(--gris); }
 .etat-erreur { color: var(--alerte); }
 </style>
@@ -161,6 +181,23 @@ a { color: var(--lien); }
   <input type="text" name="satisfait" />
 </form>
 
+<!--
+  SECOND FORMULAIRE DE DÉTECTION — les signalements des testeurs. Mêmes règles que ci-dessus,
+  et pour la même raison : généré en JavaScript, il ne serait jamais enregistré.
+
+  `etat` porte le fragment d'URL du parcours, ce qui permet de REJOUER exactement ce qui a
+  produit la gêne. `agent` sert à reproduire un défaut d'affichage — ce n'est pas une identité.
+  Noms définis dans `src/ui/avis.mjs`, et un test vérifie que les deux listes coïncident.
+-->
+<form name="avis" data-netlify="true" netlify-honeypot="bot-field-avis" hidden>
+  <input type="text" name="bot-field-avis" />
+  <input type="text" name="ecran" />
+  <input type="text" name="etat" />
+  <input type="text" name="niveau" />
+  <input type="text" name="commentaire" />
+  <input type="text" name="agent" />
+</form>
+
 <script type="module">
 /**
  * Le câblage, et lui seul. Tout le rendu est dans src/ui/rendu.mjs, en fonctions pures qui
@@ -169,14 +206,15 @@ a { color: var(--lien); }
  * L'interface AFFICHE et renvoie un indice. Elle ne connaît ni les axes, ni les seuils, ni
  * une seule filière : aucun nom de programme, d'école ou de domaine n'est écrit ici.
  */
-import { demarrer, repondre, prochaineQuestion, doitSArreter, resultat, reprendreProfil, MAX_QUESTIONS }
+import { demarrer, repondre, prochaineQuestion, doitSArreter, resultat, reprendre, MAX_QUESTIONS }
   from "../src/engine/moteur.mjs";
 import { rendreQuestion, rendreResultat, rendreDepartage } from "../src/ui/rendu.mjs";
 import { versFragment, depuisFragment } from "../src/ui/etat-url.mjs";
 import { lienContact } from "../src/ui/contact.mjs";
 import { corpsValidation, validerReponses, cibleEnvoi, listeProgrammes, CHAMPS_REPONDANT }
   from "../src/ui/collecte.mjs";
-import { TEXTES } from "../src/ui/rendu.mjs";
+import { TEXTES, echapper } from "../src/ui/rendu.mjs";
+import { blocAvis, corpsAvis, dejaEnvoye, TEXTES as AVIS } from "../src/ui/avis.mjs";
 
 const ecran = document.getElementById("ecran");
 
@@ -191,8 +229,76 @@ let aPreselectionner = {};
  * Absent en usage normal. Un prospect ordinaire ne doit pas voir un formulaire de recherche :
  * ça le ferait douter de ce qu'on lui montre.
  * ─────────────────────────────────────────────────────────── */
-const modeValidation = new URLSearchParams(location.search).get("validation") === "1";
+const parametres = new URLSearchParams(location.search);
+const modeValidation = parametres.get("validation") === "1";
 const collecte = { reponses: {}, message: null, envoye: false, enCours: false };
+
+/* ── Les signalements des testeurs ──────────────────────────────
+ * Visible SEULEMENT avec `?test=1`. Un vrai candidat ne doit jamais voir un bouton de
+ * signalement : ça donne l'impression d'un site en travaux.
+ *
+ * `envoyes` vit en mémoire, le temps de la session : un envoi par écran, pour qu'un double clic
+ * ne consomme pas deux fois le quota. Aucun stockage, aucun cookie.
+ * ─────────────────────────────────────────────────────────── */
+const modeTest = parametres.get("test") === "1";
+const avis = { phase: "ferme", message: null, enCours: false, commentaire: "", envoyes: new Set() };
+
+async function envoyerAvis(ecran, niveau) {
+  if (avis.enCours || dejaEnvoye(avis.envoyes, ecran)) return;
+  avis.enCours = true;
+  avis.message = null;
+  try {
+    const reponse = await fetch(cibleEnvoi(location.pathname), {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: corpsAvis({
+        ecran,
+        // Le fragment du parcours : c'est lui qui rend le retour rejouable.
+        etat: location.hash.replace(/^#/, ""),
+        niveau: niveau || "",
+        commentaire: avis.commentaire,
+        agent: navigator.userAgent,
+      }),
+    });
+    if (!reponse.ok) throw new Error(reponse.status + " " + reponse.statusText);
+    avis.envoyes.add(ecran);
+    avis.phase = "envoye";
+  } catch (erreur) {
+    console.error("signalement :", erreur);
+    // L'échec ne bloque jamais le parcours et n'efface rien.
+    avis.message = AVIS.echec;
+  } finally {
+    avis.enCours = false;
+    avis.commentaire = "";
+    afficher();
+  }
+}
+
+/** Le bloc de signalement de l'écran courant. Rien du tout hors mode test. */
+function rendreAvis(nomEcran) {
+  if (!modeTest) return "";
+  const phase = dejaEnvoye(avis.envoyes, nomEcran) ? "envoye" : avis.phase;
+  return blocAvis({ ecran: nomEcran, phase, message: avis.message }, echapper);
+}
+
+/** Les écouteurs du bloc, une fois posé dans la page. */
+function brancherAvis(nomEcran, niveau) {
+  const signaler = ecran.querySelector('[data-action="avis-signaler"]');
+  if (signaler) {
+    // PREMIER NIVEAU : un seul geste, aucune saisie. C'est celui qui produit le volume — sur
+    // mobile, écrire trois phrases est un effort que peu font.
+    signaler.addEventListener("click", () => {
+      avis.phase = "ouvert";
+      avis.message = null;
+      afficher();
+    });
+  }
+  const champ = ecran.querySelector("#avis-commentaire");
+  if (champ) champ.addEventListener("input", () => (avis.commentaire = champ.value));
+
+  const envoyer = ecran.querySelector('[data-action="avis-envoyer"]');
+  if (envoyer) envoyer.addEventListener("click", () => envoyerAvis(nomEcran, niveau));
+}
 
 /* ── Chargement ─────────────────────────────────────────────────
  * Un seul fichier : le moteur n'a pas de `fs`, et 84 requêtes séparées seraient absurdes
@@ -286,20 +392,27 @@ function afficher() {
   const suivante = stop.arret ? null : prochaineQuestion(etat, contexte);
 
   if (suivante) {
+    // Le signalement est en BAS du contenu, discret, jamais en travers du parcours.
     ecran.innerHTML = `<h1>Trouver ta formation</h1>` +
       rendreQuestion({
         question: suivante.question,
         posees: etat.poses,
         plafond: MAX_QUESTIONS,
         choisie: aPreselectionner[suivante.question.id] ?? null,
-      });
-    for (const bouton of ecran.querySelectorAll(".option")) {
+      }) +
+      rendreAvis(suivante.question.id);
+    for (const bouton of ecran.querySelectorAll(".question .option")) {
       bouton.addEventListener("click", () => {
         etat = repondre(etat, suivante.question.id, Number(bouton.dataset.indice), contexte);
+        // Un nouvel écran : le bloc de signalement se referme, sinon le champ libre suivrait
+        // le testeur de question en question.
+        avis.phase = "ferme";
+        avis.message = null;
         majFragment();
         afficher();
       });
     }
+    brancherAvis(suivante.question.id, null);
     window.scrollTo(0, 0);
     return;
   }
@@ -313,14 +426,17 @@ function afficher() {
       lienConseiller: lienContact(contexte.contact, r.recommandation),
       validation: modeValidation ? { programmes, ...collecte } : null,
     }) +
-    (reponseDepartage ? "" : rendreDepartage(r.departage));
+    (reponseDepartage ? "" : rendreDepartage(r.departage)) +
+    rendreAvis("resultat");
 
   const reprise = ecran.querySelector('[data-action="reprendre"]');
   if (reprise) {
     reprise.addEventListener("click", () => {
-      // Rouvre les SEULES questions de profil. Refaire les filtres serait punir le
+      // Ce qu'on rouvre dépend de l'état, et c'est le MOTEUR qui l'a tranché : en impasse,
+      // rouvrir le profil ne corrigerait rien, puisque c'est un filtre qui a vidé le jeu.
+      // Hors impasse, on conserve filtres et aiguillage — refaire les filtres punirait le
       // prospect d'avoir corrigé.
-      const repris = reprendreProfil(etat, contexte);
+      const repris = reprendre(etat, contexte, r.niveau);
       etat = repris.etat;
       aPreselectionner = repris.precedentes;
       reponseDepartage = null;
@@ -347,6 +463,8 @@ function afficher() {
     });
     bloc.querySelector('[data-action="valider"]').addEventListener("click", () => envoyerValidation(r));
   }
+
+  brancherAvis("resultat", r.niveau);
 
   window.scrollTo(0, 0);
 }

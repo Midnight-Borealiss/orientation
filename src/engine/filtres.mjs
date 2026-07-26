@@ -38,13 +38,21 @@ export function accessible(fiche, niveauProspect) {
  * La modalité demandée doit figurer dans celles du programme. `null` = le prospect est
  * flexible, rien n'est exclu.
  *
+ * `demandee` peut désigner PLUSIEURS modalités, et une seule correspondance suffit. Ce n'est
+ * pas une commodité : les deux catalogues n'emploient pas le même mot pour la même chose. Le
+ * catalogue Master écrit « cours du soir » cinq fois et jamais « week-end » ; le catalogue
+ * Bachelor écrit « week-end » et « full time » et jamais « cours du soir ». Une option qui
+ * promet « le week-end ou le soir » doit donc filtrer sur les deux étiquettes, sinon elle ne
+ * trouve qu'un seul programme du catalogue et l'écran part en impasse.
+ *
  * `modalites` vide se traite comme `niveau_acces` absent : candidate et incertaine.
  */
-export function compatibleModalite(fiche, modalite) {
-  if (!modalite) return { ok: true, incertain: false };
+export function compatibleModalite(fiche, demandee) {
+  const voulues = (Array.isArray(demandee) ? demandee : [demandee]).filter(Boolean);
+  if (!voulues.length) return { ok: true, incertain: false };
   const m = fiche.modalites || [];
   if (!m.length) return { ok: true, incertain: true };
-  return { ok: m.includes(modalite), incertain: false };
+  return { ok: voulues.some((v) => m.includes(v)), incertain: false };
 }
 
 /**

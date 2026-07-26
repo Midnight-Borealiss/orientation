@@ -27,13 +27,15 @@ Le moteur ne connaît aucune filière. Il consomme des fiches de données valid�
 | Aiguillage à deux étages | fait — la famille la plus large passe de 17,8 à 8,8 filières en lice |
 | Calibration des seuils | faite — seuils mesurés, les 3 objectifs de la spec atteints |
 | Axes de disposition (28 domaines) | à collecter auprès des responsables |
-| Écran de résultat | fait — `web/index.html`, 5 états, 160 tests, sans framework |
+| Écran de résultat | fait — `web/index.html`, 5 états, 215 tests, sans framework |
 | Hébergement Netlify | fait — `netlify.toml`, aucun build, `git push` déploie |
 | Collecte des validations étudiantes | faite — Netlify Forms, `?validation=1` |
 | Bouton « parler à un conseiller » | fait — `config/contact.json`, canal email |
 | Thème ISM | fait — `web/theme.css`, contrastes calculés dans les deux modes |
 | Charte et logo officiels | à demander au service communication |
 | Adresse d'admission par école | à demander — 3 documentées sur 8 |
+| Signalements des testeurs | fait — `?test=1`, deux niveaux, parcours joint au retour |
+| Quota Netlify Forms | à vérifier avant de lancer la cohorte étudiante |
 
 ---
 
@@ -80,7 +82,8 @@ web/theme.css             L'identité visuelle, et elle seule — aucune couleur
 src/ui/rendu.mjs          Tout le rendu, en fonctions pures qui rendent des chaînes
 src/ui/etat-url.mjs       Le parcours dans location.hash — réponses, jamais l'état
 src/ui/contact.mjs        Le lien du bouton conseiller — mailto: ou wa.me, selon `canal`
-src/ui/collecte.mjs       Le contrat Netlify Forms : champs, corps de requête, cible
+src/ui/collecte.mjs       Le contrat Netlify Forms de la validation : champs, corps, cible
+src/ui/avis.mjs           Les signalements des testeurs : deux niveaux, un envoi par écran
 scripts/contexte-web.mjs  config/ + data/filieres/ → data/_contexte.json
 scripts/servir.mjs        Serveur local (node:http seul) : file:// interdit les modules ES
 scripts/test-interface.mjs  Les 5 états, aucun score dans le rendu, dégradation, reprise
@@ -284,6 +287,29 @@ la satisfaction est indispensable : sans elle, on confondrait un modèle qui se 
 
 Le bloc est **absent sans `?validation=1`** — un prospect ordinaire ne doit pas voir un
 formulaire de recherche. Les réponses arrivent dans l'onglet *Forms* de Netlify.
+
+⚠ **Regarder le quota d'envois avant de lancer la cohorte.** L'offre gratuite de Netlify
+plafonne les formulaires à quelques dizaines ou centaines d'envois par mois, et cette limite
+change : à vérifier dans le tableau de bord. Entre les signalements des testeurs et les trente
+réponses de validation, la marge est mince.
+
+**Faire tester par des relecteurs :**
+
+```
+https://…/web/?test=1
+```
+
+Sur chaque écran apparaît un bouton discret, en bas : « cette question n'est pas claire » sur une
+question, « ce résultat me surprend » sur le résultat. Un seul geste, aucune saisie — c'est ce
+qui produira le volume, parce que sur mobile personne n'écrit trois phrases. Un champ libre
+facultatif s'ouvre ensuite ; le signalement est déjà enregistré si le testeur n'écrit rien.
+
+Le **fragment d'URL du parcours est joint automatiquement**, ce qui permet de rejouer exactement
+ce qui a produit la gêne — c'est ce qui rend un retour exploitable plutôt qu'anecdotique. Avec
+l'écran, le navigateur, et rien d'autre : aucune donnée personnelle.
+
+Un seul envoi par écran et par session, pour ne pas consommer le quota en doubles clics. Absent
+sans `?test=1` : un candidat ordinaire croirait le site en travaux.
 
 ⚠ **Netlify détecte les formulaires en analysant le HTML déployé, pas à l'exécution.** Le
 formulaire est donc écrit littéralement dans `web/index.html`, masqué ; un formulaire généré en

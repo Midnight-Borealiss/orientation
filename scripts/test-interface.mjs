@@ -17,7 +17,16 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { chargerContexte, verifierContexte } from "../src/engine/charger.mjs";
-import { jouer, resultat, demarrer, repondre, reprendreProfil, prochaineQuestion } from "../src/engine/moteur.mjs";
+import {
+  jouer,
+  resultat,
+  demarrer,
+  repondre,
+  reprendreProfil,
+  reprendreFiltres,
+  cibleReprise,
+  prochaineQuestion,
+} from "../src/engine/moteur.mjs";
 import { normaliser } from "../src/engine/texte.mjs";
 import {
   rendreResultat,
@@ -47,6 +56,16 @@ import {
   cibleEnvoi,
   listeProgrammes,
 } from "../src/ui/collecte.mjs";
+import {
+  NOM_FORMULAIRE as NOM_AVIS,
+  CHAMP_PIEGE as AVIS_PIEGE,
+  CHAMPS as CHAMPS_AVIS,
+  TEXTES as AVIS_TEXTES,
+  libelleBouton,
+  corpsAvis,
+  dejaEnvoye,
+  blocAvis,
+} from "../src/ui/avis.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
@@ -145,9 +164,12 @@ for (const etat of Object.keys(ORDRE_BLOCS)) {
 // mieux qu'un écran. Sur les états affirmés, il ferme la page.
 for (const etat of ["possible", "impasse"]) {
   const blocs = ORDRE_BLOCS[etat];
+  // « avant le classement » et non « en deuxième position » : le bloc d'élargissement s'est
+  // inséré depuis, et un index en dur cassait sans qu'aucune règle ne soit violée.
+  const apres = etat === "impasse" ? blocs.indexOf("non-classes") : blocs.indexOf("recommandation");
   verifier(
     `état « ${etat} » : le conseiller passe avant le classement`,
-    blocs.indexOf("conseiller") === 1,
+    blocs.indexOf("conseiller") >= 0 && (apres < 0 || blocs.indexOf("conseiller") < apres),
     blocs.join(" → ")
   );
 }
@@ -612,6 +634,219 @@ console.log(`\n  Écran de question\n`);
   }
 }
 
+/* ── 10 bis. Balayage F1 × F2 × A1 ────────────────────────────────
+ * Le test qu'aucune spec n'aurait produit, puisqu'il ne suppose rien : on parcourt TOUTES les
+ * combinaisons de niveau, de modalité et d'univers, et on vérifie que l'écran obtenu offre au
+ * moins une action. Une impasse est acceptable — 25 combinaisons du catalogue 2024 ne
+ * correspondent à aucun programme, et c'est un fait. Une impasse SANS RETOUR EN ARRIÈRE ne
+ * l'est pas.
+ *
+ * C'est ce balayage qui a trouvé le défaut du filtre de modalité : l'option du soir ne
+ * désignait qu'une étiquette sur les deux que les catalogues emploient.
+ * ─────────────────────────────────────────────────────────── */
+
+console.log(`\n  Balayage F1 × F2 × A1\n`);
+
+{
+  const F = contexte.questions.filtres;
+  const A1 = contexte.questions.aiguillage.find((q) => q.cible === "famille");
+  const A2 = contexte.questions.aiguillage.find((q) => q.cible === "domaines");
+
+  const sansAction = [];
+  const sansIssue = [];
+  const etatsVus = new Set();
+  let total = 0;
+
+  for (let i = 0; i < F[0].options.length; i++) {
+    for (let j = 0; j < F[1].options.length; j++) {
+      for (let k = 0; k < A1.options.length; k++) {
+        const a2s = A1.options[k].valeur === A2?.si?.famille ? A2.options.map((_, x) => x) : [null];
+        for (const a2 of a2s) {
+          total++;
+          const reponses = { F1: i, F2: j, A1: k };
+          if (a2 !== null) reponses.A2 = a2;
+          // Un profil quelconque : ce qu'on teste ici, c'est la sortie de l'écran, pas le score.
+          contexte.questions.profil.forEach((q, n) => {
+            reponses[q.id] = (i + j + k + n) % (q.options.length || 1);
+          });
+
+          const { resultat: r } = jouer(reponses, contexte);
+          const html = rendreResultat(r, {
+            lienConseiller: lienContact(contexte.contact, r.recommandation),
+          });
+          etatsVus.add(r.niveau);
+
+          const etiquette = `${F[0].options[i].valeur} · ${JSON.stringify(F[1].options[j].valeur)} · ${A1.options[k].valeur}${a2 !== null ? " · " + JSON.stringify(A2.options[a2].valeur) : ""}`;
+          if (!r.recommandation) sansIssue.push(etiquette);
+
+          // Au moins une action : reprendre, choisir une alternative, écrire à un conseiller.
+          const actions =
+            (html.match(/<button/g) || []).length + (html.match(/<a class="conseiller"/g) || []).length;
+          if (!actions) sansAction.push(etiquette);
+
+          // Une impasse doit rendre la main sur ce qui l'a causée, pas sur le profil.
+          if (r.niveau === "impasse" && r.reprise !== "filtres") sansAction.push(`${etiquette} (reprise=${r.reprise})`);
+          // Et elle ne doit jamais annoncer une liste qu'elle n'affiche pas.
+          if (r.niveau === "impasse" && /voici (l'ensemble|tout)/i.test(html)) {
+            sansAction.push(`${etiquette} (promesse de liste absente)`);
+          }
+        }
+      }
+    }
+  }
+
+  verifier(`les ${total} combinaisons de filtres et d'univers ont été balayées`, total >= 96, `${total}`);
+  verifier(
+    "chaque écran offre au moins une action : aucune impasse sans retour en arrière",
+    sansAction.length === 0,
+    sansAction.slice(0, 4).join(" · ")
+  );
+  verifier(
+    "en impasse, le bouton rouvre les filtres — rouvrir le profil ne corrigerait rien",
+    !sansAction.some((s) => s.includes("reprise=")),
+    sansAction.filter((s) => s.includes("reprise=")).slice(0, 3).join(" · ")
+  );
+
+  // Le nombre d'impasses est un FAIT du catalogue, pas une cible. On l'imprime pour qu'une
+  // dérive se voie : passer de 25 à 50 signalerait un filtre cassé, comme celui du soir.
+  console.log(`      ${sansIssue.length} combinaison(s) sans aucun programme, sur ${total} — fait du catalogue`);
+  verifier(
+    "les combinaisons sans issue restent minoritaires",
+    sansIssue.length < total / 3,
+    `${sansIssue.length}/${total}`
+  );
+
+  // Le défaut d'origine : l'option du soir ne trouvait qu'UNE fiche sur 84, et un candidat à
+  // bac+3 tombait en impasse alors que sept programmes du soir lui sont ouverts.
+  {
+    const iSoir = F[1].options.findIndex((o) => Array.isArray(o.valeur) && o.valeur.includes("cours-du-soir"));
+    verifier("une option de filtre désigne bien plusieurs modalités", iSoir >= 0);
+    const { resultat: r } = jouer(
+      { F1: 2, F2: iSoir, A1: 2, P1: 0, P2: 2, P3: 0, P4: 1, P5: 0, P6: 2, P7: 0 },
+      contexte
+    );
+    verifier(
+      "le cas rapporté ne part plus en impasse : bac+3 et cours du soir trouvent des programmes",
+      r.niveau !== "impasse" && r.parcours.apres_filtres > 1,
+      `${r.parcours.apres_filtres} après filtres, état ${r.niveau}`
+    );
+  }
+
+  // Chaque option de filtre doit couvrir ce que son libellé promet, et l'union doit couvrir
+  // toute la taxonomie : une modalité qu'aucune option n'atteint est un programme invisible.
+  {
+    const taxo = new Set(contexte.taxonomie.modalites || []);
+    const atteintes = new Set();
+    for (const q of F) {
+      if (q.filtre !== "modalites") continue;
+      for (const o of q.options) {
+        for (const v of Array.isArray(o.valeur) ? o.valeur : o.valeur ? [o.valeur] : []) atteintes.add(v);
+      }
+    }
+    const orphelines = [...taxo].filter((m) => !atteintes.has(m));
+    verifier("toute modalité de la taxonomie est atteignable par une option", orphelines.length === 0, orphelines.join(", "));
+    const inconnues = [...atteintes].filter((m) => !taxo.has(m));
+    verifier("aucune option ne désigne une modalité hors taxonomie", inconnues.length === 0, inconnues.join(", "));
+  }
+
+  verifier(
+    "le balayage rencontre plusieurs états d'écran, pas un seul",
+    etatsVus.size >= 3,
+    [...etatsVus].join(", ")
+  );
+}
+
+/* ── 10 ter. Élargissement — une mention, pas une impasse ─────── */
+
+console.log(`\n  Élargissement de l'aiguillage fin\n`);
+
+{
+  // Un bachelier qui choisit un registre dont la famille ne propose que des masters : le
+  // moteur revient à la famille. Il a donc une liste, et ce n'est PAS une impasse.
+  const A2 = contexte.questions.aiguillage.find((q) => q.cible === "domaines");
+  const iFamille = contexte.questions.aiguillage
+    .find((q) => q.cible === "famille")
+    .options.findIndex((o) => o.valeur === A2.si.famille);
+
+  let elargi = null;
+  for (let a2 = 0; a2 < A2.options.length && !elargi; a2++) {
+    for (let f1 = 0; f1 < 4 && !elargi; f1++) {
+      const reponses = { F1: f1, F2: 3, A1: iFamille, A2: a2 };
+      contexte.questions.profil.forEach((q, n) => (reponses[q.id] = (a2 + n) % (q.options.length || 1)));
+      const { resultat: r } = jouer(reponses, contexte);
+      if (r.parcours.retour_famille) elargi = r;
+    }
+  }
+
+  verifier("un élargissement réel se produit sur le catalogue", Boolean(elargi));
+  if (elargi) {
+    verifier("il n'est PAS traité comme une impasse : il y a bien un classement", elargi.niveau !== "impasse" && Boolean(elargi.recommandation));
+    const html = rendreResultat(elargi);
+    verifier("il est annoncé par une mention visible, pas seulement par une alerte interne", html.includes("bloc--elargissement"));
+    verifier(
+      "la mention annonce l'univers entier, et la liste suit vraiment",
+      html.indexOf("bloc--elargissement") < html.indexOf("bloc--reco")
+    );
+    verifier("le bouton rouvre le profil, pas les filtres : ce ne sont pas eux qui ont réduit", elargi.reprise === "profil");
+  }
+  verifier(
+    "hors élargissement, aucune mention ne s'affiche",
+    !rendreResultat(trouves.forte?.resultat || trouves.bonne.resultat).includes("bloc--elargissement")
+  );
+}
+
+/* ── 10 quater. Reprendre selon l'état ────────────────────────── */
+
+console.log(`\n  Reprendre en impasse\n`);
+
+{
+  const { etat } = jouer({ F1: 2, F2: 2, A1: 1 }, contexte);
+  const repris = reprendreFiltres(etat, contexte);
+  const idsFiltres = contexte.questions.filtres.map((q) => q.id);
+
+  verifier("il rouvre les questions de filtre", idsFiltres.every((id) => repris.etat.reponses[id] === undefined));
+  verifier(
+    "les réponses précédentes sont rendues pour être pré-sélectionnées",
+    idsFiltres.every((id) => repris.precedentes[id] === etat.reponses[id])
+  );
+  verifier("l'aiguillage est conservé", repris.etat.reponses.A1 === etat.reponses.A1);
+  verifier("l'état reçu n'est pas modifié", etat.reponses.F1 === 2);
+  verifier(
+    "la prochaine question posée est bien un filtre",
+    idsFiltres.includes(prochaineQuestion(repris.etat, contexte)?.question.id)
+  );
+  verifier("cibleReprise dit filtres en impasse, profil ailleurs", cibleReprise("impasse") === "filtres" && cibleReprise("forte") === "profil");
+  verifier(
+    "le libellé du bouton change en impasse : il ne parle plus du profil",
+    (() => {
+      const html = rendreResultat({ ...trouves.bonne.resultat, niveau: "impasse", recommandation: null, reprise: "filtres" });
+      // Comparaison sur le texte ÉCHAPPÉ : les libellés portent des apostrophes.
+      return html.includes(echapper(TEXTES.repriseFiltres)) && html.includes('data-reprise="filtres"');
+    })()
+  );
+}
+
+/* ── 10 quinquies. Ne jamais reprocher une réponse non donnée ─── */
+
+{
+  const { resultat: r } = jouer({ F1: 2, F2: 2, A1: 1 }, contexte);
+  verifier(
+    "un parcours arrêté avant le profil ne parle pas de « réponses trop partagées »",
+    r.reformulation.sansReponse === true,
+    r.reformulation.motif
+  );
+  const html = rendreResultat(r);
+  verifier(
+    "l'écran le dit autrement",
+    html.includes(echapper(TEXTES.reformulationSansReponse)) && !html.includes(echapper(TEXTES.aucuneReformulation))
+  );
+  verifier("le profil est bien transmis, il est simplement vide", Object.keys(r.profil).length === 5);
+  verifier(
+    "aucune alerte ne désigne un classement absent",
+    !html.includes("classement ci-dessus")
+  );
+}
+
 /* ── 11. Hébergement Netlify ──────────────────────────────────── */
 
 console.log(`\n  Hébergement\n`);
@@ -842,6 +1077,109 @@ console.log(`\n  Contact\n`);
     "un canal mal configuré est signalé par verifierContexte, pas avalé",
     verifierContexte({ ...contexte, contact: { canal: "sms" } }).avertissements.some((a) => /contact/.test(a))
   );
+}
+
+/* ── 13 bis. Signalements des testeurs ────────────────────────── */
+
+console.log(`\n  Signalements des testeurs\n`);
+
+{
+  // Même piège que la validation, et il se paierait deux fois : Netlify analyse le HTML
+  // déployé, donc un second formulaire dynamique échouerait aussi silencieusement.
+  const statique = HTML.match(/<form[^>]*name="avis"[\s\S]*?<\/form>/);
+  verifier("le formulaire d'avis est écrit littéralement dans le HTML", Boolean(statique));
+
+  const bloc = statique ? statique[0] : "";
+  verifier("il est masqué", /\bhidden\b/.test(bloc));
+  verifier("il porte data-netlify et son propre piège à robots", /data-netlify="true"/.test(bloc) && new RegExp(`netlify-honeypot="${AVIS_PIEGE}"`).test(bloc));
+  verifier(
+    "son piège est distinct de celui de la validation — deux formulaires, deux champs",
+    AVIS_PIEGE !== CHAMP_PIEGE
+  );
+
+  const declares = [...bloc.matchAll(/name="([^"]+)"/g)].map((m) => m[1]).filter((n) => n !== NOM_AVIS);
+  verifier(
+    "les champs du HTML statique sont exactement ceux que le code envoie",
+    JSON.stringify(declares) === JSON.stringify(CHAMPS_AVIS),
+    `HTML ${declares.join(",")} · code ${CHAMPS_AVIS.join(",")}`
+  );
+
+  const personnel = /\bnom\b|prenom|email|mail|telephone|adresse|naissance|identi/i;
+  verifier("aucun champ personnel", !CHAMPS_AVIS.some((c) => personnel.test(c)), CHAMPS_AVIS.join(","));
+
+  const corps = new URLSearchParams(
+    corpsAvis({ ecran: "P3", etat: "r=F1:2,P1:0", niveau: "bonne", commentaire: "trop abstraite", agent: "Nav/1.0" })
+  );
+  verifier("l'envoi inclut form-name", corps.get("form-name") === NOM_AVIS);
+  verifier(
+    "le parcours est joint, ce qui rend le retour rejouable",
+    corps.get("etat") === "r=F1:2,P1:0" && corps.get("ecran") === "P3"
+  );
+  verifier("le niveau de résultat est joint quand il existe", corps.get("niveau") === "bonne");
+  verifier("le navigateur est joint, pour reproduire un défaut d'affichage", corps.get("agent") === "Nav/1.0");
+  verifier(
+    "un commentaire vide part quand même : c'est le premier geste qui compte",
+    new URLSearchParams(corpsAvis({ ecran: "F1" })).get("commentaire") === ""
+  );
+  verifier(
+    "la chaîne du navigateur est tronquée — le quota d'envois est limité",
+    new URLSearchParams(corpsAvis({ ecran: "F1", agent: "x".repeat(900) })).get("agent").length <= 200
+  );
+
+  // Le libellé dit QUOI signaler : « quelque chose ne va pas » sur une question serait vague.
+  verifier(
+    "le libellé du bouton dépend de l'écran",
+    new Set(["F1", "P3", "resultat", "accueil"].map(libelleBouton)).size === 3,
+    ["F1", "resultat", "accueil"].map(libelleBouton).join(" · ")
+  );
+  verifier("sur une question, il désigne la question", /question/i.test(libelleBouton("P3")));
+  verifier("sur le résultat, il désigne le résultat", /résultat/i.test(libelleBouton("resultat")));
+
+  // Deux niveaux : le bouton d'abord, la saisie ensuite. Sur mobile, un bouton se tape,
+  // trois phrases ne s'écrivent pas.
+  const ferme = blocAvis({ ecran: "P3" }, echapper);
+  const ouvert = blocAvis({ ecran: "P3", phase: "ouvert" }, echapper);
+  verifier("premier niveau : un bouton, aucune saisie", ferme.includes("avis-signaler") && !ferme.includes("<textarea"));
+  verifier("second niveau : un champ libre, après le premier geste", ouvert.includes("<textarea") && ouvert.includes("avis-envoyer"));
+  verifier("le champ est annoncé comme facultatif", /facultatif/i.test(AVIS_TEXTES.aide));
+  verifier(
+    "après envoi, un accusé et plus aucun bouton : un seul envoi par écran",
+    (() => {
+      const e = blocAvis({ ecran: "P3", phase: "envoye" }, echapper);
+      return e.includes("avis-merci") && !e.includes("<button");
+    })()
+  );
+  verifier(
+    "un envoi déjà fait sur cet écran est reconnu",
+    (() => {
+      const vus = new Set(["P3"]);
+      return dejaEnvoye(vus, "P3") && !dejaEnvoye(vus, "P4");
+    })()
+  );
+  verifier("l'échec est annoncé sans bloquer le parcours", /continue/i.test(AVIS_TEXTES.echec));
+  verifier("le bloc échappe les données", !blocAvis({ ecran: '<script>x</script>' }, echapper).includes("<script>"));
+
+  // Garde-fou : un vrai candidat ne doit jamais voir un bouton de signalement — ça donne
+  // l'impression d'un site en travaux. Le mode est lu dans l'adresse, une seule fois.
+  verifier("le mode est conditionné par ?test=1", /get\("test"\)\s*===\s*"1"/.test(HTML));
+  verifier(
+    "aucun bloc de signalement n'est rendu hors mode test",
+    /if \(!modeTest\) return ""/.test(HTML)
+  );
+  verifier(
+    "les deux modes sont indépendants : ?validation=1 n'active pas les signalements",
+    /get\("validation"\)\s*===\s*"1"/.test(HTML) && HTML.includes("modeTest") && HTML.includes("modeValidation")
+  );
+  verifier(
+    "le bloc est posé sur les questions ET sur le résultat",
+    (HTML.match(/rendreAvis\(/g) || []).length >= 2
+  );
+  verifier(
+    "le fragment d'URL est conservé par ?test=1 comme par ?validation=1",
+    /location\.pathname \+ location\.search/.test(HTML)
+  );
+  verifier("l'envoi ne va pas vers la racine redirigée", HTML.includes("cibleEnvoi(location.pathname)"));
+  verifier("aucun stockage pour mémoriser les envois", !/localStorage|sessionStorage/.test(CODE_INTERFACE));
 }
 
 /* ── 14. Thème ISM ────────────────────────────────────────────── */

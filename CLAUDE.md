@@ -44,6 +44,8 @@ jamais `src/engine/`.
 | Charte officielle | à demander au service communication — les couleurs sont mesurées |
 | Logo | à récupérer en SVG — les variables du thème l'attendent |
 | Adresse d'admission par école | à demander — 3 documentées sur 8, aucun routage inventé |
+| Signalements des testeurs | **faits** — `?test=1`, deux niveaux, parcours joint |
+| Quota Netlify Forms | à vérifier dans le tableau de bord avant la cohorte étudiante |
 
 ---
 
@@ -1289,7 +1291,8 @@ téléphone, parfois en données limitées.
 | `src/ui/rendu.mjs` | **tout** le rendu, en fonctions pures qui rendent des chaînes |
 | `src/ui/etat-url.mjs` | le parcours dans `location.hash` — sérialisation et relecture |
 | `src/ui/contact.mjs` | la destination du bouton conseiller, depuis `config/contact.json` |
-| `src/ui/collecte.mjs` | le contrat Netlify Forms : champs, corps de requête, cible d'envoi |
+| `src/ui/collecte.mjs` | le contrat Netlify Forms de la validation : champs, corps, cible d'envoi |
+| `src/ui/avis.mjs` | les signalements des testeurs : deux niveaux, un envoi par écran |
 | `netlify.toml` | hébergement : racine publiée, types MIME, redirection |
 | `scripts/contexte-web.mjs` | `data/_contexte.json`, le contexte du moteur en un seul fichier |
 | `scripts/servir.mjs` | serveur local, `node:http` seul — `file://` interdit les modules ES |
@@ -1335,6 +1338,45 @@ moteur : les identifiants (`presentiel`, `mba`) sont des slugs, et leurs libell�
 vivrait en double et divergerait au premier renommage. Un identifiant sans libellé s'affiche
 tel quel : c'est laid, donc visible, donc corrigé.
 
+### Le filtre de modalité désigne PLUSIEURS étiquettes
+
+Défaut trouvé par balayage, pas par relecture. Les deux catalogues n'emploient pas le même mot
+pour la même chose : le catalogue Master écrit « cours du soir » cinq fois et **jamais**
+« week-end » ; le catalogue Bachelor écrit « week-end » et « full time » et **jamais** « cours
+du soir ». L'option « le week-end ou le soir » filtrait sur `week-end` seul — soit **une fiche
+sur 84**, et un candidat à bac+3 tombait en impasse alors que sept MBA du soir lui sont ouverts.
+
+La valeur d'une option de filtre est donc une **liste**, et une seule correspondance suffit :
+
+```json
+{ "label": "Le week-end ou le soir, je travaille", "valeur": ["week-end", "cours-du-soir"] }
+{ "label": "Sur le campus, en journée",            "valeur": ["presentiel", "full-time"] }
+```
+
+`validate.mjs` refuse désormais qu'une modalité de la taxonomie ne soit désignée par aucune
+option : une modalité inatteignable rend ses programmes invisibles quelle que soit la réponse.
+
+Effet mesuré sur le balayage complet : **31 combinaisons sans issue sur 160 → 25**. Les 25
+restantes sont des faits du catalogue — aucun programme d'ingénierie en ligne, aucun programme
+de droit du soir — et non des bugs.
+
+### Le balayage F1 × F2 × A1 — le test qui ne suppose rien
+
+Il parcourt **toutes** les combinaisons de niveau, de modalité et d'univers, et vérifie que
+chaque écran offre au moins une action. C'est le seul test qui pouvait trouver le défaut
+ci-dessus, puisque la spec elle-même se trompait : un test écrit depuis une spec fausse
+reproduit l'erreur.
+
+**Une impasse est acceptable. Une impasse sans retour en arrière ne l'est pas.** Le nombre
+d'impasses est imprimé et non contraint à une cible : passer de 25 à 50 signalerait un filtre
+cassé, comme celui du soir.
+
+Le balayage a trouvé un second défaut que personne n'avait rapporté : **28 combinaisons où des
+programmes existent mais où aucun n'est comparable à un profil** — tous à `axes_fiables: false`.
+L'écran affichait « aucune formation » en cachant des programmes réels. C'est la faute
+symétrique de celle de l'impasse bavarde : **ne jamais annoncer un contenu absent, ne jamais
+taire un contenu présent.**
+
 ### Les cinq états, et l'ordre des blocs
 
 Un même gabarit pour les cinq serait malhonnête. `ORDRE_BLOCS` est écrit en **listes
@@ -1347,7 +1389,20 @@ ordonnées** et non en numéros : la table de la spec porte deux fois le rang 4 
 | `bonne` | 40 % | recommandation, alternatives remontées avant le contenu |
 | `possible` | 35 % | **le conseiller passe en deuxième position** — quand le moteur est moins sûr, un humain vaut mieux qu'un écran |
 | `egalite` | 2 % | deux cartes de même poids, **aucune titrée « recommandation »** |
-| `impasse` | rare | l'aiguillage fin a vidé le jeu ; on l'annonce, on n'élargit jamais en silence |
+| `impasse` | rare | rien à recommander ; le bouton rouvre alors **les filtres**, pas le profil |
+
+**`impasse` a deux visages, et les confondre a produit deux défauts opposés :**
+
+| Situation | Ce qui existe | Ce que l'écran fait |
+|---|---|---|
+| aucun candidat | rien | dit qu'aucun programme ne réunit ces réponses, et rouvre F1/F2 |
+| des candidats, **aucun comparable** | 28 combinaisons | les **affiche sans les classer**, manque attribué à la brochure |
+
+**L'élargissement n'est PAS une impasse.** Quand l'aiguillage fin vide le jeu, le moteur revient
+à la famille : il a donc une liste. Le traiter comme une impasse faisait afficher « voici
+l'ensemble de l'univers que tu as retenu » sans que rien ne suive. Il se signale par une
+**mention visible** (`parcours.retour_famille`) au-dessus d'un classement bien réel, et son
+bouton rouvre le profil — ce ne sont pas les filtres qui ont réduit.
 
 En `possible`, le badge est **« une piste à explorer »**, jamais « correspondance faible » :
 un prospect sur trois le reçoit, et un verdict d'échec y serait faux autant que décourageant.
@@ -1398,15 +1453,22 @@ bouton Retour du téléphone devient inutilisable.
 Une entrée illisible est **ignorée et signalée**, jamais remplacée par un défaut : choisir à
 la place du prospect serait pire que perdre sa réponse.
 
-### Le bouton Reprendre rouvre le profil, pas les filtres
+### Le bouton Reprendre — sa cible dépend de l'état
 
-`reprendreProfil(etat, contexte)` rend un nouvel état et, à part, les réponses précédentes
-**à pré-sélectionner**. Deux règles :
+| État | Reprendre rouvre | Fonction |
+|---|---|---|
+| forte · bonne · possible · egalite | les 7 questions de profil, filtres et aiguillage conservés | `reprendreProfil` |
+| **impasse** | **F1 et F2**, aiguillage et profil conservés | `reprendreFiltres` |
 
-- il conserve filtres et aiguillage. La reformulation porte sur le profil ; refaire les
-  filtres serait punir le prospect d'avoir corrigé ;
-- les réponses sont **pré-sélectionnées, pas réappliquées**. Le profil repart de zéro et rien
-  n'avance tant que le prospect n'a pas cliqué.
+Hors impasse, la reformulation porte sur le profil et refaire les filtres serait punir le
+prospect d'avoir corrigé. **En impasse c'est l'inverse** : ce sont les filtres qui ont vidé le
+jeu, rouvrir le profil ne corrigerait rien, et l'écran était un cul-de-sac — le seul défaut
+vraiment inacceptable ici. `ECRAN-RESULTAT.md` § 5 prescrivait le profil dans tous les cas ; la
+section est corrigée.
+
+Le moteur tranche la cible (`resultat.reprise`, via `cibleReprise`) : l'interface ne la déduit
+pas. Dans les deux cas, les réponses précédentes sont **pré-sélectionnées, pas réappliquées** —
+rien n'avance tant que le prospect n'a pas cliqué.
 
 ### Le contexte servi au navigateur est une liste blanche
 
@@ -1517,6 +1579,48 @@ Quatre règles de conduite, chacune testée :
 - après envoi, un accusé sobre et plus aucun bouton : **pas de renvoi en double** ;
 - **un échec d'envoi n'efface jamais le résultat affiché.** Les réponses vivent hors du DOM,
   et seul le bloc de validation est retouché.
+
+## Signalements des testeurs — `?test=1`
+
+Un retour donné **au moment où la personne bute** vaut beaucoup plus qu'un retour reconstitué
+après coup. Et **un bouton à taper rapporte bien plus qu'un champ à remplir** : sur mobile,
+écrire trois phrases est un effort que peu font, toucher un bouton n'en est pas un.
+
+Deux niveaux, sur **tous les écrans** — chaque question et le résultat —, en bas du contenu et
+jamais en travers du parcours :
+
+1. **un bouton unique**, dont le libellé dit quoi signaler : « cette question n'est pas claire »
+   sur une question, « ce résultat me surprend » sur le résultat. C'est ce geste qui produira le
+   volume ;
+2. **après** ce geste, un champ libre **facultatif** — le retour est déjà enregistré si la
+   personne n'écrit rien.
+
+Contexte joint sans que le testeur le décrive : `ecran`, `etat`, `niveau`, `commentaire`,
+`agent`. **`etat` est le fragment d'URL du parcours** : c'est lui qui permet de rejouer
+exactement ce qui a produit la gêne, et donc ce qui rend un retour exploitable plutôt
+qu'anecdotique. Aucune donnée personnelle ; `agent` sert à reproduire un défaut d'affichage,
+ce n'est pas une identité.
+
+Mêmes deux pièges Netlify que la validation, et ils se paieraient deux fois : le formulaire
+d'avis est lui aussi **écrit littéralement** dans `web/index.html`, avec **son propre champ
+piège** (`bot-field-avis`, distinct de celui de la validation), et le POST va vers `/web/`.
+
+### Le quota d'envois n'est pas une abstraction
+
+L'offre gratuite de Netlify plafonne les envois de formulaires par mois — de l'ordre de la
+centaine, et ces limites changent, donc **à vérifier dans le tableau de bord avant de lancer la
+cohorte étudiante**. Entre les signalements des testeurs et les trente réponses de validation,
+la marge est mince.
+
+Deux conséquences : la règle **un envoi par écran et par session** n'est pas cosmétique — un
+double clic qui compte deux fois se paie en réponses perdues à la fin du mois —, et la chaîne
+du navigateur est tronquée à 200 caractères. L'état des envois vit en mémoire, dans un `Set` :
+aucun stockage, rien qui survive à la session.
+
+Garde-fous, tous testés : visible **seulement avec `?test=1`** — un vrai candidat ne doit jamais
+voir un bouton de signalement, ça donne l'impression d'un site en travaux —, l'échec ne bloque
+jamais le parcours et n'efface rien, et le bloc se referme au changement d'écran pour que le
+champ libre ne suive pas le testeur de question en question.
 
 ## Le thème — `web/theme.css`
 
@@ -1697,6 +1801,18 @@ ré-extraction, contrôle que les champs humains sont intacts, que les champs d'
 - Déduire l'adresse d'admission d'une école. Trois sont documentées, cinq non : c'est une question aux admissions.
 - Afficher un bouton de contact sans destination. Mieux vaut un bouton absent.
 - Publier `web/` seul sur Netlify. `data/_contexte.json` vit en dehors.
+- Écrire une option de filtre de modalité sur une seule étiquette. Les catalogues n'emploient pas le même mot.
+- Laisser une modalité de la taxonomie hors de toute option de filtre. `validate.mjs` le refuse.
+- Rouvrir le profil en impasse. Ce sont les filtres qui ont vidé le jeu ; le bouton doit rendre la main sur eux.
+- Traiter un élargissement comme une impasse. Il y a un classement : c'est une mention, pas une absence.
+- Afficher « aucune formation » quand des programmes non classables existent. Les montrer sans les classer.
+- Reprocher des « réponses trop partagées » à un parcours arrêté avant les questions de profil.
+- Afficher une alerte qui désigne un classement absent.
+- Conclure d'un cas rapporté. Le balayage a trouvé 31 combinaisons sans issue là où une seule était signalée.
+- Générer le formulaire d'avis en JavaScript, ou lui donner le même champ piège que la validation.
+- Envoyer plus d'un signalement par écran et par session. Le quota Netlify est de l'ordre de la centaine par mois.
+- Montrer un bouton de signalement sans `?test=1`. Un candidat croirait le site en travaux.
+- Conditionner l'envoi d'un signalement à la saisie d'un texte. Le premier geste est ce qui produit le volume.
 
 ## Commandes
 
@@ -1718,6 +1834,7 @@ Le moteur, une fois les données en place :
 npm run contexte:web        # config/ + data/filieres/ → data/_contexte.json (à commiter)
 npm run web                 # serveur local, puis http://localhost:8080/web/
                             # ?validation=1 ouvre le formulaire de collecte étudiante
+                            # ?test=1 ouvre les boutons de signalement des testeurs
 npm run quiz                # affiche les questions du parcours
 npm run quiz -- --etat      # contrôles de cohérence du contexte (seuils, axes, familles)
 npm run quiz -- --reponses F1=0,F2=3,A1=3,P1=1,P2=2,P3=0,P4=0,P5=1,P6=0,P7=0

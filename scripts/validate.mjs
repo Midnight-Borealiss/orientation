@@ -107,6 +107,39 @@ const seriesOk = new Set(taxo.series_bac);
     console.log(
       `  ✓ aiguillage : ${fines.length} question(s) fine(s), tous les domaines de leur famille sont atteignables`
     );
+
+    /* ── Filtre de modalité : aucune modalité inatteignable ──────────
+     * Une option de filtre peut désigner PLUSIEURS modalités, parce que les catalogues
+     * n'emploient pas le même mot pour la même chose. Une modalité qu'aucune option ne
+     * désigne rend ses programmes invisibles quelle que soit la réponse — et c'est ainsi
+     * que l'option « le week-end ou le soir » ne trouvait qu'une fiche sur 84.
+     * ─────────────────────────────────────────────────────────── */
+    const modalitesTaxo = new Set(taxo.modalites || []);
+    const soucis = [];
+    const atteintes = new Set();
+    for (const q of questions.filtres || []) {
+      if (q.filtre !== "modalites") continue;
+      for (const o of q.options || []) {
+        if (o.valeur == null) continue; // « peu importe » n'exclut rien
+        const valeurs = Array.isArray(o.valeur) ? o.valeur : [o.valeur];
+        if (!valeurs.length) soucis.push(`${q.id} : option « ${o.label} » sans modalité`);
+        for (const v of valeurs) {
+          if (!modalitesTaxo.has(v)) soucis.push(`${q.id} : modalité inconnue « ${v} »`);
+          atteintes.add(v);
+        }
+      }
+    }
+    const inatteignables = [...modalitesTaxo].filter((m) => !atteintes.has(m));
+    if (inatteignables.length) {
+      soucis.push(`modalité(s) qu'aucune option de filtre ne désigne — ${inatteignables.join(", ")}`);
+    }
+    if (soucis.length) {
+      console.log(`\n  ✗ config/questions.json`);
+      for (const s of soucis) console.log(`      ${s}`);
+      console.log("");
+      process.exit(1);
+    }
+    console.log(`  ✓ filtres : les ${modalitesTaxo.size} modalités de la taxonomie sont toutes atteignables`);
   }
 }
 

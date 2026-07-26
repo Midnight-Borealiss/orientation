@@ -84,10 +84,20 @@ La simulation donne les proportions. Un même gabarit pour tous serait malhonnê
 En `possible`, le badge ne doit pas ressembler à un échec. Formulation retenue :
 « une piste à explorer », pas « correspondance faible ».
 
-En `impasse`, dire ce qui s'est passé sans jargon : aucun programme ne combine ce niveau
-et ce choix, voici la famille entière. **Ne jamais élargir silencieusement** — un
-prospect qui croit avoir été entendu alors qu'on a ignoré sa réponse est plus mal traité
-qu'un prospect à qui l'on dit la vérité.
+En `impasse`, dire ce qui s'est passé sans jargon. **Corrigé :** cette section confondait
+deux situations, et sa formulation promettait « la famille entière » sur un écran qui
+n'affichait rien.
+
+| Situation | Ce qui existe | Ce que l'écran fait |
+|---|---|---|
+| aucun candidat après filtres et aiguillage | rien | dit qu'aucun programme ne réunit ces réponses, et rouvre F1/F2 |
+| des candidats, mais **aucun comparable** à un profil | 28 combinaisons du catalogue | les **affiche sans les classer**, en attribuant le manque à la brochure |
+| l'aiguillage fin a vidé le jeu, retour à la famille | un classement complet | **ce n'est pas une impasse** : classement normal + mention d'élargissement |
+
+**Ne jamais annoncer un contenu absent, ni taire un contenu présent** — ce sont les deux
+faces de la même faute. Et **ne jamais élargir silencieusement** : un prospect qui croit
+avoir été entendu alors qu'on a élargi sa demande est plus mal traité qu'un prospect à qui
+l'on dit la vérité.
 
 ---
 
@@ -174,12 +184,25 @@ recommandé, ou formulaire. À trancher avec les admissions.
 
 ## 5. Le bouton Reprendre
 
-Il rouvre **les sept questions de profil uniquement**, en conservant les filtres et
-l'aiguillage. La reformulation porte sur le profil ; refaire les filtres serait punir le
-prospect d'avoir corrigé.
+**Corrigé.** Cette section prescrivait le profil dans tous les cas ; c'était faux en état
+`impasse`, où le bouton ne pouvait rien corriger et l'écran devenait un cul-de-sac.
 
-Les réponses précédentes sont pré-sélectionnées, modifiables. L'état étant immuable, il
-suffit de repartir de l'état antérieur — aucune remise à zéro.
+La cible dépend de l'état :
+
+| État | Reprendre rouvre |
+|---|---|
+| forte · bonne · possible · egalite | les **sept questions de profil**, en conservant filtres et aiguillage |
+| **impasse** | **F1 et F2**, en conservant aiguillage et profil |
+
+Hors impasse, la reformulation porte sur le profil et refaire les filtres serait punir le
+prospect d'avoir corrigé. En impasse, c'est l'inverse : ce sont les filtres qui ont vidé le
+jeu, et rouvrir le profil ne changerait rien.
+
+Dans les deux cas, les réponses précédentes sont pré-sélectionnées, modifiables. L'état étant
+immuable, il suffit de repartir de l'état antérieur — aucune remise à zéro.
+
+Le moteur tranche la cible (`resultat.reprise`) : l'interface ne doit pas la déduire, deux
+interfaces la déduiraient différemment.
 
 ---
 

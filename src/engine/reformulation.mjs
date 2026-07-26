@@ -53,9 +53,24 @@ export function traitsMarquants(profil, axes, max = MAX_TRAITS) {
  *
  * Retourne `{ phrase, traits, reprise, motif }`.
  */
-export function reformuler(profil, axes, config = null) {
+export function reformuler(profil, axes, config = null, { questionsPosees = null } = {}) {
   const fragments = config?.fragments || null;
   const reprise = config?.reprise || REPRISE_DEFAUT;
+
+  /* AUCUNE QUESTION DE PROFIL POSÉE ≠ RÉPONSES TROP PARTAGÉES.
+   * Les deux produisent un vecteur sans forme, et les confondre fait dire à l'écran « tes
+   * réponses sont trop partagées » à quelqu'un qui n'a encore répondu à aucune question de
+   * profil — ce qui arrive dès que les filtres vident le jeu et arrêtent le parcours. Le
+   * motif distingue donc les deux cas, pour que l'interface ne reproche rien à personne. */
+  if (questionsPosees === 0) {
+    return {
+      phrase: "",
+      traits: [],
+      reprise,
+      motif: "aucune question de profil posée : il n'y a rien à reformuler",
+      sansReponse: true,
+    };
+  }
 
   const traits = traitsMarquants(profil, axes);
   if (!traits.length) {
@@ -64,6 +79,7 @@ export function reformuler(profil, axes, config = null) {
       traits: [],
       reprise,
       motif: "profil sans trait marqué : aucune reformulation honnête n'est possible",
+      sansReponse: false,
     };
   }
   if (!fragments) {

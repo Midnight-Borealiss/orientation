@@ -49,14 +49,24 @@ export const TEXTES = {
     // « correspondance faible » ferait lire un verdict là où il y a une direction.
     possible: "Une piste à explorer",
     egalite: "Deux voies, à égalité",
-    impasse: "Aucun programme ne combine tes réponses",
+    impasse: "Aucune formation",
+    impasseNonComparables: "Non comparables à ton profil",
   },
   posture: {
     forte: "Voici la formation qui correspond le mieux à ce que tu as décrit.",
     bonne: "Voici la formation qui correspond le mieux, et deux autres à regarder de près.",
     possible: "Ce n'est pas une réponse, c'est une direction. Prends-la comme un point de départ.",
     egalite: "Ces deux formations te correspondent également. Rien ne permet de les séparer sur ton profil, et c'est une information en soi : le choix t'appartient.",
-    impasse: "Aucun programme ne réunit à la fois ton niveau d'études et le domaine que tu as choisi. Ta réponse n'a pas été ignorée pour autant : voici l'ensemble de l'univers que tu as retenu.",
+    // AUCUNE PROMESSE DE LISTE ICI. En impasse, il n'y a rien à montrer : le texte précédent
+    // annonçait « voici l'ensemble de l'univers que tu as retenu » et rien ne suivait. On dit
+    // ce qui s'est passé, et on rend la main sur ce qui a bloqué — les deux premières réponses.
+    impasse: "Aucun programme ne réunit à la fois ton niveau d'études, ta façon de suivre les cours et l'univers que tu as choisi. Ce n'est pas une erreur de ta part : le catalogue ne propose pas cette combinaison. Change l'une des deux premières réponses et tu verras des formations.",
+    // DEUXIÈME VISAGE DE L'IMPASSE, et il ne se voit qu'en balayant : des programmes
+    // correspondent bel et bien, mais AUCUN n'est comparable à un profil — leur contenu publié
+    // est trop mince. Les traiter comme une absence les cachait, alors qu'ils existent et que
+    // le prospect y a droit. Le défaut est documentaire, il vient de la brochure.
+    impasseNonComparables:
+      "Des programmes correspondent à ton niveau et à l'univers que tu as choisi. Mais le catalogue n'en publie pas assez le contenu pour les comparer à ta façon de travailler : on te les montre sans les classer.",
   },
   titres: {
     recommandation: "Notre recommandation",
@@ -80,10 +90,23 @@ export const TEXTES = {
     "Le contenu publié de ces programmes ne permet pas de les comparer à ton profil. C'est un manque de la brochure, pas du programme.",
   conseiller:
     "Ce résultat est une piste, pas une décision. Un conseiller ISM peut la confronter à ton dossier, à tes notes et à ce que tu veux faire ensuite — ce qu'un questionnaire ne saura jamais faire.",
+  // En impasse il n'y a pas de résultat : parler d'« un résultat » serait faux, et le
+  // conseiller devient la seule chose utile de l'écran.
+  conseillerImpasse:
+    "Un conseiller ISM connaît le catalogue mieux qu'un questionnaire, y compris ce qui ouvre en cours d'année. Dis-lui où tu en es et ce que tu cherches.",
   // Repli seulement : le libellé vient de `config/contact.json`, parce qu'il doit dire ce qui
   // va se passer — un bouton « être rappelé » qui ouvre un client de messagerie trompe.
   conseillerAction: "Contacter un conseiller",
   aucuneReformulation: "Tes réponses sont trop partagées pour qu'on les résume en une phrase.",
+  // Le parcours s'est arrêté avant les questions de profil — les filtres avaient déjà vidé le
+  // jeu. Ne rien reprocher à quelqu'un qui n'a pas encore répondu.
+  reformulationSansReponse: "Le questionnaire s'est arrêté avant les questions sur ta façon de travailler.",
+  // Le bouton en impasse : il ne rouvre pas le profil, qui n'y est pour rien.
+  repriseFiltres: "Changer mon niveau ou ma façon d'étudier",
+  // L'aiguillage fin n'a rien trouvé : on est revenu à la famille, et ON LE DIT. Un
+  // élargissement silencieux serait pire — le prospect croirait avoir été entendu.
+  elargissement:
+    "Ce que tu as choisi de gérer ne correspond à aucun programme de ton niveau. Plutôt que de te laisser sans rien, voici tout l'univers que tu avais retenu.",
 
   validation: {
     titre: "Tu es déjà étudiant ? Aide-nous à vérifier",
@@ -114,13 +137,25 @@ export const TEXTES = {
  * ─────────────────────────────────────────────────────────────── */
 
 export const ORDRE_BLOCS = {
-  forte: ["reformulation", "recommandation", "contenu", "quantitatif", "alternatives", "non-classes", "conseiller"],
-  bonne: ["reformulation", "recommandation", "alternatives", "contenu", "quantitatif", "non-classes", "conseiller"],
+  forte: ["reformulation", "elargissement", "recommandation", "contenu", "quantitatif", "alternatives", "non-classes", "conseiller"],
+  bonne: ["reformulation", "elargissement", "recommandation", "alternatives", "contenu", "quantitatif", "non-classes", "conseiller"],
   // Le conseiller passe en HAUT : quand le moteur n'est pas sûr, un humain vaut mieux qu'un écran.
-  possible: ["reformulation", "conseiller", "recommandation", "contenu", "quantitatif", "alternatives", "non-classes"],
-  egalite: ["reformulation", "deux-cartes", "contenu", "quantitatif", "alternatives", "non-classes", "conseiller"],
-  impasse: ["reformulation", "conseiller", "alternatives", "non-classes"],
+  possible: ["reformulation", "elargissement", "conseiller", "recommandation", "contenu", "quantitatif", "alternatives", "non-classes"],
+  egalite: ["reformulation", "elargissement", "deux-cartes", "contenu", "quantitatif", "alternatives", "non-classes", "conseiller"],
+  // En impasse, il n'y a aucune recommandation ni alternative — les blocs correspondants
+  // seraient toujours vides. Mais `non-classes` RESTE : le balayage a montré 28 combinaisons
+  // où des programmes existent sans qu'aucun soit comparable à un profil. Les omettre les
+  // cachait derrière un « aucune formation » faux.
+  impasse: ["reformulation", "conseiller", "non-classes"],
 };
+
+/**
+ * Les deux visages de l'impasse. Le texte doit dire lequel : promettre une liste qui ne suit
+ * pas, ou taire une liste qui existe, sont la même faute vue des deux côtés.
+ */
+export function sousEtatImpasse(resultat) {
+  return resultat.sans_classement?.length ? "impasseNonComparables" : "impasse";
+}
 
 /* ── Blocs ────────────────────────────────────────────────────── */
 
@@ -131,14 +166,40 @@ export const ORDRE_BLOCS = {
  * Le bouton de reprise a le MÊME POIDS VISUEL que la phrase ; il compte autant qu'elle. Son
  * libellé vient du moteur pour que l'interface ne puisse pas l'oublier.
  */
-export function blocReformulation(reformulation) {
-  const phrase = reformulation?.phrase
-    ? `<p class="reformulation">${echapper(reformulation.phrase)}</p>`
-    : `<p class="reformulation reformulation--absente">${echapper(TEXTES.aucuneReformulation)}</p>`;
+export function blocReformulation(reformulation, reprise = "profil") {
+  // Trois cas distincts, et les confondre ferait mentir l'écran : une phrase, des réponses
+  // trop partagées pour en faire une, ou aucune réponse de profil du tout.
+  let phrase;
+  if (reformulation?.phrase) {
+    phrase = `<p class="reformulation">${echapper(reformulation.phrase)}</p>`;
+  } else {
+    const texte = reformulation?.sansReponse ? TEXTES.reformulationSansReponse : TEXTES.aucuneReformulation;
+    phrase = `<p class="reformulation reformulation--absente">${echapper(texte)}</p>`;
+  }
+
+  // En impasse, le bouton rouvre les FILTRES : rouvrir le profil ne corrigerait rien, et un
+  // écran sans issue est le seul défaut vraiment inacceptable ici.
+  const libelle =
+    reprise === "filtres" ? TEXTES.repriseFiltres : reformulation?.reprise || "Reprendre";
 
   return `<section class="bloc bloc--reformulation" aria-label="Ce que nous avons compris">
 ${phrase}
-<button type="button" class="reprendre" data-action="reprendre">${echapper(reformulation?.reprise || "Reprendre")}</button>
+<button type="button" class="reprendre" data-action="reprendre" data-reprise="${echapper(reprise)}">${echapper(libelle)}</button>
+</section>`;
+}
+
+/**
+ * L'aiguillage fin a vidé le jeu et le moteur est revenu à la famille.
+ *
+ * Ce n'est PAS une impasse : il y a bien un classement en dessous, et c'est justement pourquoi
+ * la mention peut annoncer « voici tout l'univers que tu avais retenu » — la liste suit. Le
+ * dire est obligatoire : un élargissement silencieux ferait croire au prospect qu'on a répondu
+ * à sa question alors qu'on a élargi sa demande.
+ */
+export function blocElargissement(resultat) {
+  if (!resultat.parcours?.retour_famille) return "";
+  return `<section class="bloc bloc--elargissement" aria-label="Ce que nous avons élargi">
+<p>${echapper(TEXTES.elargissement)}</p>
 </section>`;
 }
 
@@ -412,9 +473,10 @@ export function blocConseiller(resultat, lien = null) {
   const action = lien?.href
     ? `<a class="conseiller" href="${echapper(lien.href)}">${echapper(libelle)}</a>`
     : "";
+  const texte = resultat?.recommandation ? TEXTES.conseiller : TEXTES.conseillerImpasse;
   return `<section class="bloc bloc--conseiller" aria-label="${echapper(TEXTES.titres.conseiller)}">
 <h4>${echapper(TEXTES.titres.conseiller)}</h4>
-<p>${echapper(TEXTES.conseiller)}</p>
+<p>${echapper(texte)}</p>
 ${action}
 </section>`;
 }
@@ -481,7 +543,10 @@ ${message ? `<p class="message-envoi">${echapper(message)}</p>` : ""}
  */
 export function blocAlertes(resultat) {
   const messages = [];
-  if (resultat.repli_parts) {
+  // « le classement ci-dessus est approximatif » n'a aucun sens s'il n'y a pas de classement.
+  // Un profil vide déclenche le repli, et en impasse le parcours s'arrête avant les questions
+  // de profil : l'avertissement s'affichait alors en désignant quelque chose d'absent.
+  if (resultat.repli_parts && resultat.recommandation) {
     messages.push("Tes réponses sont très équilibrées : le classement ci-dessus est approximatif.");
   }
   if (resultat.parcours?.niveau_incertain) {
@@ -515,7 +580,10 @@ export function rendreResultat(resultat, { lienConseiller = null, validation = n
   const autres = (resultat.alternatives || []).filter((f) => !idsCartes.has(f.id));
 
   const construire = {
-    reformulation: () => blocReformulation(resultat.reformulation),
+    reformulation: () => blocReformulation(resultat.reformulation, resultat.reprise || "profil"),
+    // Rend la chaîne vide sauf si l'aiguillage fin a été élargi : sa place dans l'ordre est
+    // fixe, son affichage non.
+    elargissement: () => blocElargissement(resultat),
     conseiller: () => blocConseiller(resultat, lienConseiller),
     recommandation: () => blocRecommandation(resultat),
     "deux-cartes": () => blocDeuxCartes(resultat),
@@ -525,16 +593,19 @@ export function rendreResultat(resultat, { lienConseiller = null, validation = n
     "non-classes": () => blocNonClasses(resultat.sans_classement),
   };
 
+  // En impasse, le texte dépend de ce qu'il y a réellement à montrer.
+  const ton = etat === "impasse" ? sousEtatImpasse(resultat) : etat;
+
   const posture =
-    etat !== "egalite" && TEXTES.posture[etat]
-      ? `<p class="posture posture--${echapper(etat)}">${echapper(TEXTES.posture[etat])}</p>`
+    etat !== "egalite" && TEXTES.posture[ton]
+      ? `<p class="posture posture--${echapper(etat)}">${echapper(TEXTES.posture[ton])}</p>`
       : "";
 
   const blocs = ORDRE_BLOCS[etat].map((nom) => construire[nom]?.() || "").filter(Boolean);
 
   return morceaux(
-    `<div class="resultat" data-etat="${echapper(etat)}">`,
-    etat === "impasse" ? `<p class="badge badge--impasse">${echapper(TEXTES.badge.impasse)}</p>` : "",
+    `<div class="resultat" data-etat="${echapper(etat)}" data-ton="${echapper(ton)}">`,
+    etat === "impasse" ? `<p class="badge badge--impasse">${echapper(TEXTES.badge[ton])}</p>` : "",
     posture,
     ...blocs,
     blocAlertes(resultat),
