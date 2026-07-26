@@ -26,6 +26,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 import { chargerContexte, verifierContexte } from "../src/engine/charger.mjs";
+import { noterFraicheur } from "./lib/fraicheur.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
@@ -99,6 +100,7 @@ if (controle.problemes.length) {
 }
 
 fs.writeFileSync(SORTIE, JSON.stringify(allege), "utf8");
+noterFraicheur("data/_contexte.json");
 
 const ko = (n) => `${Math.round(n / 1024)} ko`;
 const complet = JSON.stringify({ ...allege, fiches: contexte.fiches }).length;

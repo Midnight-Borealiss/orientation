@@ -5,6 +5,7 @@ data/_paires.csv
 data/_comparaisons/
 data/_calibration.json
 data/_impasses.md
+data/_plafond-domaines.json
 .DS_Store
 *.log
 

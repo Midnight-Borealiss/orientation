@@ -13,7 +13,8 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import Ajv from "ajv";
 import addFormats from "ajv-formats";
-import { domainesInatteignables } from "../src/engine/aiguillage.mjs";
+import { domainesInatteignables, fichesInatteignables } from "../src/engine/aiguillage.mjs";
+import { etatFraicheur } from "./lib/fraicheur.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
@@ -226,5 +227,71 @@ for (const nom of fichiers) {
   console.log(`\n  ✓ modalités : chacune est portée par au moins une fiche — ${detail}`);
 }
 
-console.log(erreurs ? `\n  ${erreurs} fiche(s) en erreur\n` : `\n  Tout est conforme.\n`);
+/* ── Toute fiche est atteignable par au moins une combinaison d'aiguillage ──
+ * Invariant DIFFÉRENT de celui des domaines orphelins plus haut. Celui-là contrôle la
+ * question — chaque domaine d'une famille doit être désigné par une option ; celui-ci
+ * contrôle les FICHES.
+ *
+ * Pourquoi il faut les deux. L'appartenance d'une fiche à une famille se déduit de ses
+ * domaines, qui se déduisent eux-mêmes du titre, de l'objectif et des modules. Une correction
+ * d'extraction peut donc déplacer une fiche d'une famille à l'autre sans que personne l'ait
+ * demandé — c'est arrivé, huit modules retrouvés ont fait passer une licence
+ * d'`entreprise-management` à `chiffres-finance`. Rien ne garantit que la nouvelle famille
+ * soit atteignable, et une fiche hors de portée ne se signale jamais : elle se contente de
+ * ne jamais apparaître à l'écran.
+ * ─────────────────────────────────────────────────────────── */
+{
+  const chemin = path.join(ROOT, "config", "questions.json");
+  if (fs.existsSync(chemin)) {
+    const questions = JSON.parse(fs.readFileSync(chemin, "utf8"));
+    const fiches = fichiers.map((n) => JSON.parse(fs.readFileSync(path.join(DIR, n), "utf8")));
+    const { inatteignables, combinaisons } = fichesInatteignables(fiches, questions, taxo);
+    if (inatteignables.length) {
+      console.log(`\n  ✗ aiguillage : ${inatteignables.length} fiche(s) qu'aucune réponse ne peut atteindre`);
+      for (const f of inatteignables) {
+        console.log(`      ${f.id} — domaines ${JSON.stringify(f.domaines || [])}`);
+      }
+      console.log("");
+      erreurs += inatteignables.length;
+    } else {
+      console.log(
+        `  ✓ aiguillage : les ${fiches.length} fiches sont atteignables par au moins une des ${combinaisons} combinaisons A1 × A2`
+      );
+    }
+  }
+}
+
+/* ── Fraîcheur des artefacts générés ──────────────────────────────
+ * Quatre des cinq sorties sont ignorées par git : leur péremption ne produit aucun diff, et
+ * `git status` reste vide. Une consigne dans CLAUDE.md ne suffisait pas — les 80 fiches de
+ * comparaison sont bel et bien parties d'une exécution périmée, en citant des modules
+ * exclusifs d'avant une correction d'extraction. La péremption se mesure donc, par le contenu
+ * des sources et non par leur horodatage. Voir `scripts/lib/fraicheur.mjs`.
+ *
+ * Un artefact ABSENT n'est pas une erreur : quatre le sont dans un clone neuf, et il n'y a
+ * rien de périmé dans ce qui n'existe pas. Seul `perime` fait échouer.
+ * ─────────────────────────────────────────────────────────── */
+{
+  const etats = etatFraicheur();
+  const perimes = etats.filter((e) => e.etat === "perime");
+  const inconnus = etats.filter((e) => e.etat === "inconnu");
+  const absents = etats.filter((e) => e.etat === "absent");
+
+  if (perimes.length) {
+    console.log(`\n  ✗ artefact(s) périmé(s) — leurs sources ont changé depuis leur génération :`);
+    for (const e of perimes) console.log(`      ${e.nom.padEnd(24)} relancer :  ${e.commande}`);
+    console.log(`\n      Ces fichiers sont gitignorés pour la plupart : rien d'autre ne le signale.`);
+    console.log("");
+    erreurs += perimes.length;
+  } else {
+    const aJour = etats.length - absents.length - inconnus.length;
+    console.log(`  ✓ fraîcheur : ${aJour} artefact(s) à jour${absents.length ? `, ${absents.length} non généré(s)` : ""}`);
+  }
+  for (const e of inconnus) {
+    console.log(`  ! ${e.nom} existe mais n'est pas dans data/_fraicheur.json — relancer : ${e.commande}`);
+  }
+  for (const e of absents) console.log(`    ${e.nom} non généré — ${e.commande}`);
+}
+
+console.log(erreurs ? `\n  ${erreurs} erreur(s)\n` : `\n  Tout est conforme.\n`);
 process.exit(erreurs ? 1 : 0);

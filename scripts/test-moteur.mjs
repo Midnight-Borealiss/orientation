@@ -20,7 +20,13 @@ import { fileURLToPath } from "node:url";
 import { chargerContexte, verifierContexte } from "../src/engine/charger.mjs";
 import { axesComptes, axesDisposition, correlation, classer, niveauCorrespondance, vecteurFiliere } from "../src/engine/score.mjs";
 import { appliquerFiltres, accessible } from "../src/engine/filtres.mjs";
-import { aiguiller, familleParDomaine, famillesDeFiche, domainesInatteignables } from "../src/engine/aiguillage.mjs";
+import {
+  aiguiller,
+  familleParDomaine,
+  famillesDeFiche,
+  domainesInatteignables,
+  fichesInatteignables,
+} from "../src/engine/aiguillage.mjs";
 import {
   dispositionDeFiche,
   tete,
@@ -244,6 +250,36 @@ verifier(
   r1.sans_classement.every((f) => f.mention && f.nom && f.raison),
   JSON.stringify(r1.sans_classement[0] || null)
 );
+
+/* ── 6 bis². Aucune fiche hors de portée de l'aiguillage ───────────
+ * Invariant sur les FICHES, distinct de celui sur les domaines. L'appartenance à une famille
+ * se déduit des domaines, qui se déduisent du titre, de l'objectif et des modules : une
+ * correction d'extraction peut donc déplacer une fiche de famille sans que personne l'ait
+ * demandé. Une fiche hors de portée ne se signale jamais — elle se contente de ne jamais
+ * apparaître à l'écran.
+ * ─────────────────────────────────────────────────────────── */
+{
+  const { inatteignables, combinaisons } = fichesInatteignables(
+    contexte.fiches,
+    contexte.questions,
+    contexte.taxonomie
+  );
+  verifier(
+    `les ${contexte.fiches.length} fiches sont atteignables par au moins une des ${combinaisons} combinaisons A1 × A2`,
+    inatteignables.length === 0,
+    inatteignables.map((f) => `${f.id} ${JSON.stringify(f.domaines)}`).join(" · ")
+  );
+
+  // Contrôle négatif : sans lui, le test passerait même si la fonction rendait toujours une
+  // liste vide. Une fiche sans domaine n'appartient à aucune famille, donc à aucune réponse.
+  const orpheline = { id: "_fiche-sans-domaine", nom: "Contrôle", domaines: [] };
+  const avec = fichesInatteignables([...contexte.fiches, orpheline], contexte.questions, contexte.taxonomie);
+  verifier(
+    "et le contrôle détecte bien une fiche qu'aucune famille ne revendique",
+    avec.inatteignables.length === 1 && avec.inatteignables[0].id === orpheline.id,
+    `${avec.inatteignables.length} détectée(s)`
+  );
+}
 
 /* ── 4 bis. Un seul candidat : le classement n'a plus d'objet ──────
  * Quand les filtres ne laissent qu'un programme, il n'y a rien à comparer. Le noter est au

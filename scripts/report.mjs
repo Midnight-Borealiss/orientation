@@ -28,6 +28,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { sontSoeurs } from "./distinctivite.mjs";
 import { modulesDe } from "./lib/fiche.mjs";
+import { noterFraicheur } from "./lib/fraicheur.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
@@ -240,6 +241,7 @@ if (CSV) {
   ].join("\n");
   const out = path.join(ROOT, "data", "_manques.csv");
   fs.writeFileSync(out, csv);
+  noterFraicheur("data/_manques.csv");
   console.log(`\n  CSV écrit : data/_manques.csv`);
   console.log(`  Filtre par 'destinataire' et envoie à chaque équipe.\n`);
 } else {

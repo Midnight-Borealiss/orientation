@@ -24,7 +24,7 @@ jobs:
       # Le contexte servi au navigateur doit rester en phase avec config/ et data/ : le
       # script refuse d'écrire s'il n'est plus servable, et `git diff` dit s'il a bougé.
       - run: npm run contexte:web
-      - run: git diff --exit-code -- data/_contexte.json
+      - run: git diff --exit-code -- data/_contexte.json data/_fraicheur.json
       # Test de segmentation : la brochure Bachelor doit produire 26 fiches.
       # Ignoré si les catalogues PDF ne sont pas dans le dépôt.
       - run: npm run test:donnees

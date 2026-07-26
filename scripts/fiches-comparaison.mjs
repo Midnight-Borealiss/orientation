@@ -28,6 +28,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { normaliser } from "./lib/pdf-layout.mjs";
 import { calculerDistinctivite } from "./distinctivite.mjs";
+import { noterFraicheur } from "./lib/fraicheur.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
@@ -341,6 +342,7 @@ function main() {
     "",
   ].join("\n");
   fs.writeFileSync(path.join(OUT, "SOMMAIRE.md"), sommaire);
+  noterFraicheur("data/_comparaisons");
 
   console.log(`\n  ${index.length} document(s) dans data/_comparaisons/ — voir SOMMAIRE.md\n`);
 }

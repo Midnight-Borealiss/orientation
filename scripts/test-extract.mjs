@@ -21,6 +21,7 @@ import addFormats from "ajv-formats";
 import { extraire } from "./extract.mjs";
 import { calculerDistinctivite, couvertureLexicale, MODULES_MIN, SEUIL_PAIRE } from "./distinctivite.mjs";
 import { AXES, axesDunModule, cleParcours } from "./lib/fiche.mjs";
+import { ARTEFACTS, empreinteSources } from "./lib/fraicheur.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
@@ -941,6 +942,64 @@ if (trading && banque) {
   );
 } else {
   console.log("  ! fiches de référence absentes — contrôle de distinctivité ignoré");
+}
+
+/* ── Le mécanisme de fraîcheur est-il branché ? ────────────────────
+ * `validate.mjs` compare les empreintes ; ce test-ci vérifie le mécanisme lui-même. Le mode
+ * de défaillance à couvrir n'est pas un artefact périmé — c'est un artefact **ajouté sans
+ * être surveillé** : personne ne s'apercevrait jamais qu'il n'est pas suivi, puisque
+ * l'absence de contrôle ne produit aucun message.
+ * ─────────────────────────────────────────────────────────── */
+
+console.log(`\n  Fraîcheur des artefacts générés\n`);
+
+{
+  const scriptsDir = path.join(ROOT, "scripts");
+  const code = fs
+    .readdirSync(scriptsDir)
+    .filter((n) => n.endsWith(".mjs"))
+    .map((n) => fs.readFileSync(path.join(scriptsDir, n), "utf8"))
+    .join("\n");
+
+  const noms = Object.keys(ARTEFACTS);
+  verifier(`${noms.length} artefact(s) déclarés dans lib/fraicheur.mjs`, noms.length >= 5, noms.join(", "));
+
+  const nonNotes = noms.filter((n) => !code.includes(`noterFraicheur("${n}")`));
+  verifier(
+    "chaque artefact déclaré est noté par le script qui le produit",
+    !nonNotes.length,
+    nonNotes.length ? `jamais noté : ${nonNotes.join(", ")}` : ""
+  );
+
+  const sansCommande = noms.filter((n) => !ARTEFACTS[n].commande || !ARTEFACTS[n].sources?.length);
+  verifier(
+    "chaque artefact nomme sa commande de régénération et ses sources",
+    !sansCommande.length,
+    sansCommande.join(", ")
+  );
+
+  // Un artefact ne peut pas être sa propre source, ni celle d'un autre : une cascade
+  // d'empreintes ferait qu'une seule péremption en signalerait cinq, sans dire laquelle
+  // relancer. Les fichiers générés commencent tous par « _ », et fichiersDe les écarte.
+  const enCascade = noms.filter((n) =>
+    Object.values(ARTEFACTS).some((d) => d.sources.includes(n))
+  );
+  verifier("aucun artefact n'est source d'un autre", !enCascade.length, enCascade.join(", "));
+
+  // L'empreinte doit dépendre du CONTENU : deux appels de suite doivent concorder, sinon
+  // elle embarque une date ou un parcours de dossier non trié et se déclare périmée seule.
+  const deuxFois = noms.every((n) => empreinteSources(n) === empreinteSources(n));
+  verifier("l'empreinte est déterministe — aucune date, aucun ordre de dossier", deuxFois);
+
+  // Et elle doit RÉAGIR : on modifie une fiche en mémoire… impossible, l'empreinte lit le
+  // disque. On vérifie donc que deux artefacts aux sources différentes ont des empreintes
+  // différentes, ce qui prouve au moins que les sources déclarées sont bien prises en compte.
+  const distinctes = new Set(noms.map((n) => empreinteSources(n)));
+  verifier(
+    "des sources différentes donnent des empreintes différentes",
+    distinctes.size > 1,
+    `${distinctes.size} empreinte(s) distincte(s) pour ${noms.length} artefacts`
+  );
 }
 
 console.log(

@@ -42,6 +42,7 @@ import { fileURLToPath } from "node:url";
 import { normaliser } from "../src/engine/texte.mjs";
 import { sontSoeurs } from "../src/engine/parente.mjs";
 import { AXES, axesDunModule } from "./lib/fiche.mjs";
+import { noterFraicheur } from "./lib/fraicheur.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
@@ -674,6 +675,9 @@ function main() {
     ),
   ].join("\n");
   fs.writeFileSync(path.join(ROOT, "data", "_paires.csv"), csv);
+  // Après l'écriture des fiches ET du CSV : l'empreinte porte sur l'état final, sinon ce
+  // script se déclarerait périmé dès la fin de sa propre exécution.
+  noterFraicheur("data/_paires.csv");
 
   console.log(`\n  ${fichiers.length} fiches enrichies (distinctivite, structure_ue, axes_fiables, voisines)`);
   console.log(

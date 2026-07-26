@@ -107,6 +107,52 @@ export function domainesInatteignables(questions, taxonomie) {
 }
 
 /**
+ * Les fiches qu'AUCUNE combinaison de réponses d'aiguillage ne peut atteindre.
+ *
+ * `domainesInatteignables` ci-dessus contrôle la question : chaque domaine d'une famille doit
+ * être désigné par une option. Ce contrôle-ci porte sur les **fiches**, et ce n'est pas le
+ * même invariant : une fiche peut porter deux domaines tous deux atteignables et se retrouver
+ * pourtant hors de portée si aucune famille ne la revendique — cas d'un domaine sans famille,
+ * ou d'une fiche sans domaine du tout.
+ *
+ * Pourquoi ce contrôle existe. L'appartenance à une famille se DÉDUIT des domaines, et les
+ * domaines se déduisent du titre, de l'objectif et des modules. Une correction d'extraction
+ * peut donc déplacer une fiche d'une famille à l'autre sans que personne l'ait demandé — c'est
+ * arrivé. Rien ne garantit a priori que la nouvelle famille soit atteignable par le parcours,
+ * et une fiche hors de portée ne se signale jamais d'elle-même : elle se contente de ne
+ * jamais apparaître.
+ *
+ * On énumère A1 × A2 comme le prospect les rencontre, en respectant la garde `si` de la
+ * question fine : une fiche atteignable seulement par une réponse qu'on ne lui pose pas ne
+ * serait pas atteignable.
+ */
+export function fichesInatteignables(fiches, questions, taxonomie) {
+  const parFamille = (questions.aiguillage || []).find((q) => q.cible === "famille");
+  if (!parFamille) return { inatteignables: [], combinaisons: 0 };
+
+  const fines = (questions.aiguillage || []).filter((q) => q.cible === "domaines");
+  const atteintes = new Set();
+  let combinaisons = 0;
+
+  for (const opt of parFamille.options || []) {
+    const famille = opt.valeur ?? null;
+    // Les questions fines qui s'appliquent à CETTE réponse. Aucune → une seule combinaison.
+    const applicables = fines.filter((q) => !q.si?.famille || q.si.famille === famille);
+    const jeux = applicables.length
+      ? applicables.flatMap((q) => (q.options || []).map((o) => o.valeur || []))
+      : [null];
+
+    for (const domaines of jeux) {
+      combinaisons++;
+      const { retenues } = aiguiller(fiches, famille, taxonomie, domaines);
+      for (const f of retenues) atteintes.add(f.id);
+    }
+  }
+
+  return { inatteignables: fiches.filter((f) => !atteintes.has(f.id)), combinaisons };
+}
+
+/**
  * Répartition des fiches par famille — la mesure qui dit si une branche est engorgée.
  *
  * Une famille qui porte 40 % du catalogue met 40 % des programmes derrière une seule

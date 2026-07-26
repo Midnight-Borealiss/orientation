@@ -27,6 +27,7 @@ import { fileURLToPath } from "node:url";
 
 import { chargerContexte } from "../src/engine/charger.mjs";
 import { jouer } from "../src/engine/moteur.mjs";
+import { noterFraicheur } from "./lib/fraicheur.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
@@ -383,6 +384,7 @@ une modalité ou un niveau d'accès mal extrait, pas une évolution du catalogue
 `;
 
 fs.writeFileSync(SORTIE, doc, "utf8");
+noterFraicheur("data/_impasses.md");
 
 console.log(`\n  data/_impasses.md — ${lignes.length} combinaisons sans résultat sur ${total}`);
 console.log(`      ${aucun.length} sans aucun programme (question d'offre)`);

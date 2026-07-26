@@ -515,7 +515,7 @@ const LEXIQUE_DOMAINES = {
 };
 
 /** Nombre maximal de domaines par fiche. Deux, pas trois : l'aiguillage doit trancher. */
-const MAX_DOMAINES = 2;
+export const MAX_DOMAINES = 2;
 
 /**
  * Un domaine n'est retenu que si son vocabulaire apparaît dans le TITRE ou dans
@@ -526,7 +526,7 @@ const MAX_DOMAINES = 2;
  * Les modules et les métiers ne servent donc plus qu'à ORDONNER les candidats
  * déjà légitimés par le titre ou l'objectif.
  */
-export function inferDomaines(titre, objectif, modules, metiers, domainesAutorises) {
+export function inferDomaines(titre, objectif, modules, metiers, domainesAutorises, max = MAX_DOMAINES) {
   const nTitre = normaliser(titre);
   const nObjectif = normaliser(objectif || "");
   const appuis = [...modules, ...metiers].map(normaliser);
@@ -548,7 +548,7 @@ export function inferDomaines(titre, objectif, modules, metiers, domainesAutoris
 
   // Si le titre suffit à désigner des domaines, l'objectif ne vient pas les diluer.
   const parTitre = scores.filter((s) => s.dansTitre);
-  const retenus = (parTitre.length ? parTitre : scores).slice(0, MAX_DOMAINES).map((s) => s.id);
+  const retenus = (parTitre.length ? parTitre : scores).slice(0, max).map((s) => s.id);
   if (retenus.length) return retenus;
 
   // Dernier recours : le vocabulaire des modules, un seul domaine, jamais deux.

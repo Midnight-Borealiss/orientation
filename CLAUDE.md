@@ -1870,6 +1870,101 @@ Le `Content-Type` des `.mjs` est déclaré explicitement. Combiné à `nosniff`,
 erroné ferait **refuser** les modules ES au lieu de les exécuter au hasard : l'écran resterait
 sur « Chargement… » sans rien dire de plus.
 
+## Fraîcheur des artefacts générés — `scripts/lib/fraicheur.mjs`
+
+Quatre des cinq sorties du dépôt sont **ignorées par git** : une correction d'extraction les
+périme toutes, et `git status` reste vide. Ce n'est pas théorique — les 80 fiches de comparaison
+sont parties d'une exécution périmée, en citant des modules exclusifs d'avant une correction, et
+ce sont précisément les documents qui vont aux responsables. **Une consigne ne suffisait pas.**
+
+`npm run validate` échoue désormais, en nommant la commande à relancer :
+
+| Artefact | Sources déclarées | Commande |
+|---|---|---|
+| `data/_paires.csv` | fiches + taxonomie | `npm run distinctivite` |
+| `data/_comparaisons/` | fiches + taxonomie + départages | `npm run comparaisons` |
+| `data/_manques.csv` | fiches + taxonomie + axes de domaine + départages | `npm run report -- --csv` |
+| `data/_impasses.md` | fiches + taxonomie + questions + départages | `npm run impasses` |
+| `data/_contexte.json` | fiches + tout `config/` | `npm run contexte:web` |
+
+**La péremption se mesure par le CONTENU, jamais par l'horodatage.** Une date de modification
+serait ininterprétable ici : `git clone` les réécrit toutes à la même seconde, et un script qui
+écrit ses fiches *puis* son CSV rendrait son propre CSV « plus vieux » que ses entrées. Chaque
+générateur enregistre donc l'empreinte SHA-256 de ses sources dans `data/_fraicheur.json`, **après
+avoir tout écrit** — noter avant se déclarerait périmé dès la fin de sa propre exécution.
+
+Quatre décisions à ne pas défaire :
+
+- **`data/_fraicheur.json` se commite**, et ne contient aucune date. C'est ce qui rend la
+  péremption visible dans `git diff` alors que les artefacts, eux, ne le sont pas. Une date le
+  ferait changer à chaque exécution, et il ne dirait plus rien ;
+- **un artefact ABSENT n'est pas une erreur.** Quatre le sont dans un clone neuf : il n'y a rien
+  de périmé dans ce qui n'existe pas. Sans cette distinction, la CI échouerait toujours ;
+- **aucun artefact n'est source d'un autre.** Une cascade d'empreintes ferait qu'une seule
+  péremption en signalerait cinq, sans dire laquelle relancer. Les fichiers générés commencent
+  tous par `_`, et le calcul les écarte ;
+- **le test porte sur le mécanisme, pas sur l'état.** Le mode de défaillance à couvrir n'est pas
+  un artefact périmé — `validate` s'en charge — mais un artefact **ajouté sans être surveillé** :
+  `npm test` vérifie que chaque artefact déclaré est bien noté par un script.
+
+## Toute fiche doit être atteignable par l'aiguillage
+
+Invariant **distinct** de celui des domaines orphelins, et les deux sont nécessaires :
+
+| Contrôle | Porte sur | Attrape |
+|---|---|---|
+| `domainesInatteignables` | la **question** | un domaine de famille qu'aucune option ne désigne |
+| `fichesInatteignables` | les **fiches** | une fiche qu'aucune famille ne revendique |
+
+Une fiche peut porter deux domaines tous deux atteignables et se retrouver pourtant hors de
+portée : il suffit qu'un domaine n'ait pas de famille, ou qu'une fiche n'ait aucun domaine.
+
+**Pourquoi ce second contrôle a dû être ajouté.** L'appartenance à une famille se *déduit* des
+domaines, qui se déduisent eux-mêmes du titre, de l'objectif et des modules. Une correction
+d'extraction peut donc déplacer une fiche d'une famille à l'autre sans que personne l'ait
+demandé — huit modules retrouvés ont fait passer une licence d'`entreprise-management` à
+`chiffres-finance`. Rien ne garantissait que la nouvelle famille soit atteignable, et **une fiche
+hors de portée ne se signale jamais** : elle se contente de ne jamais apparaître à l'écran.
+
+L'énumération suit A1 × A2 comme le prospect les rencontre, garde `si` comprise — **10
+combinaisons**, et les 84 fiches sont couvertes. `npm run test:moteur` porte en plus un **contrôle
+négatif** : sans lui, le test passerait même si la fonction rendait toujours une liste vide.
+
+## Fragilité du plafond de 2 domaines — mesurée, pas corrigée
+
+`npm run plafond` (`scripts/plafond-domaines.mjs`) mesure ce qu'on risque. **Aucune décision n'est
+prise : le plafond reste à 2.**
+
+| Mesure | Catalogue 2024 |
+|---|---|
+| fiches ayant un 3e domaine corroboré, écarté par le plafond | **5** sur 84 |
+| dont celles qui **gagneraient une famille** à un plafond de 3 | **3** |
+| fiches **fragiles** — 2e et 3e domaines dans des familles différentes | **4** |
+
+Les trois qui gagneraient une famille :
+
+| Fiche | Domaines retenus | 3e écarté | Famille ajoutée |
+|---|---|---|---|
+| Licence de Gestion option Comptabilité-Finance | `finance + comptabilite` | `gestion` | entreprise-management |
+| Licence Électronique, Télécoms et Systèmes embarqués | `reseaux + electronique` | `communication` | commerce-communication |
+| Master Droit Notarial et Gestion du Patrimoine | `gestion + droit` | `culture-evenementiel` | commerce-communication |
+
+**Le compte des fragiles est le vrai indicateur, et il peut dépasser celui des gains** : une fiche
+est fragile quand son 2e et son 3e domaine ne relèvent pas de la même famille — un module de plus
+suffit alors à la déplacer dans le parcours. Elle ne « gagne » pourtant rien si la famille de son
+3e domaine est déjà apportée par son 1er.
+
+Deux faits à garder en tête avant de trancher :
+
+- **à score égal, `inferDomaines` départage sur l'`id`, en ordre alphabétique.** Deux domaines ex
+  æquo sont donc séparés par une convention et non par une mesure. C'est ce qui rend ces fiches
+  fragiles, et c'est aussi ce qui rend le basculement silencieux ;
+- **la contrepartie d'un plafond à 3 est mécanique** : chaque domaine supplémentaire élargit
+  l'aiguillage, et l'aiguillage doit RÉDUIRE le jeu candidat. C'est le compromis à peser avec ces
+  chiffres, pas avec une intuition. Le troisième domaine de la troisième ligne
+  (`culture-evenementiel` pour un master de droit notarial) suggère d'ailleurs qu'un plafond plus
+  haut laisserait passer du bruit lexical.
+
 ## Conventions de code
 
 - Node 18+, modules ES (`.mjs`), aucune transpilation sur les scripts.
@@ -1947,7 +2042,13 @@ ré-extraction, contrôle que les champs humains sont intacts, que les champs d'
 - Supprimer une fiche que le catalogue ne produit plus. La signaler, elle porte peut-être du travail humain.
 - Rattacher un domaine à deux familles, ou l'oublier. `validate.mjs` refuse les deux.
 - Envoyer une paire d'options sœurs à un responsable. Le nom de l'option tranche déjà.
-- S'arrêter à `npm run distinctivite` après une correction d'extraction. Les fiches de comparaison sont gitignorées : leur péremption ne fait aucun diff, et ce sont elles qui partent aux responsables.
+- S'arrêter à `npm run distinctivite` après une correction d'extraction. Les fiches de comparaison sont gitignorées : leur péremption ne fait aucun diff, et ce sont elles qui partent aux responsables. `npm run validate` le refuse désormais.
+- Mesurer la péremption d'un artefact par sa date de modification. `git clone` les réécrit toutes à la même seconde ; c'est le contenu des sources qui compte.
+- Traiter un artefact absent comme périmé. Quatre le sont dans un clone neuf, et rien n'est périmé dans ce qui n'existe pas.
+- Déclarer un artefact source d'un autre. Une seule péremption en signalerait cinq, sans dire laquelle relancer.
+- Ajouter un artefact généré sans le déclarer dans `lib/fraicheur.mjs`. Personne ne verrait jamais qu'il n'est pas suivi.
+- Conclure de `domainesInatteignables` qu'aucune fiche n'est hors de portée. Deux invariants différents : la question, et les fiches.
+- Déplacer le plafond de 2 domaines sans relire `npm run plafond`. 4 fiches sont fragiles, et l'aiguillage doit réduire, pas décrire.
 - Supposer qu'un gain de modules ne touche que les modules. Il déplace les axes, les paires, et parfois les `domaines` — donc la famille.
 - Classer un candidat unique. Il n'y a rien à comparer : on l'affiche, avec la justification des filtres.
 - Laisser un `axes_fiables: false` en zone non classée quand il est la seule option. Ce serait la pire réponse possible.
@@ -2028,6 +2129,9 @@ ré-extraction, contrôle que les champs humains sont intacts, que les champs d'
 L'ordre compte : la distinctivité enrichit les fiches produites par l'extraction, et
 le rapport des manques s'appuie sur les paires qu'elle a trouvées.
 
+**La péremption est désormais détectée par `npm run validate`**, pas seulement écrite ici — voir
+« Fraîcheur des artefacts générés ». Ce qui suit explique pourquoi ce contrôle a dû exister.
+
 **La chaîne se relance en ENTIER, jamais partiellement, et `git status` ne le dira pas.**
 `data/_paires.csv`, `data/_comparaisons/`, `data/_manques.csv` et `data/_impasses.md` sont
 **ignorés par git** : une sortie périmée ne produit donc aucun diff et se voit uniquement à
@@ -2082,11 +2186,12 @@ que rien ne signalerait.
 lexiques d'axes** : les deux déplacent la distribution des scores, donc les seuils. Le script sort
 en code d'erreur si les trois objectifs de la spec ne sont plus atteints.
 
-Deux commandes de diagnostic, sans effet de bord :
+Trois commandes de diagnostic, sans effet de bord :
 
 ```bash
 node scripts/stats-axes.mjs                    # distribution des 5 axes sur le catalogue
 node scripts/axes-modules.mjs mastere-ux-design # quel(s) axe(s) captent chaque module
+npm run plafond                                # fragilité du plafond de 2 domaines
 ```
 
 `axes-modules.mjs` est l'outil à sortir dès qu'un axe paraît faux : il montre les modules

@@ -21,6 +21,7 @@
     "test:interface": "node scripts/test-interface.mjs",
     "contexte:web": "node scripts/contexte-web.mjs",
     "web": "node scripts/servir.mjs",
+    "plafond": "node scripts/plafond-domaines.mjs",
     "impasses": "node scripts/impasses.mjs"
   },
   "dependencies": {
