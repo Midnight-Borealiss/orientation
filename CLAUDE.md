@@ -38,6 +38,8 @@ jamais `src/engine/`.
 | Aiguillage à deux étages | **fait** — `entreprise-management` passe de 17,8 à 8,6 filières en lice |
 | Écran de résultat | **fait** — `web/index.html`, six états, rendu pur et testé sans navigateur |
 | UE perdues à l'extraction | **corrigées** — +19 modules sur 4 fiches, contrôle des lignes non reprises |
+| Fraîcheur des artefacts | **contrôlée** — `npm run validate` refuse une sortie périmée |
+| Migration de famille | **tracée** — `data/_affectations-filieres.json`, suivi par git, comparé à chaque extraction |
 | Candidat unique | **traité à part** — affiché sans être noté, 28 combinaisons de filtres |
 | Hébergement Netlify | **fait** — `netlify.toml`, aucun build, `git push` déploie |
 | Collecte des validations étudiantes | **faite** — Netlify Forms, formulaire statique, `?validation=1` |
@@ -47,6 +49,7 @@ jamais `src/engine/`.
 | Logo | à récupérer en SVG — les variables du thème l'attendent |
 | Adresse d'admission par école | à demander — 3 documentées sur 8, aucun routage inventé |
 | Signalements des testeurs | **faits** — `?test=1`, deux niveaux, parcours joint |
+| Non-contamination de la production | **contrôlée** — `npm run test:contamination`, audit des écritures fait, une seule victime réparée |
 | Quota Netlify Forms | à vérifier dans le tableau de bord avant la cohorte étudiante |
 
 ---
@@ -1907,6 +1910,112 @@ Quatre décisions à ne pas défaire :
   un artefact périmé — `validate` s'en charge — mais un artefact **ajouté sans être surveillé** :
   `npm test` vérifie que chaque artefact déclaré est bien noté par un script.
 
+## Écrire dans le répertoire de sortie reçu — `scripts/test-contamination.mjs`
+
+**La règle « les scripts n'écrivent jamais hors de `data/` » ne suffit pas.** Le manifeste
+d'affectation écrivait dans `data/`, et pourtant il détruisait la production : son chemin était
+codé en dur alors que la fonction qui l'appelait recevait un `dossierSortie`. Le test de fusion
+extrait un seul catalogue vers un bac à sable ; `npm test` remplaçait donc **le manifeste des 84
+fiches par celui des 26**, à chaque exécution, en silence.
+
+La règle est donc plus forte : **écrire dans le répertoire de sortie qu'on a reçu, jamais dans
+un chemin en dur.** Une seule fonction du dépôt reçoit un répertoire cible — `extraire()` — et
+ses trois écritures en dérivent toutes : les fiches, le dump `--dump`, le manifeste. Tous les
+autres scripts sont des CLI sans répertoire cible : y coder `ROOT` est correct, ce n'est pas le
+même défaut.
+
+### Dériver le chemin ne suffit pas — il faut que la collision soit impossible
+
+**Le point le plus coûteux de tout l'épisode, et celui qu'une session future refera si elle ne
+le lit pas ici.** Un premier correctif a bien dérivé le chemin du dossier reçu :
+
+```js
+cheminPour = (dossierFiches) => path.join(path.dirname(dossierFiches), "_affectations.json")
+```
+
+Il n'a **rien corrigé**. `data/filieres` et `data/_test-fusion` sont deux dossiers **frères** :
+`path.dirname()` rend `data/` pour les deux, et le manifeste du bac à sable retombait exactement
+sur celui de la production. Le défaut a survécu à son propre correctif pendant toute une
+session, avec un commentaire de dix lignes expliquant pourquoi il était réglé.
+
+Il a aussi survécu au **contrôle ciblé** censé le couvrir, et le mécanisme mérite d'être retenu :
+ce contrôle comparait le manifeste avant et après l'extraction du bac à sable. Une fois la
+production écrasée, **la réécrire à l'identique se lit comme une absence d'écriture** — le test
+passait au vert précisément parce que le dégât était déjà fait. Il n'est redevenu rouge qu'après
+réparation du manifeste, et c'est ce rouge fugace qui a mis l'audit sur la piste.
+
+D'où la forme retenue, où le nom du manifeste porte celui du dossier qu'il décrit :
+
+```js
+cheminPour = (d) => path.join(path.dirname(d), `_affectations-${path.basename(d)}.json`)
+```
+
+La production est donc `data/_affectations-filieres.json`, le bac à sable
+`data/_affectations-_test-fusion.json`. **Deux dossiers de fiches distincts donnent deux
+manifestes distincts par construction** — pas une garde spéciale sur le nom du bac à sable, qui
+ne protégerait que le cas connu. Une collision doit être impossible, pas improbable.
+
+Deux conséquences à ne pas défaire :
+
+- **le manifeste reste un FRÈRE du dossier de fiches, pas son contenu.** Le mettre dedans
+  supprimerait la collision aussi, mais les neuf scripts qui lisent `data/filieres/*.json` le
+  prendraient pour une fiche ;
+- **le test efface donc son manifeste séparément** : `rmSync(SABLE)` n'emporte pas un fichier
+  qui vit à côté du dossier. Un bac à sable laissé derrière passe pour de la production.
+
+Le contrôle qui garde tout cela est **structurel**, et c'est ce qui le distingue du précédent :
+`cheminPour(SABLE) !== cheminPour(DOSSIER_FICHES)` ne dépend d'aucun état sur le disque, donc ne
+peut pas passer par accident sur une donnée déjà détruite.
+
+### Le contrôle global, et pourquoi il ne se limite pas aux fichiers suivis
+
+`npm run test:contamination` exécute les trois suites, puis vérifie que **tout fichier du dépôt
+est inchangé, octet pour octet**. Il ne cherche aucune écriture en particulier : il attrape
+celles qu'on n'a pas encore imaginées. Il n'entre pas dans `npm test` — il l'exécute.
+
+**Il couvre les fichiers non suivis que `.gitignore` ne couvre pas, et ce détail est la
+différence entre un test qui marche et un test qui rassure.** Mesuré : sur un relevé limité à
+`git ls-files`, le contrôle passait au vert **avec le bug réinjecté**, parce que
+`data/_affectations-filieres.json` n'était pas encore commité. Un fichier destiné au dépôt doit être
+protégé dès sa création, pas à partir de son premier commit.
+
+Corollaire : **ne pas ajouter `data/_test-fusion/` à `.gitignore`.** Un bac à sable laissé
+derrière par un test interrompu est lui aussi une contamination — l'ignorer le rendrait
+invisible ici.
+
+Trois décisions à ne pas défaire :
+
+- **une suite en échec n'est pas l'objet de ce test.** Il le dit et continue de mesurer : un
+  test rouge masquerait la contamination, qui est le vrai sujet ;
+- **les suites se lancent avec `process.execPath`, pas par `npm`.** Sous Windows,
+  `spawnSync("npm.cmd")` échoue en EINVAL sans shell — et un lanceur en panne annoncerait
+  « aucune contamination » sur des tests jamais exécutés. D'où le décompte des suites
+  réellement menées à terme : un test de non-contamination qui n'exécute rien passe toujours ;
+- **un fichier absent se note `null`, il ne se hache pas.** `hash-object` échouerait sur un
+  chemin supprimé et emporterait tout le contrôle — or une suppression est justement l'une des
+  contaminations à signaler.
+
+### Ce que l'audit a établi sur les dégâts
+
+Vérifié plutôt que supposé, et c'est la question qui comptait : le test de fusion existe depuis
+plusieurs sessions, le manifeste est récent.
+
+| Question | Réponse |
+|---|---|
+| `data/filieres/` a-t-il été altéré ? | **non** — depuis l'introduction de `dossierSortie`, l'écriture des fiches en a toujours dérivé ; un cycle `extract` + `distinctivite` complet rend les 84 fiches **octet pour octet identiques** |
+| Le dump `data/_raw/` ? | jamais atteint — les tests ne passent pas `dump: true` (chemin corrigé depuis) |
+| Les autres artefacts ? | aucun : `_paires.csv`, `_comparaisons/`, `_manques.csv`, `_impasses.md`, `_contexte.json` sont écrits par des CLI qu'aucun test n'importe, et `distinctivite.mjs` garde son `main()` derrière `process.argv` |
+| Le manifeste ? | **oui, et il l'était encore sur le disque au moment de l'audit** — 26 fiches au lieu de 84, le premier correctif n'ayant pas tenu. `validate.mjs` le disait déjà (58 erreurs, « relancer : npm run extract ») |
+
+L'unique victime est donc le manifeste d'affectation, et son invariant propre — `validate.mjs`
+compare les affectations consignées aux fiches réelles — l'avait détectée sans attendre ce test.
+Il est réparé et renommé `data/_affectations-filieres.json`.
+
+**La preuve que `data/filieres/` est intact ne vient pas d'un raisonnement mais d'une mesure** :
+un cycle `npm run extract` + `npm run distinctivite` complet laisse les 84 fiches octet pour
+octet identiques. C'est le contrôle à refaire si le doute revient — il vaut mieux qu'une
+relecture de code, puisque le premier correctif avait justement l'air correct à la lecture.
+
 ## Toute fiche doit être atteignable par l'aiguillage
 
 Invariant **distinct** de celui des domaines orphelins, et les deux sont nécessaires :
@@ -1930,18 +2039,83 @@ L'énumération suit A1 × A2 comme le prospect les rencontre, garde `si` compri
 combinaisons**, et les 84 fiches sont couvertes. `npm run test:moteur` porte en plus un **contrôle
 négatif** : sans lui, le test passerait même si la fonction rendait toujours une liste vide.
 
+## Migration de famille — `data/_affectations-filieres.json`
+
+**L'appartenance d'une fiche à une famille n'est jamais déclarée : elle se déduit.** Des domaines,
+qui se déduisent eux-mêmes du titre, de l'objectif et des modules. Une correction de parsing peut
+donc déplacer une fiche **d'entonnoir** — donc de public — sans que personne l'ait demandé, et rien
+ne le disait. C'est la protection qui compte, bien plus que tout réglage du plafond de domaines.
+
+`npm run extract` consigne l'affectation de chaque fiche dans `data/_affectations-filieres.json`, **suivi
+par git**, et la compare à l'exécution précédente. Une migration devient alors deux choses
+qu'elle n'était pas : un avertissement en clair à la ré-extraction, et un diff lisible en revue.
+
+```
+⚠ 1 fiche(s) ont CHANGÉ DE FAMILLE — elles changent d'entonnoir :
+   licence-de-gestion-option-comptabilite-finance
+      chiffres-finance + entreprise-management → chiffres-finance
+      domaines : comptabilite + gestion → finance + comptabilite
+      cause : le nombre de modules est passé de 44 à 52 ; son 2e et son 3e domaine
+              sont à égalité de score, départagés par l'ordre alphabétique
+```
+
+Cinq décisions à ne pas défaire :
+
+- **deux natures de changement, jamais confondues.** Un domaine qui bouge sans changer la famille
+  ne déplace personne dans le parcours : il se journalise à part. Les mêler noierait le seul
+  signal qui compte ;
+- **`cause` n'est renseignée que si elle est identifiable** dans le manifeste — d'où le compte de
+  modules par fiche, qui ne sert qu'à cela. Une cause inventée serait pire qu'une case vide :
+  elle orienterait la vérification au mauvais endroit ;
+- **la comparaison a lieu même quand l'extraction n'écrit pas** (les tests) : c'est le
+  signalement qui compte, pas l'écriture ;
+- **fichier distinct de `data/_fraicheur.json`**, qui fournit pourtant le même mécanisme de
+  manifeste committé. Les deux ont des diffs de nature opposée : `_fraicheur.json` ne contient
+  que des empreintes opaques, illisibles par construction, et elles changent au moindre octet
+  modifié dans n'importe quelle fiche. Y mêler les affectations noierait « cette fiche a changé
+  de famille » dans un bruit permanent ;
+- **le manifeste n'est pas surveillé par empreinte, mais par comparaison directe.** Une empreinte
+  du dossier des fiches serait périmée en permanence, puisque `npm run distinctivite` les réécrit
+  juste après `npm run extract`. `validate.mjs` compare donc les affectations **consignées** aux
+  `domaines` que les fiches portent réellement — invariant plus fort, qui attrape en plus une
+  modification à la main.
+
+## L'ensemble réellement arbitraire : l'égalité de frontière
+
+`scoresDomaines` classe les domaines candidats et **départage les ex æquo sur l'ordre alphabétique
+de leur `id`** — par convention, donc, et non par une mesure. C'est là, et nulle part ailleurs, que
+se trouve la source du basculement silencieux : **un module de plus ne fait pas « gagner » un
+domaine, il rompt une égalité que rien ne justifiait.**
+
+Trois ensembles, du plus large au plus étroit — `npm run plafond` les imprime :
+
+| Ensemble | Catalogue 2024 | Ce qu'il dit |
+|---|---|---|
+| un 3e domaine corroboré, écarté par le plafond | **5** | ce qu'on ne voit pas |
+| dont le 3e relève d'une **autre famille** que le 2e | **4** | un échange déplacerait la fiche |
+| dont le 2e et le 3e sont à **égalité exacte** | **1** | le seul cas arbitraire |
+
+L'unique égalité est `licence-de-gestion-option-comptabilite-finance` : `comptabilite` et `gestion`
+à **15 points chacun**, et « comptabilite » passe parce qu'il vient avant dans l'alphabet. C'est
+exactement la fiche qui a migré — la mesure confirme le mécanisme au lieu de le supposer.
+
+**Les deux ensembles étroits sont consignés dans `data/_affectations-filieres.json`**, sous
+`_surveillance`, donc suivis par git : ce sont les fiches à revérifier en priorité après chaque
+mise à jour de catalogue, et cette liste ne doit pas vivre seulement dans un rapport gitignoré.
+
+Une seule définition de « fragile » dans le dépôt : celle de `lib/affectations.mjs`.
+`plafond-domaines.mjs` la **consomme** au lieu de la recalculer — deux définitions divergeraient,
+et on ne saurait plus laquelle la CI surveille.
+
 ## Fragilité du plafond de 2 domaines — mesurée, pas corrigée
 
-`npm run plafond` (`scripts/plafond-domaines.mjs`) mesure ce qu'on risque. **Aucune décision n'est
-prise : le plafond reste à 2.**
+**Décision prise : le plafond reste à 2.** Le monter laisserait entrer du bruit lexical, et la
+liste ci-dessous le montre — le 3e domaine d'un master de droit notarial est
+`culture-evenementiel`. Chaque domaine de plus élargit par ailleurs l'aiguillage, dont le rôle est
+de RÉDUIRE le jeu candidat.
 
-| Mesure | Catalogue 2024 |
-|---|---|
-| fiches ayant un 3e domaine corroboré, écarté par le plafond | **5** sur 84 |
-| dont celles qui **gagneraient une famille** à un plafond de 3 | **3** |
-| fiches **fragiles** — 2e et 3e domaines dans des familles différentes | **4** |
-
-Les trois qui gagneraient une famille :
+`npm run plafond` reste utile pour ce qu'il mesure : ce que le plafond écarte. Les trois fiches qui
+gagneraient une famille à un plafond de 3 :
 
 | Fiche | Domaines retenus | 3e écarté | Famille ajoutée |
 |---|---|---|---|
@@ -1949,27 +2123,21 @@ Les trois qui gagneraient une famille :
 | Licence Électronique, Télécoms et Systèmes embarqués | `reseaux + electronique` | `communication` | commerce-communication |
 | Master Droit Notarial et Gestion du Patrimoine | `gestion + droit` | `culture-evenementiel` | commerce-communication |
 
-**Le compte des fragiles est le vrai indicateur, et il peut dépasser celui des gains** : une fiche
-est fragile quand son 2e et son 3e domaine ne relèvent pas de la même famille — un module de plus
-suffit alors à la déplacer dans le parcours. Elle ne « gagne » pourtant rien si la famille de son
-3e domaine est déjà apportée par son 1er.
+**Le compte des fiches à surveiller peut dépasser celui des gains** : une fiche dont le 2e et le
+3e domaine relèvent de familles différentes se déplacerait au moindre échange, mais elle ne
+« gagne » rien si la famille de son 3e domaine est déjà apportée par son 1er.
 
-Deux faits à garder en tête avant de trancher :
-
-- **à score égal, `inferDomaines` départage sur l'`id`, en ordre alphabétique.** Deux domaines ex
-  æquo sont donc séparés par une convention et non par une mesure. C'est ce qui rend ces fiches
-  fragiles, et c'est aussi ce qui rend le basculement silencieux ;
-- **la contrepartie d'un plafond à 3 est mécanique** : chaque domaine supplémentaire élargit
-  l'aiguillage, et l'aiguillage doit RÉDUIRE le jeu candidat. C'est le compromis à peser avec ces
-  chiffres, pas avec une intuition. Le troisième domaine de la troisième ligne
-  (`culture-evenementiel` pour un master de droit notarial) suggère d'ailleurs qu'un plafond plus
-  haut laisserait passer du bruit lexical.
+Ce que ce script ne mesure PAS, et qui est le vrai indicateur : l'**égalité exacte** à la
+frontière — voir la section précédente. Le nombre de 3e domaines écartés dit ce qu'on ne voit pas
+aujourd'hui ; l'égalité dit ce qui basculera demain sans qu'on décide rien.
 
 ## Conventions de code
 
 - Node 18+, modules ES (`.mjs`), aucune transpilation sur les scripts.
 - Pas de dépendance ajoutée sans nécessité. Actuelles : `pdfjs-dist`, `ajv`, `ajv-formats`.
-- Les scripts n'écrivent jamais en dehors de `data/`.
+- Les scripts n'écrivent jamais en dehors de `data/` — et, dans `data/`, **dans le répertoire de
+  sortie qu'ils ont reçu, jamais dans un chemin en dur.** La seconde moitié de la règle a été
+  apprise à ses dépens ; voir « Écrire dans le répertoire de sortie reçu ».
 - Français pour les messages console, les noms de champs et les commentaires.
 - Identifiants en kebab-case, stables une fois publiés.
 
@@ -2047,8 +2215,22 @@ ré-extraction, contrôle que les champs humains sont intacts, que les champs d'
 - Traiter un artefact absent comme périmé. Quatre le sont dans un clone neuf, et rien n'est périmé dans ce qui n'existe pas.
 - Déclarer un artefact source d'un autre. Une seule péremption en signalerait cinq, sans dire laquelle relancer.
 - Ajouter un artefact généré sans le déclarer dans `lib/fraicheur.mjs`. Personne ne verrait jamais qu'il n'est pas suivi.
+- Coder en dur le chemin d'une écriture dans une fonction qui reçoit un répertoire de sortie. « Rester dans `data/` » ne dit rien du bon sous-répertoire : le manifeste y était, et il écrasait la production.
+- Croire qu'un chemin « dérivé du dossier reçu » ne peut plus entrer en collision. `path.dirname()` rend le même parent pour deux dossiers frères : le premier correctif n'a rien corrigé pendant toute une session.
+- Garder un manifeste par un contrôle avant/après. Une fois la production écrasée, la réécrire à l'identique passe pour une absence d'écriture — le contrôle était vert parce que le dégât était fait.
+- Effacer un bac à sable sans effacer les fichiers qu'il a écrits À CÔTÉ de lui. `rmSync` du dossier ne les emporte pas.
+- Limiter le contrôle de non-contamination aux fichiers suivis par git. Mesuré : il passait au vert sur le bug même qui l'a motivé, le fichier détruit n'étant pas encore commité.
+- Ajouter `data/_test-fusion/` à `.gitignore`. Un bac à sable laissé derrière par un test interrompu doit rester visible.
+- Conclure « aucune contamination » sans compter les suites réellement exécutées. Un lanceur en panne ne modifie rien, donc passe toujours.
 - Conclure de `domainesInatteignables` qu'aucune fiche n'est hors de portée. Deux invariants différents : la question, et les fiches.
-- Déplacer le plafond de 2 domaines sans relire `npm run plafond`. 4 fiches sont fragiles, et l'aiguillage doit réduire, pas décrire.
+- Monter le plafond à 3 domaines. Tranché : `culture-evenementiel` sur un master de droit notarial montre que ça laisserait entrer du bruit lexical.
+- Chercher la fragilité dans le nombre de 3e domaines écartés. Elle est dans l'**égalité exacte** de la frontière : 1 fiche, départagée par l'ordre alphabétique.
+- Laisser une fiche changer de famille en silence. Elle change d'entonnoir : `npm run extract` le dit, et `data/_affectations-filieres.json` le trace dans un diff.
+- Ranger un domaine déplacé sans changement de famille avec les migrations. Il ne déplace personne dans le parcours.
+- Inventer la cause d'une migration. Renseignée seulement si le manifeste la porte — sinon on vérifie au mauvais endroit.
+- Mêler les affectations à `data/_fraicheur.json`. Ses empreintes changent au moindre octet : le signal lisible s'y noierait.
+- Surveiller `data/_affectations-filieres.json` par empreinte. `distinctivite` réécrit les fiches juste après : on compare les affectations aux fiches.
+- Recalculer « fragile » ailleurs que dans `lib/affectations.mjs`. Deux définitions divergeraient, et la CI n'en surveille qu'une.
 - Supposer qu'un gain de modules ne touche que les modules. Il déplace les axes, les paires, et parfois les `domaines` — donc la famille.
 - Classer un candidat unique. Il n'y a rien à comparer : on l'affiche, avec la justification des filtres.
 - Laisser un `axes_fiables: false` en zone non classée quand il est la seule option. Ce serait la pire réponse possible.
@@ -2158,6 +2340,7 @@ npm run comparaisons        # une fiche imprimable par paire → data/_comparais
 npm run validate            # schéma + taxonomie + axes de disposition (aussi en CI)
 npm run report -- --csv     # manques par filière → data/_manques.csv
 npm run impasses            # combinaisons sans résultat → data/_impasses.md (admissions)
+npm run test:contamination  # rejoue les 3 suites, vérifie qu'aucun fichier du dépôt n'a bougé
 ```
 
 Le moteur, une fois les données en place :
@@ -2191,7 +2374,7 @@ Trois commandes de diagnostic, sans effet de bord :
 ```bash
 node scripts/stats-axes.mjs                    # distribution des 5 axes sur le catalogue
 node scripts/axes-modules.mjs mastere-ux-design # quel(s) axe(s) captent chaque module
-npm run plafond                                # fragilité du plafond de 2 domaines
+npm run plafond                                # égalités de frontière et 3e domaines écartés
 ```
 
 `axes-modules.mjs` est l'outil à sortir dès qu'un axe paraît faux : il montre les modules
@@ -2239,6 +2422,7 @@ Découpage du code d'extraction :
 | `scripts/contexte-web.mjs` | le contexte du moteur en un seul JSON, liste blanche de champs. |
 | `scripts/servir.mjs` | serveur statique local, `node:http` seul. Aucune écriture. |
 | `scripts/impasses.mjs` | les combinaisons sans résultat, en document lisible pour les admissions. |
+| `scripts/test-contamination.mjs` | rejoue les trois suites et vérifie qu'aucun fichier du dépôt n'a bougé. |
 
 ## `data/_impasses.md` — ce que le catalogue ne couvre pas
 

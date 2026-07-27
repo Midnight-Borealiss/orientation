@@ -37,6 +37,13 @@ import {
   compterExigenceQuantitative,
   inferDomaines,
 } from "./lib/fiche.mjs";
+import {
+  construireManifeste,
+  comparerManifestes,
+  lireManifeste,
+  ecrireManifeste,
+  cheminPour,
+} from "./lib/affectations.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
@@ -709,14 +716,21 @@ export function fusionnerFiche(nouvelle, ancienne) {
 }
 
 export async function extraire({ fichiers, dump = false, ecrire = true, dossierSortie = OUT_DIR }) {
+  // Toutes les sorties se dérivent du dossier reçu. Aucun chemin en dur dans cette fonction :
+  // c'est la règle qu'un manifeste écrit en chemin fixe avait enfreinte, en remplaçant celui
+  // des 84 fiches par celui des 26 d'un bac à sable.
+  const dossierRaw =
+    path.resolve(dossierSortie) === path.resolve(OUT_DIR) ? RAW_DIR : path.join(dossierSortie, "_raw");
   const resultats = [];
   for (const chemin of fichiers) {
     const r = await traiterCatalogue(chemin);
     resultats.push({ chemin, ...r });
     if (dump) {
-      fs.mkdirSync(RAW_DIR, { recursive: true });
+      // Même règle que pour les fiches : le dump suit le dossier de sortie reçu. En dur, il
+      // écrirait dans data/_raw/ même pour une extraction vers un bac à sable.
+      fs.mkdirSync(dossierRaw, { recursive: true });
       fs.writeFileSync(
-        path.join(RAW_DIR, path.basename(chemin).replace(/\.pdf$/i, ".txt")),
+        path.join(dossierRaw, path.basename(chemin).replace(/\.pdf$/i, ".txt")),
         dumpTexte(r.pages, r.programmes, r.journal, path.basename(chemin))
       );
     }
@@ -808,6 +822,38 @@ export async function extraire({ fichiers, dump = false, ecrire = true, dossierS
     (f) => !produits.has(f.id) && catalogues.has(f.meta?.brochure_fichier)
   );
 
+  /* ── Migration de famille : jamais en silence ─────────────────────
+   * L'appartenance à une famille se DÉDUIT des domaines, qui se déduisent du titre, de
+   * l'objectif et des modules. Une correction de parsing peut donc déplacer une fiche
+   * d'entonnoir sans que personne l'ait demandé — et rien ne le disait. On compare donc
+   * l'affectation de chaque fiche à celle de l'exécution précédente.
+   *
+   * La comparaison a lieu même quand `ecrire` est faux (les tests) : c'est le signalement
+   * qui compte, pas l'écriture. Seul le manifeste, lui, n'est pas réécrit.
+   * ─────────────────────────────────────────────────────────── */
+  // Le manifeste vit à côté des fiches qu'il décrit : son chemin se DÉRIVE du dossier de
+  // sortie. Un chemin en dur ici — c'était le cas — fait qu'une extraction vers un bac à sable
+  // écrase celui de la production.
+  const cheminManifeste = cheminPour(dossierSortie);
+  const toutes = resultats.flatMap((r) => r.fiches);
+  const manifeste = construireManifeste(toutes, taxonomie);
+  const changements = comparerManifestes(lireManifeste(cheminManifeste), manifeste);
+
+  const journalGlobal = resultats[0]?.journal;
+  for (const m of changements.migrations) {
+    const ligne =
+      `MIGRATION DE FAMILLE : ${m.id} — ${m.familles_avant.join(" + ") || "aucune"} → ` +
+      `${m.familles_apres.join(" + ") || "aucune"} (domaines ${m.domaines_avant.join(" + ")} → ` +
+      `${m.domaines_apres.join(" + ")})` +
+      (m.cause ? ` — cause : ${m.cause}` : " — cause non identifiable depuis le manifeste");
+    journalGlobal?.push(ligne);
+  }
+  for (const d of changements.deplacementsDomaine) {
+    journalGlobal?.push(
+      `domaines déplacés sans changer de famille : ${d.id} — ${d.domaines_avant.join(" + ")} → ${d.domaines_apres.join(" + ")}`
+    );
+  }
+
   if (ecrire) {
     fs.mkdirSync(dossierSortie, { recursive: true });
     for (const r of resultats) {
@@ -817,9 +863,19 @@ export async function extraire({ fichiers, dump = false, ecrire = true, dossierS
         fs.writeFileSync(path.join(dossierSortie, `${f.id}.json`), JSON.stringify(propre, null, 2) + "\n");
       }
     }
+    /* Écrit à côté des fiches produites, quel que soit le dossier : une extraction vers un bac
+     * à sable produit le manifeste de CE bac à sable, et ne touche jamais celui de la
+     * production. C'est la règle générale — écrire dans le répertoire de sortie reçu — et non
+     * une garde spéciale, qui ne protégerait que ce cas-ci.
+     *
+     * Le manifeste n'entre pas dans `data/_fraicheur.json` : une empreinte du dossier des
+     * fiches y serait périmée en permanence, puisque `npm run distinctivite` les réécrit juste
+     * après. `validate.mjs` compare directement les affectations consignées aux fiches —
+     * invariant plus fort. Voir lib/fraicheur.mjs. */
+    ecrireManifeste(manifeste, cheminManifeste);
   }
 
-  return Object.assign(resultats, { fusion, orphelines });
+  return Object.assign(resultats, { fusion, orphelines, manifeste, changements });
 }
 
 /* ══ CLI ═══════════════════════════════════════════════════════ */
@@ -878,6 +934,34 @@ async function main() {
   }
   for (const o of orphelines) {
     console.log(`  ⚠ ${o.id}.json n'est plus produit par le catalogue (programme fermé ou renommé ?) — fiche conservée`);
+  }
+
+  /* Une migration de famille est le changement le plus lourd qu'une extraction puisse
+   * produire : la fiche change d'entonnoir, donc de public. Elle s'affiche en clair, jamais
+   * seulement dans le journal — c'est exactement ce qui avait manqué. */
+  const { changements, manifeste } = resultats;
+  if (changements.migrations.length) {
+    console.log(`\n  ⚠ ${changements.migrations.length} fiche(s) ont CHANGÉ DE FAMILLE — elles changent d'entonnoir :`);
+    for (const m of changements.migrations) {
+      console.log(`     ${m.id}`);
+      console.log(`        ${m.familles_avant.join(" + ") || "aucune"} → ${m.familles_apres.join(" + ") || "aucune"}`);
+      console.log(`        domaines : ${m.domaines_avant.join(" + ")} → ${m.domaines_apres.join(" + ")}`);
+      console.log(`        ${m.cause ? `cause : ${m.cause}` : "cause non identifiable depuis le manifeste"}`);
+    }
+    console.log(`     Vérifier que le nouvel entonnoir est le bon avant de commiter data/_affectations-filieres.json`);
+  }
+  for (const d of changements.deplacementsDomaine) {
+    console.log(`  · ${d.id} : domaines ${d.domaines_avant.join(" + ")} → ${d.domaines_apres.join(" + ")} (même famille)`);
+  }
+  const aSurveiller = manifeste._surveillance;
+  if (aSurveiller.egalite_frontiere.length) {
+    console.log(
+      `\n  ${aSurveiller.egalite_frontiere.length} fiche(s) à égalité exacte entre leur 2e et leur 3e domaine —` +
+        ` départagées par l'ordre alphabétique, donc susceptibles de basculer :`
+    );
+    for (const e of aSurveiller.egalite_frontiere) {
+      console.log(`     ${e.id} — ${e.retenu} / ${e.ecarte} à ${e.scores[0]} points`);
+    }
   }
 
   console.log(`\n  ${total} fiches écrites dans data/filieres/`);

@@ -22,6 +22,13 @@ import { extraire } from "./extract.mjs";
 import { calculerDistinctivite, couvertureLexicale, MODULES_MIN, SEUIL_PAIRE } from "./distinctivite.mjs";
 import { AXES, axesDunModule, cleParcours } from "./lib/fiche.mjs";
 import { ARTEFACTS, empreinteSources } from "./lib/fraicheur.mjs";
+import {
+  construireManifeste,
+  comparerManifestes,
+  CHEMIN as CHEMIN_AFFECTATIONS,
+  cheminPour as cheminAffectations,
+  DOSSIER_FICHES,
+} from "./lib/affectations.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
@@ -375,9 +382,47 @@ console.log(`\n  Fusion d'une ré-extraction\n`);
 
 // Bac à sable dans data/, jamais ailleurs : les scripts n'écrivent pas hors de data/.
 const SABLE = path.join(ROOT, "data", "_test-fusion");
+// Le manifeste du bac à sable est son FRÈRE, pas son contenu : effacer le dossier ne l'emporte
+// pas. Un test qui laisse une donnée derrière lui la fait passer pour de la production.
 fs.rmSync(SABLE, { recursive: true, force: true });
+fs.rmSync(cheminAffectations(SABLE), { force: true });
+
+/* Le manifeste d'affectation décrit LE CATALOGUE : une extraction partielle vers un bac à
+ * sable ne doit pas le toucher. Ce contrôle est né d'un vrai dégât — ce test remplaçait le
+ * manifeste des 84 fiches par celui des 26 du seul catalogue Bachelor, et `npm run validate`
+ * l'a attrapé. Un test qui écrase la donnée de production est exactement ce qu'un manifeste
+ * suivi par git doit rendre visible. */
+const manifesteAvantSable = fs.existsSync(CHEMIN_AFFECTATIONS)
+  ? fs.readFileSync(CHEMIN_AFFECTATIONS, "utf8")
+  : null;
 
 await extraire({ fichiers: [bachelor], ecrire: true, dossierSortie: SABLE });
+
+/* Deux contrôles, et le premier est indispensable : le second peut passer par accident.
+ *
+ * Comparer le manifeste avant et après ne prouve rien une fois la production déjà écrasée — la
+ * réécrire à l'identique se lit alors comme une absence d'écriture. C'est exactement ce qui est
+ * arrivé : le contrôle avant/après a couvert un correctif qui ne corrigeait rien, parce que
+ * `path.dirname()` rend `data/` pour `data/filieres` comme pour `data/_test-fusion`.
+ *
+ * Le contrôle STRUCTUREL, lui, ne dépend d'aucun état sur le disque : deux dossiers de fiches
+ * distincts doivent donner deux manifestes distincts. Une collision devient impossible, et pas
+ * seulement non observée aujourd'hui. */
+verifier(
+  "deux dossiers de fiches distincts donnent deux manifestes distincts",
+  cheminAffectations(SABLE) !== cheminAffectations(DOSSIER_FICHES),
+  `le bac à sable et la production écrivent tous deux dans ${cheminAffectations(SABLE)}`
+);
+verifier(
+  "une extraction vers un bac à sable ne touche pas le manifeste d'affectation",
+  manifesteAvantSable === (fs.existsSync(CHEMIN_AFFECTATIONS) ? fs.readFileSync(CHEMIN_AFFECTATIONS, "utf8") : null),
+  `${path.basename(CHEMIN_AFFECTATIONS)} a été réécrit par une extraction partielle`
+);
+verifier(
+  "le bac à sable produit bien SON manifeste",
+  fs.existsSync(cheminAffectations(SABLE)),
+  `${cheminAffectations(SABLE)} absent — l'extraction n'a pas consigné ses affectations`
+);
 
 const cible = path.join(SABLE, "licence-en-droit-des-affaires.json");
 if (!fs.existsSync(cible)) {
@@ -469,7 +514,10 @@ if (!fs.existsSync(cible)) {
   );
 }
 
+// Le manifeste du bac à sable est son FRÈRE, pas son contenu : effacer le dossier ne l'emporte
+// pas. Un test qui laisse une donnée derrière lui la fait passer pour de la production.
 fs.rmSync(SABLE, { recursive: true, force: true });
+fs.rmSync(cheminAffectations(SABLE), { force: true });
 
 /* ── 4. Titres et aiguillage ──────────────────────────────────── */
 
@@ -942,6 +990,105 @@ if (trading && banque) {
   );
 } else {
   console.log("  ! fiches de référence absentes — contrôle de distinctivité ignoré");
+}
+
+/* ── Affectation en familles : aucune migration silencieuse ────────
+ * L'appartenance d'une fiche à une famille n'est pas déclarée, elle se DÉDUIT de ses domaines,
+ * qui se déduisent du titre, de l'objectif et des modules. Une correction de parsing peut donc
+ * déplacer une fiche d'entonnoir sans que personne l'ait demandé — et c'est arrivé sans que
+ * rien ne le dise. Ce bloc vérifie que le manifeste couvre tout et que la comparaison réagit.
+ * ─────────────────────────────────────────────────────────── */
+
+console.log(`\n  Affectation en domaines et en familles\n`);
+
+{
+  const manifeste = construireManifeste(toutesFiches, taxo);
+
+  verifier(
+    `le manifeste consigne les ${toutesFiches.length} fiches`,
+    Object.keys(manifeste.affectations).length === toutesFiches.length,
+    `${Object.keys(manifeste.affectations).length} consignée(s)`
+  );
+
+  const sansFamille = Object.entries(manifeste.affectations).filter(([, a]) => !a.familles.length);
+  verifier(
+    "chaque fiche consignée relève d'au moins une famille",
+    !sansFamille.length,
+    sansFamille.map(([id]) => id).join(", ")
+  );
+
+  /* L'ensemble réellement arbitraire : le 2e et le 3e domaine à ÉGALITÉ EXACTE de score, que
+   * `scoresDomaines` départage sur l'ordre alphabétique de l'`id`. C'est là qu'un module de
+   * plus ne fait pas « gagner » un domaine — il rompt une égalité que rien ne justifiait. */
+  const egalites = manifeste._surveillance.egalite_frontiere;
+  verifier(
+    `${egalites.length} fiche(s) à égalité exacte entre leur 2e et leur 3e domaine`,
+    egalites.every((e) => e.scores[0] === e.scores[1]),
+    egalites.map((e) => `${e.id} ${e.retenu}/${e.ecarte} ${e.scores.join("=")}`).join(" · ")
+  );
+
+  // Les fiches à surveiller : leur 2e et leur 3e domaine ne sont pas dans la même famille.
+  // C'est un sur-ensemble des égalités — un écart d'un point suffit à rendre le cas instable.
+  const aSurveiller = manifeste._surveillance.familles_differentes;
+  verifier(
+    "les fiches à égalité sont toutes dans la liste à surveiller quand elles changent de famille",
+    egalites
+      .filter((e) => e.famille_retenu !== e.famille_ecarte)
+      .every((e) => aSurveiller.some((x) => x.id === e.id)),
+    `${egalites.length} égalité(s), ${aSurveiller.length} à surveiller`
+  );
+  verifier(
+    "chaque fiche à surveiller a bien deux familles différentes de part et d'autre",
+    aSurveiller.every((e) => e.famille_retenu && e.famille_ecarte && e.famille_retenu !== e.famille_ecarte),
+    aSurveiller.map((e) => `${e.id} ${e.famille_retenu}/${e.famille_ecarte}`).join(" · ")
+  );
+
+  /* La comparaison doit RÉAGIR. On fabrique un manifeste précédent où une fiche relevait d'une
+   * autre famille : sans ce contrôle, `comparerManifestes` pourrait ne rien détecter et le test
+   * passerait quand même. */
+  const cible = Object.keys(manifeste.affectations)[0];
+  const ancien = { affectations: JSON.parse(JSON.stringify(manifeste.affectations)) };
+  ancien.affectations[cible] = {
+    domaines: ["_domaine-de-controle"],
+    familles: ["_famille-de-controle"],
+    modules: (ancien.affectations[cible].modules || 0) + 7,
+  };
+  const diff = comparerManifestes(ancien, manifeste);
+  verifier(
+    "une migration de famille est détectée",
+    diff.migrations.length === 1 && diff.migrations[0].id === cible,
+    JSON.stringify(diff.migrations.map((m) => m.id))
+  );
+  verifier(
+    "et sa cause est attribuée quand elle est identifiable",
+    /nombre de modules/.test(diff.migrations[0]?.cause || ""),
+    diff.migrations[0]?.cause || "aucune cause"
+  );
+
+  // Un déplacement de domaine SANS changement de famille ne doit pas être rangé avec les
+  // migrations : il ne déplace personne dans le parcours, et le confondre noierait le signal.
+  const idDeuxDomaines = Object.keys(manifeste.affectations).find(
+    (id) => manifeste.affectations[id].domaines.length === 2
+  );
+  const ancien2 = { affectations: JSON.parse(JSON.stringify(manifeste.affectations)) };
+  ancien2.affectations[idDeuxDomaines] = {
+    ...manifeste.affectations[idDeuxDomaines],
+    domaines: [...manifeste.affectations[idDeuxDomaines].domaines].reverse(),
+  };
+  const diff2 = comparerManifestes(ancien2, manifeste);
+  verifier(
+    "un domaine réordonné sans changer de famille n'est pas compté comme une migration",
+    !diff2.migrations.length && diff2.deplacementsDomaine.length === 1,
+    `${diff2.migrations.length} migration(s), ${diff2.deplacementsDomaine.length} déplacement(s)`
+  );
+
+  // Deux exécutions identiques ne produisent aucun changement : sinon le journal crierait à
+  // chaque extraction et on finirait par ne plus le lire.
+  const rien = comparerManifestes(manifeste, manifeste);
+  verifier(
+    "deux exécutions identiques ne signalent rien",
+    !rien.migrations.length && !rien.deplacementsDomaine.length && !rien.disparues.length
+  );
 }
 
 /* ── Le mécanisme de fraîcheur est-il branché ? ────────────────────

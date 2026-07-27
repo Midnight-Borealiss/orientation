@@ -22,7 +22,8 @@
     "contexte:web": "node scripts/contexte-web.mjs",
     "web": "node scripts/servir.mjs",
     "plafond": "node scripts/plafond-domaines.mjs",
-    "impasses": "node scripts/impasses.mjs"
+    "impasses": "node scripts/impasses.mjs",
+    "test:contamination": "node scripts/test-contamination.mjs"
   },
   "dependencies": {
     "ajv": "^8.17.1",

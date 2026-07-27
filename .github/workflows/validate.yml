@@ -32,3 +32,10 @@ jobs:
       # Les seuils doivent rester conformes aux trois objectifs de la spec :
       # simuler.mjs sort en erreur sinon.
       - run: npm run simuler
+      # La suite de tests ne doit RIEN écrire dans le dépôt. Ce contrôle réexécute les trois
+      # suites et compare l'empreinte de chaque fichier : il attrape toute écriture en chemin
+      # dur, y compris celles qu'aucun test ciblé ne vise. Il vient en dernier — il relance la
+      # suite entière, et il n'a de sens qu'une fois les artefacts régénérés ci-dessus.
+      # Sans les PDF, test-extract.mjs ne peut pas tourner et la mesure ne vaudrait rien.
+      - run: npm run test:contamination
+        if: hashFiles('data/brochures/*.pdf') != ''

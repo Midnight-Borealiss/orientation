@@ -15,6 +15,7 @@ import Ajv from "ajv";
 import addFormats from "ajv-formats";
 import { domainesInatteignables, fichesInatteignables } from "../src/engine/aiguillage.mjs";
 import { etatFraicheur } from "./lib/fraicheur.mjs";
+import { lireManifeste } from "./lib/affectations.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
@@ -256,6 +257,64 @@ for (const nom of fichiers) {
     } else {
       console.log(
         `  ✓ aiguillage : les ${fiches.length} fiches sont atteignables par au moins une des ${combinaisons} combinaisons A1 × A2`
+      );
+    }
+  }
+}
+
+/* ── Le manifeste d'affectation décrit-il bien les fiches présentes ? ──
+ * `data/_affectations-filieres.json` est suivi par git : son diff est la seule trace lisible d'une
+ * fiche qui change de famille, donc d'entonnoir. Un manifeste qui ne couvre plus les fiches
+ * ne trace plus rien — et comme il resterait valide en JSON, rien ne le dirait.
+ *
+ * On compare ce que le manifeste a CONSIGNÉ aux `domaines` que les fiches portent réellement.
+ * Pas une nouvelle inférence : refaire l'inférence ici en donnerait une seconde implémentation,
+ * et deux calculs finiraient par diverger. Comparer deux valeurs enregistrées attrape aussi ce
+ * qu'une empreinte de dossier ne saurait pas interpréter — un `domaines` modifié à la main.
+ * ─────────────────────────────────────────────────────────── */
+{
+  const manifeste = lireManifeste();
+  if (!manifeste) {
+    console.log(`  ! data/_affectations-filieres.json absent — relancer : npm run extract`);
+  } else {
+    const declarees = manifeste.affectations || {};
+    const familleDe = new Map();
+    for (const fam of taxo.familles || []) for (const d of fam.domaines) familleDe.set(d, fam.id);
+
+    const soucis = [];
+    const vus = new Set();
+    for (const nom of fichiers) {
+      const f = JSON.parse(fs.readFileSync(path.join(DIR, nom), "utf8"));
+      vus.add(f.id);
+      const a = declarees[f.id];
+      if (!a) {
+        soucis.push(`${f.id} absente du manifeste`);
+        continue;
+      }
+      const domaines = f.domaines || [];
+      if (JSON.stringify(a.domaines) !== JSON.stringify(domaines)) {
+        soucis.push(`${f.id} : consigné ${JSON.stringify(a.domaines)}, porte ${JSON.stringify(domaines)}`);
+        continue;
+      }
+      // La famille se déduit de la taxonomie : un domaine déplacé de famille dans
+      // taxonomy.json changerait l'entonnoir sans qu'aucune fiche ne bouge.
+      const familles = [...new Set(domaines.map((d) => familleDe.get(d)).filter(Boolean))].sort();
+      if (JSON.stringify(a.familles) !== JSON.stringify(familles)) {
+        soucis.push(`${f.id} : familles consignées ${JSON.stringify(a.familles)}, déduites ${JSON.stringify(familles)}`);
+      }
+    }
+    for (const id of Object.keys(declarees)) if (!vus.has(id)) soucis.push(`${id} dans le manifeste sans fiche`);
+
+    if (soucis.length) {
+      console.log(`\n  ✗ data/_affectations-filieres.json ne décrit plus les fiches présentes`);
+      for (const s of soucis.slice(0, 8)) console.log(`      ${s}`);
+      console.log(`      relancer : npm run extract\n`);
+      erreurs += soucis.length;
+    } else {
+      const s = manifeste._surveillance || {};
+      console.log(
+        `  ✓ affectations : les ${vus.size} fiches sont consignées et concordent` +
+          ` — ${(s.familles_differentes || []).length} à surveiller, ${(s.egalite_frontiere || []).length} à égalité de frontière`
       );
     }
   }

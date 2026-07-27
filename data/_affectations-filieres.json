@@ -1,0 +1,873 @@
+{
+  "_lire": "Affectation de chaque fiche en domaines et en familles, consignée à chaque extraction. Une fiche qui change de famille change d'entonnoir : elle doit se voir dans un diff. Régénéré par npm run extract — ne pas modifier à la main.",
+  "_surveillance": {
+    "_lire": "egalite_frontiere : le 2e et le 3e domaine ont le MÊME score, départagés par l'ordre alphabétique de leur id. Un seul module de plus peut donc les échanger. familles_differentes : le 2e et le 3e domaine ne relèvent pas de la même famille, donc un échange déplacerait la fiche dans le parcours. Ce sont les fiches à revérifier en priorité après toute mise à jour de catalogue.",
+    "egalite_frontiere": [
+      {
+        "id": "licence-de-gestion-option-comptabilite-finance",
+        "nom": "Licence de Gestion option Comptabilité - Finance",
+        "retenu": "comptabilite",
+        "ecarte": "gestion",
+        "scores": [
+          15,
+          15
+        ],
+        "famille_retenu": "chiffres-finance",
+        "famille_ecarte": "entreprise-management"
+      }
+    ],
+    "familles_differentes": [
+      {
+        "id": "licence-de-gestion-option-commerce-international-et-marketin",
+        "nom": "Licence de Gestion option Commerce international et Marketing",
+        "retenu": "gestion",
+        "ecarte": "commerce-international",
+        "scores": [
+          11,
+          8
+        ],
+        "famille_retenu": "entreprise-management",
+        "famille_ecarte": "commerce-communication"
+      },
+      {
+        "id": "licence-de-gestion-option-comptabilite-finance",
+        "nom": "Licence de Gestion option Comptabilité - Finance",
+        "retenu": "comptabilite",
+        "ecarte": "gestion",
+        "scores": [
+          15,
+          15
+        ],
+        "famille_retenu": "chiffres-finance",
+        "famille_ecarte": "entreprise-management"
+      },
+      {
+        "id": "licence-en-electronique-telecommunications-et-systemes-embar",
+        "nom": "Licence en Électronique, Télécommunications et Systèmes embarqués",
+        "retenu": "electronique",
+        "ecarte": "communication",
+        "scores": [
+          16,
+          15
+        ],
+        "famille_retenu": "ingenierie-industrie",
+        "famille_ecarte": "commerce-communication"
+      },
+      {
+        "id": "master-en-droit-notarial-et-gestion-du-patrimoine",
+        "nom": "Master en Droit Notarial et Gestion du Patrimoine",
+        "retenu": "droit",
+        "ecarte": "culture-evenementiel",
+        "scores": [
+          14,
+          13
+        ],
+        "famille_retenu": "droit-action-publique",
+        "famille_ecarte": "commerce-communication"
+      }
+    ]
+  },
+  "affectations": {
+    "bachelor-chef-de-projet-digital": {
+      "domaines": [
+        "management-projet"
+      ],
+      "familles": [
+        "entreprise-management"
+      ],
+      "modules": 27
+    },
+    "bachelor-chef-de-projet-digital-en-ligne": {
+      "domaines": [
+        "management-projet"
+      ],
+      "familles": [
+        "entreprise-management"
+      ],
+      "modules": 17
+    },
+    "bachelor-concepteur-et-developpeur-de-solutions-digitales": {
+      "domaines": [
+        "informatique"
+      ],
+      "familles": [
+        "numerique"
+      ],
+      "modules": 29
+    },
+    "bachelor-en-gestion-full-time": {
+      "domaines": [
+        "gestion"
+      ],
+      "familles": [
+        "entreprise-management"
+      ],
+      "modules": 0
+    },
+    "bachelor-en-gestion-option-compta-finance-en-ligne": {
+      "domaines": [
+        "gestion",
+        "finance"
+      ],
+      "familles": [
+        "chiffres-finance",
+        "entreprise-management"
+      ],
+      "modules": 18
+    },
+    "bachelor-en-gestion-option-organisation-rh-en-ligne": {
+      "domaines": [
+        "gestion",
+        "rh"
+      ],
+      "familles": [
+        "entreprise-management"
+      ],
+      "modules": 17
+    },
+    "bachelor-en-informatique-appliquee-a-la-gestion-des-entrepri-en-ligne": {
+      "domaines": [
+        "informatique",
+        "gestion"
+      ],
+      "familles": [
+        "entreprise-management",
+        "numerique"
+      ],
+      "modules": 17
+    },
+    "bachelor-professionnel-en-gestion": {
+      "domaines": [
+        "gestion"
+      ],
+      "familles": [
+        "entreprise-management"
+      ],
+      "modules": 8
+    },
+    "doctorate-in-business-administration-dba": {
+      "domaines": [
+        "gestion"
+      ],
+      "familles": [
+        "entreprise-management"
+      ],
+      "modules": 14
+    },
+    "executive-mba-parcours-en-francais-en-ligne": {
+      "domaines": [
+        "gestion"
+      ],
+      "familles": [
+        "entreprise-management"
+      ],
+      "modules": 19
+    },
+    "executive-mba-parcours-full-english-en-ligne": {
+      "domaines": [
+        "gestion"
+      ],
+      "familles": [
+        "entreprise-management"
+      ],
+      "modules": 25
+    },
+    "executive-mba-pour-cadres-dirigeants": {
+      "domaines": [
+        "gestion"
+      ],
+      "familles": [
+        "entreprise-management"
+      ],
+      "modules": 16
+    },
+    "licence-de-gestion-option-agrobusiness": {
+      "domaines": [
+        "agrobusiness",
+        "gestion"
+      ],
+      "familles": [
+        "entreprise-management",
+        "ingenierie-industrie"
+      ],
+      "modules": 68
+    },
+    "licence-de-gestion-option-commerce-international-et-marketin": {
+      "domaines": [
+        "marketing",
+        "gestion"
+      ],
+      "familles": [
+        "commerce-communication",
+        "entreprise-management"
+      ],
+      "modules": 66
+    },
+    "licence-de-gestion-option-comptabilite-finance": {
+      "domaines": [
+        "finance",
+        "comptabilite"
+      ],
+      "familles": [
+        "chiffres-finance"
+      ],
+      "modules": 52
+    },
+    "licence-de-gestion-option-gestion-des-ressources-humaines": {
+      "domaines": [
+        "gestion",
+        "rh"
+      ],
+      "familles": [
+        "entreprise-management"
+      ],
+      "modules": 51
+    },
+    "licence-de-gestion-option-management-international": {
+      "domaines": [
+        "gestion",
+        "commerce-international"
+      ],
+      "familles": [
+        "commerce-communication",
+        "entreprise-management"
+      ],
+      "modules": 48
+    },
+    "licence-en-administration-publique": {
+      "domaines": [
+        "administration-publique"
+      ],
+      "familles": [
+        "droit-action-publique"
+      ],
+      "modules": 54
+    },
+    "licence-en-communication-et-medias": {
+      "domaines": [
+        "communication"
+      ],
+      "familles": [
+        "commerce-communication"
+      ],
+      "modules": 44
+    },
+    "licence-en-contentieux-et-recouvrement": {
+      "domaines": [
+        "droit"
+      ],
+      "familles": [
+        "droit-action-publique"
+      ],
+      "modules": 51
+    },
+    "licence-en-droit-des-affaires": {
+      "domaines": [
+        "droit"
+      ],
+      "familles": [
+        "droit-action-publique"
+      ],
+      "modules": 48
+    },
+    "licence-en-droit-gestion": {
+      "domaines": [
+        "droit",
+        "gestion"
+      ],
+      "familles": [
+        "droit-action-publique",
+        "entreprise-management"
+      ],
+      "modules": 24
+    },
+    "licence-en-droit-prive-fondamental": {
+      "domaines": [
+        "droit"
+      ],
+      "familles": [
+        "droit-action-publique"
+      ],
+      "modules": 24
+    },
+    "licence-en-electronique-telecommunications-et-systemes-embar": {
+      "domaines": [
+        "reseaux",
+        "electronique"
+      ],
+      "familles": [
+        "ingenierie-industrie",
+        "numerique"
+      ],
+      "modules": 26
+    },
+    "licence-en-genie-logiciel-reseaux-et-systemes": {
+      "domaines": [
+        "reseaux",
+        "informatique"
+      ],
+      "familles": [
+        "numerique"
+      ],
+      "modules": 35
+    },
+    "licence-en-gestion": {
+      "domaines": [
+        "gestion"
+      ],
+      "familles": [
+        "entreprise-management"
+      ],
+      "modules": 0
+    },
+    "licence-en-informatique": {
+      "domaines": [
+        "informatique"
+      ],
+      "familles": [
+        "numerique"
+      ],
+      "modules": 41
+    },
+    "licence-en-informatique-appliquee-a-la-gestion-des-entrepris": {
+      "domaines": [
+        "informatique",
+        "gestion"
+      ],
+      "familles": [
+        "entreprise-management",
+        "numerique"
+      ],
+      "modules": 28
+    },
+    "licence-en-journalisme-et-metiers-de-l-information": {
+      "domaines": [
+        "journalisme"
+      ],
+      "familles": [
+        "commerce-communication"
+      ],
+      "modules": 41
+    },
+    "licence-en-management-et-production-des-evenements-culturels": {
+      "domaines": [
+        "culture-evenementiel"
+      ],
+      "familles": [
+        "commerce-communication"
+      ],
+      "modules": 56
+    },
+    "licence-en-mathematiques-appliquees-informatique-et-economet": {
+      "domaines": [
+        "mathematiques"
+      ],
+      "familles": [
+        "chiffres-finance"
+      ],
+      "modules": 37
+    },
+    "licence-en-science-politique-et-relations-internationales": {
+      "domaines": [
+        "science-politique"
+      ],
+      "familles": [
+        "droit-action-publique"
+      ],
+      "modules": 37
+    },
+    "licence-en-technologie-transport-et-logistique": {
+      "domaines": [
+        "logistique"
+      ],
+      "familles": [
+        "ingenierie-industrie"
+      ],
+      "modules": 34
+    },
+    "licence-modelisation-statistique-informatique-economique-et": {
+      "domaines": [
+        "mathematiques",
+        "finance"
+      ],
+      "familles": [
+        "chiffres-finance"
+      ],
+      "modules": 35
+    },
+    "master-audit-controle-de-gestion-et-aide-a-la-decision-en-ligne": {
+      "domaines": [
+        "comptabilite",
+        "gestion"
+      ],
+      "familles": [
+        "chiffres-finance",
+        "entreprise-management"
+      ],
+      "modules": 24
+    },
+    "master-droit-de-l-entreprise": {
+      "domaines": [
+        "droit"
+      ],
+      "familles": [
+        "droit-action-publique"
+      ],
+      "modules": 9
+    },
+    "master-droit-des-affaires-en-ligne": {
+      "domaines": [
+        "droit"
+      ],
+      "familles": [
+        "droit-action-publique"
+      ],
+      "modules": 17
+    },
+    "master-en-droit-notarial-et-gestion-du-patrimoine": {
+      "domaines": [
+        "gestion",
+        "droit"
+      ],
+      "familles": [
+        "droit-action-publique",
+        "entreprise-management"
+      ],
+      "modules": 12
+    },
+    "master-en-finance-digitale-fintech": {
+      "domaines": [
+        "finance"
+      ],
+      "familles": [
+        "chiffres-finance"
+      ],
+      "modules": 15
+    },
+    "master-en-fiscalite-droit-des-affaires-option-affaires-inter": {
+      "domaines": [
+        "droit",
+        "fiscalite"
+      ],
+      "familles": [
+        "chiffres-finance",
+        "droit-action-publique"
+      ],
+      "modules": 20
+    },
+    "master-en-fiscalite-droit-des-affaires-option-droit-des-affa": {
+      "domaines": [
+        "droit",
+        "fiscalite"
+      ],
+      "familles": [
+        "chiffres-finance",
+        "droit-action-publique"
+      ],
+      "modules": 13
+    },
+    "master-en-fiscalite-droit-des-affaires-option-fiscalite": {
+      "domaines": [
+        "droit",
+        "fiscalite"
+      ],
+      "familles": [
+        "chiffres-finance",
+        "droit-action-publique"
+      ],
+      "modules": 13
+    },
+    "master-en-fiscalite-droit-des-affaires-option-juriste-de-ban": {
+      "domaines": [
+        "droit",
+        "finance"
+      ],
+      "familles": [
+        "chiffres-finance",
+        "droit-action-publique"
+      ],
+      "modules": 23
+    },
+    "master-en-marche-financier-trading": {
+      "domaines": [
+        "marches-financiers",
+        "finance"
+      ],
+      "familles": [
+        "chiffres-finance"
+      ],
+      "modules": 12
+    },
+    "master-en-passation-des-marches-et-droit-notarial": {
+      "domaines": [
+        "droit"
+      ],
+      "familles": [
+        "droit-action-publique"
+      ],
+      "modules": 12
+    },
+    "master-gouvernance-et-management-public": {
+      "domaines": [
+        "gestion"
+      ],
+      "familles": [
+        "entreprise-management"
+      ],
+      "modules": 18
+    },
+    "master-in-business-administration": {
+      "domaines": [
+        "gestion"
+      ],
+      "familles": [
+        "entreprise-management"
+      ],
+      "modules": 27
+    },
+    "master-in-international-management": {
+      "domaines": [
+        "commerce-international"
+      ],
+      "familles": [
+        "commerce-communication"
+      ],
+      "modules": 14
+    },
+    "master-ingenierie-financiere-en-ligne": {
+      "domaines": [
+        "finance"
+      ],
+      "familles": [
+        "chiffres-finance"
+      ],
+      "modules": 31
+    },
+    "master-management-de-la-qualite-hygiene-securite-environneme-en-ligne": {
+      "domaines": [
+        "qualite"
+      ],
+      "familles": [
+        "entreprise-management"
+      ],
+      "modules": 20
+    },
+    "master-management-de-projet-en-ligne": {
+      "domaines": [
+        "management-projet"
+      ],
+      "familles": [
+        "entreprise-management"
+      ],
+      "modules": 21
+    },
+    "master-management-des-ressources-humaines-en-ligne": {
+      "domaines": [
+        "rh"
+      ],
+      "familles": [
+        "entreprise-management"
+      ],
+      "modules": 18
+    },
+    "master-marketing-communication-vente-relation-client-en-ligne": {
+      "domaines": [
+        "marketing",
+        "communication"
+      ],
+      "familles": [
+        "commerce-communication"
+      ],
+      "modules": 20
+    },
+    "master-marketing-digital-en-ligne": {
+      "domaines": [
+        "marketing"
+      ],
+      "familles": [
+        "commerce-communication"
+      ],
+      "modules": 15
+    },
+    "master-rse-developpement-durable": {
+      "domaines": [
+        "rse"
+      ],
+      "familles": [
+        "entreprise-management"
+      ],
+      "modules": 12
+    },
+    "mastere-big-data-data-strategie": {
+      "domaines": [
+        "data"
+      ],
+      "familles": [
+        "numerique"
+      ],
+      "modules": 11
+    },
+    "mastere-concepteur-et-developpeur-de-solutions-digitales": {
+      "domaines": [
+        "informatique"
+      ],
+      "familles": [
+        "numerique"
+      ],
+      "modules": 18
+    },
+    "mastere-marketing-digital-brand-content": {
+      "domaines": [
+        "marketing"
+      ],
+      "familles": [
+        "commerce-communication"
+      ],
+      "modules": 9
+    },
+    "mastere-ux-design": {
+      "domaines": [
+        "design-web"
+      ],
+      "familles": [
+        "numerique"
+      ],
+      "modules": 11
+    },
+    "mba-actuariat-big-data-assurance-quantitative": {
+      "domaines": [
+        "assurance",
+        "data"
+      ],
+      "familles": [
+        "chiffres-finance",
+        "numerique"
+      ],
+      "modules": 19
+    },
+    "mba-big-data-et-intelligence-artificielle": {
+      "domaines": [
+        "data"
+      ],
+      "familles": [
+        "numerique"
+      ],
+      "modules": 20
+    },
+    "mba-communication-creativite-et-evenementiel": {
+      "domaines": [
+        "communication",
+        "culture-evenementiel"
+      ],
+      "familles": [
+        "commerce-communication"
+      ],
+      "modules": 16
+    },
+    "mba-diplomatie-et-geostrategie": {
+      "domaines": [
+        "science-politique"
+      ],
+      "familles": [
+        "droit-action-publique"
+      ],
+      "modules": 25
+    },
+    "mba-en-audit-controle-de-gestion-et-aide-a-la-decision": {
+      "domaines": [
+        "comptabilite",
+        "gestion"
+      ],
+      "familles": [
+        "chiffres-finance",
+        "entreprise-management"
+      ],
+      "modules": 12
+    },
+    "mba-en-banque-assurance": {
+      "domaines": [
+        "finance",
+        "assurance"
+      ],
+      "familles": [
+        "chiffres-finance"
+      ],
+      "modules": 14
+    },
+    "mba-en-communication-leadership-et-relations-publiques": {
+      "domaines": [
+        "communication"
+      ],
+      "familles": [
+        "commerce-communication"
+      ],
+      "modules": 28
+    },
+    "mba-en-decentralisation-et-gouvernance-territoriale": {
+      "domaines": [
+        "administration-publique"
+      ],
+      "familles": [
+        "droit-action-publique"
+      ],
+      "modules": 32
+    },
+    "mba-en-droit-et-gouvernance-des-energies-et-des-mines": {
+      "domaines": [
+        "droit",
+        "energie"
+      ],
+      "familles": [
+        "droit-action-publique",
+        "ingenierie-industrie"
+      ],
+      "modules": 12
+    },
+    "mba-en-droit-maritime-et-activites-portuaires": {
+      "domaines": [
+        "droit"
+      ],
+      "familles": [
+        "droit-action-publique"
+      ],
+      "modules": 13
+    },
+    "mba-en-ingenierie-financiere": {
+      "domaines": [
+        "finance"
+      ],
+      "familles": [
+        "chiffres-finance"
+      ],
+      "modules": 14
+    },
+    "mba-en-science-politique-et-relations-internationales": {
+      "domaines": [
+        "science-politique"
+      ],
+      "familles": [
+        "droit-action-publique"
+      ],
+      "modules": 25
+    },
+    "mba-gestion-de-la-chaine-logistique": {
+      "domaines": [
+        "logistique",
+        "gestion"
+      ],
+      "familles": [
+        "entreprise-management",
+        "ingenierie-industrie"
+      ],
+      "modules": 12
+    },
+    "mba-ingenierie-reseaux-et-systemes-decisionnels": {
+      "domaines": [
+        "reseaux"
+      ],
+      "familles": [
+        "numerique"
+      ],
+      "modules": 8
+    },
+    "mba-juriste-d-entreprise": {
+      "domaines": [
+        "droit"
+      ],
+      "familles": [
+        "droit-action-publique"
+      ],
+      "modules": 7
+    },
+    "mba-management-aeronautique-et-aeroportuaire": {
+      "domaines": [
+        "logistique"
+      ],
+      "familles": [
+        "ingenierie-industrie"
+      ],
+      "modules": 16
+    },
+    "mba-management-de-projets": {
+      "domaines": [
+        "management-projet"
+      ],
+      "familles": [
+        "entreprise-management"
+      ],
+      "modules": 9
+    },
+    "mba-management-de-projets-internationaux": {
+      "domaines": [
+        "management-projet"
+      ],
+      "familles": [
+        "entreprise-management"
+      ],
+      "modules": 19
+    },
+    "mba-management-des-energies-petrolieres-et-gazieres": {
+      "domaines": [
+        "energie"
+      ],
+      "familles": [
+        "ingenierie-industrie"
+      ],
+      "modules": 20
+    },
+    "mba-management-des-ressources-humaines": {
+      "domaines": [
+        "rh"
+      ],
+      "familles": [
+        "entreprise-management"
+      ],
+      "modules": 13
+    },
+    "mba-management-en-agrobusiness": {
+      "domaines": [
+        "agrobusiness"
+      ],
+      "familles": [
+        "ingenierie-industrie"
+      ],
+      "modules": 13
+    },
+    "mba-management-et-securite-des-systemes-d-information": {
+      "domaines": [
+        "cybersecurite"
+      ],
+      "familles": [
+        "numerique"
+      ],
+      "modules": 8
+    },
+    "mba-management-vente-et-relation-client": {
+      "domaines": [
+        "marketing"
+      ],
+      "familles": [
+        "commerce-communication"
+      ],
+      "modules": 18
+    },
+    "mba-paix-et-securite": {
+      "domaines": [
+        "science-politique"
+      ],
+      "familles": [
+        "droit-action-publique"
+      ],
+      "modules": 26
+    },
+    "mba-qualite-hygiene-securite-et-environnement-qhse": {
+      "domaines": [
+        "qualite"
+      ],
+      "familles": [
+        "entreprise-management"
+      ],
+      "modules": 16
+    }
+  }
+}

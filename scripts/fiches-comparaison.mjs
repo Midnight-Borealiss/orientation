@@ -341,8 +341,13 @@ function main() {
       ),
     "",
   ].join("\n");
-  fs.writeFileSync(path.join(OUT, "SOMMAIRE.md"), sommaire);
-  noterFraicheur("data/_comparaisons");
+  // `--dry` doit être SEC de bout en bout. Le sommaire et la note de fraîcheur échappaient à
+  // la garde : un essai à blanc réécrivait donc data/_comparaisons/SOMMAIRE.md et déclarait
+  // l'artefact à jour alors qu'aucune fiche n'avait été produite.
+  if (!dry) {
+    fs.writeFileSync(path.join(OUT, "SOMMAIRE.md"), sommaire);
+    noterFraicheur("data/_comparaisons");
+  }
 
   console.log(`\n  ${index.length} document(s) dans data/_comparaisons/ — voir SOMMAIRE.md\n`);
 }

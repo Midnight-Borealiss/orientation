@@ -37,6 +37,12 @@ const MANIFESTE = path.join(ROOT, "data", "_fraicheur.json");
  * les configs —, donc tous se périment ensemble, et chacun nomme sa propre commande.
  */
 export const ARTEFACTS = {
+  /* `data/_affectations-filieres.json` N'EST PAS surveillé ici, et c'est un choix mesuré : une empreinte
+   * du dossier des fiches serait périmée en permanence, puisque `npm run distinctivite`
+   * réécrit les fiches après `npm run extract` qui produit le manifeste. Son invariant est de
+   * toute façon plus fort qu'une empreinte — `validate.mjs` compare les affectations
+   * CONSIGNÉES aux `domaines` que portent réellement les fiches, ce qui attrape en plus une
+   * modification à la main qu'une empreinte de dossier ne saurait pas interpréter. */
   "data/_paires.csv": {
     sources: ["data/filieres", "config/taxonomy.json"],
     commande: "npm run distinctivite",

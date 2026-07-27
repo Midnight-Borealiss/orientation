@@ -526,7 +526,19 @@ export const MAX_DOMAINES = 2;
  * Les modules et les métiers ne servent donc plus qu'à ORDONNER les candidats
  * déjà légitimés par le titre ou l'objectif.
  */
-export function inferDomaines(titre, objectif, modules, metiers, domainesAutorises, max = MAX_DOMAINES) {
+/**
+ * Le CLASSEMENT des domaines candidats, avec leur score — la matière sur laquelle
+ * `inferDomaines` tranche. Exposé parce que le score est ce qui décide de l'appartenance à
+ * une famille, donc de la place d'une fiche dans le parcours, et qu'un classement dont on ne
+ * voit pas les scores ne se surveille pas : deux domaines ex æquo y sont séparés par l'ordre
+ * alphabétique de leur `id`, c'est-à-dire par une convention et non par une mesure.
+ *
+ * Rend la liste triée telle que `inferDomaines` la découpe : d'abord les domaines nommés dans
+ * le titre s'il en existe, sinon ceux tirés de l'objectif corroboré. Vide si seul le dernier
+ * recours (le vocabulaire des modules) peut désigner un domaine — auquel cas il n'y a qu'un
+ * domaine et aucune frontière où quoi que ce soit puisse basculer.
+ */
+export function scoresDomaines(titre, objectif, modules, metiers, domainesAutorises) {
   const nTitre = normaliser(titre);
   const nObjectif = normaliser(objectif || "");
   const appuis = [...modules, ...metiers].map(normaliser);
@@ -548,7 +560,15 @@ export function inferDomaines(titre, objectif, modules, metiers, domainesAutoris
 
   // Si le titre suffit à désigner des domaines, l'objectif ne vient pas les diluer.
   const parTitre = scores.filter((s) => s.dansTitre);
-  const retenus = (parTitre.length ? parTitre : scores).slice(0, max).map((s) => s.id);
+  return parTitre.length ? parTitre : scores;
+}
+
+export function inferDomaines(titre, objectif, modules, metiers, domainesAutorises, max = MAX_DOMAINES) {
+  const appuis = [...modules, ...metiers].map(normaliser);
+
+  const retenus = scoresDomaines(titre, objectif, modules, metiers, domainesAutorises)
+    .slice(0, max)
+    .map((s) => s.id);
   if (retenus.length) return retenus;
 
   // Dernier recours : le vocabulaire des modules, un seul domaine, jamais deux.
